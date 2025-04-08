@@ -1,4 +1,4 @@
-package com.a7a7.module.codegroup;
+package com.a7a7.modeule.codegroup;
 
 public class CodeGroupService {
 
