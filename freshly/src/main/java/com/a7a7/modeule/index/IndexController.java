@@ -15,5 +15,4 @@ public class IndexController {
 	public String indexMob() {
 		return "mobile/index/index";
 	}
-	// aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 }
