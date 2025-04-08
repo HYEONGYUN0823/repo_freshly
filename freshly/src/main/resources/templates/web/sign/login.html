@@ -84,37 +84,37 @@
 
     function validation() {
         const idInput = document.getElementById("id");
+        const passwordInput = document.getElementById("password");
+
         const idValue = idInput.value.trim();
+        const passwordValue = passwordInput.value.trim();
 
-        function validation() {
-            const idInput = document.getElementById("id");
-            const idValue = idInput.value.trim();
+        const idPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{4,12}$/;
+        const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{8,16}$/;
 
-            const passwordInput = document.getElementById("password");
-            const passwordValue = passwordInput.value.trim();
+        let isValid = true;
 
-            let isValid = true;
-
-            if (idValue == "") {
-                idInput.classList.add("is-invalid");
-                idInput.classList.remove("is-valid");
-                isValid = false;
-            } else {
-                idInput.classList.remove("is-invalid");
-                idInput.classList.add("is-valid");
-            }
-
-            if (passwordValue == "") {
-                passwordInput.classList.add("is-invalid");
-                passwordInput.classList.remove("is-valid");
-                isValid = false;
-            } else {
-                passwordInput.classList.remove("is-invalid");
-                passwordInput.classList.add("is-valid");
-            }
-
-            return isValid;
+        // 아이디 검사
+        if (!idPattern.test(idValue)) {
+            idInput.classList.add("is-invalid");
+            idInput.classList.remove("is-valid");
+            isValid = false;
+        } else {
+            idInput.classList.remove("is-invalid");
+            idInput.classList.add("is-valid");
         }
+
+        // 비밀번호 검사
+        if (!passwordPattern.test(passwordValue)) {
+            passwordInput.classList.add("is-invalid");
+            passwordInput.classList.remove("is-valid");
+            isValid = false;
+        } else {
+            passwordInput.classList.remove("is-invalid");
+            passwordInput.classList.add("is-valid");
+        }
+
+        return isValid;
     }
 
     function loginLogic() {
