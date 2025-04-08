@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService signService;
+	MemberService service;
 	
 	@RequestMapping(value = "/web/login")
 	public String webLogin() {
 		
 		return "web/sign/login";
+	}
+	
+	@RequestMapping(value = "/mob/login")
+	public String mobLogin() {
+		
+		return "mobile/sign/login";
 	}
 	
 }
