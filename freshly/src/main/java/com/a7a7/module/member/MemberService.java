@@ -1,4 +1,4 @@
-package com.a7a7.modeule.member;
+package com.a7a7.module.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,5 +8,8 @@ public class MemberService {
 	@Autowired
 	MemberDao dao;
 	
+	public MemberDto loginChk(MemberDto dto) {
+		return dao.loginChk(dto);
+	}
 	
 }
