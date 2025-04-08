@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 	@Autowired
 	MemberDao dao;
+	
+	
 }
