@@ -26,10 +26,10 @@ public class IndexController {
 		
 		// login 검사
 		if(httpSession.getAttribute("user") == null) {
-			return "redirect:/mod/login";
+			return "redirect:/mob/login";
 		}
 		model.addAttribute("user", httpSession.getAttribute("user"));
 		
-		return "mod/index/index";
+		return "mobile/index/index";
 	}
 }

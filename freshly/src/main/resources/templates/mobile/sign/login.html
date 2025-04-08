@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <!-- Required meta tags -->
@@ -8,7 +8,7 @@
   <meta content="Codescandy" name="author">
   <title>Sign in eCommerce HTML Template - FreshCart</title>
   <!-- Favicon icon-->
-  <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/mobile/template/assets/images/favicon/favicon.ico">
 
 
   <!-- Libs CSS -->
@@ -50,29 +50,29 @@
           <!-- col -->
           <div class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1">
             <div class="mb-lg-9 mb-5">
-              <h1 class="mb-1 h2 fw-bold">로그인</h1>
-              <p>Welcome back to FreshCart! Enter your email to get started.</p>
+              <h1 class="mb-1 h2 fw-bold text-center">로그인</h1>
+              <p class="text-center">Welcome back to FreshCart!</p>
             </div>
 
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" id="form" method="post" novalidate>
               <div class="row g-3">
                 <!-- row -->
 
                 <div class="col-12">
                   <!-- input -->
-                  <label for="formSigninEmail" class="form-label visually-hidden">아이디</label>
-                  <input type="email" class="form-control" id="formSigninEmail" placeholder="Email" required />
-                  <div class="invalid-feedback">Please enter name.</div>
+                  <label for="mbId" class="form-label visually-hidden">아이디</label>
+                  <input type="email" class="form-control" id="mbId" name="mbId" placeholder="아이디" required value="ServiceAdmin"/>
+                  <div class="invalid-feedback"  id="mbIdError">아이디를 입력하세요</div>
                 </div>
                 <div class="col-12">
                   <!-- input -->
                   <div class="password-field position-relative">
-                    <label for="formSigninPassword" class="form-label visually-hidden">패스워드</label>
+                    <label for="mbPassword" class="form-label visually-hidden">패스워드</label>
                     <div class="password-field position-relative">
-                      <input type="password" class="form-control fakePassword" id="formSigninPassword"
+                      <input type="password" class="form-control fakePassword" id="mbPassword" name="mbPassword" value="a1234567"
                         placeholder="*****" required />
-                      <span><i class="bi bi-eye-slash passwordToggler"></i></span>
-                      <div class="invalid-feedback">Please enter password.</div>
+                     
+                      <div class="invalid-feedback"  id="mbPasswordError">비밀번호를 입력하세요</div>
                     </div>
                   </div>
                 </div>
@@ -84,16 +84,14 @@
                     <label class="form-check-label" for="flexCheckDefault">Remember me</label>
                   </div>
                   <div>
-                    Forgot password?
-                    <a href="../pages/forgot-password.html">Reset It</a>
+                    <a href="../pages/forgot-password.html">비밀번호 찾기</a>
                   </div>
                 </div>
                 <!-- btn -->
-                <div class="col-12 d-grid"><button type="submit" class="btn btn-primary">Sign In</button></div>
+                <div class="col-12 d-grid"><button type="button" id="login" class="btn btn-primary">로그인</button></div>
                 <!-- link -->
                 <div>
-                  Don’t have an account?
-                  <a href="../pages/signup.html">Sign Up</a>
+                  <a href="../pages/signup.html">회원가입</a>
                 </div>
               </div>
             </form>
@@ -263,9 +261,28 @@
       </div>
     </div>
   </footer>
+  <!-- 모달 창 -->
+<div id="modalAlert" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAlertTitle">확 인</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="modalAlertBody">일치하는 회원이 존재하지 않습니다!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Javascript-->
   <!-- Libs JS -->
-  <!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+  <script src="/mobile/template/assets/libs/jquery/jquery.min.js"></script>  
   <script src="/mobile/template/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/mobile/template/assets/libs/simplebar/dist/simplebar.min.js"></script>
 
@@ -282,35 +299,75 @@
 		document.getElementById("mbId").classList.remove("is-valid");
 		document.getElementById("mbPassword").classList.remove("is-invalid");
 		document.getElementById("mbPassword").classList.remove("is-valid");
+		
 		document.getElementById("mbIdError").textContent = '';
 		document.getElementById("mbPasswordError").textContent = '';
   
 		const id = document.getElementById("mbId").value;
-		const password = document.getElementById("password").value;
-		let expIdText = /^[A-Za-z0-9]{4,12}$/;
-		let expPasswordText = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/ ; 
- 		
-		if(id == null || id == ""){
+		const password = document.getElementById("mbPassword").value;
+		const expIdText = /^[A-Za-z0-9]{4,12}$/
+	  	const expPasswordText = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{8,16}$/;
+		
+	  	 let isValid = true;
+		
+		if(id == null || id === ""){
 			document.getElementById("mbIdError").textContent = "아이디를 입력해주세요.";
 			document.getElementById("mbId").classList.add("is-invalid");
-			 if(!expIdText.test(id)){
-				document.getElementById("mbIdError").textContent = "4~12자리 영어숫자조합의 아이디를 입력해주세요.";
-				document.getElementById("mbId").classList.add("is-invalid");
-			}else{
-				document.getElementById("mbId").classList.add("is-valid");
-			}
-		}else if(password == null || password == ""){
-			document.getElementById("mbPasswordError").textContent = "비밀번호를 입력해주세요.";
-			document.getElementById("mbPassword").classList.add("is-invalid");
-			if(!expPasswordText.test(password)){			
-				document.getElementById("mbPasswordError").textContent = "8~16자리 영어숫자조합의 비밀번호를 입력해주세요.";
-				document.getElementById("mbPassword").classList.add("is-invalid");
-			}else{
-				document.getElementById("mbPassword").classList.add("is-valid");
-			}
+			isValid =false;
+		}else if(!expIdText.test(id)){
+			document.getElementById("mbIdError").textContent = "4~12자리 영어숫자조합의 아이디를 입력해주세요.";
+			document.getElementById("mbId").classList.add("is-invalid");
+			isValid =false;
+		}else{
+			document.getElementById("mbId").classList.add("is-valid");
+			 isValid = true;
 		}
 		
+		if(password == null || password === ""){
+			document.getElementById("mbPasswordError").textContent = "비밀번호를 입력해주세요.";
+			document.getElementById("mbPassword").classList.add("is-invalid");
+			isValid =false;
+		}else if(!expPasswordText.test(password)){			
+			document.getElementById("mbPasswordError").textContent = "8~16자리 영어숫자조합의 비밀번호를 입력해주세요.";
+			document.getElementById("mbPassword").classList.add("is-invalid");
+			isValid =false;
+		}else{
+			document.getElementById("mbPassword").classList.add("is-valid");
+			 isValid = true;
+			}
+		
+  	
+  	if(isValid){
+  		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			,url: "/loginProc"
+			,data : { "mbId" : $("#mbId").val(), "mbPassword" : $("#mbPassword").val()}
+			,success: function(response) {
+				
+				if(response.rt == "success") {
+					location.href = "/mob/";
+				}else if(response.rt == "fail"){	
+		 		document.getElementById("modalAlertTitle").innerText = "확 인";
+		 		document.getElementById("modalAlertBody").innerText = "일치하는 회원 혹은 비밀번호가 존재 하지 않습니다!"; 
+		 		$("#modalAlert").modal("show"); 
+		 		document.getElementById("mbPassword").value = "";  // 비밀번호 초기화
+		 	    document.getElementById("mbPassword").focus();     // 포커스
+		 	  	document.getElementById("mbPassword").classList.remove("is-invalid");
+		 	  	document.getElementById("mbPassword").classList.add("is-invalid");		 	  	
+				}
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+		}else {
+	        console.log("유효성 검사 실패: 폼 제출 안 함");
+	  	}
+  	
   	}
+  	
   </script>
 </body>
 
