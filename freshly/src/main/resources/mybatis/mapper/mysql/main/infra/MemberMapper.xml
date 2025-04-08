@@ -21,6 +21,20 @@
 			1=1
 			AND mbId = #{mbId}
 			AND mbPassword = #{mbPassword}
+			AND mbDelNy = 0
 	</select>
+	
+	<select id="idChk" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM
+			member
+		WHERE
+			1=1
+			AND mbId = #{mbId}
+			AND mbDelNy = 0
+	</select>
+	
+	
 	
 </mapper>

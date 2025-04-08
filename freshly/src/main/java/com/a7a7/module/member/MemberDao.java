@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 public interface MemberDao {
 
 	public MemberDto loginChk(MemberDto dto);
+	public int idChk(MemberDto dto);
 }

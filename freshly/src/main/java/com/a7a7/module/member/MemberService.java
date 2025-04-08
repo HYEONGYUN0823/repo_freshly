@@ -11,4 +11,8 @@ public class MemberService {
 	public MemberDto loginChk(MemberDto dto) {
 		return dao.loginChk(dto);
 	}
+	
+	public int idChk(MemberDto dto) {
+		return dao.idChk(dto);
+	}
 }

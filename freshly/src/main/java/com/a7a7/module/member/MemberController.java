@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import jakarta.servlet.http.HttpSession;
 
 
@@ -17,6 +18,7 @@ public class MemberController {
 	MemberService service;
 	
 	// 공통
+	// 로그인 회원일치 검사
 	@ResponseBody
 	@RequestMapping(value = "/loginProc")
 	public Map<String, Object> loginProc(MemberDto dto, HttpSession httpSession) throws Exception {
@@ -33,6 +35,36 @@ public class MemberController {
 			returnMap.put("rt", "fail");
 		}
 
+		return returnMap;
+	}
+	// 로그인 ID 중복검사
+	@ResponseBody
+	@RequestMapping(value = "/idChk")
+	public Map<String, Object> idChk(MemberDto dto) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		// id 중복검사
+		int result = service.idChk(dto);
+		
+		// 검사결과 map에 put해서 리턴
+		if(result == 0 && dto.getMbId() != "") {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		
+		return returnMap;
+	}
+	// 로그아웃
+	@ResponseBody
+	@RequestMapping(value = "/logoutProc")
+	public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+			
+		httpSession.setAttribute("user", null);
+		returnMap.put("rt", "success");
+		
 		return returnMap;
 	}
 	
