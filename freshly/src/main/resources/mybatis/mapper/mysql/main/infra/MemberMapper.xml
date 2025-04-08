@@ -5,4 +5,22 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.member.MemberDto"/>
 	
+	<select id="loginChk" resultMap="resultMapObj">
+		SELECT 
+			seq
+			,mbName
+			,mbId
+			,mbPassword
+			,mbEmail
+		    ,mbRegDateTime
+		    ,mbModDateTime
+		    ,mbDelNy
+		FROM
+			member
+		WHERE
+			1=1
+			AND mbId = #{mbId}
+			AND mbPassword = #{mbPassword}
+	</select>
+	
 </mapper>

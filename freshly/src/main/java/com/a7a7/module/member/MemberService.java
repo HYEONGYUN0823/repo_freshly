@@ -8,5 +8,7 @@ public class MemberService {
 	@Autowired
 	MemberDao dao;
 	
-	
+	public MemberDto loginChk(MemberDto dto) {
+		return dao.loginChk(dto);
+	}
 }
