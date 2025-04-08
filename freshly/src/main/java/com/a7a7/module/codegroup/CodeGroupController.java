@@ -1,4 +1,4 @@
-package com.a7a7.modeule.codegroup;
+package com.a7a7.module.codegroup;
 
 public class CodeGroupController {
 
