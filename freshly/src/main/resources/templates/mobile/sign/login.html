@@ -274,6 +274,44 @@
 
   <script src="../assets/js/vendors/password.js"></script>
   <script src="../assets/js/vendors/validation.js"></script>
+  
+  <script type="text/javascript">
+  	document.getElementById("login").onclick = function(){
+  
+  		document.getElementById("mbId").classList.remove("is-invalid");
+		document.getElementById("mbId").classList.remove("is-valid");
+		document.getElementById("mbPassword").classList.remove("is-invalid");
+		document.getElementById("mbPassword").classList.remove("is-valid");
+		document.getElementById("mbIdError").textContent = '';
+		document.getElementById("mbPasswordError").textContent = '';
+  
+		const id = document.getElementById("mbId").value;
+		const password = document.getElementById("password").value;
+		let expIdText = /^[A-Za-z0-9]{4,12}$/;
+		let expPasswordText = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/ ; 
+ 		
+		if(id == null || id == ""){
+			document.getElementById("mbIdError").textContent = "아이디를 입력해주세요.";
+			document.getElementById("mbId").classList.add("is-invalid");
+			 if(!expIdText.test(id)){
+				document.getElementById("mbIdError").textContent = "4~12자리 영어숫자조합의 아이디를 입력해주세요.";
+				document.getElementById("mbId").classList.add("is-invalid");
+			}else{
+				document.getElementById("mbId").classList.add("is-valid");
+			}
+		}else if(password == null || password == ""){
+			document.getElementById("mbPasswordError").textContent = "비밀번호를 입력해주세요.";
+			document.getElementById("mbPassword").classList.add("is-invalid");
+			if(!expPasswordText.test(password)){			
+				document.getElementById("mbPasswordError").textContent = "8~16자리 영어숫자조합의 비밀번호를 입력해주세요.";
+				document.getElementById("mbPassword").classList.add("is-invalid");
+			}else{
+				document.getElementById("mbPassword").classList.add("is-valid");
+			}
+		}
+		
+  	}
+  </script>
 </body>
 
 </html>
