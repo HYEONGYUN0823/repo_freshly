@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{web/include/head :: head}"></div>
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>공장 관리</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">공통</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">공장 관리</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">공장 목록</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                
+                                    <table id="example" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>공장명</th>
+                                                <th>대표자</th>
+                                                <th>전화번호</th>
+                                                <th>주소</th>
+                                                <th>상세주소</th>
+                                                <th>등록일</th>
+                                                <th>수정일</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item : ${list}">
+                                                <td name="seq" th:text="${item.seq}"></td>
+                                                <td name="fcName" th:text="${item.fcName}"></td>
+                                                <td name="fcManagerName" th:text="${item.fcManagerName}"></td>
+                                                <td name="fcTel" th:text="${item.fcTel}"></td>
+                                                <td name="fcAddress" th:text="${item.fcAddress}"></td>
+                                                <td name="fcAddressDetail" th:text="${item.fcAddressDetail}"></td>
+                                                <td name="fcRegDateTime" th:text="${item.fcRegDateTime}"></td>
+                                                <td name="fcModDateTime" th:text="${item.fcModDateTime}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+<!--**********************************
+       Scripts
+   ***********************************-->
+   
+<!-- Required vendors -->
+<script src="/web/template/vendor/global/global.min.js"></script>
+<script src="/web/template/js/quixnav-init.js"></script>
+<script src="/web/template/js/custom.min.js"></script>
+
+<!-- Datatable -->
+<script src="/web/template/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/web/template/js/plugins-init/datatables.init.js"></script>
+
+<!--**********************************
+       Scripts end
+   ***********************************-->
+   
+<div th:replace="~{web/include/footer :: footer}"></div>
+
+</html>

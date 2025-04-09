@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.a7a7.module.basic.BasicDao">
+	
+	<resultMap id="resultMapObj" type="com.a7a7.module.basic.BasicDto"/>
+	
+	<select id="selectGroceryList" resultMap="resultMapObj">
+		SELECT
+			seq
+		    ,gcName
+		    ,gcCategory
+		    ,gcPrice
+		    ,gcUseNy
+		    ,gcRegDateTime
+		    ,gcModDateTime
+		FROM
+			grocery
+		WHERE
+			1=1
+		    AND gcDelNy = 0
+	</select>
+	
+	
+	
+	
+	<select id="selectFactoryList" resultMap="resultMapObj">
+		SELECT
+			seq
+		    ,fcName
+		    ,fcManagerName
+		    ,fcTel
+		    ,fcAddress
+		    ,fcAddressDetail
+		    ,fcRegDateTime
+		    ,fcModDateTime
+		    ,fcUseNy
+		FROM
+			factory
+		WHERE
+			1=1
+		    AND fcDelNy = 0
+	</select>
+	
+	
+</mapper>

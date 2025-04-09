@@ -16777,6 +16777,9 @@ table.dataTable thead th {
 table.dataTable tbody td {
   padding: 15px 18px; }
 
+table.dataTable tr {
+  color: #454545; }
+  
 table.dataTable tr.selected {
   color: #593bdb; }
 
