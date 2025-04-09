@@ -12,10 +12,18 @@ public class DeliveryController {
 	@Autowired
 	DeliveryService service;
 	
+	// 모바일 배달 리스트 화면 입니다.
 	@RequestMapping(value ="/mob/account/deliverylist")
-	public String accountdeliverylist(Model model) {
+	public String mobdeliverylist(Model model) {
 		model.addAttribute("lists", service.selectDeliveryList());
 		return "mobile/account/deliverylist";
+	}
+	
+	// 앱 배달 리스트 화면 입니다.
+	@RequestMapping(value ="/web/account/deliveryList")
+	public String webdeliverylist(Model model) {
+		model.addAttribute("lists", service.selectDeliveryList());
+		return "web/account/deliveryList";
 	}
 	
 }
