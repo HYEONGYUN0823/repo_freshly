@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.a7a7.module.order.OrderDao">
+	
+	<resultMap id="resultMapObj" type="com.a7a7.module.order.OrderDto"/>
+	
+	<select id="selectOrderList" resultMap="resultMapObj">
+		select
+			a.seq,
+			a.acOrderStatus,
+			a.acOrderDateTime,
+			a.account_seq
+		from
+		 	acorder as a
+		 	where 1=1
+		 	ORDER BY a.seq desc
+	</select>
+	
+	
+</mapper>

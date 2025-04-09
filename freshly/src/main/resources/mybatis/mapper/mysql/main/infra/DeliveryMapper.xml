@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.a7a7.module.delivery.DeliveryDao">
+	
+	<resultMap id="resultMapObj" type="com.a7a7.module.delivery.DeliveryDto"/>
+	
+	<select id="selectDeliveryList" resultMap="resultMapObj">
+		select 
+			a.seq,
+			a.deliveryStatus,
+			a.deliveryStartDateTime,
+			a.deliveryEndDateTime,
+			a.acOrder_seq
+		from
+			delivery as a
+			where 1=1
+			ORDER BY a.seq desc
+	</select>
+</mapper>
