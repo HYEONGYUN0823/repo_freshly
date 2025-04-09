@@ -12,13 +12,13 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>식료품 관리</h4>
+                            <h4>공장 관리</h4>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">공통</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">식료품 관리</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">기본</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">공장 관리</a></li>
                         </ol>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">식료품 목록</h4>
+                                <h4 class="card-title">공장 목록</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -38,9 +38,11 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>이름</th>
-                                                <th>분류</th>
-                                                <th>가격</th>
+                                                <th>공장명</th>
+                                                <th>대표자</th>
+                                                <th>전화번호</th>
+                                                <th>주소</th>
+                                                <th>상세주소</th>
                                                 <th>등록일</th>
                                                 <th>수정일</th>
                                             </tr>
@@ -48,15 +50,15 @@
                                         <tbody>
                                             <tr th:each="item : ${list}">
                                                 <td name="seq" th:text="${item.seq}"></td>
-                                                <td name="gcName" th:text="${item.gcName}"></td>
-                                                <td name="gcCategory" th:text="${item.gcCategory}"></td>
-                                                <td name="gcPrice" th:text="${item.gcPrice}"></td>
-                                                <td name="gcRegDateTime" th:text="${item.gcRegDateTime}"></td>
-                                                <td name="gcModDateTime" th:text="${item.gcModDateTime}"></td>
+                                                <td name="fcName" th:text="${item.fcName}"></td>
+                                                <td name="fcManagerName" th:text="${item.fcManagerName}"></td>
+                                                <td name="fcTel" th:text="${item.fcTel}"></td>
+                                                <td name="fcAddress" th:text="${item.fcAddress}"></td>
+                                                <td name="fcAddressDetail" th:text="${item.fcAddressDetail}"></td>
+                                                <td name="fcRegDateTime" th:text="${item.fcRegDateTime}"></td>
+                                                <td name="fcModDateTime" th:text="${item.fcModDateTime}"></td>
                                             </tr>
-                                            
                                         </tbody>
-                                        
                                     </table>
                                     
                                 </div>

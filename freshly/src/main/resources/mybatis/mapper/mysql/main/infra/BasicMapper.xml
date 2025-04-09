@@ -21,8 +21,24 @@
 		    AND gcDelNy = 0
 	</select>
 	
-	
-	
+	<select id="selectAccountList" resultMap="resultMapObj">
+		SELECT
+			seq
+		    ,acName
+		    ,acCategory
+		    ,acManagerName
+		    ,acManagerTel
+		    ,acAddress
+		    ,acAddressDetail
+		    ,acStartDate
+		    ,acEndDate
+		    ,acUseNy
+		FROM
+			account
+		WHERE
+			1=1
+		    AND acDelNy = 0
+	</select>
 	
 	<select id="selectFactoryList" resultMap="resultMapObj">
 		SELECT

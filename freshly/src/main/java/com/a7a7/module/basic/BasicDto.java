@@ -15,7 +15,16 @@ public class BasicDto {
 	private String gcModDateTime;
 	
 	// 거래처
-	
+	private String acName;
+	private Integer acCategory;
+	private String acManagerName;
+	private String acManagerTel;
+	private Integer acAddress;
+	private String acAddressDetail;
+	private String acStartDate;
+	private String acEndDate;
+	private String acUseNy;
+	private String acDelNy;
 	
 	// 공장
 	private String fcName;
@@ -85,7 +94,66 @@ public class BasicDto {
 	}
 	
 	// 거래처
-	
+	public String getAcName() {
+		return acName;
+	}
+	public void setAcName(String acName) {
+		this.acName = acName;
+	}
+	public Integer getAcCategory() {
+		return acCategory;
+	}
+	public void setAcCategory(Integer acCategory) {
+		this.acCategory = acCategory;
+	}
+	public String getAcManagerName() {
+		return acManagerName;
+	}
+	public void setAcManagerName(String acManagerName) {
+		this.acManagerName = acManagerName;
+	}
+	public String getAcManagerTel() {
+		return acManagerTel;
+	}
+	public void setAcManagerTel(String acManagerTel) {
+		this.acManagerTel = acManagerTel;
+	}
+	public Integer getAcAddress() {
+		return acAddress;
+	}
+	public void setAcAddress(Integer acAddress) {
+		this.acAddress = acAddress;
+	}
+	public String getAcAddressDetail() {
+		return acAddressDetail;
+	}
+	public void setAcAddressDetail(String acAddressDetail) {
+		this.acAddressDetail = acAddressDetail;
+	}
+	public String getAcStartDate() {
+		return acStartDate;
+	}
+	public void setAcStartDate(String acStartDate) {
+		this.acStartDate = acStartDate;
+	}
+	public String getAcEndDate() {
+		return acEndDate;
+	}
+	public void setAcEndDate(String acEndDate) {
+		this.acEndDate = acEndDate;
+	}
+	public String getAcUseNy() {
+		return acUseNy;
+	}
+	public void setAcUseNy(String acUseNy) {
+		this.acUseNy = acUseNy;
+	}
+	public String getAcDelNy() {
+		return acDelNy;
+	}
+	public void setAcDelNy(String acDelNy) {
+		this.acDelNy = acDelNy;
+	}
 	
 	// 공장
 	public String getFcName() {
