@@ -13,10 +13,10 @@ public class IndexController {
 	public String indexWeb(Model model, HttpSession httpSession) {
 		
 		// login 검사
-		if(httpSession.getAttribute("user") == null) {
+		if(httpSession.getAttribute("webUser") == null) {
 			return "redirect:/web/login";
 		}
-		model.addAttribute("user", httpSession.getAttribute("user"));
+		model.addAttribute("webUser", httpSession.getAttribute("webUser"));
 		
 		return "web/index/index";
 	}
@@ -25,10 +25,10 @@ public class IndexController {
 	public String indexMob(Model model, HttpSession httpSession) {
 		
 		// login 검사
-		if(httpSession.getAttribute("user") == null) {
+		if(httpSession.getAttribute("mobUser") == null) {
 			return "redirect:/mob/login";
 		}
-		model.addAttribute("user", httpSession.getAttribute("user"));
+		model.addAttribute("mobUser", httpSession.getAttribute("mobUser"));
 		
 		return "mobile/index/index";
 	}
