@@ -42,6 +42,7 @@
                                        			<th style="text-align: center;">주문번호</th>
                                        			<th style="text-align: center;">거래처</th>
                                        			<th style="text-align: center;">주문 상태</th>
+                                       			<th style="text-align: center;">상세 주문 갯수</th>
                                       			<th style="text-align: center;">주문 시간</th>
                                             </tr>
                                         </thead>
@@ -51,6 +52,7 @@
                                        			<td style="text-align: center;"><a href="javascript:void(0);" th:text ="${item.ac_seq}" th:attr="onclick=|goForm('${item.ac_seq}')|"></a></td>
                                       			<td style="text-align: center;" th:text ="${item.account_seq}"></td>
                                       			<td style="text-align: center;" th:text ="${item.acOrderStatus}"></td>
+                                      			<td style="text-align: center;" th:text ="${item.ioCount}"></td>
                                        			<td style="text-align: center;" th:text ="${item.acOrderDateTime}"></td>
                                             </tr>
                                         </tbody>

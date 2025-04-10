@@ -9,6 +9,10 @@
 		select
 			a.seq as ac_seq,
 			a.acOrderStatus,
+			(select count(*) from individualOrder as b
+			where 1=1
+			AND ac_seq = b.acOrder_seq
+			) as ioCount,
 			a.acOrderDateTime,
 			a.account_seq
 		from

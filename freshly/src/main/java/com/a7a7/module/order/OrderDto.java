@@ -7,6 +7,7 @@ public class OrderDto {
 	private String acOrderDateTime;
 	private Integer acOrderDelNy;
 	private String account_seq;
+	private Integer ioCount;
 	
 	
 	
@@ -42,6 +43,12 @@ public class OrderDto {
 	}
 	public void setAccount_seq(String account_seq) {
 		this.account_seq = account_seq;
+	}
+	public Integer getIoCount() {
+		return ioCount;
+	}
+	public void setIoCount(Integer ioCount) {
+		this.ioCount = ioCount;
 	}
 	
 	
