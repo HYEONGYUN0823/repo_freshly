@@ -7,6 +7,11 @@ public class OrderDto {
 	private String acOrderDateTime;
 	private Integer acOrderDelNy;
 	private String account_seq;
+	
+	
+	
+	
+	
 	public String getSeq() {
 		return seq;
 	}
