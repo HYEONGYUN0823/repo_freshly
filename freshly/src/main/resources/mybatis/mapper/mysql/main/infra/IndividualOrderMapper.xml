@@ -15,7 +15,7 @@
 			c.seq as gc_seq,
 			c.gcName,
 			c.gcPrice,
-			c.gcPrice * a.ioQuantity as totalPrice
+			c.gcPrice * a.ioQuantity as totalPrice				<!--  총 가격에 대한 변수. IndividialOrderDto에 정의함.-->
 		from
 			individualOrder as a
 			left join acOrder as b on b.seq = a.acOrder_seq
