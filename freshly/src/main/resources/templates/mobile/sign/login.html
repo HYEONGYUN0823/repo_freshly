@@ -185,7 +185,7 @@
 			,success: function(response) {
 				
 				if(response.rt == "success") {
-					location.href = "/mob/";
+					location.href = "/mob/account/orderlist";
 				}else if(response.rt == "fail"){	
 		 		document.getElementById("modalAlertTitle").innerText = "확 인";
 		 		document.getElementById("modalAlertBody").innerText = "일치하는 회원 혹은 비밀번호가 존재 하지 않습니다!"; 

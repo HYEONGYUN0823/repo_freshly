@@ -2119,32 +2119,7 @@
 	<script src="/mobile/template/assets/js/vendors/tns-slider.js"></script>
 	<script src="/mobile/template/assets/js/vendors/zoom.js"></script>
 	
-	<script type="text/javascript">
-    const URL_SIGNIN_FORM_XDM = "/mob/login"
-	const URL_SIGNOUT_PROC_XDM = "/mob/logoutProc"
-	const URL_INDEX_VIEW_XDM = "/mob/"
-	
-	
-		document.getElementById("btnSignout").onclick = function(){
-			$.ajax({
-				async: true 
-				,cache: false
-				,type: "post"
-				,url: URL_SIGNOUT_PROC_XDM
-				,data: {}
-				,success: function(response) {
-					if(response.rt == "success") {
-						location.href = URL_SIGNIN_FORM_XDM;
-					} else {
-						// by pass
-					}
-				}
-				,error : function(jqXHR, textStatus, errorThrown){
-					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-				}
-			});
-		};
-  </script>
+	<div th:replace="~{mobile/include/footer :: footer}"></div>
 </body>
 
 </html>
