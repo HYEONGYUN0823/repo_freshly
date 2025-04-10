@@ -7,7 +7,8 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+        <form class="content-body" id="form" method="post">
+        	<input type="hidden" name="ac_seq">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
@@ -38,8 +39,7 @@
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center;">#</th>
-                                                <th style="text-align: center;">#</th>
-                                       			<th style="text-align: center;">Seq</th>
+                                       			<th style="text-align: center;">주문번호</th>
                                        			<th style="text-align: center;">거래처</th>
                                        			<th style="text-align: center;">주문 상태</th>
                                       			<th style="text-align: center;">주문 시간</th>
@@ -48,7 +48,7 @@
                                         <tbody>
                                             <tr th:each="item : ${list}">
                                                 <td style="text-align: center;">#</td>
-                                       			<td style="text-align: center;" th:text ="${item.seq}"></td>
+                                       			<td style="text-align: center;"><a href="javascript:void(0);" th:text ="${item.ac_seq}" th:attr="onclick=|goForm('${item.ac_seq}')|"></a></td>
                                       			<td style="text-align: center;" th:text ="${item.account_seq}"></td>
                                       			<td style="text-align: center;" th:text ="${item.acOrderStatus}"></td>
                                        			<td style="text-align: center;" th:text ="${item.acOrderDateTime}"></td>
@@ -63,7 +63,7 @@
                    
                 </div>
             </div>
-        </div>
+        </form>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -86,5 +86,20 @@
    ***********************************-->
    
 <div th:replace="~{web/include/footer :: footer}"></div>
+
+<!-- 해당 주문에 대한 개별 주문에 대한 페이지 -->
+<script type="text/javascript">
+
+let seq = document.querySelector("input[name=ac_seq]");	
+
+goForm = function(keyValue) {
+	    seq.value = keyValue;
+	    console.log("전송값 ac_seq: ", seq.value); 
+	    form.action = "/web/account/individualOrderList";
+
+	   
+	    form.submit();
+	}
+</script>
 
 </html>

@@ -2,7 +2,7 @@ package com.a7a7.module.order;
 
 public class OrderDto {
 
-	private String seq;
+	private String ac_seq;
 	private Integer acOrderStatus;
 	private String acOrderDateTime;
 	private Integer acOrderDelNy;
@@ -12,11 +12,12 @@ public class OrderDto {
 	
 	
 	
-	public String getSeq() {
-		return seq;
+	
+	public String getAc_seq() {
+		return ac_seq;
 	}
-	public void setSeq(String seq) {
-		this.seq = seq;
+	public void setAc_seq(String ac_seq) {
+		this.ac_seq = ac_seq;
 	}
 	public Integer getAcOrderStatus() {
 		return acOrderStatus;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.a7a7.module.individualorder.IndividualOrderDao">
+	
+	<resultMap id="resultMapObj" type="com.a7a7.module.individualorder.IndividualOrderDto"/>
+	
+	<select id="selectIndividualOrderList" resultMap="resultMapObj">
+		select
+			a.seq as io_seq,
+			a.ioQuantity,
+			a.acOrder_seq,
+			a.grocery_seq,
+			b.seq as ac_seq,
+			c.seq as gc_seq,
+			c.gcName,
+			c.gcPrice,
+			c.gcPrice * a.ioQuantity as totalPrice
+		from
+			individualOrder as a
+			left join acOrder as b on b.seq = a.acOrder_seq
+			left join grocery as c on c.seq = a.grocery_seq
+		where 1=1
+			AND acOrder_seq = #{ac_seq}
+	</select>
+	
+</mapper>

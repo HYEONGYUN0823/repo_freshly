@@ -7,14 +7,14 @@
 	
 	<select id="selectOrderList" resultMap="resultMapObj">
 		select
-			a.seq,
+			a.seq as ac_seq,
 			a.acOrderStatus,
 			a.acOrderDateTime,
 			a.account_seq
 		from
 		 	acorder as a
 		 	where 1=1
-		 	ORDER BY a.seq desc
+		 	ORDER BY ac_seq desc
 	</select>
 	
 	

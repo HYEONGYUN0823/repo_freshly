@@ -12,13 +12,13 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>입고 관리</h4>
+                            <h4>상세 주문 관리</h4>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">공장</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">입고 관리</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">기본</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">상세 주문 관리</a></li>
                         </ol>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">입고 목록</h4>
+                                <h4 class="card-title">주문 목록</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -38,23 +38,23 @@
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center;">#</th>
-                                       			<th style="text-align: center;">Seq</th>
-                                       			<th style="text-align: center;">공장</th>
-                                       			<th style="text-align: center;">입고 상태</th>
-                                       			<th style="text-align: center;">주문번호</th> <!-- individualOrder_seq정보를 몰라서 우선 주문번호 ㅎㄷㄷ -->
-                                      			<th style="text-align: center;">등록일</th>
-                                      			<th style="text-align: center;">수정일</th>
+                                                <th style="text-align: center;">주문 번호</th>
+                                       			<th style="text-align: center;">NO</th>
+                                       			<th style="text-align: center;">식료품</th>
+                                      			<th style="text-align: center;">식료품 가격</th>
+                                      			<th style="text-align: center;">주문 갯수</th>
+                                      			<th style="text-align: center;">총 가격</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
                                                 <td style="text-align: center;">#</td>
-                                       			<td style="text-align: center;" th:text ="${item.seq}"></td>
-                                      			<td style="text-align: center;" th:text ="${item.factory_seq}"></td>
-                                      			<td style="text-align: center;" th:text ="${item.rcStatus}"></td>
-                                      			<td style="text-align: center;" th:text ="${item.individualOrder_seq}"></td>
-                                       			<td style="text-align: center;" th:text ="${item.rcRegDateTime}"></td>
-                                       			<td style="text-align: center;" th:text ="${item.rcModDateTime}"></td>
+                                       			<td style="text-align: center;" th:text ="${item.ac_seq}"></td>
+                                      			<td style="text-align: center;" th:text ="${item.io_seq}"></td>
+                                      			<td style="text-align: center;" th:text ="${item.gcName}"></td>
+                                       			<td style="text-align: center;" th:text ="${item.gcPrice}"></td>
+                                       			<td style="text-align: center;" th:text ="${item.ioQuantity}"></td>
+                                       			<td style="text-align: center;" th:text ="${item.totalPrice}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
