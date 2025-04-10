@@ -14,14 +14,14 @@ public class OrderController {
 	// 모바일 주문 리스트 화면 입니다.
 	@RequestMapping(value ="/mob/account/orderlist")
 	public String moborderlist(Model model) {
-		model.addAttribute("lists",service.selectOrderList());
+		model.addAttribute("list",service.selectOrderList());
 		return "/mobile/account/orderlist";
 	}
 	
 	// 앱 주문 리스트 화면 입니다.
 	@RequestMapping(value ="/web/account/orderList")
 	public String weborderlist(Model model) {
-		model.addAttribute("lists",service.selectOrderList());
+		model.addAttribute("list",service.selectOrderList());
 		return "/web/account/orderList";
 	}
 	
