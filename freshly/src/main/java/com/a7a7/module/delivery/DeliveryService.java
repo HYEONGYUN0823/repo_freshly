@@ -14,4 +14,8 @@ public class DeliveryService {
 	public List<DeliveryDto> selectDeliveryList(){
 		return dao.selectDeliveryList();
 	}
+	
+	public int deliveryInsert(DeliveryDto dto) {
+		return dao.deliveryInsert(dto);
+	}
 }

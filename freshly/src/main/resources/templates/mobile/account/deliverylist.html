@@ -2,16 +2,19 @@
 <html lang="kor" xmlns:th="http://www.thymeleaf.org">
 
  <div th:replace= "~{mobile/include/head :: head}"></div>
+		
 
          <!-- main wrapper -->
          <main class="main-content-wrapper">
+         <form name="formList" id="formList" method="post" autocomplete="off">
+        	<input type="hidden" name="seq">
             <div class="container">
                <!-- row -->
                <div class="row mb-8">
                   <div class="col-md-12">
                      <!-- page header -->
                      <div>
-                        <h2>배달내역 목록</h2>
+                        <h2>배송내역 목록</h2>
                         <!-- breacrumb -->
                         <nav aria-label="breadcrumb">
                            <ol class="breadcrumb mb-0">
@@ -31,9 +34,9 @@
                            <div class="row justify-content-between">
                               <div class="col-md-4 col-12 mb-2 mb-md-0">
                                  <!-- form -->
-                                 <form class="d-flex" role="search">
+                                 <div class="d-flex" role="search">
                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-                                 </form>
+                                 </div>
                               </div>
                               <div class="col-lg-2 col-md-4 col-12">
                                  <!-- select -->
@@ -62,9 +65,9 @@
                                        <th style="text-align: center;">#</th>
                                        <th style="text-align: center;">Seq</th>
                                        <th style="text-align: center;">주문 번호</th>
-                                       <th style="text-align: center;">배달 상태</th>
-                                       <th style="text-align: center;">배달 시작 시간</th>
-                                       <th style="text-align: center;">배달 종료 시간</th>
+                                       <th style="text-align: center;">배송 상태</th>
+                                       <th style="text-align: center;">배송 시작 시간</th>
+                                       <th style="text-align: center;">배송 종료 시간</th>
                                        <th></th>
                                     </tr>
                                  </thead>
@@ -121,14 +124,60 @@
                               </ul>
                            </nav>
                         </div>
+                        
+                        <div class="mt-3 d-flex justify-content-between">
+						    <div style="margin-left: 16px; margin-bottom: 16px;">
+						        <button type="button" class="btn btn-danger me-2">
+						            <i class="fa-solid fa-x"></i>
+						        </button>
+						        <button type="button" id="btnUel" class="btn btn-danger">
+						            <i class="fa-regular fa-trash-can"></i>
+						        </button>
+						    </div>
+						
+						    <div style="margin-right: 16px; margin-bottom: 16px;">
+						        <button type="button" class="btn btn-primary me-2">
+						            <i class="fa-solid fa-u"></i>
+						        </button>
+						        <button type="button" class="btn btn-success me-2">
+						            <i class="fa-regular fa-file-excel"></i>
+						        </button>
+						        <button type="button" id="btnForm" class="btn btn-primary">
+						            <i class="fa-solid fa-plus"></i>
+						        </button>
+						    </div>
+						</div>
+                        
                      </div>
                   </div>
                </div>
             </div>
+            </form>
          </main>
+      
      
 
  <div th:replace = "~{mobile/include/footer :: footer}"></div>
+ 
+ <script type="text/javascript">
+
+	let goUrlXdmForm = "/mob/account/deliveryForm";
+	let goUrlXdmUele = "";
+
+	let seq = document.querySelector("input[name=seq]");
+	let form = document.getElementById("formList");
+	
+	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+
+	goForm = function (keyValue) {
+		
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+</script>
 
    </body>
 </html>

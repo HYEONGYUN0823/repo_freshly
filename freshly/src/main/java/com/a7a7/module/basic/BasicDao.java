@@ -11,7 +11,9 @@ public interface BasicDao {
 // 		식료품
 //**********************************************
 	public List<BasicDto> selectGroceryList();		//리스트
+	public BasicDto selectGroceryView(BasicDto dto);
 	public int GroceryInsert(BasicDto dto);						//insert
+	
 	
 	
 //	**********************************************

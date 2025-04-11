@@ -16,6 +16,9 @@ public class BasicService {
 	public List<BasicDto> selectGroceryList() {
 		return dao.selectGroceryList();
 	}
+	public BasicDto selectGroceryView(BasicDto dto) {
+		return dao.selectGroceryView(dto);
+	}
 	
 	public int GroceryInsert(BasicDto dto) {
 		return dao.GroceryInsert(dto);

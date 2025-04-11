@@ -51,7 +51,7 @@
                                             <tr th:each="item : ${list}">
                                              	<td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
-                                                <td name="gcName" th:text="${item.gcName}"></td>
+                                                <td name="gcName"><a href="javascript:void(0);" th:text="${item.gcName}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                                 <td name="gcCategory" th:text="${item.gcCategory}"></td>
                                                 <td name="gcPrice" th:text="${item.gcPrice}"></td>
                                                 <td name="gcRegDateTime" th:text="${item.gcRegDateTime}"></td>
@@ -117,6 +117,7 @@
 	    goForm(0);
 	}
 
+	/* form으로 보내는 기능. */
 	goForm = function (keyValue) {
 		
 	    seq.value = keyValue;
