@@ -9,7 +9,7 @@
             Content body start
         ***********************************-->
         <form class="content-body" id="formList" method="post">
-        	<input type="hidden" name="seq"> 
+        	<input type="hidden" name="acOrder_seq"> 
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
@@ -107,7 +107,7 @@
 <script type="text/javascript">
 
 // 상세주문 이동
-let seq = document.querySelector("input[name=seq]");
+let seq = document.querySelector("input[name=acOrder_seq]");
 let form = document.getElementById("formList");
 
 let goUrlXdmForm = "/web/account/orderForm";

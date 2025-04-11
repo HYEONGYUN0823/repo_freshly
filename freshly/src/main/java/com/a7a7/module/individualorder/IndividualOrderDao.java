@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface IndividualOrderDao {
 
 	public List<IndividualOrderDto> selectIndividualOrderList(String seq);
+	public int insert(IndividualOrderDto dto);
 }

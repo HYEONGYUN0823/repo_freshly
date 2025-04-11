@@ -24,7 +24,7 @@
 		 	acorder as a
 		where 
 		 	1=1
-		 	AND a.seq = #{seq}
+		 	AND a.seq = #{acOrder_seq}
 		 	AND a.acOrderDelNy = 0
 		ORDER BY seq desc
 	</select>

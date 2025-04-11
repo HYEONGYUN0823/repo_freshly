@@ -20,9 +20,23 @@
 		    JOIN grocery gc ON io.grocery_seq = gc.seq
 		WHERE
 			1=1
-		    AND acOrder_seq = #{seq}
+		    AND acOrder_seq = #{acOrder_seq}
 		ORDER BY
 			seq DESC
 	</select>
+	
+	<insert id="insert">
+		INSERT INTO individualorder(
+			ioQuantity,
+			ioDelNy,
+			grocery_seq,
+			acOrder_seq
+		) VALUES(
+			#{ioQuantity},
+			0,
+			#{grocery_seq},
+			#{acOrder_seq}
+		)
+	</insert>
 	
 </mapper>

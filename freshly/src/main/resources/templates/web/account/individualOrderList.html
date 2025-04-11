@@ -4,6 +4,10 @@
 <div th:replace="~{web/include/head :: head}"></div>
 
 
+		<form name="formList" id="formList" method="post" autocomplete="off">
+        <input type="hidden" name="seq">
+        <input type="hidden" name="account_seq" th:value="${order.account_seq}">
+        <input type="hidden" name="acOrder_seq" th:value="${order.seq}">
         <!--**********************************
             Content body start
         ***********************************-->
@@ -92,6 +96,25 @@
                                     </table>
                                     
                                 </div>
+                                
+                                <div class="mt-3">
+                                	<button type="button" class="btn btn-danger">
+                                		<i class="fa-solid fa-x"></i>
+                                	</button>
+                                    <button type="button" id="btnUel" class="btn btn-danger">
+                                    	<i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                    <button type="button" id="btnForm" class="btn btn-primary" style="float: right;">
+                                    	<i class="fa-solid fa-plus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-success" style="float: right; margin-right: 4px;">
+                                    	<i class="fa-regular fa-file-excel"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" style="float: right; margin-right: 4px;">
+                                    	<i class="fa-solid fa-u"></i>
+                                    </button>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -99,6 +122,7 @@
                 </div>
             </div>
         </div>
+        </form>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -115,6 +139,26 @@
 <!-- Datatable -->
 <script src="/web/template/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/web/template/js/plugins-init/datatables.init.js"></script>
+
+<script type="text/javascript">
+
+	let goUrlXdmForm = "/web/account/individualOrderForm";
+	let goUrlXdmUele = "";
+
+	let seq = document.querySelector("input[name=seq]");
+	let form = document.getElementById("formList");
+	
+	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+
+	goForm = function (keyValue) {
+		
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+</script>
 
 <!--**********************************
        Scripts end

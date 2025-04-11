@@ -19,4 +19,8 @@ public class IndividualOrderService {
 		return dao.selectIndividualOrderList(seq);
 	}
 	
+	public int insert(IndividualOrderDto dto) {
+		return dao.insert(dto);
+	}
+	
 }
