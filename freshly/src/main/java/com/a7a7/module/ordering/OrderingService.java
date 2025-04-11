@@ -16,4 +16,8 @@ public class OrderingService {
 		return dao.selectList();
 	}
 	
+	public int insert(OrderingDto dto) {
+		return dao.insert(dto);
+	}
+	
 }

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{web/include/head :: head}"></div>
+
+
+<body>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>발주 관리</h4>
+<!--                             <p class="mb-0">공장관리 등록폼</p> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">발주</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">발주 관리</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="#">
+                                    <div>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label">발주번호 *</label>
+                                                        <input 
+	                                                    type="text" 
+	                                                    id="seq" 
+	                                                    name="seq" 
+	                                                    th:value="${item?.seq}" 
+	                                                    maxlength="20" 
+	                                                    placeholder="자동생성" 
+	                                                    disabled class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="factory_seq" class="text-label">공장 *</label>
+                                                        <div>
+	                                                        <select
+																id="factory_seq" name="factory_seq" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option th:each="list : ${listCodeGroup}"
+																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
+																		th:selected="${list.factory_seq == item?.factory_seq}">
+																	</option>
+															</select>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="odStatus">발주 상태 *</label>
+                                                        <div>
+	                                                        <select
+																id="odStatus" name="odStatus" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option value="1">접수</option>
+																	<option value="2">진행중</option>
+																	<option value="3">완료</option>
+																	<option value="4">취소</option>
+															</select>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="individualOrder_seq">주문번호*</label>
+                                                        <div>
+                                                            <select
+																id="individualOrder_seq" name="individualOrder_seq" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option th:each="list : ${listCodeGroup}"
+																		th:value="${list.individualOrder_seq}" th:text="${list.individualOrder_seq}"
+																		th:selected="${list.individualOrder_seq == item?.individualOrder_seq}">
+																	</option>
+															</select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden"  
+														id="odDelNy" name="odDelNy" 
+														th:value="0" 
+														class="form-control" />
+                                            </div>
+                                        </section>
+                                       
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/factory/OrderingList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="/web/template/vendor/global/global.min.js"></script>
+    <script src="/web/template/js/quixnav-init.js"></script>
+    <script src="/web/template/js/custom.min.js"></script>
+    
+
+
+    <script src="/web/template/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/web/template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/web/template/js/plugins-init/jquery.validate-init.js"></script>
+
+
+
+    <!-- Form step init -->
+    <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
+    
+    <div th:replace="~{web/include/footer :: footer}"></div>
+
+</body>
+
+</html>

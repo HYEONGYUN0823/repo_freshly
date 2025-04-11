@@ -1,5 +1,7 @@
 package com.a7a7.module.ordering;
 
+import java.lang.ProcessBuilder.Redirect;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,5 +25,20 @@ public class OrderingController {
 		model.addAttribute("list", service.selectList());
 		return "web/factory/OrderingList";
 	}
+	
+	@RequestMapping(value = "/web/factory/OrderingForm")
+	public String webOrderingForm() {
+		
+		return "web/factory/OrderingForm";
+	}
+	
+	
+	@RequestMapping(value = "web/factory/OrderingInst")
+	public String orderingInst(OrderingDto dto) {
+		service.insert(dto);
+		
+		return "redirect:/web/factory/OrderingList";
+	}
+	
 	
 }
