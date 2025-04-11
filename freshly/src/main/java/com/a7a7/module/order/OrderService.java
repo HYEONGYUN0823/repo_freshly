@@ -11,6 +11,10 @@ public class OrderService {
 	@Autowired
 	OrderDao dao;
 	
+	public OrderDto selectOneOrder(String seq){
+		return dao.selectOneOrder(seq);
+	}
+	
 	public List<OrderDto> selectOrderList(){
 		return dao.selectOrderList();
 	}

@@ -4,18 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.a7a7.module.order.OrderService;
 
 @Controller
 public class IndividualOrderController {
 
 	@Autowired
 	IndividualOrderService service;
+	@Autowired
+	OrderService orderService;
 	
-	//전체 주문에서 ac_seq값을 받고 그에 따른 상세 정보를 받는 컨트롤러
+	// 개별주문 List 화면
 	@RequestMapping(value="/web/account/individualOrderList")
-	public String webindividualOrderList(IndividualOrderDto dto,Model model) {
-		model.addAttribute("view", service.selectOrderView(dto));
-		model.addAttribute("list", service.selectIndividualOrderList(dto));
+	public String webindividualOrderList(@RequestParam(value = "seq") String seq, Model model) {
+		model.addAttribute("order", orderService.selectOneOrder(seq));
+		model.addAttribute("list", service.selectIndividualOrderList(seq));
 		
 		return "/web/account/individualOrderList";
 	}

@@ -8,7 +8,7 @@
             Content body start
         ***********************************-->
         <form class="content-body" id="form" method="post">
-        	<input type="hidden" name="ac_seq">  <!--  상세 주문에 대한 ac_seq을 보내기 위해 설정. (보내는 이유 selectIndividualOrderList에서 AND acOrder_seq = #{ac_seq}) 정보 보내기 위해서 -->
+        	<input type="hidden" name="seq"> 
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
@@ -42,14 +42,14 @@
                                        			<th style="text-align: center;">주문번호</th>
                                        			<th style="text-align: center;">거래처</th>
                                        			<th style="text-align: center;">주문 상태</th>
-                                       			<th style="text-align: center;">상세 주문 갯수</th>
+                                       			<th style="text-align: center;">상세 주문 개수</th>
                                       			<th style="text-align: center;">주문 시간</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
                                                 <td style="text-align: center;">#</td>
-                                       			<td style="text-align: center;"><a href="javascript:void(0);" th:text ="${item.ac_seq}" th:attr="onclick=|goForm('${item.ac_seq}')|"></a></td>
+                                       			<td style="text-align: center;"><a href="javascript:void(0);" th:text ="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                       			<td style="text-align: center;" th:text ="${item.account_seq}"></td>
                                       			<td style="text-align: center;" th:text ="${item.acOrderStatus}"></td>
                                       			<td style="text-align: center;" th:text ="${item.ioCount}"></td>
@@ -92,14 +92,11 @@
 <!-- 해당 주문에 대한 개별 주문에 대한 페이지 -->
 <script type="text/javascript">
 
-let seq = document.querySelector("input[name=ac_seq]");	 <!--  상세 주문에 대한 ac_seq을 보내기 위해 설정. (보내는 이유 selectIndividualOrderList에서 AND acOrder_seq = #{ac_seq}) 정보 보내기 위해서 -->
+let seq = document.querySelector("input[name=seq]");	 <!--  상세 주문에 대한 ac_seq을 보내기 위해 설정. (보내는 이유 selectIndividualOrderList에서 AND acOrder_seq = #{ac_seq}) 정보 보내기 위해서 -->
 
 goForm = function(keyValue) {
 	    seq.value = keyValue;
-	    console.log("전송값 ac_seq: ", seq.value); 
 	    form.action = "/web/account/individualOrderList";
-
-	   
 	    form.submit();
 	}
 </script>

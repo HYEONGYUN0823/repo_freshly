@@ -5,33 +5,51 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.order.OrderDto"/>
 	
-	<select id="selectOrderList" resultMap="resultMapObj">
+	<select id="selectOneOrder" resultMap="resultMapObj">
 		select
-			a.seq as ac_seq,
+			a.seq,
 			a.acOrderStatus,
-			(select count(*) from individualOrder as b
-			where 1=1
-			AND ac_seq = b.acOrder_seq
+			(
+			select 
+				count(*) 
+			from 
+				individualorder as b
+			where 
+				1=1
+				AND a.seq = b.acOrder_seq
 			) as ioCount,
 			a.acOrderDateTime,
 			a.account_seq
 		from
 		 	acorder as a
-		 	where 1=1
-		 	ORDER BY ac_seq desc
+		where 
+		 	1=1
+		 	AND a.seq = #{seq}
+		 	AND a.acOrderDelNy = 0
+		ORDER BY seq desc
 	</select>
 	
-	<select id ="selectOrderView" resultMap="resultMapObj">
+	<select id="selectOrderList" resultMap="resultMapObj">
 		select
-			a.seq as ac_seq,
+			a.seq,
 			a.acOrderStatus,
+			(
+			select 
+				count(*) 
+			from 
+				individualorder as b
+			where 
+				1=1
+				AND a.seq = b.acOrder_seq
+			) as ioCount,
 			a.acOrderDateTime,
 			a.account_seq
 		from
 		 	acorder as a
-		 	where 1=1
-		 	and a.seq = #{ac_seq}
-		 	ORDER BY ac_seq desc
+		where 
+		 	1=1
+		 	AND a.acOrderDelNy = 0
+		ORDER BY seq desc
 	</select>
 	
 </mapper>

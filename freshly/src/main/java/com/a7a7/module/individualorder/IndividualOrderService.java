@@ -13,18 +13,10 @@ public class IndividualOrderService {
 	
 	@Autowired
 	IndividualOrderDao dao;
-	
-	@Autowired
-	OrderDao orderDao;
 
 	// 개별주문 리스트
-	public List<IndividualOrderDto> selectIndividualOrderList(IndividualOrderDto dto){
-		return dao.selectIndividualOrderList(dto);
+	public List<IndividualOrderDto> selectIndividualOrderList(String seq){
+		return dao.selectIndividualOrderList(seq);
 	}
 	
-	
-	// 개별주문 리스트에서 주문 보여주는 용도
-	public OrderDto selectOrderView(IndividualOrderDto dto){
-		return orderDao.selectOrderView(dto);
-	}
 }

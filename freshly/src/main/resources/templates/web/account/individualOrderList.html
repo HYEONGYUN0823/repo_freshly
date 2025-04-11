@@ -37,15 +37,17 @@
                                                 <th style="text-align: center;">주문번호</th>
                                        			<th style="text-align: center;">거래처</th>
                                                 <th style="text-align: center;">주문 상태</th>
+                                       			<th style="text-align: center;">상세 주문 개수</th>
                                                 <th style="text-align: center;">주문 시간</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td style="text-align: center;" th:text ="${view.ac_seq}"></td>
-                                                <td style="text-align: center;" th:text ="${view.acOrderStatus}"></td>
-                                                <td style="text-align: center;" th:text ="${view.acOrderStatus}"></td>
-                                                <td style="text-align: center;" th:text ="${view.acOrderDateTime}"></td>
+                                                <td style="text-align: center;" th:text ="${order.seq}"></td>
+                                                <td style="text-align: center;" th:text ="${order.account_seq}"></td>
+                                                <td style="text-align: center;" th:text ="${order.acOrderStatus}"></td>
+                                                <td style="text-align: center;" th:text ="${order.ioCount}"></td>
+                                                <td style="text-align: center;" th:text ="${order.acOrderDateTime}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -79,12 +81,12 @@
                                         <tbody>
                                             <tr th:each="item : ${list}">
                                                 <td style="text-align: center;">#</td>
-                                       			<td style="text-align: center;" th:text ="${item.ac_seq}"></td>
-                                      			<td style="text-align: center;" th:text ="${item.io_seq}"></td>
+                                       			<td style="text-align: center;" th:text ="${item.acOrder_seq}"></td>
+                                      			<td style="text-align: center;" th:text ="${item.seq}"></td>
                                       			<td style="text-align: center;" th:text ="${item.gcName}"></td>
                                        			<td style="text-align: center;" th:text ="${item.gcPrice}"></td>
                                        			<td style="text-align: center;" th:text ="${item.ioQuantity}"></td>
-                                       			<td style="text-align: center;" th:text ="${item.totalPrice}"></td>
+                                       			<td style="text-align: center;" th:text ="${item.ioTotalPrice}"></td>
                                             </tr>
                                         </tbody>
                                     </table>

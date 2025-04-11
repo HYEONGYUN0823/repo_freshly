@@ -6,28 +6,23 @@
 	<resultMap id="resultMapObj" type="com.a7a7.module.individualorder.IndividualOrderDto"/>
 	
 	
-	
-	
-	
-	
-	
 	<select id="selectIndividualOrderList" resultMap="resultMapObj">
-		select
-			a.seq as io_seq,
-			a.ioQuantity,
-			a.acOrder_seq,
-			a.grocery_seq,
-			b.seq as ac_seq,
-			c.seq as gc_seq,
-			c.gcName,
-			c.gcPrice,
-			c.gcPrice * a.ioQuantity as totalPrice				<!--  총 가격에 대한 변수. IndividialOrderDto에 정의함.-->
-		from
-			individualOrder as a
-			left join acOrder as b on b.seq = a.acOrder_seq
-			left join grocery as c on c.seq = a.grocery_seq
-		where 1=1
-			AND acOrder_seq = #{ac_seq}
+		SELECT
+			io.seq
+		    ,io.acOrder_seq
+		    ,io.ioQuantity
+		    ,gc.gcName
+		    ,gc.gcPrice
+		    ,(io.ioQuantity * gc.gcPrice) as ioTotalPrice
+		FROM
+			individualorder io
+		    JOIN acorder ac ON io.acOrder_seq = ac.seq
+		    JOIN grocery gc ON io.grocery_seq = gc.seq
+		WHERE
+			1=1
+		    AND acOrder_seq = #{seq}
+		ORDER BY
+			seq DESC
 	</select>
 	
 </mapper>
