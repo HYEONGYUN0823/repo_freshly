@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.a7a7.module.codegroup.CodeGroupDto;
 import com.a7a7.module.codegroup.CodeGroupService;
 
 @Controller

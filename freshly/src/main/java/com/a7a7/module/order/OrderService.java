@@ -18,4 +18,8 @@ public class OrderService {
 	public List<OrderDto> selectOrderList(){
 		return dao.selectOrderList();
 	}
+	
+	public int insert(OrderDto dto) {
+		return dao.insert(dto);
+	}
 }

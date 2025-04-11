@@ -52,4 +52,18 @@
 		ORDER BY seq desc
 	</select>
 	
+	<insert id="insert">
+		INSERT INTO acorder(
+			acOrderStatus,
+			acOrderDateTime,
+			acOrderDelNy,
+			account_seq
+		) VALUES(
+			1,
+			now(),
+			0,
+			#{account_seq}
+		)
+	</insert>
+	
 </mapper>
