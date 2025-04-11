@@ -31,7 +31,7 @@ public class OrderingController {
 		
 		return "web/factory/OrderingForm";
 	}
-	
+//	model.addAttribute("factoryList", factoryService.selectFactoryList());
 	
 	@RequestMapping(value = "web/factory/OrderingInst")
 	public String orderingInst(OrderingDto dto) {

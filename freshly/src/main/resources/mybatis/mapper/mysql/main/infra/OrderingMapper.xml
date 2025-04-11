@@ -26,13 +26,15 @@
 			odStatus,
 			odRegDateTime,
 			odDelNy,
-			factory_seq
+			factory_seq,
+			individualOrder_seq
 		) values (
 			#{seq},
 			#{odStatus},
 			now(),
 			#{odDelNy},
-			#{factory_seq}
+			#{factory_seq},
+			#{individualOrder_seq}
 		)
 	</insert>
 	
