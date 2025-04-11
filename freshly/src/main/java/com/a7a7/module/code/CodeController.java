@@ -11,9 +11,6 @@ public class CodeController {
 	@Autowired
 	CodeService service;
 	
-//	**********************************************
-//		Web
-//	**********************************************
 	// 코드 list 화면
 	@RequestMapping(value = "/web/system/codeList")
 	public String selectWebcodeList(Model model) {
@@ -23,8 +20,4 @@ public class CodeController {
 		return "web/system/codeList";
 	}
 	
-	
-//	**********************************************
-//		Mobile
-//	**********************************************
 }
