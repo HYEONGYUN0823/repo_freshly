@@ -7,16 +7,28 @@
 	
 	<select id="selectCodeGroupList" resultMap="resultMapObj">
 		SELECT
-			seq
-		    ,cgName
-		    ,cgUseNy
-		    ,cgRegDateTime
-		    ,cgModDateTime
+			cg.seq
+		    ,cg.cgName
+		    ,cg.cgUseNy
+		    ,
+		    (
+		    	SELECT COUNT(*)
+		    	FROM 
+		    		code cd
+		    	WHERE
+		    		1=1
+		    		AND cd.codeGroup_seq = cg.seq 
+		    		AND cd.cdDelNy = 0
+		    ) AS cdCount
+		    ,cg.cgRegDateTime
+		    ,cg.cgModDateTime
 		FROM
-			codeGroup
+			codeGroup cg
 		WHERE
 			1=1
 		    AND cgDelNy = 0
+		ORDER BY
+			seq DESC
 	</select>
 	
 	<insert id="insert">

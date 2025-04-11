@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{web/include/head :: head}"></div>
+
+
+<body>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>코드 관리</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">시스템 관리</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">코드 관리</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" id="form">
+                                    <div>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label">코드</label>
+                                                        <input type="text" id="seq" name="seq" maxlength="20" placeholder="자동생성" 
+	                                                     class="form-control" disabled/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="cdName" class="text-label">코드 이름 *</label>
+                                                        <input type="text" id="cdName" name="cdName" class="form-control" placeholder="한글,영대소문자,숫자" required>    
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="cdUseNy">사용 *</label>
+                                                        <select id="cdUseNy" name="cdUseNy" class="form-control">
+																<option value="1">사용</option>
+																<option value="0">사용안함</option>
+														</select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="codeGroup_seq">코드그룹 *</label>
+                                                        <select id="codeGroup_seq" name="codeGroup_seq" class="form-control">
+															<option disabled hidden selected value="">선택하세요</option>
+															<option th:each="group : ${codeGroup}"
+																	th:value="${group.seq}" 
+																	th:text="${group.cgName}" 
+																	th:selected="${group.seq == item?.codeGroup_seq}">
+															</option>
+														</select>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </section>
+                                       
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/system/codeGroupList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" id="btnUel" class="btn btn-danger">
+										<i class="fa-regular fa-trash-can"></i>
+									</button>
+                                    <button type="button" class="btn btn-primary" id="BtnInst" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="/web/template/vendor/global/global.min.js"></script>
+    <script src="/web/template/js/quixnav-init.js"></script>
+    <script src="/web/template/js/custom.min.js"></script>
+    
+
+
+    <script src="/web/template/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/web/template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/web/template/js/plugins-init/jquery.validate-init.js"></script>
+
+
+
+    <!-- Form step init -->
+    <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
+    
+    <script type="text/javascript">
+    
+    	let goUrlXdmInst = "/web/system/codeInst";
+    	
+    	document.getElementById("BtnInst").onclick = function(){
+    		form.action = goUrlXdmInst;
+			form.submit();
+    	}
+    	
+    </script>
+    
+    <div th:replace="~{web/include/footer :: footer}"></div>
+
+</body>
+
+</html>

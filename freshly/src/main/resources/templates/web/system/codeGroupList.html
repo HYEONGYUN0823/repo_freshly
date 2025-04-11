@@ -40,15 +40,19 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>코드그룹 번호</th>
                                                 <th>코드그룹명</th>
+                                                <th>코드개수</th>
                                                 <th>등록일</th>
                                                 <th>수정일</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
+                                            	<td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
                                                 <td name="cgName" th:text="${item.cgName}"></td>
+                                                <td th:text="${item.cdCount}"></td>
                                                 <td name="cgRegDateTime" th:text="${item.cgRegDateTime}"></td>
                                                 <td name="cgModDateTime" th:text="${item.cgModDateTime}"></td>
                                             </tr>

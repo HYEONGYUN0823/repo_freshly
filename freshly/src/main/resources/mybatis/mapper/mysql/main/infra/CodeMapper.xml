@@ -18,7 +18,24 @@
 		WHERE
 			1=1
 		    AND cdDelNy = 0
+		ORDER BY
+			seq DESC
 	</select>
 	
+	<insert id="insert">
+		INSERT INTO code(
+			cdName,
+			cdUseNy,
+			cdDelNy,
+			cdRegDateTime,
+			codeGroup_seq
+		) VALUES(
+			#{cdName},
+			0,
+			0,
+			now(),
+			#{codeGroup_seq}
+		)
+	</insert>
 	
 </mapper>

@@ -16,4 +16,8 @@ public class CodeService {
 		return dao.selectCodeList();
 	}
 
+	public int insert(CodeDto dto) {
+		return dao.insert(dto);
+	}
+	
 }

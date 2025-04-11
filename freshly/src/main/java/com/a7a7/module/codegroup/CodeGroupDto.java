@@ -9,6 +9,8 @@ public class CodeGroupDto {
 	private String cgRegDateTime;
 	private String cgModDateTime;
 	
+	private Integer cdCount;
+	
 	public String getSeq() {
 		return seq;
 	}
@@ -44,6 +46,13 @@ public class CodeGroupDto {
 	}
 	public void setCgModDateTime(String cgModDateTime) {
 		this.cgModDateTime = cgModDateTime;
+	}
+	
+	public Integer getCdCount() {
+		return cdCount;
+	}
+	public void setCdCount(Integer cdCount) {
+		this.cdCount = cdCount;
 	}
 	
 }
