@@ -20,4 +20,17 @@ public class CodeGroupController {
 		return "web/system/codeGroupList";
 	}
 	
+	// 코드그룹 Insert 화면
+	@RequestMapping(value = "/web/system/codeGroupForm")
+	public String codeGroupForm() {
+		
+		return "web/system/codeGroupForm";
+	}
+	// 코드그룹 Insert
+	@RequestMapping(value = "/web/system/codeGroupInst")
+	public String codeGroupInst(CodeGroupDto dto) {
+		service.insert(dto);
+		return "redirect:/web/system/codeGroupList";
+	}
+	
 }
