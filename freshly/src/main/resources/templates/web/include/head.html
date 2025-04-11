@@ -22,7 +22,7 @@
     <link href="/web/template/datetimepicker-master/jquery.datetimepicker.css" rel="stylesheet"> 			<!-- 데이트타입피커 -->
     <!-- Custom Stylesheet -->
     <link href="/web/template/css/style.css" rel="stylesheet">
-    
+    <link rel="stylesheet" type="text/css" href="/web/template/css/jquery.datetimepicker.css">
 
 
 </head>
@@ -203,11 +203,11 @@
                             <li><a href="/web/basic/factoryList">공장 관리</a></li>
                         </ul>
                     </li>
-                   
-                    <li>
-                    	<a href="/web/account/orderList"><i class="fa-solid fa-cash-register"></i>주문관리</a>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa-solid fa-cash-register"></i><span class="nav-text">주문</span></a> <!--  -->
+                        <ul aria-expanded="false">
+                            <li><a href="/web/account/orderList">주문관리</a></li>
+                        </ul>
                     </li>
-                        
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa-solid fa-industry"></i><span class="nav-text">발주</span></a> <!--  -->
                         <ul aria-expanded="false">
                             <li><a href="/web/factory/OrderingList">발주관리</a></li>
