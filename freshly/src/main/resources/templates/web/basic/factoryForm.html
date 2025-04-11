@@ -56,7 +56,7 @@
                                                     <div class="form-group">
                                                         <label for="fcName" class="text-label">공장 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="fcName" name="fcName" th:value="fcName" class="form-control">
+	                                                        <input type="text" id="fcName" name="fcName" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -69,7 +69,7 @@
                                                         <label for="fcManagerName" class="text-label">공장 담당자</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="fcManagerName" name="fcManagerName" th:value="fcManagerName" class="form-control">
+	                                                        	<input type="text" id="fcManagerName" name="fcManagerName" class="form-control">
 															</div>
 														</div>
                                                     </div>
@@ -78,7 +78,7 @@
                                                     <div class="form-group">
                                                         <label for="fcTel" class="text-label">공장 전화번호</label><span style="color: crimson;">*</span>
                                                         <div>
-														   <input type="text" id="fcTel" name="fcTel" th:value="fcTel" class="form-control">
+														   <input type="text" id="fcTel" name="fcTel" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -98,7 +98,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="fcAdressDetail">공장 상세주소</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                         <input type="text" id="fcAdressDetail" name="fcAdressDetail" th:value="fcAdressDetail" class="form-control">
+	                                                         <input type="text" id="fcAdressDetail" name="fcAdressDetail"  class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                                                             <select
 																id="acUseNy" name="fcUseNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${fcUseNy == 1}">사용</option>
+																	<option value="1" th:selected="${fcUseNy == 1 || fcUseNy == null}">사용</option>
                    													<option value="0" th:selected="${fcUseNy == 0}">미사용</option>
 															</select>
                                                         </div>
@@ -146,7 +146,7 @@
                                                     </div>
                                                 </div> -->
                                                 <input type="hidden"  
-														id="odDelNy" name="odDelNy" 
+														id="fcDelNy" name="fcDelNy" 
 														th:value="0" 
 														class="form-control" />
                                             </div>

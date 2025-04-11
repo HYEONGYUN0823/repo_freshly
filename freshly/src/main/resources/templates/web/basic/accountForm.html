@@ -56,7 +56,7 @@
                                                     <div class="form-group">
                                                         <label for="acName" class="text-label">거래처 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="acName" name="acName" th:value="acName" class="form-control">
+	                                                        <input type="text" id="acName" name="acName" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -81,7 +81,7 @@
                                                         <label for="acManagerName" class="text-label">거래처 담당자</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="acManagerName" name="acManagerName" th:value="acManagerName" class="form-control">
+	                                                        	<input type="text" id="acManagerName" name="acManagerName" class="form-control">
 															</div>
 														</div>
                                                     </div>
@@ -90,7 +90,7 @@
                                                     <div class="form-group">
                                                         <label for="acManagerTel" class="text-label">거래처 전화번호</label><span style="color: crimson;">*</span>
                                                         <div>
-														   <input type="text" id="acManagerTel" name="acManagerTel" th:value="acManagerName" class="form-control">
+														   <input type="text" id="acManagerTel" name="acManagerTel" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -110,7 +110,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="acAdressDetail">거래처 상세주소</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                         <input type="text" id="acAdressDetail" name="acAdressDetail" th:value="acAdressDetail" class="form-control">
+	                                                         <input type="text" id="acAdressDetail" name="acAdressDetail" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -118,7 +118,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="acStartDate">거래 일자</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                       <input type="text"  class="form-control" id="acStartDate" name="acStartDate" th:value="acStartDate" required>
+	                                                       <input type="text"  class="form-control" id="acStartDate" name="acStartDate" required>
 														</div>
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="acEndDate">거래 종료일자</label><span style="color: crimson;">*</span>
                                                         <div>
-															<input type="text"  class="form-control" id="acEndDate" name="acEndDate" th:value="acEndDate" required>
+															<input type="text"  class="form-control" id="acEndDate" name="acEndDate" required>
 														</div>
                                                     </div>
                                                 </div>
@@ -137,7 +137,7 @@
                                                             <select
 																id="acUseNy" name="acUseNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${acUseNy == 1}">사용</option>
+																	<option value="1" th:selected="${acUseNy == 1  or acUseNy == null}" >사용</option>
                    													<option value="0" th:selected="${acUseNy == 0}">미사용</option>
 															</select>
                                                         </div>

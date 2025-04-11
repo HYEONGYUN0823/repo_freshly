@@ -56,7 +56,7 @@
                                                     <div class="form-group">
                                                         <label for="acName" class="text-label">식료품 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="gcName" name="gcName" th:value="gcName" class="form-control">
+	                                                        <input type="text" id="gcName" name="gcName"  class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -81,7 +81,7 @@
                                                         <label for="acManagerName" class="text-label">식료품 가격</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="gcPrice" name="gcPrice" th:value="gcPrice" class="form-control">
+	                                                        	<input type="text" id="gcPrice" name="gcPrice" class="form-control">
 															</div>
 														</div>
                                                     </div>
@@ -97,7 +97,7 @@
                                                             <select
 																id="acUseNy" name="gcUseNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${gcUseNy == 1}">사용</option>
+																	<option value="1" th:selected="${gcUseNy == 1 || gcUseNy == null}">사용</option>
                    													<option value="0" th:selected="${gcUseNy == 0}">미사용</option>
 															</select>
                                                         </div>
