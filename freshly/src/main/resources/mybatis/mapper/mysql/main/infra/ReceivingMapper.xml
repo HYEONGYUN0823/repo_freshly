@@ -20,5 +20,23 @@
 		 	ORDER BY a.seq desc
 	</select>
 	
+	<insert id="insert">
+		INSERT INTO receiving (
+			seq,
+			rcStatus,
+			rcRegDateTime,
+			rcDelNy,
+			factory_seq,
+			individualOrder_seq
+		) values (
+			#{seq},
+			#{rcStatus},
+			now(),
+			#{rcDelNy},
+			#{factory_seq},
+			#{individualOrder_seq}
+		)
+	</insert>
+	
 	
 </mapper>

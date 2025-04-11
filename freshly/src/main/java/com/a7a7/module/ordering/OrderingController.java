@@ -5,14 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.a7a7.module.delivery.DeliveryService;
+import com.a7a7.module.basic.BasicService;
+import com.a7a7.module.individualorder.IndividualOrderService;
 
 @Controller
 public class OrderingController {
 	@Autowired
 	OrderingService service;
 	@Autowired
-	DeliveryService deliveryService;
+	BasicService basicService;
+	@Autowired
+	IndividualOrderService individualOrderService;
 	
 	// 모바일 공장 발주관리
 	@RequestMapping(value ="/mob/factory/OrderingList")
@@ -29,8 +32,9 @@ public class OrderingController {
 	}
 	
 	@RequestMapping(value = "/web/factory/OrderingForm")
-	public String webOrderingForm() {
-		
+	public String webOrderingForm(Model model) {
+		model.addAttribute("listFactory", basicService.selectFactoryList());
+//		model.addAttribute("listOrder", individualOrderService.selectIndividualOrderList(null));
 		
 		return "web/factory/OrderingForm";
 	}

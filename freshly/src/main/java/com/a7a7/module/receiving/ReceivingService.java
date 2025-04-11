@@ -15,5 +15,8 @@ public class ReceivingService {
 	public List<OrderDto> selectList(){
 		return dao.selectList();
 	}
+	public int insert(ReceivingDto dto) {
+		return dao.insert(dto);
+	}
 	
 }

@@ -11,4 +11,6 @@ public interface ReceivingDao {
 	
 	public List<OrderDto> selectList();
 	
+	public int insert(ReceivingDto dto);
+	
 }
