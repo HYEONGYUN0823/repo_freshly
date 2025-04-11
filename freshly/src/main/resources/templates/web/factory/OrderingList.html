@@ -3,10 +3,14 @@
 
 <div th:replace="~{web/include/head :: head}"></div>
 
+        <form name="formList" id="formList" method="post" autocomplete="off">
+        <input type="hidden" name="seq">
+		<input type="hidden" name="odDelNy">
 
         <!--**********************************
             Content body start
         ***********************************-->
+		
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -17,8 +21,8 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">발주</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">발주 관리</a></li>
+                            <li class="breadcrumb-item"><a href="/web/factory/OrderingList">발주</a></li>
+                            <li class="breadcrumb-item active"><a href="/web/factory/OrderingList">발주 관리</a></li>
                         </ol>
                     </div>
                 </div>
@@ -60,6 +64,17 @@
                                     </table>
                                     
                                 </div>
+                                <div class="mb-3"></div>
+                                <button type="button" class="btn btn-danger"><i class="fa-solid fa-x"></i></button>
+                                    <button type="button" id="btnUel" class="btn btn-danger"><i
+                                            class="fa-regular fa-trash-can"></i></button>
+                                    <button type="button" id="btnForm" class="btn btn-primary" style="float: right;"><i
+                                            class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn btn-success"
+                                        style="float: right; margin-right: 4px;"><i
+                                            class="fa-regular fa-file-excel"></i></button>
+                                    <button type="button" class="btn btn-primary"
+                                        style="float: right; margin-right: 4px;"><i class="fa-solid fa-u"></i></button>
                             </div>
                         </div>
                     </div>
@@ -67,6 +82,7 @@
                 </div>
             </div>
         </div>
+        </form>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -87,7 +103,28 @@
 <!--**********************************
        Scripts end
    ***********************************-->
+<script type="text/javascript">
+
+	let goUrlXdmForm = "/web/factory/OrderingForm";
+	let goUrlXdmUele = "";
+
+	let seq = document.querySelector("input[name=seq]");
+	let form = document.getElementById("formList");
+	
+	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+
+	goForm = function (keyValue) {
+		
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+</script>
    
 <div th:replace="~{web/include/footer :: footer}"></div>
+
+
 
 </html>
