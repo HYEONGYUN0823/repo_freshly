@@ -3,7 +3,8 @@
 
 <div th:replace="~{web/include/head :: head}"></div>
 
-
+		<form name="formList" id="formList" method="post" autocomplete="off">
+        <input type="hidden" name="seq">
         <!--**********************************
             Content body start
         ***********************************-->
@@ -25,7 +26,7 @@
                 <!-- row -->
 
 
-                <form class="row">
+                <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -82,9 +83,10 @@
                         </div>
                     </div>
                    
-                </form>
+                </div>
             </div>
         </div>
+        </form>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -107,5 +109,25 @@
    ***********************************-->
    
 <div th:replace="~{web/include/footer :: footer}"></div>
+
+<script type="text/javascript">
+
+	let goUrlXdmForm = "/web/basic/accountForm";
+	let goUrlXdmUele = "";
+
+	let seq = document.querySelector("input[name=seq]");
+	let form = document.getElementById("formList");
+	
+	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+
+	goForm = function (keyValue) {
+		
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+</script>
 
 </html>

@@ -75,6 +75,7 @@
 			,acStartDate
 			,acEndDate
 			,acUseNy
+			,acDelNy
 		)values(
 			#{seq}
 			,#{acName}
@@ -86,6 +87,7 @@
 			,#{acStartDate}
 			,#{acEndDate}
 			,#{acUseNy}
+			,0
 		)
 		<selectKey resultType="String" keyProperty="seq" order="AFTER">
 			Select last_insert_id()
@@ -121,6 +123,7 @@
 		    ,fcAddressDetail
 		    ,fcRegDateTime
 		    ,fcUseNy
+		    ,fcDelNy
 		)values(
 			#{seq}
 		    ,#{fcName}
@@ -129,7 +132,8 @@
 		    ,#{fcAddress}
 		    ,#{fcAddressDetail}
 		    ,now()
-		    ,fcUseNy
+		    ,#{fcUseNy}
+		    ,0
 		)
 		<selectKey resultType="String" keyProperty="seq" order="AFTER">
 			Select last_insert_id()

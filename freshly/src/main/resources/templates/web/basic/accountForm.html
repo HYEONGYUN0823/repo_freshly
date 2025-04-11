@@ -30,12 +30,11 @@
                     <div class="col-xl-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="#">
+                               <form method="post" id="form">
                                     <div>
                                         <section>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-4">
-                                                	<input type="hidden" name="seq">
                                                     <div class="form-group">
                                                         <label class="text-label">거래처번호</label><span style="color: crimson;">*</span>
                                                         <input 
@@ -97,11 +96,12 @@
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="acAdress">거래처 주소</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="acAddress">거래처 주소</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <select
-																id="acAdress" name="acAdress" class="form-control">
+																id="acAdress" name="acAddress" class="form-control">
 																	<option value="">선택하세요</option>										
+																	<option value="1">1</option>										
 															</select>
 														</div>
                                                     </div>
@@ -143,10 +143,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <div th:if="${seq=0}" class="list-inline-item me-5">
-													
-												</div> -->
-                                                <div class="col-lg-6 mb-4">
+                                                
+                                                <!-- <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="acDelNy">거래처 삭제여부</label><span style="color: crimson;">*</span>
                                                         <div>
@@ -158,7 +156,7 @@
 															</select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --> 
                                                 <input type="hidden"  
 														id="odDelNy" name="odDelNy" 
 														th:value="0" 
@@ -167,8 +165,8 @@
                                         </section>
                                        
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/factory/OrderingList'"><i class="fa-solid fa-list"></i></button>
-                                    <button type="button" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/basic/accountList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" id="BtnInst" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -200,9 +198,6 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="/web/template/jquery/jquery-3.7.1.min.js"></script>
-    <script src="/web/template/datetimepicker-master/jquery.datetimepicker.js"></script>
-    
     <script src="/web/template/vendor/global/global.min.js"></script>
     <script src="/web/template/js/quixnav-init.js"></script>
     <script src="/web/template/js/custom.min.js"></script>
@@ -224,6 +219,8 @@
     <div th:replace="~{web/include/footer :: footer}"></div>
     
     <script type="text/javascript">
+    
+    /* 데이트 타임 피커 */
 	jQuery('#acStartDate').datetimepicker({
 		format:'Y.m.d',
 		lang:'ko'
@@ -233,6 +230,15 @@
 	  	lang:'ko'
 	});
 
+	/* insert */
+	
+	let goUrlXdmInst = "/web/basic/accountInsert";
+	
+	document.getElementById("BtnInst").onclick = function(){
+		form.action = goUrlXdmInst;
+		form.submit();
+	}
+	
 </script>
 
 </body>

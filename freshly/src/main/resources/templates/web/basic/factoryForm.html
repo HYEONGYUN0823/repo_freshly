@@ -30,12 +30,11 @@
                     <div class="col-xl-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="#">
+                                <form method="post" id="form">
                                     <div>
                                         <section>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-4">
-                                                	<input type="hidden" name="seq">
                                                     <div class="form-group">
                                                         <label class="text-label">공장번호</label><span style="color: crimson;">*</span>
                                                         <input 
@@ -55,7 +54,7 @@
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label for="acName" class="text-label">공장 이름</label><span style="color: crimson;">*</span>
+                                                        <label for="fcName" class="text-label">공장 이름</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <input type="text" id="fcName" name="fcName" th:value="fcName" class="form-control">
 														</div>
@@ -77,7 +76,7 @@
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label for="acManagerTel" class="text-label">공장 전화번호</label><span style="color: crimson;">*</span>
+                                                        <label for="fcTel" class="text-label">공장 전화번호</label><span style="color: crimson;">*</span>
                                                         <div>
 														   <input type="text" id="fcTel" name="fcTel" th:value="fcTel" class="form-control">
 														</div>
@@ -85,11 +84,12 @@
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="fcAdress">공장 주소</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="fcAddress">공장 주소</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <select
-																id="fcAdress" name="fcAdress" class="form-control">
+																id="fcAddress" name="fcAddress" class="form-control">
 																	<option value="">선택하세요</option>										
+																	<option value="1">1</option>										
 															</select>
 														</div>
                                                     </div>
@@ -121,7 +121,7 @@
                                                 </div> -->
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="acUseNy">공장 사용여부</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="fcUseNy">공장 사용여부</label><span style="color: crimson;">*</span>
                                                         <div>
                                                             <select
 																id="acUseNy" name="fcUseNy" class="form-control">
@@ -132,7 +132,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 mb-4">
+                                                <!-- <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="fcDelNy">거래처 삭제여부</label><span style="color: crimson;">*</span>
                                                         <div>
@@ -144,7 +144,7 @@
 															</select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <input type="hidden"  
 														id="odDelNy" name="odDelNy" 
 														th:value="0" 
@@ -153,8 +153,8 @@
                                         </section>
                                        
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/factory/OrderingList'"><i class="fa-solid fa-list"></i></button>
-                                    <button type="button" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/basic/factoryList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" id="BtnInst" style="float: right;"><i class="fa-solid fa-plus"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -208,6 +208,17 @@
     <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
     
     <div th:replace="~{web/include/footer :: footer}"></div>
+    
+    <script type="text/javascript">
+    
+    	let goUrlXdmInst = "/web/basic/factoryInsert";
+    	
+    	document.getElementById("BtnInst").onclick = function(){
+    		form.action = goUrlXdmInst;
+			form.submit();
+    	}
+    	
+    </script>
     
 
 </body>
