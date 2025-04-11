@@ -38,6 +38,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>seq</th>
                                                 <th>공장명</th>
                                                 <th>대표자</th>
                                                 <th>전화번호</th>
@@ -49,6 +50,7 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
+                                            	<td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
                                                 <td name="fcName" th:text="${item.fcName}"></td>
                                                 <td name="fcManagerName" th:text="${item.fcManagerName}"></td>
@@ -61,6 +63,18 @@
                                         </tbody>
                                     </table>
                                     
+                                </div>
+                                <div class="mt-3">
+                                	<button type="button" class="btn btn-danger"><i class="fa-solid fa-x"></i></button>
+                                    <button type="button" id="btnUel" class="btn btn-danger"><i
+                                            class="fa-regular fa-trash-can"></i></button>
+                                    <button type="button" id="btnForm" class="btn btn-primary" style="float: right;"><i
+                                            class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn btn-success"
+                                        style="float: right; margin-right: 4px;"><i
+                                            class="fa-regular fa-file-excel"></i></button>
+                                    <button type="button" class="btn btn-primary"
+                                        style="float: right; margin-right: 4px;"><i class="fa-solid fa-u"></i></button>
                                 </div>
                             </div>
                         </div>

@@ -21,6 +21,29 @@
 		    AND gcDelNy = 0
 	</select>
 	
+	<insert id="GroceryInsert">
+		insert into grocery(
+			seq
+			,gcName
+			,gcCategory
+			,gcPrice
+			,gcUseNy
+			,gcDelNy
+			,gcRegDateTime
+		)values(
+			#{seq}
+			,#{gcName}
+			,#{gcCategory}
+			,#{gcPrice}
+			,#{gcUseNy}
+			,0
+			,now()
+		)
+		<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			Select last_insert_id()
+		</selectKey>
+	</insert>
+	
 	<select id="selectAccountList" resultMap="resultMapObj">
 		SELECT
 			seq
@@ -40,6 +63,36 @@
 		    AND acDelNy = 0
 	</select>
 	
+	<insert id="AccountInsert">
+		insert into account(
+			seq
+			,acName
+			,acCategory
+			,acManagerName
+			,acManagerTel
+			,acAddress
+			,acAddressDetail
+			,acStartDate
+			,acEndDate
+			,acUseNy
+		)values(
+			#{seq}
+			,#{acName}
+			,#{acCategory}
+			,#{acManagerName}
+			,#{acManagerTel}
+			,#{acAddress}
+			,#{acAddressDetail}
+			,#{acStartDate}
+			,#{acEndDate}
+			,#{acUseNy}
+		)
+		<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			Select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	
 	<select id="selectFactoryList" resultMap="resultMapObj">
 		SELECT
 			seq
@@ -58,5 +111,29 @@
 		    AND fcDelNy = 0
 	</select>
 	
+	<insert  id="FactoryInsert">
+		insert into factory(
+			seq
+			,fcName
+			,fcManagerName
+			,fcTel
+		    ,fcAddress
+		    ,fcAddressDetail
+		    ,fcRegDateTime
+		    ,fcUseNy
+		)values(
+			#{seq}
+		    ,#{fcName}
+		    ,#{fcManagerName}
+		    ,#{fcTel}
+		    ,#{fcAddress}
+		    ,#{fcAddressDetail}
+		    ,now()
+		    ,fcUseNy
+		)
+		<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			Select last_insert_id()
+		</selectKey>
+	</insert>
 	
 </mapper>

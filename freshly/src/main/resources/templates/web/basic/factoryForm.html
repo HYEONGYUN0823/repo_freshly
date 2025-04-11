@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{web/include/head :: head}"></div>
+
+
+<body>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>공장 관리</h4>
+<!--                             <p class="mb-0">공장관리 등록폼</p> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">기본</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">공장 관리</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="#">
+                                    <div>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-4">
+                                                	<input type="hidden" name="seq">
+                                                    <div class="form-group">
+                                                        <label class="text-label">공장번호</label><span style="color: crimson;">*</span>
+                                                        <input 
+	                                                    type="text" 
+	                                                    id="seq" 
+	                                                    name="seq" 
+	                                                    th:value="${item?.seq}" 
+	                                                    maxlength="20" 
+	                                                    placeholder="자동생성" 
+	                                                    disabled class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="acName" class="text-label">공장 이름</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <input type="text" id="fcName" name="fcName" th:value="fcName" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="fcManagerName" class="text-label">공장 담당자</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                       <div>
+	                                                        	<input type="text" id="fcManagerName" name="fcManagerName" th:value="fcManagerName" class="form-control">
+															</div>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="acManagerTel" class="text-label">공장 전화번호</label><span style="color: crimson;">*</span>
+                                                        <div>
+														   <input type="text" id="fcTel" name="fcTel" th:value="fcTel" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="fcAdress">공장 주소</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <select
+																id="fcAdress" name="fcAdress" class="form-control">
+																	<option value="">선택하세요</option>										
+															</select>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="fcAdressDetail">공장 상세주소</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                         <input type="text" id="fcAdressDetail" name="fcAdressDetail" th:value="fcAdressDetail" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                    	<input type="hidden" name="fcRegDateTime">
+                                                        <label class="text-label" for="fcRegDateTime">공장 정보 등록일자</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                       <input type="text"  class="form-control" id="fcRegDateTime" name="fcRegDateTime" th:value="fcRegDateTime" disabled>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="fcModDateTime">공장 정보 수정일자</label><span style="color: crimson;">*</span>
+                                                        <div>
+															<input type="text"  class="form-control" id="fcModDateTime" name="fcModDateTime" th:value="fcModDateTime" required>
+														</div>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="acUseNy">공장 사용여부</label><span style="color: crimson;">*</span>
+                                                        <div>
+                                                            <select
+																id="acUseNy" name="fcUseNy" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option value="1" th:selected="${fcUseNy == 1}">사용</option>
+                   													<option value="0" th:selected="${fcUseNy == 0}">미사용</option>
+															</select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="fcDelNy">거래처 삭제여부</label><span style="color: crimson;">*</span>
+                                                        <div>
+                                                            <select
+																id="acDelNy" name="acDelNy" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option value="1" th:selected="${fcDelNy == 1}">삭제</option>
+                   													<option value="0" th:selected="${fcDelNy == 0}">미삭제</option>
+															</select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden"  
+														id="odDelNy" name="odDelNy" 
+														th:value="0" 
+														class="form-control" />
+                                            </div>
+                                        </section>
+                                       
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/factory/OrderingList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="/web/template/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/web/template/datetimepicker-master/jquery.datetimepicker.js"></script>
+    
+    <script src="/web/template/vendor/global/global.min.js"></script>
+    <script src="/web/template/js/quixnav-init.js"></script>
+    <script src="/web/template/js/custom.min.js"></script>
+    
+
+
+    <script src="/web/template/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/web/template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/web/template/js/plugins-init/jquery.validate-init.js"></script>
+    
+    
+    
+
+
+    <!-- Form step init -->
+    <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
+    
+    <div th:replace="~{web/include/footer :: footer}"></div>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{web/include/head :: head}"></div>
+
+
+<body>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>거래처 관리</h4>
+<!--                             <p class="mb-0">공장관리 등록폼</p> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">기본</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">거래처 관리</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="#">
+                                    <div>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-4">
+                                                	<input type="hidden" name="seq">
+                                                    <div class="form-group">
+                                                        <label class="text-label">거래처번호</label><span style="color: crimson;">*</span>
+                                                        <input 
+	                                                    type="text" 
+	                                                    id="seq" 
+	                                                    name="seq" 
+	                                                    th:value="${item?.seq}" 
+	                                                    maxlength="20" 
+	                                                    placeholder="자동생성" 
+	                                                    disabled class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="acName" class="text-label">거래처 이름</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <input type="text" id="acName" name="acName" th:value="acName" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="acCategory" class="text-label">거래처 카테고리</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <select
+																id="acCategory" name="acCategory" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option value="1">1</option>
+																	<!-- <option th:each="list : ${listCodeGroup}"
+																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
+																		th:selected="${list.factory_seq == item?.factory_seq}">
+																	</option> -->
+															</select>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="acManagerName" class="text-label">거래처 담당자</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                       <div>
+	                                                        	<input type="text" id="acManagerName" name="acManagerName" th:value="acManagerName" class="form-control">
+															</div>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="acManagerTel" class="text-label">거래처 전화번호</label><span style="color: crimson;">*</span>
+                                                        <div>
+														   <input type="text" id="acManagerTel" name="acManagerTel" th:value="acManagerName" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="acAdress">거래처 주소</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <select
+																id="acAdress" name="acAdress" class="form-control">
+																	<option value="">선택하세요</option>										
+															</select>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="acAdressDetail">거래처 상세주소</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                         <input type="text" id="acAdressDetail" name="acAdressDetail" th:value="acAdressDetail" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="acStartDate">거래 일자</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                       <input type="text"  class="form-control" id="acStartDate" name="acStartDate" th:value="acStartDate" required>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="acEndDate">거래 종료일자</label><span style="color: crimson;">*</span>
+                                                        <div>
+															<input type="text"  class="form-control" id="acEndDate" name="acEndDate" th:value="acEndDate" required>
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="acUseNy">거래처 사용여부</label><span style="color: crimson;">*</span>
+                                                        <div>
+                                                            <select
+																id="acUseNy" name="acUseNy" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option value="1" th:selected="${acUseNy == 1}">사용</option>
+                   													<option value="0" th:selected="${acUseNy == 0}">미사용</option>
+															</select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div th:if="${seq=0}" class="list-inline-item me-5">
+													
+												</div> -->
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="acDelNy">거래처 삭제여부</label><span style="color: crimson;">*</span>
+                                                        <div>
+                                                            <select
+																id="acDelNy" name="acDelNy" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option value="1" th:selected="${acDelNy == 1}">삭제</option>
+                   													<option value="0" th:selected="${acDelNy == 0}">미삭제</option>
+															</select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden"  
+														id="odDelNy" name="odDelNy" 
+														th:value="0" 
+														class="form-control" />
+                                            </div>
+                                        </section>
+                                       
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/factory/OrderingList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="/web/template/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/web/template/datetimepicker-master/jquery.datetimepicker.js"></script>
+    
+    <script src="/web/template/vendor/global/global.min.js"></script>
+    <script src="/web/template/js/quixnav-init.js"></script>
+    <script src="/web/template/js/custom.min.js"></script>
+    
+
+
+    <script src="/web/template/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/web/template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/web/template/js/plugins-init/jquery.validate-init.js"></script>
+    
+    
+    
+
+
+    <!-- Form step init -->
+    <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
+    
+    <div th:replace="~{web/include/footer :: footer}"></div>
+    
+    <script type="text/javascript">
+	jQuery('#acStartDate').datetimepicker({
+		format:'Y.m.d',
+		lang:'ko'
+		});
+	jQuery('#acEndDate').datetimepicker({
+		format:'Y.m.d',
+	  	lang:'ko'
+	});
+
+</script>
+
+</body>
+
+</html>

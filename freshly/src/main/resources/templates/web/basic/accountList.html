@@ -25,7 +25,7 @@
                 <!-- row -->
 
 
-                <div class="row">
+                <form class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -38,6 +38,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>seq</th>
                                                 <th>거래처명</th>
                                                 <th>분류</th>
                                                 <th>대표자</th>
@@ -50,6 +51,7 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
+                                                <td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
                                                 <td name="acName" th:text="${item.acName}"></td>
                                                 <td name="acCategory" th:text="${item.acCategory}"></td>
@@ -64,11 +66,23 @@
                                     </table>
                                     
                                 </div>
+                                <div class="mt-3">
+                                	<button type="button" class="btn btn-danger"><i class="fa-solid fa-x"></i></button>
+                                    <button type="button" id="btnUel" class="btn btn-danger"><i
+                                            class="fa-regular fa-trash-can"></i></button>
+                                    <button type="button" id="btnForm" class="btn btn-primary" style="float: right;"><i
+                                            class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn btn-success"
+                                        style="float: right; margin-right: 4px;"><i
+                                            class="fa-regular fa-file-excel"></i></button>
+                                    <button type="button" class="btn btn-primary"
+                                        style="float: right; margin-right: 4px;"><i class="fa-solid fa-u"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                    
-                </div>
+                </form>
             </div>
         </div>
         <!--**********************************
