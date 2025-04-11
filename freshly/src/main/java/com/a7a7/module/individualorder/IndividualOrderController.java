@@ -14,6 +14,7 @@ public class IndividualOrderController {
 	//전체 주문에서 ac_seq값을 받고 그에 따른 상세 정보를 받는 컨트롤러
 	@RequestMapping(value="/web/account/individualOrderList")
 	public String webindividualOrderList(IndividualOrderDto dto,Model model) {
+		model.addAttribute("view", service.selectOrderView(dto));
 		model.addAttribute("list", service.selectIndividualOrderList(dto));
 		
 		return "/web/account/individualOrderList";

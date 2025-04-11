@@ -5,6 +5,12 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.individualorder.IndividualOrderDto"/>
 	
+	
+	
+	
+	
+	
+	
 	<select id="selectIndividualOrderList" resultMap="resultMapObj">
 		select
 			a.seq as io_seq,
