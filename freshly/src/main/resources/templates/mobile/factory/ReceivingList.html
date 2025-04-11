@@ -2,7 +2,6 @@
 <html lang="kor" xmlns:th="http://www.thymeleaf.org">
 
   <div th:replace= "~{mobile/include/head :: head}"></div>
-
          <!-- main wrapper -->
          <main class="main-content-wrapper">
             <div class="container">
@@ -31,7 +30,9 @@
                            <div class="row justify-content-between">
                               <div class="col-md-4 col-12 mb-2 mb-md-0">
                                  <!-- form -->
-                                 <form class="d-flex" role="search">
+                                 <form class="d-flex" role="search" name="formList" id="formList" method="post" autocomplete="off">
+									<input type="hidden" name="seq">
+									<input type="hidden" name="rcDelNy">
                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
                                  </form>
                               </div>
@@ -122,12 +123,56 @@
                               </ul>
                            </nav>
                         </div>
+                        
+						<div class="mt-3 d-flex justify-content-between">
+						    <div style="margin-left: 16px; margin-bottom: 16px;">
+						        <button type="button" class="btn btn-danger me-2">
+						            <i class="fa-solid fa-x"></i>
+						        </button>
+						        <button type="button" id="btnUel" class="btn btn-danger">
+						            <i class="fa-regular fa-trash-can"></i>
+						        </button>
+						    </div>
+						
+						    <div style="margin-right: 16px; margin-bottom: 16px;">
+						        <button type="button" class="btn btn-primary me-2">
+						            <i class="fa-solid fa-u"></i>
+						        </button>
+						        <button type="button" class="btn btn-success me-2">
+						            <i class="fa-regular fa-file-excel"></i>
+						        </button>
+						        <button type="button" id="btnForm" class="btn btn-primary">
+						            <i class="fa-solid fa-plus"></i>
+						        </button>
+						    </div>
+						</div>
+						
                      </div>
                   </div>
                </div>
             </div>
          </main>
-      
+         
+<script type="text/javascript">
+
+	let goUrlXdmForm = "/mob/factory/receivingForm";
+	let goUrlXdmUele = "";
+
+	let seq = document.querySelector("input[name=seq]");
+	let form = document.getElementById("formList");
+	
+	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+
+	goForm = function (keyValue) {
+		
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+	
+</script>
 
     <div th:replace = "~{mobile/include/footer :: footer}"></div>
 
