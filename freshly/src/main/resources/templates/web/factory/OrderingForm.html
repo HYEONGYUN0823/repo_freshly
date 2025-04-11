@@ -53,7 +53,7 @@
                                                         <div>
 	                                                        <select
 																id="factory_seq" name="factory_seq" class="form-control">
-																	<option value="">선택하세요</option>
+																	<option value="" selected disabled>선택하세요</option>
 																	<option th:each="list : ${listCodeGroup}"
 																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
 																		th:selected="${list.factory_seq == item?.factory_seq}">
@@ -68,7 +68,7 @@
                                                         <div>
 	                                                        <select
 																id="odStatus" name="odStatus" class="form-control">
-																	<option value="">선택하세요</option>
+																	<option value="" selected disabled>선택하세요</option>
 																	<option value="1">접수</option>
 																	<option value="2">진행중</option>
 																	<option value="3">완료</option>
@@ -83,7 +83,7 @@
                                                         <div>
                                                             <select
 																id="individualOrder_seq" name="individualOrder_seq" class="form-control">
-																	<option value="">선택하세요</option>
+																	<option value="" selected disabled>선택하세요</option>
 																	<option th:each="list : ${listCodeGroup}"
 																		th:value="${list.individualOrder_seq}" th:text="${list.individualOrder_seq}"
 																		th:selected="${list.individualOrder_seq == item?.individualOrder_seq}">
@@ -155,7 +155,7 @@
     <script type="text/javascript">
     
     	let goUrlXdmInst = "/web/factory/OrderingInst";
-    	
+    	let goUrlXdmUele = "/web/factory/OrderingUele";
     	
     </script>
     

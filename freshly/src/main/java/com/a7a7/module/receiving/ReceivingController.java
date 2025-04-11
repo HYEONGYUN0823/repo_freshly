@@ -17,6 +17,12 @@ public class ReceivingController {
         model.addAttribute("list", service.selectList());
         return "mobile/factory/ReceivingList";
     }
+    
+    @RequestMapping(value ="/mob/factory/receivingForm")
+    public String mobReceivingForm(Model model) {
+    	
+        return "mobile/factory/receivingForm";
+    }
 
     // 웹 공장 발주관리
     @RequestMapping(value ="/web/factory/ReceivingList")
