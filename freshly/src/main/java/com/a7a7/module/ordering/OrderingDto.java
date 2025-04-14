@@ -6,9 +6,9 @@ public class OrderingDto {
 	private int odStatus;
 	private String odRegDateTime;
 	private String odModDateTime;
-	private int odDelNy;
+	private Integer odDelNy;
 	private String factory_seq;
-	private String individualOrder_seq;
+	private String acOrder_seq;
 	
 //	-----
 	
@@ -36,10 +36,10 @@ public class OrderingDto {
 	public void setOdModDateTime(String odModDateTime) {
 		this.odModDateTime = odModDateTime;
 	}
-	public int getOdDelNy() {
+	public Integer getOdDelNy() {
 		return odDelNy;
 	}
-	public void setOdDelNy(int odDelNy) {
+	public void setOdDelNy(Integer odDelNy) {
 		this.odDelNy = odDelNy;
 	}
 	public String getFactory_seq() {
@@ -48,11 +48,12 @@ public class OrderingDto {
 	public void setFactory_seq(String factory_seq) {
 		this.factory_seq = factory_seq;
 	}
-	public String getIndividualOrder_seq() {
-		return individualOrder_seq;
+	public String getAcOrder_seq() {
+		return acOrder_seq;
 	}
-	public void setIndividualOrder_seq(String individualOrder_seq) {
-		this.individualOrder_seq = individualOrder_seq;
+	public void setAcOrder_seq(String acOrder_seq) {
+		this.acOrder_seq = acOrder_seq;
 	}
+	
 	
 }

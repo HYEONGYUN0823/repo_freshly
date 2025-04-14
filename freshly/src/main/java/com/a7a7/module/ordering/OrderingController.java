@@ -3,6 +3,7 @@ package com.a7a7.module.ordering;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.a7a7.module.basic.BasicService;
@@ -32,9 +33,16 @@ public class OrderingController {
 	}
 	
 	@RequestMapping(value = "/web/factory/OrderingForm")
-	public String webOrderingForm(Model model) {
+	public String webOrderingForm(@ModelAttribute("vo") OrderingVo vo, OrderingDto dto, Model model) {
 		model.addAttribute("listFactory", basicService.selectFactoryList());
 		model.addAttribute("listOrder", orderService.selectOrderList());
+		
+		if (vo.getSeq().equals("0") || vo.getSeq().equals("")) {
+//			insert mode
+		} else {
+//			update mode
+			model.addAttribute("item", service.selectOne(dto));
+		}
 		
 		return "web/factory/OrderingForm";
 	}
@@ -43,6 +51,13 @@ public class OrderingController {
 	@RequestMapping(value = "/web/factory/OrderingInst")
 	public String orderingInst(OrderingDto dto) {
 		service.insert(dto);
+		
+		return "redirect:/web/factory/OrderingList";
+	}
+	
+	@RequestMapping(value = "/web/factory/OrderingUpdt")
+	public String orderingUpdt(OrderingDto dto) {
+		service.update(dto);
 		
 		return "redirect:/web/factory/OrderingList";
 	}

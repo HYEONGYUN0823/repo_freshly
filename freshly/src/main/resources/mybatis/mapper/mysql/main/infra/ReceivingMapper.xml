@@ -13,7 +13,7 @@
 			a.rcModDateTime,
 			a.rcDelNy,
 			a.factory_seq,
-			a.individualOrder_seq
+			a.acOrder_seq
 		from
 		 	Receiving as a
 		 	where 1=1
@@ -27,14 +27,14 @@
 			rcRegDateTime,
 			rcDelNy,
 			factory_seq,
-			individualOrder_seq
+			acOrder_seq
 		) values (
 			#{seq},
 			#{rcStatus},
 			now(),
 			#{rcDelNy},
 			#{factory_seq},
-			#{individualOrder_seq}
+			#{acOrder_seq}
 		)
 	</insert>
 	

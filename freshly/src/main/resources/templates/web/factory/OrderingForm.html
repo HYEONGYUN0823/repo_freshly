@@ -31,6 +31,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <form method="post" id="form">
+                                <input type="hidden" name="seq" th:value="${vo.seq}">
                                     <div>
                                         <section>
                                             <div class="row">
@@ -56,7 +57,7 @@
 																	<option value="" selected disabled>선택하세요</option>
 																	<option th:each="list : ${listFactory}"
 																		th:value="${list.seq}" th:text="${list.fcName}"
-																		th:selected="${list.seq == item?.seq}">
+																		th:selected="${list.seq == item?.factory_seq}">
 																	</option>
 															</select>
 														</div>
@@ -68,25 +69,25 @@
                                                         <div>
 	                                                        <select
 																id="odStatus" name="odStatus" class="form-control">
-																	<option value="" selected disabled>선택하세요</option>
-																	<option value="1">접수</option>
-																	<option value="2">진행중</option>
-																	<option value="3">완료</option>
-																	<option value="4">취소</option>
+																	<option value="" disabled th:selected="${item?.odStatus} == null">선택하세요</option>
+																	<option value="1" th:selected="${item?.odStatus == '1'}">접수</option>
+																	<option value="2" th:selected="${item?.odStatus == '2'}">진행중</option>
+																	<option value="3" th:selected="${item?.odStatus == '3'}">완료</option>
+																	<option value="4" th:selected="${item?.odStatus == '4'}">취소</option>
 															</select>
 														</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="individualOrder_seq">주문번호*</label>
+                                                        <label class="text-label" for="acOrder_seq">주문번호*</label>
                                                         <div>
                                                             <select
-																id="individualOrder_seq" name="individualOrder_seq" class="form-control">
+																id="acOrder_seq" name="acOrder_seq" class="form-control">
 																	<option value="" selected disabled>선택하세요</option>
 																	<option th:each="list : ${listOrder}"
 																		th:value="${list.seq}" th:text="${list.seq}"
-																		th:selected="${list.seq == item?.seq}">
+																		th:selected="${list.seq == item?.acOrder_seq}">
 																	</option>
 															</select>
                                                         </div>
@@ -155,11 +156,17 @@
     <script type="text/javascript">
     
     	let goUrlXdmInst = "/web/factory/OrderingInst";
+    	let goUrlXdmUpdt = "/web/factory/OrderingUpdt";
     	
 		document.getElementById("btnSave").onclick = function() {
 			let seq = document.querySelector("input[name=seq]");
 			let form = document.getElementById("form");
-			form.action = goUrlXdmInst;
+
+			if (seq.value == "0" || seq.value == "") { // 추가
+				form.action = goUrlXdmInst;
+			} else { // 수정
+				form.action = goUrlXdmUpdt;
+			}
 
 			form.submit();
 		}

@@ -13,11 +13,25 @@
 			a.odModDateTime,
 			a.odDelNy,
 			a.factory_seq,
-			a.individualOrder_seq
+			a.acOrder_seq
 		from
 		 	ordering as a
 		 	where 1=1
 		 	ORDER BY a.seq desc
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			seq,
+			odStatus,
+			odDelNy,
+			factory_seq,
+			acOrder_seq
+		FROM
+			ordering
+		WHERE 1=1
+			AND seq = #{seq}
+		ORDER BY seq DESC
 	</select>
 	
 	<insert id="insert">
@@ -27,15 +41,25 @@
 			odRegDateTime,
 			odDelNy,
 			factory_seq,
-			individualOrder_seq
+			acOrder_seq
 		) values (
 			#{seq},
 			#{odStatus},
 			now(),
 			#{odDelNy},
 			#{factory_seq},
-			#{individualOrder_seq}
+			#{acOrder_seq}
 		)
 	</insert>
+	
+	<update id="update">
+		UPDATE ordering SET
+			odStatus = #{odStatus},
+			odModDateTime = now(),
+			odDelNy = #{odDelNy},
+			factory_seq = #{factory_seq},
+			acOrder_seq = #{acOrder_seq}
+		WHERE seq = #{seq}
+	</update>
 	
 </mapper>

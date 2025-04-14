@@ -11,6 +11,9 @@ public interface OrderingDao {
 	
 	public List<OrderDto> selectList();
 	
+	public OrderingDto selectOne(OrderingDto dto);
+	
 	public int insert(OrderingDto dto);
 	
+	public int update(OrderingDto dto);
 }

@@ -16,8 +16,16 @@ public class OrderingService {
 		return dao.selectList();
 	}
 	
+	public OrderingDto selectOne(OrderingDto dto) {
+		return dao.selectOne(dto);
+	}
+	
 	public int insert(OrderingDto dto) {
 		return dao.insert(dto);
+	}
+	
+	public int update(OrderingDto dto) {
+		return dao.update(dto);
 	}
 	
 }
