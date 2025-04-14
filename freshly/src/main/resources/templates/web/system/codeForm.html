@@ -36,22 +36,23 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label">코드</label>
-                                                        <input type="text" id="seq" name="seq" maxlength="20" placeholder="자동생성" 
+                                                        <input type="text"  maxlength="20" placeholder="자동생성" 
 	                                                     class="form-control" disabled/>
+	                                                    <input type="hidden" id="seq" name="seq" th:value="${item?.seq}"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label for="cdName" class="text-label">코드 이름 *</label>
-                                                        <input type="text" id="cdName" name="cdName" class="form-control" placeholder="한글,영대소문자,숫자" required>    
+                                                        <input type="text" id="cdName" name="cdName" class="form-control" placeholder="한글,영대소문자,숫자" th:value="${item?.cdName}" required>    
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="cdUseNy">사용 *</label>
                                                         <select id="cdUseNy" name="cdUseNy" class="form-control">
-																<option value="1">사용</option>
-																<option value="0">사용안함</option>
+																<option value="1" th:selected="${item?.cdUseNy == 1}">사용</option>
+																<option value="0" th:selected="${item?.cdUseNy == 0}">사용안함</option>
 														</select>
                                                     </div>
                                                 </div>
@@ -59,7 +60,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="codeGroup_seq">코드그룹 *</label>
                                                         <select id="codeGroup_seq" name="codeGroup_seq" class="form-control">
-															<option disabled hidden selected value="">선택하세요</option>
+															<option disabled hidden th:selected="${item?.codeGroup_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${codeGroup}"
 																	th:value="${group.seq}" 
 																	th:text="${group.cgName}" 
@@ -73,11 +74,11 @@
                                         </section>
                                        
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/system/codeGroupList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/system/codeList'"><i class="fa-solid fa-list"></i></button>
                                     <button type="button" id="btnUel" class="btn btn-danger">
 										<i class="fa-regular fa-trash-can"></i>
 									</button>
-                                    <button type="button" class="btn btn-primary" id="BtnInst" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn btn-primary" id="BtnSubmit" style="float: right;"><i class="fa-solid fa-plus"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -128,10 +129,20 @@
     <script type="text/javascript">
     
     	let goUrlXdmInst = "/web/system/codeInst";
+    	let goUrlXdmUpdt = "/web/system/codeUpdt";
     	
-    	document.getElementById("BtnInst").onclick = function(){
-    		form.action = goUrlXdmInst;
-			form.submit();
+    	let seq = document.querySelector("input[name=seq]");
+    	
+    	document.getElementById("BtnSubmit").onclick = function(){
+
+    		if(seq.value == ""){
+    			form.action = goUrlXdmInst;
+				form.submit();
+    		} else{
+    			form.action = goUrlXdmUpdt;
+				form.submit();
+    		}
+    		
     	}
     	
     </script>

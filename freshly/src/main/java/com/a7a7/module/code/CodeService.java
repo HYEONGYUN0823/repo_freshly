@@ -15,9 +15,17 @@ public class CodeService {
 	public List<CodeDto> selectCodeList() {
 		return dao.selectCodeList();
 	}
+	
+	public CodeDto selectOneCode(String seq) {
+		return dao.selectOneCode(seq);
+	}
 
 	public int insert(CodeDto dto) {
 		return dao.insert(dto);
+	}
+	
+	public int update(CodeDto dto) {
+		return dao.update(dto);
 	}
 	
 }

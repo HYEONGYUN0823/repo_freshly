@@ -24,6 +24,20 @@
 			seq DESC
 	</select>
 	
+	<select id="selectOneCode" resultMap="resultMapObj">
+		SELECT
+			cd.seq
+		    ,cd.cdName
+		    ,cd.cdUseNy
+		    ,cd.codeGroup_seq
+		FROM
+			code cd
+		WHERE
+			1=1
+		    AND cdDelNy = 0
+		    AND seq = #{seq}
+	</select>
+	
 	<insert id="insert">
 		INSERT INTO code(
 			cdName,
@@ -39,5 +53,16 @@
 			#{codeGroup_seq}
 		)
 	</insert>
+	
+	<update id="update">
+		UPDATE code 
+		SET
+			cdName = #{cdName},
+			cdUseNy = #{cdUseNy},
+			cdModDateTime = now(),
+			codeGroup_seq = #{codeGroup_seq}
+		WHERE
+			seq = #{seq}
+	</update>
 	
 </mapper>
