@@ -13,7 +13,7 @@
 			a.rcModDateTime,
 			a.rcDelNy,
 			a.factory_seq,
-			a.acOrder_seq
+			a.grocery_seq
 		from
 		 	Receiving as a
 		 	where 1=1
@@ -26,7 +26,7 @@
 			rcStatus,
 			rcDelNy,
 			factory_seq,
-			acOrder_seq
+			grocery_seq
 		FROM
 			Receiving
 		WHERE 1=1
@@ -41,14 +41,14 @@
 			rcRegDateTime,
 			rcDelNy,
 			factory_seq,
-			acOrder_seq
+			grocery_seq
 		) values (
 			#{seq},
 			#{rcStatus},
 			now(),
 			#{rcDelNy},
 			#{factory_seq},
-			#{acOrder_seq}
+			#{grocery_seq}
 		)
 	</insert>
 	
@@ -58,7 +58,7 @@
 			rcModDateTime = now(),
 			rcDelNy = #{rcDelNy},
 			factory_seq = #{factory_seq},
-			acOrder_seq = #{acOrder_seq}
+			grocery_seq = #{grocery_seq}
 		WHERE seq = #{seq}
 	</update>
 	

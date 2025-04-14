@@ -16,8 +16,6 @@ public class ReceivingController {
     ReceivingService service;
 	@Autowired
 	BasicService basicService;
-	@Autowired
-	OrderService orderService;
 
     // 모바일 공장 발주관리
     @RequestMapping(value ="/mob/factory/ReceivingList")
@@ -29,7 +27,7 @@ public class ReceivingController {
     @RequestMapping(value ="/mob/factory/receivingForm")
     public String mobReceivingForm(@ModelAttribute("vo") ReceivingVo vo, ReceivingDto dto, Model model) {
     	model.addAttribute("listFactory", basicService.selectFactoryList());
-    	model.addAttribute("listOrder", orderService.selectOrderList());
+    	model.addAttribute("listGrocery", basicService.selectGroceryList());
     	
 		if (vo.getSeq().equals("0") || vo.getSeq().equals("")) {
 //			insert mode

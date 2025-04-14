@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.a7a7.module.basic.BasicService;
-import com.a7a7.module.order.OrderService;
+import com.a7a7.module.member.MemberService;
 
 @Controller
 public class OrderingController {
@@ -16,7 +16,7 @@ public class OrderingController {
 	@Autowired
 	BasicService basicService;
 	@Autowired
-	OrderService orderService;
+	MemberService memberService;
 	
 	// 모바일 공장 발주관리
 	@RequestMapping(value ="/mob/factory/OrderingList")
@@ -35,7 +35,8 @@ public class OrderingController {
 	@RequestMapping(value = "/web/factory/OrderingForm")
 	public String webOrderingForm(@ModelAttribute("vo") OrderingVo vo, OrderingDto dto, Model model) {
 		model.addAttribute("listFactory", basicService.selectFactoryList());
-		model.addAttribute("listOrder", orderService.selectOrderList());
+		model.addAttribute("listGrocery", basicService.selectGroceryList());
+		model.addAttribute("listMember", memberService.selectMemberList());
 		
 		if (vo.getSeq().equals("0") || vo.getSeq().equals("")) {
 //			insert mode

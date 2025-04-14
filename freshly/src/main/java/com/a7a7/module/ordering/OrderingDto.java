@@ -8,7 +8,8 @@ public class OrderingDto {
 	private String odModDateTime;
 	private Integer odDelNy;
 	private String factory_seq;
-	private String acOrder_seq;
+	private String member_seq;
+	private String grocery_seq;
 	
 //	-----
 	
@@ -48,12 +49,17 @@ public class OrderingDto {
 	public void setFactory_seq(String factory_seq) {
 		this.factory_seq = factory_seq;
 	}
-	public String getAcOrder_seq() {
-		return acOrder_seq;
+	public String getMember_seq() {
+		return member_seq;
 	}
-	public void setAcOrder_seq(String acOrder_seq) {
-		this.acOrder_seq = acOrder_seq;
+	public void setMember_seq(String member_seq) {
+		this.member_seq = member_seq;
 	}
-	
+	public String getGrocery_seq() {
+		return grocery_seq;
+	}
+	public void setGrocery_seq(String grocery_seq) {
+		this.grocery_seq = grocery_seq;
+	}
 	
 }

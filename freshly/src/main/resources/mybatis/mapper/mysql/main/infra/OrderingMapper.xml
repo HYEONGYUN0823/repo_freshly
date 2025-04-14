@@ -13,7 +13,8 @@
 			a.odModDateTime,
 			a.odDelNy,
 			a.factory_seq,
-			a.acOrder_seq
+			a.member_seq,
+			a.grocery_seq
 		from
 		 	ordering as a
 		 	where 1=1
@@ -26,7 +27,8 @@
 			odStatus,
 			odDelNy,
 			factory_seq,
-			acOrder_seq
+			member_seq,
+			grocery_seq
 		FROM
 			ordering
 		WHERE 1=1
@@ -41,14 +43,16 @@
 			odRegDateTime,
 			odDelNy,
 			factory_seq,
-			acOrder_seq
+			member_seq,
+			grocery_seq
 		) values (
 			#{seq},
 			#{odStatus},
 			now(),
 			#{odDelNy},
 			#{factory_seq},
-			#{acOrder_seq}
+			#{member_seq},
+			#{grocery_seq}
 		)
 	</insert>
 	
@@ -58,7 +62,8 @@
 			odModDateTime = now(),
 			odDelNy = #{odDelNy},
 			factory_seq = #{factory_seq},
-			acOrder_seq = #{acOrder_seq}
+			member_seq = #{member_seq},
+			grocery_seq = #{grocery_seq}
 		WHERE seq = #{seq}
 	</update>
 	

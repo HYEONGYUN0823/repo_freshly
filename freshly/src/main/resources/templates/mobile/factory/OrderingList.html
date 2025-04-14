@@ -63,7 +63,8 @@
 										<th style="text-align: center;">Seq</th>
                                			<th style="text-align: center;">공장</th>
                                			<th style="text-align: center;">발주 상태</th>
-                               			<th style="text-align: center;">주문번호</th> <!-- individualOrder_seq정보를 몰라서 우선 주문번호 ㅎㄷㄷ -->
+                               			<th style="text-align: center;">담당자 이름</th>
+                               			<th style="text-align: center;">식료품 이름</th>
                               			<th style="text-align: center;">등록일</th>
                               			<th style="text-align: center;">수정일</th>
                               			<th></th>
@@ -81,7 +82,8 @@
 										<td style="text-align: center;" th:text ="${item.seq}"></td>
 										<td style="text-align: center;" th:text ="${item.factory_seq}"></td>
 										<td style="text-align: center;" th:text ="${item.odStatus}"></td>
-										<td style="text-align: center;" th:text ="${item.individualOrder_seq}"></td>
+										<td style="text-align: center;" th:text ="${item.member_seq}"></td>
+										<td style="text-align: center;" th:text ="${item.grocery_seq}"></td>
 										<td style="text-align: center;" th:text ="${item.odRegDateTime}"></td>
 										<td style="text-align: center;" th:text ="${item.odModDateTime}"></td>
                                        <td>

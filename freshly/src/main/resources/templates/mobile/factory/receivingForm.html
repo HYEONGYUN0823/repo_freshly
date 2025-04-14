@@ -63,13 +63,13 @@
 									</select>
                               </div>
                               <div class="mb-3">
-                                 <label class="form-label">주문번호</label>
+                                 <label class="form-label">식료품 이름</label>
 									<select
-										id="acOrder_seq" name="acOrder_seq" class="form-control">
+										id="grocery_seq" name="grocery_seq" class="form-control">
 											<option value="" selected disabled>선택하세요</option>
-											<option th:each="list : ${listOrder}"
-												th:value="${list.seq}" th:text="${list.seq}"
-												th:selected="${list.seq == item?.acOrder_seq}">
+											<option th:each="list : ${listGrocery}"
+												th:value="${list.seq}" th:text="${list.gcName}"
+												th:selected="${list.seq == item?.grocery_seq}">
 											</option>
 									</select>
                               </div>
