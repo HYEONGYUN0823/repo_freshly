@@ -21,7 +21,7 @@
 			a.acOrderDateTime,
 			a.account_seq
 		from
-		 	acorder as a
+		 	acorder a
 		where 
 		 	1=1
 		 	AND a.seq = #{acOrder_seq}
@@ -45,7 +45,7 @@
 			a.acOrderDateTime,
 			a.account_seq
 		from
-		 	acorder as a
+		 	acorder a
 		where 
 		 	1=1
 		 	AND a.acOrderDelNy = 0

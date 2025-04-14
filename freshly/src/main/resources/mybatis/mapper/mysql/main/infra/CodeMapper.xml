@@ -7,14 +7,16 @@
 	
 	<select id="selectCodeList" resultMap="resultMapObj">
 		SELECT
-			seq
-		    ,cdName
-		    ,cdUseNy
-		    ,cdRegDateTime
-		    ,cdModDateTime
-		    ,codeGroup_seq
+			cd.seq
+		    ,cd.cdName
+		    ,cd.cdUseNy
+		    ,cd.cdRegDateTime
+		    ,cd.cdModDateTime
+		    ,cd.codeGroup_seq
+		    ,cg.cgName
 		FROM
-			code
+			code cd
+			JOIN codeGroup cg ON cg.seq = cd.codeGroup_seq
 		WHERE
 			1=1
 		    AND cdDelNy = 0

@@ -10,6 +10,7 @@ public class CodeDto {
 	private String cdModDateTime;
 	private Integer codeGroup_seq;
 	
+	private String cgName;
 	
 	public String getSeq() {
 		return seq;
@@ -53,5 +54,13 @@ public class CodeDto {
 	public void setCodeGroup_seq(Integer codeGroup_seq) {
 		this.codeGroup_seq = codeGroup_seq;
 	}
+	
+	public String getCgName() {
+		return cgName;
+	}
+	public void setCgName(String cgName) {
+		this.cgName = cgName;
+	}
+	
 	
 }
