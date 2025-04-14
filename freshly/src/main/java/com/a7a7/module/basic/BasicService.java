@@ -28,6 +28,10 @@ public class BasicService {
 		return dao.GroceryUpdate(dto);
 	}
 	
+	public int GroceryUelete(List<Integer> seqs) {
+		return dao.GroceryUelete(seqs);
+	}
+	
 //	**********************************************
 //	거래처
 //**********************************************
@@ -42,6 +46,9 @@ public class BasicService {
 	}
 	public int AccountUpdate(BasicDto dto) {
 		return dao.AccountUpdate(dto);
+	}
+	public int AccountUelete(List<Integer> seqs) {
+		return dao.AccountUelete(seqs);
 	}
 //	**********************************************
 //	공장
@@ -60,7 +67,9 @@ public class BasicService {
 	public int FactoryUpdate(BasicDto dto) {
 		return dao.FactoryUpdate(dto);
 	}
-	
+	public int FactoryUelete(List<Integer> seqs) {
+		return dao.FactoryUelete(seqs);
+	}
 	
 	
 	

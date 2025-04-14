@@ -1,10 +1,14 @@
 package com.a7a7.module.basic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -51,6 +55,12 @@ public class BasicController {
 	}
 	
 	
+	@RequestMapping(value = "/web/basic/groceryUelete")
+	public String groceryUelete(@RequestParam("seq") List<Integer> seqList) {
+		service.GroceryUelete(seqList);
+		return "redirect:/web/basic/groceryList";
+	}
+	
 	
 	
 	
@@ -88,7 +98,11 @@ public class BasicController {
 		service.AccountUpdate(dto);
 		return "redirect:/web/basic/accountList";
 	}
-	
+	@RequestMapping(value = "/web/basic/accountUelete")
+	public String accountUelete(@RequestParam("seq") List<Integer> seqList) {
+		service.AccountUelete(seqList);
+		return "redirect:/web/basic/accountList";
+	}
 	
 	
 	// ******** 공장 관리  ********
@@ -126,7 +140,11 @@ public class BasicController {
 	}
 	
 	
-	
+	@RequestMapping(value = "/web/basic/factoryUelete")
+	public String factoryUelete(@RequestParam("seq") List<Integer> seqList) {
+		service.FactoryUelete(seqList);
+		return "redirect:/web/basic/factoryList";
+	}
 	
 	
 	
@@ -170,5 +188,6 @@ public class BasicController {
 		
 		return "mobile/basic/factoryList";
 	}
+	
 	
 }

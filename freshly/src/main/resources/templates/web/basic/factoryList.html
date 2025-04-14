@@ -38,6 +38,7 @@
                                     <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
+                                            	<th style="text-align: center;"><input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox"></th>
                                                 <th>#</th>
                                                 <th>seq</th>
                                                 <th>공장명</th>
@@ -51,6 +52,7 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
+                                            	<td style="text-align: center;"><input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}"></td>
                                             	<td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
                                                 <td name="fcName"><a href="javascript:void(0);" th:text="${item.fcName}" th:attr="onclick=|goForm('${item.seq}')|">공장명</a></td>
@@ -105,7 +107,7 @@
 <!--**********************************
        Scripts end
    ***********************************-->
-   
+<div th:replace="~{web/include/modal :: modal}"></div>  <!-- 모달 추가해야함.  -->
 <div th:replace="~{web/include/footer :: footer}"></div>
 <script type="text/javascript">
 
@@ -125,6 +127,38 @@
 	    form.action = goUrlXdmForm;
 	    form.submit();
 	}
+	
+	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
+	if(document.getElementById("btnUel")){
+		document.getElementById("btnUel").onclick = function () {
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");      	
+			}
+		}
+
+		document.getElementById("btnModalUelete").onclick = function () {
+		
+			const query = 'input[name="itemCheckbox"]:checked';
+			const selectedElements = document.querySelectorAll(query);
+			//체크박스 체크된 항목의 개수
+			const selectedElementsCnt = selectedElements.length;
+			if(selectedElementsCnt == 0){
+		      alert("삭제할 항목을 선택해주세요.");
+		      return false;
+			}else{
+				const selectedValues = [];
+				selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+			
+				seq.value = selectedValues.join(',');
+				form.action = "/web/basic/groceryUelete";
+				form.submit();
+			}
+		}
 </script>
 
 </html>
