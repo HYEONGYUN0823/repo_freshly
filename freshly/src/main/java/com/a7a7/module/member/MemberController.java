@@ -146,5 +146,11 @@ public class MemberController {
 		return "redirect:/web/basic/memberList";
 	}
 	
+	@RequestMapping(value ="/web/basic/memberUpdate")
+	public String MemberUpdate(MemberDto dto) {
+		service.MemberUpdate(dto);
+		return "redirect:/web/basic/memberList";
+	}
+	
 	
 }

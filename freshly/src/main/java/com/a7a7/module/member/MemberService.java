@@ -32,4 +32,9 @@ public class MemberService {
 	public int MemberInsert(MemberDto dto) {
 		return dao.MemberInsert(dto);
 	}
+	
+	public int MemberUpdate(MemberDto dto) {
+		return dao.MemberUpdate(dto);
+	}
+
 }

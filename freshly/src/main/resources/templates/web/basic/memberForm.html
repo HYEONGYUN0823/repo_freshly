@@ -34,7 +34,6 @@
                                         <section>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-4">
-                                                	<!-- <input type="hidden" name="seq"> -->
                                                     <div class="form-group">
                                                     	<input type="hidden" name="seq" th:value ="${vo.seq}">
                                                         <label class="text-label">담당자 번호</label><span style="color: crimson;">*</span>
@@ -52,7 +51,7 @@
                                                     <div class="form-group">
                                                         <label for="mbName" class="text-label">담당자 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="mbName" name="mbName"  th:value="${item?.mbName}"   class="form-control">
+	                                                        <input type="text" id="mbName" name="mbName"  th:value="${item?.mbName}" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -86,13 +85,13 @@
                                                 <div class="col-lg-6 mb-4" th:if = "${vo.seq == '0'}"></div>
                                                 <div class="col-lg-6 mb-4" th:if = "${vo.seq != '0'}">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="gcDelNy">식료품 삭제여부</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="mbDelNy">담당자 정보 삭제여부</label><span style="color: crimson;">*</span>
                                                         <div>
                                                             <select
 																id="mbDelNy" name="mbDelNy" class="form-control">
 																	<option value="">선택하세요</option>
 																	<option value="1" th:selected="${item?.mbDelNy == 1}">삭제</option>
-                   													<option value="0" th:selected="${item?.mbDelNy == 0}">미삭제</option>
+                   													<option value="0" th:selected="${item?.mbDelNy == 0 || mbDelNy == null}">미삭제</option> <!--뭔가 null로 하지않으면 0을 안받음 -->
 															</select>
                                                         </div>
                                                     </div>
@@ -165,7 +164,7 @@
 			form.action = "/web/basic/memberInsert";
 			form.submit();
 		}else {
-			form.action = "/web/basic/groceryUpdate";
+			form.action = "/web/basic/memberUpdate";
 			form.submit();
 		}
     }

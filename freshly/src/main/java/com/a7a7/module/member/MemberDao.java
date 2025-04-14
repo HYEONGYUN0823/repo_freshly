@@ -19,4 +19,6 @@ public interface MemberDao {
 	public MemberDto selectMemberView(MemberDto dto);
 	
 	public int MemberInsert(MemberDto dto);
+	
+	public int MemberUpdate(MemberDto dto);
 }
