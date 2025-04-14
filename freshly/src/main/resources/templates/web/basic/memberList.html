@@ -13,13 +13,13 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>공장 관리</h4>
+                            <h4>담당자 관리</h4>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">기본</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">공장 관리</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">담당자 관리</a></li>
                         </ol>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">공장 목록</h4>
+                                <h4 class="card-title">담당자 정보</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -40,28 +40,26 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>seq</th>
-                                                <th>공장명</th>
-                                                <th>대표자</th>
-                                                <th>전화번호</th>
-                                                <th>주소</th>
-                                                <th>상세주소</th>
-                                                <th>등록일</th>
-                                                <th>수정일</th>
+                                                <th>담당자정보</th>
+                                                <th>담당자 아이디</th>
+                                                <th>담당자 이메일</th>
+                                                <th>담당자 등록일</th>
+                                                <th>담당자 수정일</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
-                                            	<td>#</td>
+                                             	<td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
-                                                <td name="fcName"><a href="javascript:void(0);" th:text="${item.fcName}" th:attr="onclick=|goForm('${item.seq}')|">공장명</a></td>
-                                                <td name="fcManagerName" th:text="${item.fcManagerName}">대표자</td>
-                                                <td name="fcTel" th:text="${item.fcTel}">전화번호</td>
-                                                <td name="fcAddress" th:text="${item.fcAddress}">주소</td>
-                                                <td name="fcAddressDetail" th:text="${item.fcAddressDetail}">상세주소</td>
-                                                <td name="fcRegDateTime" th:text="${item.fcRegDateTime}">등록일</td>
-                                                <td name="fcModDateTime" th:text="${item.fcModDateTime}">수정일</td>
+                                                <td name="gcName"><a href="javascript:void(0);" th:text="${item.mbName}" th:attr="onclick=|goForm('${item.seq}')|">담당자정보</a></td>
+                                                <td name="gcCategory" th:text="${item.mbId}">아이디</td>
+                                                <td name="gcRegDateTime" th:text="${item.mbEmail}">이메일</td>
+                                                <td name="gcModDateTime" th:text="${item.mbRegDateTime}">등록일</td>
+                                                <td name="gcModDateTime" th:text="${item.mbModDateTime}">수정일</td>
                                             </tr>
+                                            
                                         </tbody>
+                                        
                                     </table>
                                     
                                 </div>
@@ -109,7 +107,7 @@
 <div th:replace="~{web/include/footer :: footer}"></div>
 <script type="text/javascript">
 
-	let goUrlXdmForm = "/web/basic/factoryForm";
+	let goUrlXdmForm = "/web/basic/groceryForm";
 	let goUrlXdmUele = "";
 
 	let seq = document.querySelector("input[name=seq]");
@@ -119,6 +117,7 @@
 	    goForm(0);
 	}
 
+	/* form으로 보내는 기능. */
 	goForm = function (keyValue) {
 		
 	    seq.value = keyValue;

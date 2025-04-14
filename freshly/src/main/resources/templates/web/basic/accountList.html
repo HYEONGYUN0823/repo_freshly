@@ -54,14 +54,14 @@
                                             <tr th:each="item : ${list}">
                                                 <td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
-                                                <td name="fcName"><a href="javascript:void(0);" th:text="${item.acName}"  th:attr="onclick=|goForm('${item.seq}')|"></a></td>
-                                                <td name="acCategory" th:text="${item.acCategory}"></td>
-                                                <td name="acManagerName" th:text="${item.acManagerName}"></td>
-                                                <td name="acManagerTel" th:text="${item.acManagerTel}"></td>
-                                                <td name="acAddress" th:text="${item.acAddress}"></td>
-                                                <td name="acAddressDetail" th:text="${item.acAddressDetail}"></td>
-                                                <td name="acStartDate" th:text="${item.acStartDate}"></td>
-                                                <td name="acEndDate" th:text="${item.acEndDate}"></td>
+                                                <td name="fcName"><a href="javascript:void(0);" th:text="${item.acName}" th:attr="onclick=|goForm('${item.seq}')|"> 거래처명</a></td>
+                                                <td name="acCategory" th:text="${item.acCategory}">분류</td>
+                                                <td name="acManagerName" th:text="${item.acManagerName}">대표자</td>
+                                                <td name="acManagerTel" th:text="${item.acManagerTel}">전화번호</td>
+                                                <td name="acAddress" th:text="${item.acAddress}">주소</td>
+                                                <td name="acAddressDetail" th:text="${item.acAddressDetail}">상세주소</td>
+                                                <td name="acStartDate" th:text="${item.acStartDate}">거래시작일</td>
+                                                <td name="acEndDate" th:text="${item.acEndDate}">거래종료일</td>
                                             </tr>
                                         </tbody>
                                     </table>

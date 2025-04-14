@@ -35,6 +35,20 @@
 			AND mbDelNy = 0
 	</select>
 	
+	<!-- #########################   WEB 화면 ###################  -->
 	
+	<select id="selectMemberList" resultMap="resultMapObj">
+		SELECT 
+			seq
+			,mbName
+			,mbId
+			,mbEmail
+		    ,mbRegDateTime
+		    ,mbModDateTime
+		FROM
+			member
+		WHERE 1=1
+			AND mbDelNy = 0
+	</select>
 	
 </mapper>
