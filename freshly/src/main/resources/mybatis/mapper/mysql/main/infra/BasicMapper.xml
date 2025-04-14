@@ -14,6 +14,7 @@
 		    ,gcName
 		    ,gcCategory
 		    ,gcPrice
+		    ,gcStock
 		    ,gcUseNy
 		    ,gcRegDateTime
 		    ,gcModDateTime
@@ -30,6 +31,7 @@
 			,gcName
 			,gcCategory
 			,gcPrice
+			,gcStock
 			,gcUseNy
 			,gcDelNy
 			,gcRegDateTime
@@ -38,6 +40,7 @@
 			,#{gcName}
 			,#{gcCategory}
 			,#{gcPrice}
+			,#{gcStock}
 			,#{gcUseNy}
 			,0
 			,now()
@@ -53,6 +56,7 @@
 		    ,gcName
 		    ,gcCategory
 		    ,gcPrice
+		    ,gcStock
 		    ,gcUseNy
 		    ,gcDelNy
 		    ,gcRegDateTime
@@ -71,6 +75,7 @@
 		gcName = #{gcName},
 		gcCategory = #{gcCategory},
 		gcPrice = #{gcPrice},
+		gcStock = #{gcStock},
 		gcUseNy = #{gcUseNy},
 		gcModDateTime = now(),
 		gcDelNy = #{gcDelNy}

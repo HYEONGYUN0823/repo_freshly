@@ -15,4 +15,8 @@ public interface MemberDao {
 	// #########################   WEB 화면 ################### 
 	
 	public List<MemberDto> selectMemberList();
+	
+	public MemberDto selectMemberView(MemberDto dto);
+	
+	public int MemberInsert(MemberDto dto);
 }

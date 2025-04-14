@@ -24,4 +24,12 @@ public class MemberService {
 	public List<MemberDto> selectMemberList(){
 		return dao.selectMemberList();
 	}
+	
+	public MemberDto selectMemberView(MemberDto dto) {
+		return dao.selectMemberView(dto);
+	}
+	
+	public int MemberInsert(MemberDto dto) {
+		return dao.MemberInsert(dto);
+	}
 }

@@ -6,8 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.a7a7.module.basic.BasicDto;
+import com.a7a7.module.basic.BasicVo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -125,6 +129,16 @@ public class MemberController {
 		return "web/basic/memberList";
 	}
 	
+	@RequestMapping(value = "/web/basic/memberForm")
+	public String selectWebmemberForm(@ModelAttribute("vo") BasicVo vo, MemberDto dto,Model model) {
+		//insert
+		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
+		}// update
+		else {
+			model.addAttribute("item", service.selectMemberView(dto));
+		}
+		return "web/basic/memberForm";
+	}
 	
 	
 }

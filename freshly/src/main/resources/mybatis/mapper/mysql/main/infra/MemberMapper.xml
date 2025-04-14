@@ -51,4 +51,40 @@
 			AND mbDelNy = 0
 	</select>
 	
+	<select id="selectMemberView" resultMap="resultMapObj">
+		SELECT 
+			seq
+			,mbName
+			,mbId
+			,mbPassword
+			,mbEmail
+		    ,mbRegDateTime
+		    ,mbModDateTime
+		FROM
+			member
+		WHERE 1=1
+			and seq =#{seq}
+			AND mbDelNy = 0
+	</select>
+	
+	<insert id="MemberInsert">
+		insert into member(
+			seq,
+			mbName,
+			mbId,
+			mbPassword,
+			mbEmail,
+		    mbRegDateTime
+		)value
+			#{seq},
+			#{mbName},
+			#{mbId},
+			#{mbPassword},
+			#{mbEmail},
+		    now()
+		<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			Select last_insert_id()
+		</selectKey>
+	</insert>
+	
 </mapper>

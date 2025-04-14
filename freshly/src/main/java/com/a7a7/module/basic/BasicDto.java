@@ -9,6 +9,7 @@ public class BasicDto {
 	private String gcName;
 	private Integer gcCategory;
 	private Integer gcPrice;
+	private Integer gcStock;
 	private Integer gcDelNy;
 	private Integer gcUseNy;
 	private String gcRegDateTime;
@@ -209,6 +210,12 @@ public class BasicDto {
 	}
 	public void setFcUseNy(Integer fcUseNy) {
 		this.fcUseNy = fcUseNy;
+	}
+	public Integer getGcStock() {
+		return gcStock;
+	}
+	public void setGcStock(Integer gcStock) {
+		this.gcStock = gcStock;
 	}
 	
 }
