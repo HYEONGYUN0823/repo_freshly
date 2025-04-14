@@ -23,8 +23,8 @@ public class BasicDto {
 	private String acAddressDetail;
 	private String acStartDate;
 	private String acEndDate;
-	private String acUseNy;
-	private String acDelNy;
+	private Integer acUseNy;
+	private Integer acDelNy;
 	
 	// 공장
 	private String fcName;
@@ -142,16 +142,16 @@ public class BasicDto {
 	public void setAcEndDate(String acEndDate) {
 		this.acEndDate = acEndDate;
 	}
-	public String getAcUseNy() {
+	public Integer getAcUseNy() {
 		return acUseNy;
 	}
-	public void setAcUseNy(String acUseNy) {
+	public void setAcUseNy(Integer acUseNy) {
 		this.acUseNy = acUseNy;
 	}
-	public String getAcDelNy() {
+	public Integer getAcDelNy() {
 		return acDelNy;
 	}
-	public void setAcDelNy(String acDelNy) {
+	public void setAcDelNy(Integer acDelNy) {
 		this.acDelNy = acDelNy;
 	}
 	

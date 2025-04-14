@@ -20,8 +20,9 @@ public interface BasicDao {
 //		거래처
 //**********************************************
 	public List<BasicDto> selectAccountList();		//리스트
+	public BasicDto selectAccountView(BasicDto dto);
 	public int AccountInsert(BasicDto dto);						//insert
-	
+	public int AccountUpdate(BasicDto dto);	
 	
 //	**********************************************
 //		공장

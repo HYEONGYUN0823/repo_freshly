@@ -35,6 +35,7 @@
                                         <section>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-4">
+                                                	<input type="hidden" name ="seq" th:value="${vo.seq}">
                                                     <div class="form-group">
                                                         <label class="text-label">거래처번호</label><span style="color: crimson;">*</span>
                                                         <input 
@@ -56,7 +57,7 @@
                                                     <div class="form-group">
                                                         <label for="acName" class="text-label">거래처 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="acName" name="acName" class="form-control">
+	                                                        <input type="text" id="acName" name="acName" th:value="${item?.acName}" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -67,7 +68,7 @@
 	                                                        <select
 																id="acCategory" name="acCategory" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1">1</option>
+																	<option value="1" th:selected ="${item?.acCategory}">1</option>
 																	<!-- <option th:each="list : ${listCodeGroup}"
 																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
 																		th:selected="${list.factory_seq == item?.factory_seq}">
@@ -81,7 +82,7 @@
                                                         <label for="acManagerName" class="text-label">거래처 담당자</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="acManagerName" name="acManagerName" class="form-control">
+	                                                        	<input type="text" id="acManagerName" name="acManagerName" th:value="${item?.acManagerName}" class="form-control">
 															</div>
 														</div>
                                                     </div>
@@ -90,7 +91,7 @@
                                                     <div class="form-group">
                                                         <label for="acManagerTel" class="text-label">거래처 전화번호</label><span style="color: crimson;">*</span>
                                                         <div>
-														   <input type="text" id="acManagerTel" name="acManagerTel" class="form-control">
+														   <input type="text" id="acManagerTel" name="acManagerTel" th:value="${item?.acManagerTel}" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -101,16 +102,16 @@
 	                                                        <select
 																id="acAdress" name="acAddress" class="form-control">
 																	<option value="">선택하세요</option>										
-																	<option value="1">1</option>										
+																	<option value="1" th:selected ="${item?.acAddress}">1</option>										
 															</select>
 														</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="acAdressDetail">거래처 상세주소</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="acAddressDetail">거래처 상세주소</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                         <input type="text" id="acAdressDetail" name="acAdressDetail" class="form-control">
+	                                                         <input type="text" id="acAddressDetail" name="acAddressDetail"  th:value="${item?.acAddressDetail}" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -118,7 +119,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="acStartDate">거래 일자</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                       <input type="text"  class="form-control" id="acStartDate" name="acStartDate" required>
+	                                                       <input type="text"  class="form-control" id="acStartDate" name="acStartDate" th:value="${item?.acStartDate}"  required>
 														</div>
                                                     </div>
                                                 </div>
@@ -126,7 +127,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="acEndDate">거래 종료일자</label><span style="color: crimson;">*</span>
                                                         <div>
-															<input type="text"  class="form-control" id="acEndDate" name="acEndDate" required>
+															<input type="text"  class="form-control" id="acEndDate" name="acEndDate" th:value="${item?.acEndDate}" required>
 														</div>
                                                     </div>
                                                 </div>
@@ -137,31 +138,27 @@
                                                             <select
 																id="acUseNy" name="acUseNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${acUseNy == 1  or acUseNy == null}" >사용</option>
-                   													<option value="0" th:selected="${acUseNy == 0}">미사용</option>
+																	<option value="1" th:selected="${item?.acUseNy == 1  or acUseNy == null}" >사용</option>
+                   													<option value="0" th:selected="${item?.acUseNy == 0}">미사용</option>
 															</select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
-                                                <!-- <div class="col-lg-6 mb-4">
+                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq == '0'}"></div>
+                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq != '0'}">
                                                     <div class="form-group">
                                                         <label class="text-label" for="acDelNy">거래처 삭제여부</label><span style="color: crimson;">*</span>
                                                         <div>
                                                             <select
 																id="acDelNy" name="acDelNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${acDelNy == 1}">삭제</option>
-                   													<option value="0" th:selected="${acDelNy == 0}">미삭제</option>
+																	<option value="1" th:selected="${item?.acDelNy == 1}">삭제</option>
+                   													<option value="0" th:selected="${item?.acDelNy == 0}">미삭제</option>
 															</select>
                                                         </div>
                                                     </div>
-                                                </div> --> 
-                                                <input type="hidden"  
-														id="acDelNy" name="acDelNy" 
-														th:value="0" 
-														class="form-control" />
-                                            </div>
+                                                </div> 
+ 
                                         </section>
                                        
                                     </div>
@@ -230,15 +227,17 @@
 	  	lang:'ko'
 	});
 
-	/* insert */
-	
-	let goUrlXdmInst = "/web/basic/accountInsert";
+	/* insert 또는 update */
 	
 	document.getElementById("BtnInst").onclick = function(){
-		form.action = goUrlXdmInst;
-		form.submit();
-	}
-	
+    	if(seq.value == "0" || seq.value == "") {
+			form.action = "/web/basic/accountInsert";
+			form.submit();
+		}else {
+			form.action = "/web/basic/accountUpdate";
+			form.submit();
+		}
+    }
 </script>
 
 </body>

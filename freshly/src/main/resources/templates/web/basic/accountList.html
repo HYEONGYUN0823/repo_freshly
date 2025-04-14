@@ -54,7 +54,7 @@
                                             <tr th:each="item : ${list}">
                                                 <td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
-                                                <td name="acName" th:text="${item.acName}"></td>
+                                                <td name="fcName"><a href="javascript:void(0);" th:text="${item.acName}"  th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                                 <td name="acCategory" th:text="${item.acCategory}"></td>
                                                 <td name="acManagerName" th:text="${item.acManagerName}"></td>
                                                 <td name="acManagerTel" th:text="${item.acManagerTel}"></td>

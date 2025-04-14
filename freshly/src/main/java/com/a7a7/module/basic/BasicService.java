@@ -34,10 +34,15 @@ public class BasicService {
 	public List<BasicDto> selectAccountList() {
 		return dao.selectAccountList();
 	}
+	public BasicDto selectAccountView(BasicDto dto) {
+		return dao.selectAccountView(dto);
+	}
 	public int AccountInsert(BasicDto dto) {
 		return dao.AccountInsert(dto);
 	}
-	
+	public int AccountUpdate(BasicDto dto) {
+		return dao.AccountUpdate(dto);
+	}
 //	**********************************************
 //	공장
 //**********************************************

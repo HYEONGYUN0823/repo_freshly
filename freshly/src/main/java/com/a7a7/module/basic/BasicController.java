@@ -66,7 +66,13 @@ public class BasicController {
 	}
 	
 	@RequestMapping(value = "/web/basic/accountForm")
-	public String selectWebAccountForm() {
+	public String selectWebAccountForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
+		//insert
+		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {						
+		}// update
+		else {
+			model.addAttribute("item", service.selectAccountView(dto));
+		}
 		return "web/basic/accountForm";
 	}
 	
@@ -74,6 +80,12 @@ public class BasicController {
 	@RequestMapping(value="/web/basic/accountInsert")
 	public String groceryWebAccountInsert(BasicDto dto) {
 		service.AccountInsert(dto);
+		return "redirect:/web/basic/accountList";
+	}
+	
+	@RequestMapping(value="/web/basic/accountUpdate")
+	public String groceryWebAccountUpdate(BasicDto dto) {
+		service.AccountUpdate(dto);
 		return "redirect:/web/basic/accountList";
 	}
 	

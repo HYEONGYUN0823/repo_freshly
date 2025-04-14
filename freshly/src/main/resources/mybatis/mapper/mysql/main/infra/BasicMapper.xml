@@ -101,6 +101,27 @@
 		    AND acDelNy = 0
 	</select>
 	
+	<select id="selectAccountView" resultMap="resultMapObj">
+		SELECT
+			seq
+		    ,acName
+		    ,acCategory
+		    ,acManagerName
+		    ,acManagerTel
+		    ,acAddress
+		    ,acAddressDetail
+		    ,acStartDate
+		    ,acEndDate
+		    ,acUseNy
+		    ,acDelNy
+		FROM
+			account
+		WHERE
+			1=1
+			AND seq = #{seq}
+		    AND acDelNy = 0
+	</select>
+	
 	<insert id="AccountInsert">
 		insert into account(
 			seq
@@ -131,6 +152,23 @@
 			Select last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<update id ="AccountUpdate">
+		update account 
+		set
+			acName = #{acName},
+			acCategory = #{acCategory},
+			acManagerName = #{acManagerName},
+			acManagerTel = #{acManagerTel},
+			acAddress = #{acAddress},
+			acAddressDetail = #{acAddressDetail},
+			acStartDate = #{acStartDate},
+			acEndDate = #{acEndDate},
+			acUseNy = #{acUseNy},
+			acDelNy = #{acDelNy}
+		where
+		 	seq = #{seq}
+	</update>
 	
 	
 	<!--*********** 공장 ********************-->
