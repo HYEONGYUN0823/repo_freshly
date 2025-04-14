@@ -3,7 +3,7 @@ package com.a7a7.module.ordering;
 public class OrderingDto {
 	
 	private String seq;
-	private int odStatus;
+	private Integer odStatus;
 	private String odRegDateTime;
 	private String odModDateTime;
 	private Integer odDelNy;
@@ -18,10 +18,10 @@ public class OrderingDto {
 	public void setSeq(String seq) {
 		this.seq = seq;
 	}
-	public int getOdStatus() {
+	public Integer getOdStatus() {
 		return odStatus;
 	}
-	public void setOdStatus(int odStatus) {
+	public void setOdStatus(Integer odStatus) {
 		this.odStatus = odStatus;
 	}
 	public String getOdRegDateTime() {

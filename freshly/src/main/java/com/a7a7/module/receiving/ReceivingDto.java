@@ -3,7 +3,7 @@ package com.a7a7.module.receiving;
 public class ReceivingDto {
 	
 	private String seq;
-	private int rcStatus;
+	private Integer rcStatus;
 	private String rcRegDateTime;
 	private String rcModDateTime;
 	private Integer rcDelNy;
@@ -18,10 +18,10 @@ public class ReceivingDto {
 	public void setSeq(String seq) {
 		this.seq = seq;
 	}
-	public int getRcStatus() {
+	public Integer getRcStatus() {
 		return rcStatus;
 	}
-	public void setRcStatus(int rcStatus) {
+	public void setRcStatus(Integer rcStatus) {
 		this.rcStatus = rcStatus;
 	}
 	public String getRcRegDateTime() {

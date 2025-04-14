@@ -56,10 +56,10 @@
 									<select
 										id="rcStatus" name="rcStatus" class="form-control">
 											<option value="" disabled th:selected="${item?.rcStatus} == null">선택하세요</option>
-											<option value="1" th:selected="${item?.rcStatus == '1'}">접수</option>
-											<option value="2" th:selected="${item?.rcStatus == '2'}">진행중</option>
-											<option value="3" th:selected="${item?.rcStatus == '3'}">완료</option>
-											<option value="4" th:selected="${item?.rcStatus == '4'}">취소</option>
+											<option value="1" th:selected="${item?.rcStatus == 1}">접수</option>
+											<option value="2" th:selected="${item?.rcStatus == 2}">진행중</option>
+											<option value="3" th:selected="${item?.rcStatus == 3}">완료</option>
+											<option value="4" th:selected="${item?.rcStatus == 4}">취소</option>
 									</select>
                               </div>
                               <div class="mb-3">
