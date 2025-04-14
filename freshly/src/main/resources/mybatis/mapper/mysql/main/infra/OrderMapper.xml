@@ -19,9 +19,11 @@
 				AND a.seq = b.acOrder_seq
 			) as ioCount,
 			a.acOrderDateTime,
-			a.account_seq
+			a.account_seq,
+			ac.acName
 		from
 		 	acorder a
+		 	JOIN account ac ON ac.seq = a.account_seq
 		where 
 		 	1=1
 		 	AND a.seq = #{acOrder_seq}
@@ -31,38 +33,46 @@
 	
 	<select id="selectOrderList" resultMap="resultMapObj">
 		select
-			a.seq,
-			a.acOrderStatus,
-			(
-			select 
-				count(*) 
-			from 
-				individualorder as b
-			where 
-				1=1
-				AND a.seq = b.acOrder_seq
-			) as ioCount,
-			a.acOrderDateTime,
-			a.account_seq
+			a.seq
+			,a.aoQuantity
+			,a.aoStatus
+			,a.aoDateTime
+			,a.account_seq
+			,ac.acName
+			,a.grocery_seq
+			,gc.gcName
+			,gc.gcPrice
+			,(a.aoQuantity * gc.gcPrice) AS aoTotal
+			,a.member_seq
+			,mb.mbName
 		from
 		 	acorder a
+		 	JOIN account ac ON ac.seq = a.account_seq
+		 	JOIN grocery gc ON gc.seq = a.grocery_seq
+		 	JOIN member mb ON mb.seq = a.member_seq
 		where 
 		 	1=1
-		 	AND a.acOrderDelNy = 0
+		 	AND a.aoDelNy = 0
 		ORDER BY seq desc
 	</select>
 	
 	<insert id="insert">
 		INSERT INTO acorder(
-			acOrderStatus,
-			acOrderDateTime,
-			acOrderDelNy,
-			account_seq
+			aoStatus
+			,aoQuantity
+			,aoDateTime
+			,aoDelNy
+			,account_seq
+			,grocery_seq
+			,member_seq
 		) VALUES(
-			1,
-			now(),
-			0,
-			#{account_seq}
+			1
+			,#{aoQuantity}
+			,now()
+			,0
+			,#{account_seq}
+			,#{grocery_seq}
+			,#{member_seq}
 		)
 	</insert>
 	

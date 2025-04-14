@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.a7a7.module.basic.BasicService;
+import com.a7a7.module.member.MemberService;
 
 @Controller
 public class OrderController {
@@ -14,6 +15,8 @@ public class OrderController {
 	OrderService service;
 	@Autowired
 	BasicService basicService;
+	@Autowired
+	MemberService memberService;
 	
 	// 주문 List 화면
 	@RequestMapping(value ="/web/account/orderList")
@@ -27,6 +30,8 @@ public class OrderController {
 	public String orderForm(Model model) {
 		
 		model.addAttribute("accountGroup", basicService.selectAccountList());
+		model.addAttribute("groceryGroup", basicService.selectGroceryList());
+		model.addAttribute("memberGroup", memberService.selectMemberList());
 		
 		return "web/account/orderForm";
 	}
