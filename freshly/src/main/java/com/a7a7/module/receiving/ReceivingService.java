@@ -28,4 +28,8 @@ public class ReceivingService {
 		return dao.update(dto);
 	}
 	
+	public int uelete(ReceivingDto dto) {
+		return dao.uelete(dto);
+	}
+	
 }

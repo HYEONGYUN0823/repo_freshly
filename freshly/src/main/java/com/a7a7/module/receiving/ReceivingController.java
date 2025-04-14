@@ -52,11 +52,20 @@ public class ReceivingController {
 		
 		return "redirect:/mob/factory/ReceivingList";
 	}
-
-    // 웹 공장 발주관리
-    @RequestMapping(value ="/web/factory/ReceivingList")
-    public String webReceivingList(Model model) {
-        model.addAttribute("list", service.selectList());
-        return "web/factory/ReceivingList";
-    }
+	
+	@RequestMapping(value = "/mob/factory/receivingUete")
+	public String receivingUete(ReceivingDto dto) {
+		service.uelete(dto);
+		
+		return "redirect:/mob/factory/ReceivingList";
+	}
+	
 }
+//	
+//    // 웹 공장 발주관리
+//    @RequestMapping(value ="/web/factory/ReceivingList")
+//    public String webReceivingList(Model model) {
+//        model.addAttribute("list", service.selectList());
+//        return "web/factory/ReceivingList";
+//    }
+//}

@@ -21,15 +21,21 @@ public class OrderingController {
 	// 모바일 공장 발주관리
 	@RequestMapping(value ="/mob/factory/OrderingList")
 	public String mobOrderingList(Model model) {
-		model.addAttribute("list", service.selectList());
+		model.addAttribute("list", service.selectOrderingList());
 		return "mobile/factory/OrderingList";
 	}
 	
 	// 웹 공장 발주관리
 	@RequestMapping(value ="/web/factory/OrderingList")
 	public String webOrderingList(Model model) {
-		model.addAttribute("list", service.selectList());
+		model.addAttribute("list", service.selectOrderingList());
 		return "web/factory/OrderingList";
+	}
+	
+	@RequestMapping(value ="/web/factory/ReceivingList")
+	public String webReceivingList(Model model) {
+		model.addAttribute("list", service.selectReceivingList());
+		return "web/factory/receivingList";
 	}
 	
 	@RequestMapping(value = "/web/factory/OrderingForm")
@@ -69,5 +75,7 @@ public class OrderingController {
 		
 		return "redirect:/web/factory/OrderingList";
 	}
+
+	
 	
 }

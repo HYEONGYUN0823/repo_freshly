@@ -73,6 +73,14 @@
 											</option>
 									</select>
                               </div>
+                              <div class="mb-3">
+                                 <label class="form-label">수량</label>
+									<div>
+                                    	<input class="form-control"
+												id="rcQuantity" name="rcQuantity" type="text" th:value="${item?.rcQuantity}"
+												placeholder="숫자">
+                                    </div>
+                              </div>
 								<input type="hidden"  
 									id="rcDelNy" name="rcDelNy" 
 									th:value="0" 

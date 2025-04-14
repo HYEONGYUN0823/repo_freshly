@@ -6,6 +6,7 @@ public class ReceivingDto {
 	private Integer rcStatus;
 	private String rcRegDateTime;
 	private String rcModDateTime;
+	private String rcQuantity;
 	private Integer rcDelNy;
 	private String factory_seq;
 	private String grocery_seq;
@@ -35,6 +36,12 @@ public class ReceivingDto {
 	}
 	public void setRcModDateTime(String rcModDateTime) {
 		this.rcModDateTime = rcModDateTime;
+	}
+	public String getRcQuantity() {
+		return rcQuantity;
+	}
+	public void setRcQuantity(String rcQuantity) {
+		this.rcQuantity = rcQuantity;
 	}
 	public Integer getRcDelNy() {
 		return rcDelNy;

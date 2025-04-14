@@ -12,8 +12,12 @@ public class OrderingService {
 	@Autowired
 	OrderingDao dao;
 	
-	public List<OrderDto> selectList(){
-		return dao.selectList();
+	public List<OrderDto> selectOrderingList(){
+		return dao.selectOrderingList();
+	}
+	
+	public List<OrderDto> selectReceivingList(){
+		return dao.selectReceivingList();
 	}
 	
 	public OrderingDto selectOne(OrderingDto dto) {

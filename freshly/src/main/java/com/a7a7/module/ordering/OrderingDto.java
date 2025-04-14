@@ -4,12 +4,17 @@ public class OrderingDto {
 	
 	private String seq;
 	private Integer odStatus;
-	private String odRegDateTime;
-	private String odModDateTime;
+	private String odStartDateTime;
+	private String odEndDateTime;
+	private String odQuantity;	
 	private Integer odDelNy;
 	private String factory_seq;
 	private String member_seq;
 	private String grocery_seq;
+	
+	private String fcName;
+	private String mbName;
+	private String gcName;
 	
 //	-----
 	
@@ -25,17 +30,23 @@ public class OrderingDto {
 	public void setOdStatus(Integer odStatus) {
 		this.odStatus = odStatus;
 	}
-	public String getOdRegDateTime() {
-		return odRegDateTime;
+	public String getOdStartDateTime() {
+		return odStartDateTime;
 	}
-	public void setOdRegDateTime(String odRegDateTime) {
-		this.odRegDateTime = odRegDateTime;
+	public void setOdStartDateTime(String odStartDateTime) {
+		this.odStartDateTime = odStartDateTime;
 	}
-	public String getOdModDateTime() {
-		return odModDateTime;
+	public String getOdEndDateTime() {
+		return odEndDateTime;
 	}
-	public void setOdModDateTime(String odModDateTime) {
-		this.odModDateTime = odModDateTime;
+	public void setOdEndDateTime(String odEndDateTime) {
+		this.odEndDateTime = odEndDateTime;
+	}
+	public String getOdQuantity() {
+		return odQuantity;
+	}
+	public void setOdQuantity(String odQuantity) {
+		this.odQuantity = odQuantity;
 	}
 	public Integer getOdDelNy() {
 		return odDelNy;
@@ -61,5 +72,25 @@ public class OrderingDto {
 	public void setGrocery_seq(String grocery_seq) {
 		this.grocery_seq = grocery_seq;
 	}
+	public String getFcName() {
+		return fcName;
+	}
+	public void setFcName(String fcName) {
+		this.fcName = fcName;
+	}
+	public String getMbName() {
+		return mbName;
+	}
+	public void setMbName(String mbName) {
+		this.mbName = mbName;
+	}
+	public String getGcName() {
+		return gcName;
+	}
+	public void setGcName(String gcName) {
+		this.gcName = gcName;
+	}
+	
+	
 	
 }

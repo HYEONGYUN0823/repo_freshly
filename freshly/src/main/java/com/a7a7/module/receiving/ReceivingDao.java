@@ -16,4 +16,6 @@ public interface ReceivingDao {
 	public int insert(ReceivingDto dto);
 	
 	public int update(ReceivingDto dto);
+	
+	public int uelete(ReceivingDto dto);
 }

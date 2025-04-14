@@ -69,7 +69,7 @@
                                                         <div>
 	                                                        <select
 																id="odStatus" name="odStatus" class="form-control">
-																	<option value="" disabled th:selected="${item?.odStatus} == null">선택하세요</option>
+																	<option value="1" disabled th:selected="${item?.odStatus} == 1">선택하세요</option>
 																	<option value="1" th:selected="${item?.odStatus == 1}">접수</option>
 																	<option value="2" th:selected="${item?.odStatus == 2}">진행중</option>
 																	<option value="3" th:selected="${item?.odStatus == 3}">완료</option>
@@ -105,6 +105,16 @@
 																		th:selected="${list.seq == item?.grocery_seq}">
 																	</option>
 															</select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="odQuantity">수량*</label>
+                                                        <div>
+                                                            <input class="form-control"
+																	id="odQuantity" name="odQuantity" type="text" th:value="${item?.odQuantity}"
+																	placeholder="숫자">
                                                         </div>
                                                     </div>
                                                 </div>

@@ -9,7 +9,9 @@ import com.a7a7.module.order.OrderDto;
 @Repository
 public interface OrderingDao {
 	
-	public List<OrderDto> selectList();
+	public List<OrderDto> selectOrderingList();
+	
+	public List<OrderDto> selectReceivingList();
 	
 	public OrderingDto selectOne(OrderingDto dto);
 	
