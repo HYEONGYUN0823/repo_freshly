@@ -36,8 +36,9 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label">주문 번호</label>
-                                                        <input type="text" id="seq" name="seq" maxlength="20" placeholder="자동생성" 
+                                                        <input type="text" maxlength="20" th:placeholder="자동생성" th:value="${item?.seq}"
 	                                                     class="form-control" disabled/>
+	                                                    <input type="hidden" id="seq" name="seq" th:value="${item?.seq}">
                                                     </div>
                                                 </div>
                                                 
@@ -46,10 +47,11 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="account_seq">거래처 *</label>
                                                         <select id="account_seq" name="account_seq" class="form-control">
-															<option disabled hidden selected value="">선택하세요</option>
+															<option disabled hidden th:selected="${item?.account_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${accountGroup}"
 																	th:value="${group.seq}" 
-																	th:text="${group.acName}">
+																	th:text="${group.acName}"
+																	th:selected="${group.seq == item?.account_seq}">
 															</option>
 														</select>
                                                     </div>
@@ -59,10 +61,11 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="grocery_seq">상품</label>
                                                         <select id="grocery_seq" name="grocery_seq" class="form-control">
-															<option disabled hidden selected value="">선택하세요</option>
+															<option disabled hidden th:selected="${item?.grocery_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${groceryGroup}"
 																	th:value="${group.seq}" 
-																	th:text="${group.gcName}">
+																	th:text="${group.gcName}"
+																	th:selected="${group.seq == item?.grocery_seq}">
 															</option>
 														</select>
                                                     </div>
@@ -70,7 +73,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="ioQuantity">주문개수</label>
-                                                        <input type="text" id="aoQuantity" name="aoQuantity" maxlength="20" placeholder="숫자" 
+                                                        <input type="text" id="aoQuantity" name="aoQuantity" maxlength="20" placeholder="숫자" th:value="${item?.aoQuantity}"
 	                                                     class="form-control"/>
                                                     </div>
                                                 </div>
@@ -79,11 +82,25 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="member_seq">담당자</label>
                                                         <select id="member_seq" name="member_seq" class="form-control">
-															<option disabled hidden selected value="">선택하세요</option>
+															<option disabled hidden th:selected="${item?.member_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${memberGroup}"
 																	th:value="${group.seq}" 
-																	th:text="${group.mbName}">
+																	th:text="${group.mbName}"
+																	th:selected="${group.seq == item?.member_seq}">
 															</option>
+														</select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="aoStatus">주문 상태</label>
+                                                        <select id="aoStatus" name="aoStatus" class="form-control" th:disabled="${item?.seq == null}">
+															<option disabled hidden th:selected="${item?.aoStatus == null}" value="">선택하세요</option>
+															<option value="1" th:selected="${item?.aoStatus == 1 or item?.seq == null}">주문 접수</option>
+															<option value="2" th:selected="${item?.aoStatus == 2}">진행중</option>
+															<option value="3" th:selected="${item?.aoStatus == 3}">주문 완료</option>
+															<option value="4" th:selected="${item?.aoStatus == 4}">주문 취소</option>
 														</select>
                                                     </div>
                                                 </div>
@@ -92,11 +109,11 @@
                                         </section>
                                        
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/system/codeGroupList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/account/orderList'"><i class="fa-solid fa-list"></i></button>
                                     <button type="button" id="btnUel" class="btn btn-danger">
 										<i class="fa-regular fa-trash-can"></i>
 									</button>
-                                    <button type="button" class="btn btn-primary" id="BtnInst" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                    <button type="button" class="btn btn-primary" id="BtnSubmit" style="float: right;"><i class="fa-solid fa-plus"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -147,10 +164,20 @@
     <script type="text/javascript">
     
     	let goUrlXdmInst = "/web/account/orderInst";
+		let goUrlXdmUpdt = "/web/account/orderUpdt";
     	
-    	document.getElementById("BtnInst").onclick = function(){
-    		form.action = goUrlXdmInst;
-			form.submit();
+    	let seq = document.querySelector("input[name=seq]");
+    	
+    	document.getElementById("BtnSubmit").onclick = function(){
+
+			if(seq.value == ""){
+    			form.action = goUrlXdmInst;
+				form.submit();
+    		} else{
+    			form.action = goUrlXdmUpdt;
+				form.submit();
+    		}
+			
     	}
     	
     </script>

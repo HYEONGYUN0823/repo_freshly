@@ -10,5 +10,6 @@ public interface OrderDao {
 	public OrderDto selectOneOrder(String seq);
 	public List<OrderDto> selectOrderList();
 	public int insert(OrderDto dto);
+	public int update(OrderDto dto);
 
 }

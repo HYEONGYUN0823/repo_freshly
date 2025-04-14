@@ -7,28 +7,17 @@
 	
 	<select id="selectOneOrder" resultMap="resultMapObj">
 		select
-			a.seq,
-			a.acOrderStatus,
-			(
-			select 
-				count(*) 
-			from 
-				individualorder as b
-			where 
-				1=1
-				AND a.seq = b.acOrder_seq
-			) as ioCount,
-			a.acOrderDateTime,
-			a.account_seq,
-			ac.acName
+			a.seq
+			,a.aoStatus
+			,aoQuantity
+			,a.account_seq
+			,a.grocery_seq
+			,a.member_seq
 		from
 		 	acorder a
-		 	JOIN account ac ON ac.seq = a.account_seq
 		where 
 		 	1=1
-		 	AND a.seq = #{acOrder_seq}
-		 	AND a.acOrderDelNy = 0
-		ORDER BY seq desc
+		 	AND a.seq = #{seq}
 	</select>
 	
 	<select id="selectOrderList" resultMap="resultMapObj">
@@ -75,5 +64,17 @@
 			,#{member_seq}
 		)
 	</insert>
+	
+	<update id="update">
+		UPDATE acorder
+		SET
+			aoStatus = #{aoStatus}
+			,aoQuantity = #{aoQuantity}
+			,account_seq = #{account_seq}
+			,grocery_seq = #{grocery_seq}
+			,member_seq = #{member_seq}
+		WHERE
+			seq = #{seq}
+	</update>
 	
 </mapper>

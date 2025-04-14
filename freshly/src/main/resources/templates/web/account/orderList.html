@@ -9,7 +9,7 @@
             Content body start
         ***********************************-->
         <form class="content-body" id="formList" method="post">
-        	<input type="hidden" name="acOrder_seq"> 
+        	<input type="hidden" name="formSeq"> 
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
@@ -60,7 +60,12 @@
                                       			<td style="text-align: center;" th:text ="${item.gcPrice}"></td>
                                       			<td style="text-align: center;" th:text ="${item.aoQuantity}"></td>
                                       			<td style="text-align: center;" th:text ="${item.aoTotal}"></td>
-                                      			<td style="text-align: center;" th:text ="${item.aoStatus}"></td>
+                                      			
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 1}">주문 접수</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}">진행중</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">주문 완료</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 4}">주문 취소</td>
+                                      			
                                        			<td style="text-align: center;" th:text ="${item.aoDateTime}"></td>
                                        			<td style="text-align: center;" th:text ="${item.mbName}"></td>
                                             </tr>
@@ -115,7 +120,7 @@
 <script type="text/javascript">
 
 // 상세주문 이동
-let seq = document.querySelector("input[name=acOrder_seq]");
+let seq = document.querySelector("input[name=formSeq]");
 let form = document.getElementById("formList");
 
 let goUrlXdmForm = "/web/account/orderForm";
@@ -126,14 +131,10 @@ document.getElementById("btnForm").onclick = function () {
 }
 
 goForm = function(keyValue) {
-	    seq.value = keyValue;
-	    if(seq.value == 0){
-	    	form.action = goUrlXdmForm;
-	    } else {
-	    	form.action = "/web/account/individualOrderList";
-	    }
-	    form.submit();
-	}
+    seq.value = keyValue;
+    form.action = goUrlXdmForm;
+    form.submit();
+}
 	
 
 </script>
