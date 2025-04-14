@@ -153,6 +153,25 @@
 		    AND fcDelNy = 0
 	</select>
 	
+	<select id="selectFactoryView" resultMap="resultMapObj">
+		SELECT
+			seq
+		    ,fcName
+		    ,fcManagerName
+		    ,fcTel
+		    ,fcAddress
+		    ,fcAddressDetail
+		    ,fcRegDateTime
+		    ,fcModDateTime
+		    ,fcUseNy
+		    ,fcDelNy
+		FROM
+			factory
+		WHERE 1=1
+			AND seq =#{seq}
+		    AND fcDelNy = 0
+	</select>
+	
 	<insert  id="FactoryInsert">
 		insert into factory(
 			seq

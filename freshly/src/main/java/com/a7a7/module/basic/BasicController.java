@@ -78,6 +78,7 @@ public class BasicController {
 	}
 	
 	
+	
 	// 공장 관리
 	// 공장 list 화면
 	@RequestMapping(value = "/web/basic/factoryList")
@@ -89,7 +90,14 @@ public class BasicController {
 	}
 	
 	@RequestMapping(value = "/web/basic/factoryForm")
-	public String selectWebFactoryForm() {
+	public String selectWebFactoryForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
+		//insert
+		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {
+					
+		}// update
+		else {
+			model.addAttribute("item", service.selectGroceryView(dto));
+		}
 		return "web/basic/factoryForm";
 	}
 	

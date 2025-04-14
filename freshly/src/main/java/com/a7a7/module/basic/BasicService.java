@@ -24,6 +24,7 @@ public class BasicService {
 		return dao.GroceryInsert(dto);
 	}
 	public int GroceryUpdate(BasicDto dto) {
+		System.out.println("##############################");
 		return dao.GroceryUpdate(dto);
 	}
 	
