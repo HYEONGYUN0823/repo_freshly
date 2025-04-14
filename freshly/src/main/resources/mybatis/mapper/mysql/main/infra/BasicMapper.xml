@@ -23,6 +23,8 @@
 		WHERE
 			1=1
 		    AND gcDelNy = 0
+		ORDER BY
+			seq DESC
 	</select>
 	
 	<insert id="GroceryInsert">
@@ -104,6 +106,8 @@
 		WHERE
 			1=1
 		    AND acDelNy = 0
+		ORDER BY
+			seq DESC
 	</select>
 	
 	<select id="selectAccountView" resultMap="resultMapObj">
@@ -194,6 +198,8 @@
 		WHERE
 			1=1
 		    AND fcDelNy = 0
+		ORDER BY
+			seq DESC
 	</select>
 	
 	<select id="selectFactoryView" resultMap="resultMapObj">

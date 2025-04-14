@@ -49,6 +49,8 @@
 			member
 		WHERE 1=1
 			AND mbDelNy = 0
+		ORDER BY
+			seq DESC
 	</select>
 	
 	<select id="selectMemberView" resultMap="resultMapObj">
