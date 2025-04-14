@@ -83,6 +83,8 @@
                                         style="float: right; margin-right: 4px;"><i class="fa-solid fa-u"></i></button>
                                 </div>
                                 
+                                <div th:replace="~{web/include/modal :: modal}"></div>
+                                
                             </div>
                         </div>
                     </div>
@@ -114,7 +116,7 @@
 <script type="text/javascript">
 
 	let goUrlXdmForm = "/web/factory/OrderingForm";
-	let goUrlXdmUele = "";
+	let goUrlXdmUele = "web/factory/OrderingUele";
 
 	let seq = document.querySelector("input[name=seq]");
 	let form = document.getElementById("formList");
@@ -129,8 +131,30 @@
 	    form.action = goUrlXdmForm;
 	    form.submit();
 	}
+	
+	const uelModal = new bootstrap.Modal(document.getElementById("uelModal"));
+	const uelElement = document.getElementById("uelModal");
+
+	document.getElementById("btnUel").onclick = function(uelEvent) {
+		event.preventDefault();
+
+		let click = true;
+
+		if (click) {
+			let alertModal = new bootstrap.Modal(document.getElementById("uelModal"));
+			alertModal.show();
+		}
+
+	}
+	document.getElementById("btnUelSubmit").onclick = function() {
+		let seq = document.querySelector("input[name=seq]");
+		let form = document.getElementById("form");
+		form.action = goUrlXdmUele;
+
+		form.submit();
+	}
 </script>
-   
+
 <div th:replace="~{web/include/footer :: footer}"></div>
 
 
