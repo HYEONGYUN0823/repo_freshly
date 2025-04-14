@@ -3,6 +3,7 @@ package com.a7a7.module.basic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -26,13 +27,26 @@ public class BasicController {
 	}
 	
 	@RequestMapping(value = "/web/basic/groceryForm")
-	public String selectWebGroceryForm() {		
+	public String selectWebGroceryForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
+		//insert
+		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {
+			
+		}// update
+		else {
+			model.addAttribute("item", service.selectGroceryView(dto));
+		}
 		return "web/basic/groceryForm";
 	}
 	
 	@RequestMapping(value="/web/basic/groceryInsert")
 	public String groceryWebGrocertInsert(BasicDto dto) {
 		service.GroceryInsert(dto);
+		return "redirect:/web/basic/groceryList";
+	}
+	
+	@RequestMapping(value="/web/basic/groceryUpdate")
+	public String groceryWebGrocertUpdate(BasicDto dto) {
+		service.GroceryUpdate(dto);
 		return "redirect:/web/basic/groceryList";
 	}
 	

@@ -5,6 +5,9 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.basic.BasicDto"/>
 	
+	
+	<!--*********** 식료품 ********************-->
+	
 	<select id="selectGroceryList" resultMap="resultMapObj">
 		SELECT
 			seq
@@ -51,6 +54,7 @@
 		    ,gcCategory
 		    ,gcPrice
 		    ,gcUseNy
+		    ,gcDelNy
 		    ,gcRegDateTime
 		    ,gcModDateTime
 		FROM
@@ -61,11 +65,22 @@
 		    AND seq = #{seq} 
 	</select>
 	
+	<update id="GroceryUpdate">
+		update grocery 
+		set
+		gcName = #{gcName},
+		gcCategory = #{gcCategory},
+		gcPrice = #{gcPrice},
+		gcUseNy = #{gcUseNy},
+		gcModDateTime = now(),
+		gcDelNy = #{gcDelNy}
+		where
+		seq = #{seq}
+	</update>
 	
 	
 	
-	
-	
+	<!--*********** 거래처 ********************-->
 	
 	<select id="selectAccountList" resultMap="resultMapObj">
 		SELECT
@@ -117,6 +132,8 @@
 		</selectKey>
 	</insert>
 	
+	
+	<!--*********** 공장 ********************-->
 	
 	<select id="selectFactoryList" resultMap="resultMapObj">
 		SELECT

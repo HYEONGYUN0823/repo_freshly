@@ -56,7 +56,7 @@
                                                     <div class="form-group">
                                                         <label for="acName" class="text-label">식료품 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="gcName" name="gcName"  class="form-control">
+	                                                        <input type="text" id="gcName" name="gcName"  th:value="${item?.gcName}"   class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -65,9 +65,9 @@
                                                         <label for="gcCategory" class="text-label">식료품 카테고리</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <select
-																id="gcCategory" name="gcCategory" class="form-control">
-																	<option value="">선택하세요</option>
-																	<option value="31">1</option>
+																id="gcCategory" name="gcCategory" class="form-control" >
+																	<option value="" >선택하세요</option>
+																	<option value="1" th:selected = "${item?.gcCategory}">1</option>
 																	<!-- <option th:each="list : ${listCodeGroup}"
 																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
 																		th:selected="${list.factory_seq == item?.factory_seq}">
@@ -81,7 +81,7 @@
                                                         <label for="acManagerName" class="text-label">식료품 가격</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="gcPrice" name="gcPrice" class="form-control">
+	                                                        	<input type="text" id="gcPrice" name="gcPrice"  th:value="${item?.gcPrice}" class="form-control"> 
 															</div>
 														</div>
                                                     </div>
@@ -97,25 +97,26 @@
                                                             <select
 																id="acUseNy" name="gcUseNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${gcUseNy == 1 || gcUseNy == null}">사용</option>
-                   													<option value="0" th:selected="${gcUseNy == 0}">미사용</option>
+																	<option value="1" th:selected="${item?.gcUseNy == 1 || gcUseNy == null}">사용</option>
+                   													<option value="0" th:selected="${item?.gcUseNy == 0}">미사용</option>
 															</select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-lg-6 mb-4">
+                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq == '0'}"></div>
+                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq != '0'}">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="fcDelNy">식료품 삭제여부</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="gcDelNy">식료품 삭제여부</label><span style="color: crimson;">*</span>
                                                         <div>
                                                             <select
-																id="acDelNy" name="fcDelNy" class="form-control">
+																id="gcDelNy" name="gcDelNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${fcDelNy == 1}">삭제</option>
-                   													<option value="0" th:selected="${fcDelNy == 0}">미삭제</option>
+																	<option value="1" th:selected="${item?.gcDelNy == 1}">삭제</option>
+                   													<option value="0" th:selected="${item?.gcDelNy == 0}">미삭제</option>
 															</select>
                                                         </div>
                                                     </div>
-                                                </div> -->
+                                                </div> 
                                                 <input type="hidden"  
 														id="odDelNy" name="odDelNy" 
 														th:value="0" 
@@ -183,14 +184,15 @@
     <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
     
     <script type="text/javascript">
-    
-    	let goUrlXdmInst = "/web/basic/groceryInsert";
-    	
-    	document.getElementById("BtnInst").onclick = function(){
-    		form.action = goUrlXdmInst;
+    document.getElementById("BtnInst").onclick = function(){
+    	if(seq.value == "0" || seq.value == "") {
+			form.action = "/web/basic/groceryInsert";
 			form.submit();
-    	}
-    	
+		}else {
+			form.action = "/web/basic/groceryUpdate";
+			form.submit();
+		}
+    }
     </script>
 
 </body>

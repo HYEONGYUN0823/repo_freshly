@@ -23,6 +23,9 @@ public class BasicService {
 	public int GroceryInsert(BasicDto dto) {
 		return dao.GroceryInsert(dto);
 	}
+	public int GroceryUpdate(BasicDto dto) {
+		return dao.GroceryUpdate(dto);
+	}
 	
 //	**********************************************
 //	거래처
