@@ -3,8 +3,11 @@ package com.a7a7.module.delivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.a7a7.module.basic.BasicDto;
+import com.a7a7.module.basic.BasicVo;
 import com.a7a7.module.order.OrderService;
 
 
@@ -25,14 +28,25 @@ public class DeliveryController {
 	}
 	
 	@RequestMapping(value ="/mob/account/deliveryForm")
-	public String mobdeliveryForm(Model model) {
+	public String mobdeliveryForm(@ModelAttribute("vo") BasicVo vo, DeliveryDto dto,Model model) {
 		model.addAttribute("acOrder", orderservice.selectOrderList());
+		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
+		}// update
+		else {
+			model.addAttribute("item", service.selectDeliveryView(dto));
+		}
 		return "mobile/account/deliveryForm";
 	}
 	
 	@RequestMapping(value ="/mob/account/deliveryInsert")
 	public String mobdeliveryInsert(DeliveryDto dto) {
 		service.deliveryInsert(dto);
+		return "redirect:/mob/account/deliverylist";
+	}
+	
+	@RequestMapping(value ="/mob/account/deliveryUpdate")
+	public String mobdeliveryUpdate(DeliveryDto dto) {
+		service.deliveryUpdate(dto);
 		return "redirect:/mob/account/deliverylist";
 	}
 	

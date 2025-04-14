@@ -80,11 +80,11 @@
                                           </div>
                                        </td>
                                        <td style="text-align: center;"></td>
-                                       <td style="text-align: center;" th:text ="${item.seq}"></td>
-                                       <td style="text-align: center;" th:text ="${item.acOrder_seq}"></td>
-                                       <td style="text-align: center;" th:text ="${item.deliveryStatus}"></td>
-                                       <td style="text-align: center;" th:text ="${item.deliveryStartDateTime}"></td>
-                                       <td style="text-align: center;" th:text ="${item.deliveryEndDateTime}"></td>
+                                       <td style="text-align: center;" name="seq"><a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
+                                       <td style="text-align: center;" name="acOrder_seq" th:text ="${item.acOrder_seq}">주문 번호</td>
+                                       <td style="text-align: center;" name="deliveryStatus" th:text ="${item.deliveryStatus}">배송 상태</td>
+                                       <td style="text-align: center;" name="deliveryStartDateTime" th:text ="${item.deliveryStartDateTime}">배송 시작 시간</td>
+                                       <td style="text-align: center;" name="deliveryEndDateTime" th:text ="${item.deliveryEndDateTime}">배송 종료 시간</td>
                                        
                                        <td>
                                           <div class="dropdown">

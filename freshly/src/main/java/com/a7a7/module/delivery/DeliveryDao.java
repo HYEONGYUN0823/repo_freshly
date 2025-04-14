@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 public interface DeliveryDao {
 	
 	public List<DeliveryDto> selectDeliveryList();
+	public DeliveryDto selectDeliveryView(DeliveryDto dto);
 	
 	public int deliveryInsert(DeliveryDto dto);
+	public int deliveryUpdate(DeliveryDto dto);
 
 }

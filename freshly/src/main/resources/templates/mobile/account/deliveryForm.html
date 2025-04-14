@@ -28,6 +28,7 @@
                            <div class="row">
                               <!-- input -->
                               <div class="mb-3">
+                              	<input type="hidden" name="seq" th:value="${vo.seq}">
                                  <label class="form-label">seq</label>
                                  <input 
 	                                 type="text" 
@@ -54,10 +55,10 @@
                               	<label class="form-label">배송상태</label>
 								<select id="deliveryStatus" name="deliveryStatus" class="form-control">
 									<option value="" selected disabled>선택하세요</option>
-									<option value="1">접수</option>
-									<option value="2">진행중</option>
-									<option value="3">완료</option>
-									<option value="4">취소</option>
+									<option value="1" th:selected ="item?.deliveryStatus">접수</option>
+									<option value="2" th:selected ="item?.deliveryStatus">진행중</option>
+									<option value="3" th:selected ="item?.deliveryStatus">완료</option>
+									<option value="4" th:selected ="item?.deliveryStatus">취소</option>
 								</select>
                               </div>
                               <!-- input -->
@@ -85,13 +86,15 @@
 	<div th:replace = "~{mobile/include/footer :: footer}"></div>
 	
 	 <script type="text/javascript">
-    
-    	let goUrlXdmInst = "/mob/account/deliveryInsert";
-    	
-    	document.getElementById("BtnInst").onclick = function(){
-    		form.action = goUrlXdmInst;
-			form.submit();
-    	}
+	 document.getElementById("BtnInst").onclick = function(){
+	    	if(seq.value == "0" || seq.value == "") {
+				form.action = "/mob/account/deliveryInsert";
+				form.submit();
+			}else {
+				form.action = "/mob/account/deliveryUpdate";
+				form.submit();
+			}
+	    }
     	
     </script>
 	

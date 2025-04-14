@@ -74,13 +74,13 @@
 	<update id="GroceryUpdate">
 		update grocery 
 		set
-		gcName = #{gcName},
-		gcCategory = #{gcCategory},
-		gcPrice = #{gcPrice},
-		gcStock = #{gcStock},
-		gcUseNy = #{gcUseNy},
-		gcModDateTime = now(),
-		gcDelNy = #{gcDelNy}
+		gcName = #{gcName}
+		,gcCategory = #{gcCategory}
+		,gcPrice = #{gcPrice}
+		,gcStock = #{gcStock}
+		,gcUseNy = #{gcUseNy}
+		,gcModDateTime = now()
+		,gcDelNy = #{gcDelNy}
 		where
 		seq = #{seq}
 	</update>
@@ -165,16 +165,16 @@
 	<update id ="AccountUpdate">
 		update account 
 		set
-			acName = #{acName},
-			acCategory = #{acCategory},
-			acManagerName = #{acManagerName},
-			acManagerTel = #{acManagerTel},
-			acAddress = #{acAddress},
-			acAddressDetail = #{acAddressDetail},
-			acStartDate = #{acStartDate},
-			acEndDate = #{acEndDate},
-			acUseNy = #{acUseNy},
-			acDelNy = #{acDelNy}
+			acName = #{acName}
+			,acCategory = #{acCategory}
+			,acManagerName = #{acManagerName}
+			,acManagerTel = #{acManagerTel}
+			,acAddress = #{acAddress}
+			,acAddressDetail = #{acAddressDetail}
+			,acStartDate = #{acStartDate}
+			,acEndDate = #{acEndDate}
+			,acUseNy = #{acUseNy}
+			,acDelNy = #{acDelNy}
 		where
 		 	seq = #{seq}
 	</update>
@@ -251,14 +251,14 @@
 	<update id="FactoryUpdate">
 		update factory 
 		set
-			fcName = #{fcName},
-			fcManagerName = #{fcManagerName},
-			fcTel = #{fcTel},
-		    fcAddress = #{fcAddress},
-		    fcAddressDetail = #{fcAddressDetail},
-		    fcModDateTime = now(),
-		    fcUseNy = #{fcUseNy},
-		    fcDelNy = #{fcDelNy}
+			fcName = #{fcName}
+			,fcManagerName = #{fcManagerName}
+			,fcTel = #{fcTel}
+		   	,fcAddress = #{fcAddress}
+		    ,fcAddressDetail = #{fcAddressDetail}
+		    ,fcModDateTime = now()
+		    ,fcUseNy = #{fcUseNy}
+		    ,fcDelNy = #{fcDelNy}
 		where
 			seq = #{seq}
 	</update>

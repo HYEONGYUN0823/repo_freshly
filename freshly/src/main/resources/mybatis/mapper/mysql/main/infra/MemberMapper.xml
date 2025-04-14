@@ -71,21 +71,21 @@
 	
 	<insert id="MemberInsert">
 		insert into member(
-			seq,
-			mbName,
-			mbId,
-			mbPassword,
-			mbEmail,
-		    mbRegDateTime,
-		    mbDelNy
+			seq
+			,mbName
+			,mbId
+			,mbPassword
+			,mbEmail
+		    ,mbRegDateTime
+		    ,mbDelNy
 		)values(
-			#{seq},
-			#{mbName},
-			#{mbId},
-			#{mbPassword},
-			#{mbEmail},
-		    now(),
-		    0
+			#{seq}
+			,#{mbName}
+			,#{mbId}
+			,#{mbPassword}
+			,#{mbEmail}
+		   	,now()
+		    ,0
 		)
 		<selectKey resultType="String" keyProperty="seq" order="AFTER">
 			Select last_insert_id()
@@ -95,12 +95,12 @@
 	<update id="MemberUpdate">
 		update member
 		set
-		mbName = #{mbName},
-		mbId = #{mbId},
-		mbPassword  = #{mbPassword},
-		mbEmail  = #{mbEmail},
-		mbModDateTime = now(),
-		mbDelNy = #{mbDelNy}
+		mbName = #{mbName}
+		,mbId = #{mbId}
+		,mbPassword  = #{mbPassword}
+		,mbEmail  = #{mbEmail}
+		,mbModDateTime = now()
+		,mbDelNy = #{mbDelNy}
 		where 1=1
 		AND seq = #{seq}
 	</update>

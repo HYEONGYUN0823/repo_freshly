@@ -15,7 +15,16 @@ public class DeliveryService {
 		return dao.selectDeliveryList();
 	}
 	
+	public DeliveryDto selectDeliveryView(DeliveryDto dto) {
+		return dao.selectDeliveryView(dto);
+	}
+	
 	public int deliveryInsert(DeliveryDto dto) {
 		return dao.deliveryInsert(dto);
+	}
+	
+
+	public int deliveryUpdate(DeliveryDto dto) {
+		return dao.deliveryUpdate(dto);
 	}
 }

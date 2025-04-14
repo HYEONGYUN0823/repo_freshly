@@ -7,36 +7,63 @@
 	
 	<select id="selectDeliveryList" resultMap="resultMapObj">
 		select 
-			a.seq,
-			a.deliveryStatus,
-			a.deliveryStartDateTime,
-			a.deliveryEndDateTime,
-			a.acOrder_seq
+			seq
+			,deliveryStatus
+			,deliveryStartDateTime
+			,deliveryEndDateTime
+			,acOrder_seq
 		from
-			delivery as a
+			delivery 
 			where 1=1
-			ORDER BY a.seq desc
+			ORDER BY seq desc
+	</select>
+	
+	<select id="selectDeliveryView" resultMap="resultMapObj">
+		select 
+			seq
+			,deliveryStatus
+			,deliveryStartDateTime
+			,deliveryEndDateTime
+			,acOrder_seq
+		from
+			delivery 
+			where 1=1
+			and seq =#{seq}
+			ORDER BY seq desc
 	</select>
 	
 	
 	<insert id ="deliveryInsert">
 		insert into delivery(
-			seq,
-			acOrder_seq,
-			deliveryStatus,
-			deliveryStartDateTime,
-			deliveryDelNy
+			seq
+			,acOrder_seq
+			,deliveryStatus
+			,deliveryStartDateTime
+			,deliveryDelNy
 		)values(
-			#{seq},
-			#{acOrder_seq},
-			#{deliveryStatus},
-			now(),
-			0
+			#{seq}
+			,#{acOrder_seq}
+			,#{deliveryStatus}
+			,now()
+			,0
 		)
 		<selectKey resultType="String" keyProperty="seq" order="AFTER">
 			Select last_insert_id()
 		</selectKey>
 		
 	</insert>
+	
+	<update id ="deliveryUpdate">
+		update delivery 
+		set
+		acOrder_seq = #{acOrder_seq}
+		,deliveryStatus = #{deliveryStatus}
+		,deliveryEndDateTime = now()
+		,deliveryDelNy = #{deliveryDelNy}
+		where
+		seq = #{seq}
+	</update>
+	
+	
 	
 </mapper>
