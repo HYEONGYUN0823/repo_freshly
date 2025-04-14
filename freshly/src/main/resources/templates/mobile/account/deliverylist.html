@@ -82,7 +82,12 @@
                                        <td style="text-align: center;"></td>
                                        <td style="text-align: center;" name="seq"><a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                        <td style="text-align: center;" name="acOrder_seq" th:text ="${item.acOrder_seq}">주문 번호</td>
-                                       <td style="text-align: center;" name="deliveryStatus" th:text ="${item.deliveryStatus}">배송 상태</td>
+                                       
+                                       <td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 1}">접수</td>
+                                       <td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 2}">진행중</td>
+                                       <td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 3}">완료</td>
+                                       <td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 4}">취소</td>
+                                       
                                        <td style="text-align: center;" name="deliveryStartDateTime" th:text ="${item.deliveryStartDateTime}">배송 시작 시간</td>
                                        <td style="text-align: center;" name="deliveryEndDateTime" th:text ="${item.deliveryEndDateTime}">배송 종료 시간</td>
                                        
