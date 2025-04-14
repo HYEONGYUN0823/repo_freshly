@@ -11,6 +11,9 @@ public interface ReceivingDao {
 	
 	public List<OrderDto> selectList();
 	
+	public ReceivingDto selectOne(ReceivingDto dto);
+	
 	public int insert(ReceivingDto dto);
 	
+	public int update(ReceivingDto dto);
 }

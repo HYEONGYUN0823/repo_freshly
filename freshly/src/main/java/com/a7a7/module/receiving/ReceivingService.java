@@ -15,8 +15,17 @@ public class ReceivingService {
 	public List<OrderDto> selectList(){
 		return dao.selectList();
 	}
+	
+	public ReceivingDto selectOne(ReceivingDto dto) {
+		return dao.selectOne(dto);
+	}
+	
 	public int insert(ReceivingDto dto) {
 		return dao.insert(dto);
+	}
+	
+	public int update(ReceivingDto dto) {
+		return dao.update(dto);
 	}
 	
 }

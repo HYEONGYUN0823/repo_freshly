@@ -25,6 +25,7 @@
                         <!-- card body -->
                         <div class="card-body p-6">
 							<form method="post" id="form">
+							<input type="hidden" name="seq" th:value="${vo.seq}">
                            <div class="row">
                               <!-- input -->
                               <div class="mb-3">
@@ -45,7 +46,7 @@
 										<option value="" selected disabled>선택하세요</option>
 										<option th:each="list : ${listFactory}"
 											th:value="${list.seq}" th:text="${list.fcName}"
-											th:selected="${list.seq == item?.seq}">
+											th:selected="${list.seq == item?.factory_seq}">
 										</option>
 									</select>
                               </div>
@@ -54,11 +55,11 @@
                                  <label class="form-label">입고상태</label>
 									<select
 										id="rcStatus" name="rcStatus" class="form-control">
-											<option value="" selected disabled>선택하세요</option>
-											<option value="1">접수</option>
-											<option value="2">진행중</option>
-											<option value="3">완료</option>
-											<option value="4">취소</option>
+											<option value="" disabled th:selected="${item?.rcStatus} == null">선택하세요</option>
+											<option value="1" th:selected="${item?.rcStatus == '1'}">접수</option>
+											<option value="2" th:selected="${item?.rcStatus == '2'}">진행중</option>
+											<option value="3" th:selected="${item?.rcStatus == '3'}">완료</option>
+											<option value="4" th:selected="${item?.rcStatus == '4'}">취소</option>
 									</select>
                               </div>
                               <div class="mb-3">
@@ -68,7 +69,7 @@
 											<option value="" selected disabled>선택하세요</option>
 											<option th:each="list : ${listOrder}"
 												th:value="${list.seq}" th:text="${list.seq}"
-												th:selected="${list.seq == item?.seq}">
+												th:selected="${list.seq == item?.acOrder_seq}">
 											</option>
 									</select>
                               </div>
@@ -97,12 +98,18 @@
 	<script type="text/javascript">
 		
 		let goUrlXdmInst = "/mob/factory/receivingInst";
+		let goUrlXdmUpdt = "/mob/factory/receivingUpdt";
 		
 		document.getElementById("btnSave").onclick = function() {
 			let seq = document.querySelector("input[name=seq]");
 			let form = document.getElementById("form");
-			form.action = goUrlXdmInst;
-		
+
+			if (seq.value == "0" || seq.value == "") { // 추가
+				form.action = goUrlXdmInst;
+			} else { // 수정
+				form.action = goUrlXdmUpdt;
+			}
+
 			form.submit();
 		}
 		

@@ -20,6 +20,20 @@
 		 	ORDER BY a.seq desc
 	</select>
 	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			seq,
+			rcStatus,
+			rcDelNy,
+			factory_seq,
+			acOrder_seq
+		FROM
+			Receiving
+		WHERE 1=1
+			AND seq = #{seq}
+		ORDER BY seq DESC
+	</select>
+	
 	<insert id="insert">
 		INSERT INTO receiving (
 			seq,
@@ -37,6 +51,16 @@
 			#{acOrder_seq}
 		)
 	</insert>
+	
+	<update id="update">
+		UPDATE receiving SET
+			rcStatus = #{rcStatus},
+			rcModDateTime = now(),
+			rcDelNy = #{rcDelNy},
+			factory_seq = #{factory_seq},
+			acOrder_seq = #{acOrder_seq}
+		WHERE seq = #{seq}
+	</update>
 	
 	
 </mapper>

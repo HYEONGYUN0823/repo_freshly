@@ -61,7 +61,7 @@
                                           </div>
                                        </th>
                                        	<th style="text-align: center;">#</th>
-                               			<th style="text-align: center;">Seq</th>
+                               			<th style="text-align: center;">입고번호</th>
                                			<th style="text-align: center;">공장</th>
                                			<th style="text-align: center;">입고 상태</th>
                                			<th style="text-align: center;">주문번호</th> <!-- individualOrder_seq정보를 몰라서 우선 주문번호 ㅎㄷㄷ -->
@@ -79,7 +79,10 @@
                                           </div>
                                        </td>
                                        <td style="text-align: center;">#</td>
-										<td style="text-align: center;" th:text ="${item.seq}"></td>
+										<td style="text-align: center;" class="seq align-middle fw-semi-bold"><a
+											href="javascript:void(0);" th:text="${item.seq}"
+											th:attr="onclick=|goForm('${item.seq}')|"> </a>
+										</td>
 										<td style="text-align: center;" th:text ="${item.factory_seq}"></td>
 										<td style="text-align: center;" th:text ="${item.rcStatus}"></td>
 										<td style="text-align: center;" th:text ="${item.acOrder_seq}"></td>

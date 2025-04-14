@@ -6,9 +6,9 @@ public class ReceivingDto {
 	private int rcStatus;
 	private String rcRegDateTime;
 	private String rcModDateTime;
-	private int rcDelNy;
+	private Integer rcDelNy;
 	private String factory_seq;
-	private String individualOrder_seq;
+	private String acOrder_seq;
 	
 //	-----
 	
@@ -36,10 +36,10 @@ public class ReceivingDto {
 	public void setRcModDateTime(String rcModDateTime) {
 		this.rcModDateTime = rcModDateTime;
 	}
-	public int getRcDelNy() {
+	public Integer getRcDelNy() {
 		return rcDelNy;
 	}
-	public void setRcDelNy(int rcDelNy) {
+	public void setRcDelNy(Integer rcDelNy) {
 		this.rcDelNy = rcDelNy;
 	}
 	public String getFactory_seq() {
@@ -48,11 +48,11 @@ public class ReceivingDto {
 	public void setFactory_seq(String factory_seq) {
 		this.factory_seq = factory_seq;
 	}
-	public String getIndividualOrder_seq() {
-		return individualOrder_seq;
+	public String getAcOrder_seq() {
+		return acOrder_seq;
 	}
-	public void setIndividualOrder_seq(String individualOrder_seq) {
-		this.individualOrder_seq = individualOrder_seq;
+	public void setAcOrder_seq(String acOrder_seq) {
+		this.acOrder_seq = acOrder_seq;
 	}
 	
 }
