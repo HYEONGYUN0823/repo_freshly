@@ -63,5 +63,11 @@ public class OrderingController {
 		return "redirect:/web/factory/OrderingList";
 	}
 	
+	@RequestMapping(value = "/web/factory/OrderingUele")
+	public String orderingUele(OrderingDto dto) {
+		service.uelete(dto);
+		
+		return "redirect:/web/factory/OrderingList";
+	}
 	
 }

@@ -7,13 +7,13 @@
 	
 	<select id="selectList" resultMap="resultMapObj">
 		select
-			a.seq,
-			a.rcStatus,
-			a.rcRegDateTime,
-			a.rcModDateTime,
-			a.rcDelNy,
-			a.factory_seq,
-			a.grocery_seq
+			a.seq
+			,a.rcStatus
+			,a.rcRegDateTime
+			,a.rcModDateTime
+			,a.rcDelNy
+			,a.factory_seq
+			,a.grocery_seq
 		from
 		 	Receiving as a
 		 	where 1=1
@@ -22,11 +22,11 @@
 	
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
-			seq,
-			rcStatus,
-			rcDelNy,
-			factory_seq,
-			grocery_seq
+			seq
+			,rcStatus
+			,rcDelNy
+			,factory_seq
+			,grocery_seq
 		FROM
 			Receiving
 		WHERE 1=1
@@ -36,29 +36,29 @@
 	
 	<insert id="insert">
 		INSERT INTO receiving (
-			seq,
-			rcStatus,
-			rcRegDateTime,
-			rcDelNy,
-			factory_seq,
-			grocery_seq
+			seq
+			,rcStatus
+			,rcRegDateTime
+			,rcDelNy
+			,factory_seq
+			,grocery_seq
 		) values (
-			#{seq},
-			#{rcStatus},
-			now(),
-			#{rcDelNy},
-			#{factory_seq},
-			#{grocery_seq}
+			#{seq}
+			,#{rcStatus}
+			,now()
+			,#{rcDelNy}
+			,#{factory_seq}
+			,#{grocery_seq}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE receiving SET
-			rcStatus = #{rcStatus},
-			rcModDateTime = now(),
-			rcDelNy = #{rcDelNy},
-			factory_seq = #{factory_seq},
-			grocery_seq = #{grocery_seq}
+			rcStatus = #{rcStatus}
+			,rcModDateTime = now()
+			,rcDelNy = #{rcDelNy}
+			,factory_seq = #{factory_seq}
+			,grocery_seq = #{grocery_seq}
 		WHERE seq = #{seq}
 	</update>
 	

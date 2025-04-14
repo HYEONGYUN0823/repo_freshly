@@ -16,4 +16,6 @@ public interface OrderingDao {
 	public int insert(OrderingDto dto);
 	
 	public int update(OrderingDto dto);
+	
+	public int uelete(OrderingDto dto);
 }

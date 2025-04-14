@@ -28,4 +28,8 @@ public class OrderingService {
 		return dao.update(dto);
 	}
 	
+	public int uelete(OrderingDto dto) {
+		return dao.uelete(dto);
+	}
+	
 }

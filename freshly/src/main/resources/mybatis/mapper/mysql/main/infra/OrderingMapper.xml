@@ -67,4 +67,11 @@
 		WHERE seq = #{seq}
 	</update>
 	
+	<update id="uelete">
+		UPDATE ordering SET
+			odDelNy = 1,
+			modDateTime = now()
+		WHERE seq = #{seq}
+	</update>
+	
 </mapper>
