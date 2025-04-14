@@ -44,10 +44,17 @@ public class BasicService {
 	public List<BasicDto> selectFactoryList() {
 		return dao.selectFactoryList();
 	}
+	public BasicDto selectFactoryView(BasicDto dto) {
+		return dao.selectFactoryView(dto);
+	}
+	
 	public int FactoryInsert(BasicDto dto) {
 		return dao.FactoryInsert(dto);
 	}
 	
+	public int FactoryUpdate(BasicDto dto) {
+		return dao.FactoryUpdate(dto);
+	}
 	
 	
 	

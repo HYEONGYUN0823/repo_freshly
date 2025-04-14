@@ -27,6 +27,7 @@ public interface BasicDao {
 //		공장
 //**********************************************
 	public List<BasicDto> selectFactoryList();		//리스트
+	public BasicDto selectFactoryView(BasicDto dto);
 	public int FactoryInsert(BasicDto dto);						//insert
-	
+	public int FactoryUpdate(BasicDto dto);
 }

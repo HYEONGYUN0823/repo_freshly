@@ -34,6 +34,7 @@
                                     <div>
                                         <section>
                                             <div class="row">
+                                            	<input type="hidden" name="seq" th:value="${vo.seq}">
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label">공장번호</label><span style="color: crimson;">*</span>
@@ -56,7 +57,7 @@
                                                     <div class="form-group">
                                                         <label for="fcName" class="text-label">공장 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="fcName" name="fcName" class="form-control">
+	                                                        <input type="text" id="fcName" name="fcName" th:value="${item?.fcName}" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -69,7 +70,7 @@
                                                         <label for="fcManagerName" class="text-label">공장 담당자</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="fcManagerName" name="fcManagerName" class="form-control">
+	                                                        	<input type="text" id="fcManagerName" name="fcManagerName" th:value="${item?.fcManagerName}" class="form-control">
 															</div>
 														</div>
                                                     </div>
@@ -78,7 +79,7 @@
                                                     <div class="form-group">
                                                         <label for="fcTel" class="text-label">공장 전화번호</label><span style="color: crimson;">*</span>
                                                         <div>
-														   <input type="text" id="fcTel" name="fcTel" class="form-control">
+														   <input type="text" id="fcTel" name="fcTel" th:value="${item?.fcTel}" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
@@ -89,36 +90,19 @@
 	                                                        <select
 																id="fcAddress" name="fcAddress" class="form-control">
 																	<option value="">선택하세요</option>										
-																	<option value="1">1</option>										
+																	<option value="1" th:selected="${item?.fcAddress}">1</option>										
 															</select>
 														</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="fcAdressDetail">공장 상세주소</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="fcAddressDetail">공장 상세주소</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                         <input type="text" id="fcAdressDetail" name="fcAdressDetail"  class="form-control">
+	                                                         <input type="text" id="fcAddressDetail" name="fcAddressDetail" th:value="${item?.fcAddressDetail}" class="form-control">
 														</div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-lg-6 mb-4">
-                                                    <div class="form-group">
-                                                    	<input type="hidden" name="fcRegDateTime">
-                                                        <label class="text-label" for="fcRegDateTime">공장 정보 등록일자</label><span style="color: crimson;">*</span>
-                                                        <div>
-	                                                       <input type="text"  class="form-control" id="fcRegDateTime" name="fcRegDateTime" th:value="fcRegDateTime" disabled>
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-4">
-                                                    <div class="form-group">
-                                                        <label class="text-label" for="fcModDateTime">공장 정보 수정일자</label><span style="color: crimson;">*</span>
-                                                        <div>
-															<input type="text"  class="form-control" id="fcModDateTime" name="fcModDateTime" th:value="fcModDateTime" required>
-														</div>
-                                                    </div>
-                                                </div> -->
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="fcUseNy">공장 사용여부</label><span style="color: crimson;">*</span>
@@ -126,8 +110,8 @@
                                                             <select
 																id="acUseNy" name="fcUseNy" class="form-control">
 																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${fcUseNy == 1 || fcUseNy == null}">사용</option>
-                   													<option value="0" th:selected="${fcUseNy == 0}">미사용</option>
+																	<option value="1" th:selected="${item?.fcUseNy == 1 || fcUseNy == null}">사용</option>
+                   													<option value="0" th:selected="${item?.fcUseNy == 0}">미사용</option>
 															</select>
                                                         </div>
                                                     </div>
@@ -146,11 +130,7 @@
                                                         </div>
                                                     </div>
                                                 </div> 
-                                                <input type="hidden"  
-														id="fcDelNy" name="fcDelNy" 
-														th:value="0" 
-														class="form-control" />
-                                            </div>
+                                                
                                         </section>
                                        
                                     </div>
@@ -211,14 +191,15 @@
     <div th:replace="~{web/include/footer :: footer}"></div>
     
     <script type="text/javascript">
-    
-    	let goUrlXdmInst = "/web/basic/factoryInsert";
-    	
-    	document.getElementById("BtnInst").onclick = function(){
-    		form.action = goUrlXdmInst;
+    document.getElementById("BtnInst").onclick = function(){
+    	if(seq.value == "0" || seq.value == "") {
+			form.action = "/web/basic/factoryInsert";
 			form.submit();
-    	}
-    	
+		}else {
+			form.action = "/web/basic/factoryUpdate";
+			form.submit();
+		}
+    }
     </script>
     
 

@@ -16,7 +16,8 @@ public class BasicController {
 //	**********************************************
 //		Web
 //	**********************************************
-	// 식료품 관리
+	
+	// ******** 식료품 관리 ********
 	// 식료품 list 화면
 	@RequestMapping(value = "/web/basic/groceryList")
 	public String selectWebGroceryList(Model model) {
@@ -29,8 +30,7 @@ public class BasicController {
 	@RequestMapping(value = "/web/basic/groceryForm")
 	public String selectWebGroceryForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
 		//insert
-		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {
-			
+		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
 		}// update
 		else {
 			model.addAttribute("item", service.selectGroceryView(dto));
@@ -55,7 +55,7 @@ public class BasicController {
 	
 	
 	
-	// 거래처 관리
+	// ******** 거래처 관리 ********
 	// 거래처 list 화면
 	@RequestMapping(value = "/web/basic/accountList")
 	public String selectWebAccountList(Model model) {
@@ -79,7 +79,7 @@ public class BasicController {
 	
 	
 	
-	// 공장 관리
+	// ******** 공장 관리  ********
 	// 공장 list 화면
 	@RequestMapping(value = "/web/basic/factoryList")
 	public String selectWebFactoryList(Model model) {
@@ -96,7 +96,7 @@ public class BasicController {
 					
 		}// update
 		else {
-			model.addAttribute("item", service.selectGroceryView(dto));
+			model.addAttribute("item", service.selectFactoryView(dto));
 		}
 		return "web/basic/factoryForm";
 	}
@@ -104,6 +104,12 @@ public class BasicController {
 	@RequestMapping(value="/web/basic/factoryInsert")
 	public String groceryWebFactoryInsert(BasicDto dto) {
 		service.FactoryInsert(dto);
+		return "redirect:/web/basic/factoryList";
+	}
+	
+	@RequestMapping(value="/web/basic/factoryUpdate")
+	public String groceryWebFactoryUpdate(BasicDto dto) {
+		service.FactoryUpdate(dto);
 		return "redirect:/web/basic/factoryList";
 	}
 	
