@@ -130,7 +130,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/web/basic/memberForm")
-	public String selectWebmemberForm(@ModelAttribute("vo") BasicVo vo, MemberDto dto,Model model) {
+	public String selectWebmemberForm(@ModelAttribute("vo") MemberVo vo, MemberDto dto,Model model) {
 		//insert
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
 		}// update
@@ -138,6 +138,12 @@ public class MemberController {
 			model.addAttribute("item", service.selectMemberView(dto));
 		}
 		return "web/basic/memberForm";
+	}
+	
+	@RequestMapping(value ="/web/basic/memberInsert")
+	public String memberInsert(MemberDto dto) {
+		service.MemberInsert(dto);
+		return "redirect:/web/basic/memberList";
 	}
 	
 	

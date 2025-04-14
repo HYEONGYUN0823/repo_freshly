@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{web/include/head :: head}"></div>
+
+<body>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>담당자 관리</h4>
+<!--                             <p class="mb-0">공장관리 등록폼</p> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">기본</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">담당자 관리</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                  <form method="post" id="form">
+                                    <div>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-4">
+                                                	<!-- <input type="hidden" name="seq"> -->
+                                                    <div class="form-group">
+                                                    	<input type="hidden" name="seq" th:value ="${vo.seq}">
+                                                        <label class="text-label">담당자 번호</label><span style="color: crimson;">*</span>
+                                                        <input 
+	                                                    type="text" 
+	                                                    id="seq" 
+	                                                    name="seq" 
+	                                                    th:value="${item?.seq}" 
+	                                                    maxlength="20" 
+	                                                    placeholder="자동생성" 
+	                                                    disabled class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="mbName" class="text-label">담당자 이름</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <input type="text" id="mbName" name="mbName"  th:value="${item?.mbName}"   class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="mbId" class="text-label">담당자 아이디</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <input type="text" id="mbId" name="mbId"  th:value="${item?.mbId}" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="mbPassword" class="text-label">담당자 패스워드</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                        <input type="text" id="mbPassword" name="mbPassword"  th:value="${item?.mbPassword}" class="form-control">
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="mbEmail" class="text-label">담당자 이메일</label><span style="color: crimson;">*</span>
+                                                        <div>
+	                                                       <div>
+	                                                        	<input type="text" id="mbEmail" name="mbEmail"  th:value="${item?.mbEmail}" class="form-control"> 
+															</div>
+														</div>
+                                                    </div>
+                                                </div>
+                 
+                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq == '0'}"></div>
+                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq != '0'}">
+                                                    <div class="form-group">
+                                                        <label class="text-label" for="gcDelNy">식료품 삭제여부</label><span style="color: crimson;">*</span>
+                                                        <div>
+                                                            <select
+																id="mbDelNy" name="mbDelNy" class="form-control">
+																	<option value="">선택하세요</option>
+																	<option value="1" th:selected="${item?.mbDelNy == 1}">삭제</option>
+                   													<option value="0" th:selected="${item?.mbDelNy == 0}">미삭제</option>
+															</select>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </section>
+                                       
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/basic/groceryList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" id="BtnInst" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="/web/template/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/web/template/datetimepicker-master/jquery.datetimepicker.js"></script>
+    
+    <script src="/web/template/vendor/global/global.min.js"></script>
+    <script src="/web/template/js/quixnav-init.js"></script>
+    <script src="/web/template/js/custom.min.js"></script>
+    
+
+
+    <script src="/web/template/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/web/template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/web/template/js/plugins-init/jquery.validate-init.js"></script>
+    
+    
+    
+
+
+    <!-- Form step init -->
+    <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
+    
+    <div th:replace="~{web/include/footer :: footer}"></div>
+    
+    <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
+    
+    <script type="text/javascript">
+    document.getElementById("BtnInst").onclick = function(){
+    	if(seq.value == "0" || seq.value == "") {
+			form.action = "/web/basic/memberInsert";
+			form.submit();
+		}else {
+			form.action = "/web/basic/groceryUpdate";
+			form.submit();
+		}
+    }
+    </script>
+
+</body>
+
+</html>

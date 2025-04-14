@@ -74,14 +74,17 @@
 			mbId,
 			mbPassword,
 			mbEmail,
-		    mbRegDateTime
-		)value
+		    mbRegDateTime,
+		    mbDelNy
+		)values(
 			#{seq},
 			#{mbName},
 			#{mbId},
 			#{mbPassword},
 			#{mbEmail},
-		    now()
+		    now(),
+		    0
+		)
 		<selectKey resultType="String" keyProperty="seq" order="AFTER">
 			Select last_insert_id()
 		</selectKey>
