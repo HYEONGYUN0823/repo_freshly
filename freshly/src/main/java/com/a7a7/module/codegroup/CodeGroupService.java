@@ -15,8 +15,16 @@ public class CodeGroupService {
 		return dao.selectCodeGroupList();
 	}
 	
+	public CodeGroupDto selectOneCodeGroup(String seq) {
+		return dao.selectOneCodeGroup(seq);
+	}
+	
 	public int insert(CodeGroupDto dto) {
 		return dao.insert(dto);
+	}
+	
+	public int update(CodeGroupDto dto) {
+		return dao.update(dto);
 	}
 	
 }

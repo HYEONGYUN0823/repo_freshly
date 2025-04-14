@@ -31,6 +31,19 @@
 			seq DESC
 	</select>
 	
+	<select id="selectOneCodeGroup" resultMap="resultMapObj">
+		SELECT
+			cg.seq
+		    ,cg.cgName
+		    ,cg.cgUseNy
+		FROM
+			codeGroup cg
+		WHERE
+			1=1
+		    AND cgDelNy = 0
+		    AND seq = #{seq}
+	</select>
+	
 	<insert id="insert">
 		INSERT INTO codegroup(
 			cgName,
@@ -44,5 +57,15 @@
 			now()
 		)
 	</insert>
+	
+	<update id="update">
+		UPDATE codegroup 
+		SET
+			cgName = #{cgName},
+			cgUseNy = #{cgUseNy},
+			cgModDateTime = now()
+		WHERE
+			seq = #{seq}
+	</update>
 	
 </mapper>

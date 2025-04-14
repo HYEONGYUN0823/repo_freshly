@@ -4,7 +4,7 @@
 <div th:replace="~{web/include/head :: head}"></div>
 
 		<form name="formList" id="formList" method="post" autocomplete="off">
-        <input type="hidden" name="seq">
+        <input type="hidden" name="formSeq">
 
         <!--**********************************
             Content body start
@@ -51,7 +51,9 @@
                                             <tr th:each="item : ${list}">
                                             	<td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
-                                                <td name="cgName" th:text="${item.cgName}"></td>
+                                                <td>
+													<a href="javascript:void(0);" name="cgName" th:text="${item.cgName}" th:attr="onclick=|goForm(${item.seq})|"></a>
+												</td>
                                                 <td th:text="${item.cdCount}"></td>
                                                 <td name="cgRegDateTime" th:text="${item.cgRegDateTime}"></td>
                                                 <td name="cgModDateTime" th:text="${item.cgModDateTime}"></td>
@@ -104,7 +106,7 @@
 	let goUrlXdmForm = "/web/system/codeGroupForm";
 	let goUrlXdmUele = "";
 
-	let seq = document.querySelector("input[name=seq]");
+	let seq = document.querySelector("input[name=formSeq]");
 	let form = document.getElementById("formList");
 	
 	document.getElementById("btnForm").onclick = function () {
