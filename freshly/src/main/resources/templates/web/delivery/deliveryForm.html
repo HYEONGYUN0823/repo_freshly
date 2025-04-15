@@ -62,9 +62,9 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="form-label">배송상태</label>
-														<select id="deliveryStatus" name="deliveryStatus" class="form-control">
+														<select id="deliveryStatus" name="deliveryStatus" class="form-control" th:disabled="${item?.deliveryStatus == null}">
 															<option value="" selected hidden disabled>선택하세요</option>
-															<option value="1" th:selected ="${item?.deliveryStatus == 1}">접수</option>
+															<option value="1" th:selected ="${item?.deliveryStatus == 1 || deliveryStatus == null}">접수</option>
 															<option value="2" th:selected ="${item?.deliveryStatus == 2}">진행중</option>
 															<option value="3" th:selected ="${item?.deliveryStatus == 3}">완료</option>
 															<option value="4" th:selected ="${item?.deliveryStatus == 4}">취소</option>
