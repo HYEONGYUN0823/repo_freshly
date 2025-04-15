@@ -48,7 +48,7 @@
                                             			<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
                                             		</div>
                                             	</th>
-                                       			<th style="text-align: center;">Seq</th>
+                                       			<th style="text-align: center;">배송 번호</th>
                                        			<th style="text-align: center;">주문 번호</th>
                                       			<th style="text-align: center;">배송 상태</th>
                                        			<th style="text-align: center;">배송 시작 시간</th>
@@ -63,7 +63,7 @@
                                             			<input type="hidden" id="deliveryStatus" th:value="${item.deliveryStatus}">
                                             		</div>		
                                             	</td>
-                                       			<td style="text-align: center;"><a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
+                                       			<td style="text-align: center;" th:text ="${item.seq}"></td>
                                        			<td style="text-align: center;" name="acOrder_seq" th:text ="${item.acOrder_seq}">주문 번호</td>
                                        
                                 
@@ -79,20 +79,8 @@
                                 </div>
                                 
                                 <div class="mt-3">
-                                	<button type="button" class="btn btn-danger">
-                                		<i class="fa-solid fa-x"></i>
-                                	</button>
                                     <button type="button" id="btnUel" class="btn btn-danger">
                                     	<i class="fa-regular fa-trash-can"></i>
-                                    </button>
-                                    <button type="button" id="btnForm" class="btn btn-primary" style="float: right;">
-                                    	<i class="fa-solid fa-plus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-success" style="float: right; margin-right: 4px;">
-                                    	<i class="fa-regular fa-file-excel"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-primary" style="float: right; margin-right: 4px;">
-                                        <i class="fa-solid fa-u"></i>
                                     </button>
                                 </div>
                                 
