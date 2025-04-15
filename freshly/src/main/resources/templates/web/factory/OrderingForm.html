@@ -30,7 +30,7 @@
                     <div class="col-xl-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" id="form">
+                                <form method="post" id="form" class="needs-validation" novalidate>
                                 <input type="hidden" name="seq" th:value="${vo.seq}">
                                     <div>
                                         <section>
@@ -56,8 +56,9 @@
 																id="factory_seq" name="factory_seq" class="form-control">
 																	<option value="" selected disabled>선택하세요</option>
 																	<option th:each="list : ${listFactory}"
-																		th:value="${list.seq}" th:text="${list.fcName}"
-																		th:selected="${list.seq == item?.factory_seq}">
+																			th:value="${list.seq}" 
+																			th:text="${list.fcName}"
+																			th:selected="${list.seq == item?.factory_seq}">
 																	</option>
 															</select>
 														</div>
@@ -83,13 +84,14 @@
                                                         <label class="text-label" for="member_seq">담당자 이름*</label>
                                                         <div>
                                                             <select
-																id="member_seq" name="member_seq" class="form-control">
+																id="member_seq" name="member_seq" class="form-control" required>
 																	<option value="" selected disabled>선택하세요</option>
 																	<option th:each="list : ${listMember}"
-																		th:value="${list.seq}" th:text="${list.mbName}"
-																		th:selected="${list.seq == item?.member_seq}">
+																			th:value="${list.seq}" th:text="${list.mbName}"
+																			th:selected="${list.seq == item?.member_seq}">
 																	</option>
 															</select>
+															<div class="invalid-feedback">담당자를 선택해주세요.</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,13 +100,14 @@
                                                         <label class="text-label" for="grocery_seq">식료품 이름*</label>
                                                         <div>
                                                             <select
-																id="grocery_seq" name="grocery_seq" class="form-control">
+																id="grocery_seq" name="grocery_seq" class="form-control" required>
 																	<option value="" selected disabled>선택하세요</option>
 																	<option th:each="list : ${listGrocery}"
-																		th:value="${list.seq}" th:text="${list.gcName}"
-																		th:selected="${list.seq == item?.grocery_seq}">
+																			th:value="${list.seq}" th:text="${list.gcName}"
+																			th:selected="${list.seq == item?.grocery_seq}">
 																	</option>
 															</select>
+															<div class="invalid-feedback">식료품을 선택해주세요.</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,7 +117,8 @@
                                                         <div>
                                                             <input class="form-control"
 																	id="odQuantity" name="odQuantity" type="text" th:value="${item?.odQuantity}"
-																	placeholder="숫자">
+																	placeholder="숫자" required>
+                                                        <div class="invalid-feedback">수량을 입력해주세요.</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,18 +180,25 @@
     	let goUrlXdmInst = "/web/factory/OrderingInst";
     	let goUrlXdmUpdt = "/web/factory/OrderingUpdt";
     	
-		document.getElementById("btnSave").onclick = function() {
-			let seq = document.querySelector("input[name=seq]");
-			let form = document.getElementById("form");
+    	document.getElementById("btnSave").onclick = function () {
+    	    let form = document.getElementById("form");
 
-			if (seq.value == "0" || seq.value == "") { // 추가
-				form.action = goUrlXdmInst;
-			} else { // 수정
-				form.action = goUrlXdmUpdt;
-			}
+    	    // 벨리데이션
+    	    if (!form.checkValidity()) {
+    	        form.classList.add('was-validated');
+    	        return false;
+    	    }
 
-			form.submit();
-		}
+    	    let seq = document.querySelector("input[name=seq]");
+
+    	    if (seq.value == "0" || seq.value == "") { // 추가
+    	        form.action = goUrlXdmInst;
+    	    } else { // 수정
+    	        form.action = goUrlXdmUpdt;
+    	    }
+
+    	    form.submit();
+    	}
     	
     </script>
     
