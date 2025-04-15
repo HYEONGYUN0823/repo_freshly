@@ -65,6 +65,15 @@
 			seq = #{seq}
 	</update>
 	
+	<update id="uelete">
+		UPDATE 
+			code 
+		SET
+			cdDelNy = 1
+		WHERE
+			seq = #{seq}
+	</update>
+	
 	<select id="selectCategory" resultMap="resultMapObj">
 		SELECT
 			seq 

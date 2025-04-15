@@ -28,4 +28,8 @@ public class CodeService {
 		return dao.update(dto);
 	}
 	
+	public int uelete(String seq) {
+		return dao.uelete(seq);
+	}
+	
 }

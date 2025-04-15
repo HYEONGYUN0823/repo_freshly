@@ -1,5 +1,7 @@
 package com.a7a7.module.code;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,10 +50,21 @@ public class CodeController {
 		return "redirect:/web/system/codeList";
 	}
 	
-	// 코드그룹 Update
+	// 코드 Update
 	@RequestMapping(value = "/web/system/codeUpdt")
 	public String codeUpdt(CodeDto dto) {
 		service.update(dto);
+		return "redirect:/web/system/codeList";
+	}
+	
+	// 코드 Uelete
+	@RequestMapping(value = "/web/system/codeUele")
+	public String codeUele(@RequestParam("formSeq") List<String> seqList) {
+
+		for(String seq : seqList) {
+			service.uelete(seq);
+		}
+		
 		return "redirect:/web/system/codeList";
 	}
 	

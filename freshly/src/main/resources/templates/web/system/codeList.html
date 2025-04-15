@@ -118,6 +118,15 @@
 <script src="/web/template/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/web/template/js/plugins-init/datatables.init.js"></script>
 
+
+
+<!--**********************************
+       Scripts end
+   ***********************************-->
+   
+<div th:replace="~{web/include/footer :: footer}"></div>
+<div th:replace="~{web/include/modal :: modal}"></div>
+
 <script type="text/javascript">
 
 	let goUrlXdmForm = "/web/system/codeForm";
@@ -136,12 +145,39 @@
 	    form.action = goUrlXdmForm;
 	    form.submit();
 	}
+	
+	// Uelete Button Click
+	document.getElementById("btnUel").onclick = function () {
+		document.querySelector("#modalConfirmTitle").textContent = "확 인";
+		document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+		document.querySelector("#btnModalDeli").style.display = 'none';
+		document.querySelector("#btnModalUelete").style.display = '';
+		document.querySelector("#btnModalDelete").style.display = 'none';
+		$("#modalConfirm").modal("show");      	
+	}
+	// Modal Uelete Button Click
+	document.getElementById("btnModalUelete").onclick = function () {
+	
+		const query = 'input[name="itemCheckbox"]:checked';
+		const selectedElements = document.querySelectorAll(query);
+		//체크박스 체크된 항목의 개수
+		const selectedElementsCnt = selectedElements.length;
+		if(selectedElementsCnt == 0){
+	      alert("삭제할 항목을 선택해주세요.");
+	      return false;
+		}else{
+			const selectedValues = [];
+			
+			selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+		
+			seq.value = selectedValues.join(',');
+			form.action = "/web/system/codeUele";
+			form.submit();
+		}
+	}
+	
 </script>
-
-<!--**********************************
-       Scripts end
-   ***********************************-->
-   
-<div th:replace="~{web/include/footer :: footer}"></div>
 
 </html>
