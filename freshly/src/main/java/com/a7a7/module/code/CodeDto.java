@@ -8,7 +8,7 @@ public class CodeDto {
 	private Integer cdDelNy;
 	private String cdRegDateTime;
 	private String cdModDateTime;
-	private Integer codeGroup_seq;
+	private String codeGroup_seq;
 	
 	private String cgName;
 	
@@ -48,10 +48,10 @@ public class CodeDto {
 	public void setCdModDateTime(String cdModDateTime) {
 		this.cdModDateTime = cdModDateTime;
 	}
-	public Integer getCodeGroup_seq() {
+	public String getCodeGroup_seq() {
 		return codeGroup_seq;
 	}
-	public void setCodeGroup_seq(Integer codeGroup_seq) {
+	public void setCodeGroup_seq(String codeGroup_seq) {
 		this.codeGroup_seq = codeGroup_seq;
 	}
 	

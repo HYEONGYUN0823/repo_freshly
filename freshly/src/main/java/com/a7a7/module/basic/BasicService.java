@@ -2,14 +2,28 @@ package com.a7a7.module.basic;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.a7a7.module.code.CodeDao;
+import com.a7a7.module.code.CodeDto;
 
 @Service
 public class BasicService {
 	
 	@Autowired
 	BasicDao dao;
+	
+	@Autowired
+	CodeDao cddao;
+	
+//	**********************************************
+//	공통
+//**********************************************	
+	public List<CodeDto> selectCategory(String codeGroup_seq){
+		return cddao.selectCategory(codeGroup_seq);
+	}
 //	**********************************************
 //		식료품
 //**********************************************
@@ -24,13 +38,13 @@ public class BasicService {
 		return dao.GroceryInsert(dto);
 	}
 	public int GroceryUpdate(BasicDto dto) {
-		System.out.println("##############################");
 		return dao.GroceryUpdate(dto);
 	}
 	
 	public int GroceryUelete(List<Integer> seqs) {
 		return dao.GroceryUelete(seqs);
 	}
+	
 	
 //	**********************************************
 //	거래처

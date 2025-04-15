@@ -42,6 +42,10 @@ public class BasicDto {
 	private Integer fcDelNy;
 	private Integer fcUseNy;
 	
+	// code
+	private String cd_seq;
+	private String cdName;
+	
 //	*******************************
 //	Getter, Setter
 //	*******************************
@@ -227,5 +231,22 @@ public class BasicDto {
 	public void setSeqs(List<Integer> seqs) {
 		this.seqs = seqs;
 	}
+	
+	//
+	public String getCd_seq() {
+		return cd_seq;
+	}
+	public void setCd_seq(String cd_seq) {
+		this.cd_seq = cd_seq;
+	}
+	public String getCdName() {
+		return cdName;
+	}
+	public void setCdName(String cdName) {
+		this.cdName = cdName;
+	}
+	
+	
+	
 	
 }

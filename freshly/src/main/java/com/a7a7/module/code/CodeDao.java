@@ -2,6 +2,7 @@ package com.a7a7.module.code;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -12,4 +13,5 @@ public interface CodeDao {
 	public int insert(CodeDto dto);
 	public int update(CodeDto dto);
 
+	public List<CodeDto> selectCategory(@Param("codeGroup_seq")String codeGroup_seq);
 }

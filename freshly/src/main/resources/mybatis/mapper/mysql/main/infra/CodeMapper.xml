@@ -65,4 +65,19 @@
 			seq = #{seq}
 	</update>
 	
+	<select id="selectCategory" resultMap="resultMapObj">
+		SELECT
+			seq 
+		    ,cdName
+		FROM
+			code
+		WHERE
+			1=1
+		    AND codeGroup_seq = #{codeGroup_seq}
+		ORDER BY
+			seq DESC
+	</select>
+	
+	
+	
 </mapper>

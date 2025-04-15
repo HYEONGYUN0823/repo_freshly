@@ -50,7 +50,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="item : ${list}">
+                                            <tr th:each="item:${list}">
                       							<td style="text-align: center;"><input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}"></td>
                                              	<td>#</td>
                                                 <td name="seq" th:text="${item.seq}"></td>

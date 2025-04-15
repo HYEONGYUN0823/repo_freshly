@@ -24,16 +24,17 @@ public class BasicController {
 	// ******** 식료품 관리 ********
 	// 식료품 list 화면
 	@RequestMapping(value = "/web/basic/groceryList")
-	public String selectWebGroceryList(Model model) {
-		
+	public String selectWebGroceryList(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
+//		model.addAttribute("li", service.viewCategory(vo.getGcCategory().toString()));
 		model.addAttribute("list", service.selectGroceryList());
+		System.out.println(dto.getGcCategory());
 		
 		return "web/basic/groceryList";
 	}
 	
 	@RequestMapping(value = "/web/basic/groceryForm")
 	public String selectWebGroceryForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
-		//insert
+		model.addAttribute("lists", service.selectCategory("3"));
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
 		}// update
 		else {
@@ -77,7 +78,8 @@ public class BasicController {
 	
 	@RequestMapping(value = "/web/basic/accountForm")
 	public String selectWebAccountForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
-		//insert
+		model.addAttribute("list1", service.selectCategory("2"));
+		model.addAttribute("list2", service.selectCategory("1"));
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {						
 		}// update
 		else {
@@ -117,7 +119,7 @@ public class BasicController {
 	
 	@RequestMapping(value = "/web/basic/factoryForm")
 	public String selectWebFactoryForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
-		//insert
+		model.addAttribute("lists", service.selectCategory("1"));
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {
 					
 		}// update
@@ -164,7 +166,7 @@ public class BasicController {
 	@RequestMapping(value = "/mob/basic/groceryList")
 	public String selectMobGroceryList(Model model) {
 		
-		model.addAttribute("list", service.selectGroceryList());
+//		model.addAttribute("list", service.selectGroceryList(dto));
 		
 		return "mobile/basic/groceryList";
 	}

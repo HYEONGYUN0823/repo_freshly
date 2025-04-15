@@ -29,7 +29,7 @@
                     <div class="col-xl-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                  <form method="post" id="form">
+                                  <form method="post" id="form" novalidate>
                                     <div>
                                         <section>
                                             <div class="row">
@@ -57,18 +57,19 @@
                                                     <div class="form-group">
                                                         <label for="acName" class="text-label">식료품 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="gcName" name="gcName"  th:value="${item?.gcName}"   class="form-control">
+	                                                        <input type="text" id="gcName" name="gcName"  th:value="${item?.gcName}"   class="form-control"> 
 														</div>
+														<!-- <div class="invalid-feedback" id ="gcNameError">Please select a valid state.</div> -->
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label for="gcCategory" class="text-label">식료품 카테고리</label><span style="color: crimson;">*</span>
+                                                        <label for="gcCategory" class="text-label" >식료품 카테고리</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <select
-																id="gcCategory" name="gcCategory" class="form-control" >
+																id="gcCategory" name="gcCategory" class="form-control">
 																	<option value="" >선택하세요</option>
-																	<option value="1" th:selected = "${item?.gcCategory}">1</option>
+																	<option th:each="list: ${lists}" th:value="${list.seq}" th:text="${list.cdName}" th:selected = "${list.seq ==item?.gcCategory}">1</option>
 																	<!-- <option th:each="list : ${listCodeGroup}"
 																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
 																		th:selected="${list.factory_seq == item?.factory_seq}">
