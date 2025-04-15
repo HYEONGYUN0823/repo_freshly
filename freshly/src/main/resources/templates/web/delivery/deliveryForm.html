@@ -49,7 +49,7 @@
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label" for="acOrder_seq">주문번호</label>
-                                                    <input type="hidden" name="acOrder_seq" th:value="${item?.acOrder_seq}">
+                                                    <input type="hidden" name="aoseq" th:value="${item?.acOrder_seq}">
                                  					<select id="acOrder_seq" name="acOrder_seq" class="form-control" th:disabled="${item?.acOrder_seq != null}">
 														<option value="" selected hidden disabled>선택하세요</option>
 														<option th:each="ac : ${acOrder}"
@@ -81,7 +81,7 @@
                                         </section>
                                        
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/basic/accountList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/delivery/deliverylist'"><i class="fa-solid fa-list"></i></button>
                                     <button type="button" id="BtnInst" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
                                 </form>
                             </div>

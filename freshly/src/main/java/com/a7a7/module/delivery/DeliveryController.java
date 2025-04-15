@@ -1,10 +1,13 @@
 package com.a7a7.module.delivery;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.a7a7.module.basic.BasicDto;
 import com.a7a7.module.basic.BasicVo;
@@ -45,13 +48,21 @@ public class DeliveryController {
 	}
 	
 	@RequestMapping(value ="/web/delivery/deliveryUpdate")
-	public String mobdeliveryUpdate(DeliveryDto dto) {
+	public String mobdeliveryUpdate(@RequestParam("aoseq") String ao,DeliveryDto dto) {
+		System.out.println(ao);
+		dto.setAcOrder_seq(ao);
+		System.out.println(dto.getAcOrder_seq());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		service.deliveryUpdate(dto);
 		return "redirect:/web/delivery/deliverylist";
 	}
 	
 	
-	
+	@RequestMapping(value = "/web/delivery/deliveryUelete")
+	public String deliveryUelete(@RequestParam("seq") List<Integer> seqList) {
+		service.deliveryUelete(seqList);
+		return "redirect:/web/delivery/deliverylist";
+	}
 	
 	
 	

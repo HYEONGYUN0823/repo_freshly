@@ -1,5 +1,7 @@
 package com.a7a7.module.delivery;
 
+import java.util.List;
+
 public class DeliveryDto {
 
 	private String seq;
@@ -8,7 +10,7 @@ public class DeliveryDto {
 	private String deliveryEndDateTime;
 	private Integer deliveryDelNy;
 	private String acOrder_seq;
-	
+	private List<Integer> seqs;  // uelete 메서드를 위한 공통 seqs.
 	
 	
 	public String getSeq() {
@@ -46,6 +48,12 @@ public class DeliveryDto {
 	}
 	public void setAcOrder_seq(String acOrder_seq) {
 		this.acOrder_seq = acOrder_seq;
+	}
+	public List<Integer> getSeqs() {
+		return seqs;
+	}
+	public void setSeqs(List<Integer> seqs) {
+		this.seqs = seqs;
 	}
 	
 	

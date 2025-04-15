@@ -27,4 +27,8 @@ public class DeliveryService {
 	public int deliveryUpdate(DeliveryDto dto) {
 		return dao.deliveryUpdate(dto);
 	}
+	
+	public int deliveryUelete(List<Integer> seqs) {
+		return dao.deliveryUelete(seqs);
+	}
 }

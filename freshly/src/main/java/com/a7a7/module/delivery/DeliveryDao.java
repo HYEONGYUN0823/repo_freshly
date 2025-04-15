@@ -2,6 +2,7 @@ package com.a7a7.module.delivery;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -12,5 +13,6 @@ public interface DeliveryDao {
 	
 	public int deliveryInsert(DeliveryDto dto);
 	public int deliveryUpdate(DeliveryDto dto);
+	public int deliveryUelete(@Param("seqs")List<Integer> seqs);
 
 }

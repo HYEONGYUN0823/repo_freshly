@@ -4,6 +4,7 @@ public class DeliveryVo {
 
 	private String seq;
 
+
 	public String getSeq() {
 		return seq;
 	}
@@ -11,6 +12,7 @@ public class DeliveryVo {
 	public void setSeq(String seq) {
 		this.seq = seq;
 	}
+
 	
 	
 }

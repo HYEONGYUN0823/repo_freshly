@@ -15,6 +15,7 @@
 		from
 			delivery 
 			where 1=1
+			and deliveryDelNy = 0
 			ORDER BY seq desc
 	</select>
 	
@@ -64,6 +65,14 @@
 		seq = #{seq}
 	</update>
 	
-	
+	<update id="deliveryUelete">
+		update delivery
+		set
+		deliveryDelNy = 1
+		where seq in
+    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
+        #{seq}
+    </foreach>
+	</update>
 	
 </mapper>
