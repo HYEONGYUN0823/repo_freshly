@@ -72,7 +72,7 @@ public class OrderingController {
 		
 		service.uelete(seqList);
 		
-		return "redirect:/mobile/factory/deliveryCompletedList";
+		return "redirect:/mob/factory/deliveryCompletedList";
 	}
 	
 	// 모바일 공장 발주관리

@@ -75,7 +75,7 @@
                                     <tr th:each="item: ${list}">
                                        <td>
                                           <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value="" id="orderOne" />
+                                             <input class="form-check-input" type="checkbox" th:value="${item.seq}" name="itemCheckbox" id="itemCheckbox" />
                                              <label class="form-check-label" for="orderOne"></label>
                                           </div>
                                        </td>
@@ -143,9 +143,9 @@
 						        <button type="button" class="btn btn-success me-2">
 						            <i class="fa-regular fa-file-excel"></i>
 						        </button>
-						        <button type="button" id="btnForm" class="btn btn-primary">
-						            <i class="fa-solid fa-plus"></i>
-						        </button>
+<!-- 						        <button type="button" id="btnForm" class="btn btn-primary"> -->
+<!-- 						            <i class="fa-solid fa-plus"></i> -->
+<!-- 						        </button> -->
 						    </div>
 						</div>
 						
@@ -158,45 +158,53 @@
          </main>
          
 <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
 
-	let goUrlXdmForm = "";
-	let goUrlXdmUele = "";
+    let goUrlXdmUele = "/mob/factory/deliveryCompletedUele";
+    let seq = document.querySelector("input[name=seq]");
+    let form = document.getElementById("formList");
 
-	let seq = document.querySelector("input[name=seq]");
-	let form = document.getElementById("formList");
-	
-	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
-	}
+    // 삭제 버튼 클릭 시
+    const btnUel = document.getElementById("btnUel");
+    if (btnUel) {
+        btnUel.onclick = function () {
+            const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+            if (selectedElements.length === 0) {
+                showAlertModal("삭제할 항목을 선택해주세요.");
+                return false;
+            } else {
+                const modal = document.getElementById('modalConfirmUelete');
+                if (modal) {
+                    new bootstrap.Modal(modal).show();
+                }
+            }
+        };
+    }
 
-	goForm = function (keyValue) {
-		
-	    seq.value = keyValue;
-	    form.action = goUrlXdmForm;
-	    form.submit();
-	}
-	
-	const uelModal = new bootstrap.Modal(document.getElementById("uelModal"));
-	const uelElement = document.getElementById("uelModal");
+    // 삭제 모달 내부 삭제 버튼 클릭 시
+    const btnModalUelete = document.getElementById("btnModalUelete");
+    if (btnModalUelete) {
+        btnModalUelete.onclick = function () {
+            const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+            const selectedValues = Array.from(selectedElements).map(el => el.value);
+            if (selectedValues.length === 0) {
+                showAlertModal("삭제할 항목을 선택해주세요.");
+                return false;
+            }
+            seq.value = selectedValues.join(',');
+            form.action = goUrlXdmUele;
+            form.submit();
+        };
+    }
 
-	document.getElementById("btnUel").onclick = function(uelEvent) {
-		event.preventDefault();
+    // 모달 알림 함수
+    function showAlertModal(message) {
+        const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+        document.getElementById('alertModalBody').innerText = message;
+        alertModal.show();
+    }
 
-		let click = true;
-
-		if (click) {
-			let alertModal = new bootstrap.Modal(document.getElementById("uelModal"));
-			alertModal.show();
-		}
-
-	}
-	document.getElementById("btnUelSubmit").onclick = function() {
-		let seq = document.querySelector("input[name=seq]");
-		let form = document.getElementById("form");
-		form.action = goUrlXdmUele;
-
-		form.submit();
-	}
+});
 </script>
 
     <div th:replace = "~{mobile/include/footer :: footer}"></div>

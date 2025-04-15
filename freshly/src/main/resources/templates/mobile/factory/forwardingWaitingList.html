@@ -153,67 +153,7 @@
 						    </div>
 						</div>
 						
-            <!-- ✅ 삭제 모달 -->
-            <div class="modal fade" id="modalConfirmUelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalConfirmUeleteLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalConfirmTitleUelete">확 인</h5>
-                            <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
-                                <i class="fas fa-times fa-lg"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="modalConfirmBodyUelete">
-                            해당 데이터를 삭제하시겠습니까 ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-danger btn_custom" id="btnModalUelete">삭제</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ✅ 출고 모달 -->
-            <div class="modal fade" id="modalConfirmForwarding" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalConfirmForwardingLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">출고 확인</h5>
-                            <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
-                                <i class="fas fa-times fa-lg"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            선택한 항목을 출고 처리하시겠습니까?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-danger btn_custom" id="btnModalForwarding">출고</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-			<!-- ✅ 알림 모달 -->
-			<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="alertModalLabel">알림</h5>
-			        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
-			          <i class="fas fa-times fa-lg"></i>
-			        </button>
-			      </div>
-			      <div class="modal-body" id="alertModalBody">
-			        <!-- 메시지가 여기 들어갑니다 -->
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">확인</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+						<div th:replace= "~{mobile/include/modal :: modal}"></div>
 					  
                      </div>
                   </div>
@@ -223,8 +163,10 @@
          </main>
          
 <script type="text/javascript">
+
     let goUrlXdmUele = "/mob/factory/forwardingWaitingUele";
     let goUrlXdmUpdt = "/mob/factory/forwardingWaitingUpdt";
+    let goUrlXdmList = "/mob/factory/deliveryCompletedList";
 
     let seq = document.querySelector("input[name=seq]");
     let form = document.getElementById("formList");
@@ -278,9 +220,27 @@
             showAlertModal("출고할 항목을 선택해주세요.");
             return false;
         }
+
+        // 출고 완료 후 모달 띄우도록 설정
+        localStorage.setItem("forwardingCompleted", "true");
+
         seq.value = selectedValues.join(',');
         form.action = goUrlXdmUpdt;
         form.submit();
+    };
+
+    // 페이지 로드 후 출고 완료 모달 띄우기
+    document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("forwardingCompleted") === "true") {
+            localStorage.removeItem("forwardingCompleted");
+            const confirmModal = new bootstrap.Modal(document.getElementById("modalAfterForwarding"));
+            confirmModal.show();
+        }
+    });
+
+    // 출고완료 목록으로 이동
+    document.getElementById("btnGoToComplete").onclick = function () {
+        window.location.href = goUrlXdmList;
     };
 </script>
 
