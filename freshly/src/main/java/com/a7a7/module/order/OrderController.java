@@ -5,9 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.a7a7.module.basic.BasicService;
+import com.a7a7.module.delivery.DeliveryDto;
+import com.a7a7.module.delivery.DeliveryService;
 import com.a7a7.module.member.MemberService;
+import com.a7a7.module.ordering.OrderingDto;
+import com.a7a7.module.ordering.OrderingService;
 
 @Controller
 public class OrderController {
@@ -18,6 +23,8 @@ public class OrderController {
 	BasicService basicService;
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	DeliveryService deliveryService;
 	
 	// 주문 List 화면
 	@RequestMapping(value ="/web/account/orderList")
@@ -57,5 +64,22 @@ public class OrderController {
 		service.update(dto);
 		return "redirect:/web/account/orderList";
 	}
+	
+//	// 배송 Insert Ajax
+//	@RequestMapping(value = "/web/account/deliveryInstProc")
+//	@ResponseBody
+//	public String deliveryInstProc(@RequestParam("seq") String seq) {
+//		
+//		DeliveryDto deliveryDto = new DeliveryDto();
+//		deliveryDto.setAcOrder_seq(seq);
+//		
+//		OrderDto dto = service.selectOneOrder(seq);
+//		dto.setAoStatus(4);
+//		service.update(dto);
+//		
+//		deliveryService.deliveryInsert(deliveryDto);
+//		
+//		return "redirect:/web/account/orderList";
+//	}
 		
 }

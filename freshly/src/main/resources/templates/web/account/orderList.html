@@ -10,6 +10,7 @@
         ***********************************-->
         <form class="content-body" id="formList" method="post">
         	<input type="hidden" name="formSeq"> 
+        	<input type="hidden" name="seq"> 
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
@@ -72,22 +73,15 @@
                                        			
                                        			<!-- 주문 상태 -->
                                        			<td style="text-align: center;" th:if="${item.aoStatus == 1}">주문 접수</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}">발주중</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">배송 대기</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 4}">배송중</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 5}">배송 완료</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}">배송중</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">배송 완료</td>
                                       			
                                       			<!-- 주문 처리 -->
                                        			<td style="text-align: center;" th:if="${item.aoStatus == 1}">
-                                       				<button type="button" class="btn btn-google-plus" id="btnOrdering" th:if="${item.gcStock - item.aoQuantity < 0}" th:value="${item.seq}">발주</button>
-                                       				<button type="button" class="btn btn-google" id="btnDelivery" th:if="${item.gcStock - item.aoQuantity >= 0}" th:value="${item.seq}">배송</button>
+                                       				<button type="button" class="btn btn-google" id="btnDelivery" th:value="${item.gcStock - item.aoQuantity}">배송</button>
                                        			</td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 2}"></td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">
-                                      				<button type="button" class="btn btn-google" id="btnDelivery" th:value="${item.seq}">배송</button>
-                                      			</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 4}"></td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 5}"></td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -136,6 +130,7 @@
    ***********************************-->
    
 <div th:replace="~{web/include/footer :: footer}"></div>
+<div th:replace="~{web/include/modal :: modal}"></div>
 
 <script type="text/javascript">
 
@@ -156,6 +151,30 @@
 	    form.submit();
 	}
 	
+	// 배송 button
+	document.querySelectorAll("#btnDelivery").forEach(btn => {
+	    btn.onclick = function(){
+		
+			let delValue = this.value;
+			
+			if(delValue < 0){
+				document.querySelector("#modalConfirmTitle").textContent = "발주";
+				document.querySelector("#modalConfirmBody").textContent = "재고가 부족해 발주가 필요합니다.";
+				document.querySelector("#btnModalDeli").style.display = 'none';
+				document.querySelector("#btnModalUelete").style.display = 'none';
+				document.querySelector("#btnModalDelete").style.display = 'none';
+				$("#modalConfirm").modal("show");
+			} else {
+				document.querySelector("#modalConfirmTitle").textContent = "배송";
+				document.querySelector("#modalConfirmBody").textContent = "배송하시겠습니까?";
+				document.querySelector("#btnModalDeli").style.display = '';
+				document.querySelector("#btnModalUelete").style.display = 'none';
+				document.querySelector("#btnModalDelete").style.display = 'none';
+				$("#modalConfirm").modal("show");
+			}
+	    }
+	});
+
 	
 	
 
