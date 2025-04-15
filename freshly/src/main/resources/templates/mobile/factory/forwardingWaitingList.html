@@ -2,8 +2,11 @@
 <html lang="kor" xmlns:th="http://www.thymeleaf.org">
 
   <div th:replace= "~{mobile/include/head :: head}"></div>
+  
          <!-- main wrapper -->
          <main class="main-content-wrapper">
+         <form name="formList" id="formList" method="post" autocomplete="off">
+         <input type="hidden" name="seq">
             <div class="container">
                <!-- row -->
                <div class="row mb-8">
@@ -30,11 +33,11 @@
                            <div class="row justify-content-between">
                               <div class="col-md-4 col-12 mb-2 mb-md-0">
                                  <!-- form -->
-                                 <form class="d-flex" role="search" name="formList" id="formList" method="post" autocomplete="off">
+<!--                                  <form class="d-flex" role="search" name="formList" id="formList" method="post" autocomplete="off"> -->
 									<input type="hidden" name="seq">
 									<input type="hidden" name="rcDelNy">
                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-                                 </form>
+<!--                                  </form> -->
                               </div>
                               <div class="col-lg-2 col-md-4 col-12">
                                  <!-- select -->
@@ -74,7 +77,7 @@
                                     <tr th:each="item: ${list}">
                                        <td>
                                           <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value="" id="orderOne" />
+                                             <input class="form-check-input" type="checkbox" th:value="${item.seq}" name="itemCheckbox" id="itemCheckbox" />
                                              <label class="form-check-label" for="orderOne"></label>
                                           </div>
                                        </td>
@@ -157,12 +160,13 @@
                   </div>
                </div>
             </div>
+            </form>
          </main>
          
 <script type="text/javascript">
 
-	let goUrlXdmForm = "/mob/factory/receivingForm";
-	let goUrlXdmUele = "";
+// 	let goUrlXdmForm = "/mob/factory/receivingForm";
+	let goUrlXdmUele = "/mob/factory/deliveryCompletedList";
 
 	let seq = document.querySelector("input[name=seq]");
 	let form = document.getElementById("formList");
@@ -178,27 +182,37 @@
 	    form.submit();
 	}
 	
-	const uelModal = new bootstrap.Modal(document.getElementById("uelModal"));
-	const uelElement = document.getElementById("uelModal");
-
-	document.getElementById("btnUel").onclick = function(uelEvent) {
-		event.preventDefault();
-
-		let click = true;
-
-		if (click) {
-			let alertModal = new bootstrap.Modal(document.getElementById("uelModal"));
-			alertModal.show();
+	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
+	if(document.getElementById("btnUel")){
+		document.getElementById("btnUel").onclick = function () {
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");      	
+			}
 		}
 
-	}
-	document.getElementById("btnUelSubmit").onclick = function() {
-		let seq = document.querySelector("input[name=seq]");
-		let form = document.getElementById("form");
-		form.action = goUrlXdmUele;
-
-		form.submit();
-	}
+		document.getElementById("btnModalUelete").onclick = function () {
+		
+			const query = 'input[name="itemCheckbox"]:checked';
+			const selectedElements = document.querySelectorAll(query);
+			//체크박스 체크된 항목의 개수
+			const selectedElementsCnt = selectedElements.length;
+			if(selectedElementsCnt == 0){
+		      alert("삭제할 항목을 선택해주세요.");
+		      return false;
+			}else{
+				const selectedValues = [];
+				selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+			
+				seq.value = selectedValues.join(',');
+				form.action = goUrlXdmUele;
+				form.submit();
+			}
+		}
 </script>
 
     <div th:replace = "~{mobile/include/footer :: footer}"></div>

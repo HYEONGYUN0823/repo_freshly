@@ -29,12 +29,26 @@ public class OrderingController {
         return "mobile/factory/forwardingWaitingList";
     }
     
+	@RequestMapping(value = "/mob/factory/forwardingWaitingUele")
+	public String forwardingWaitingUele(@RequestParam("seq") List<Integer> seqList) {
+		service.uelete(seqList);
+		
+		return "redirect:/mobile/factory/forwardingWaitingList";
+	}
+    
     // 출고완료 목록
     @RequestMapping(value ="/mob/factory/deliveryCompletedList")
     public String deliveryCompletedList(Model model) {
     	model.addAttribute("list", service.selectDeliveryCompletedList());
     	return "mobile/factory/deliveryCompletedList";
     }
+    
+	@RequestMapping(value = "/mob/factory/deliveryCompletedUele")
+	public String deliveryCompletedUele(@RequestParam("seq") List<Integer> seqList) {
+		service.uelete(seqList);
+		
+		return "redirect:/mobile/factory/deliveryCompletedList";
+	}
 	
 	// 모바일 공장 발주관리
 	@RequestMapping(value ="/mob/factory/OrderingList")
