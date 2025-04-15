@@ -61,7 +61,7 @@
                                             	</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
                                                 <td name="gcName"><a href="javascript:void(0);" th:text="${item.gcName}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
-                                                <td name="gcCategory" th:value="${item.gcCategory}" th:text="${item.cdName}">분류</td>
+                                                <td name="gcCategory" th:value="${item.gcCategory}" th:text="${@codeService.selectOneCachedCode(item.gcCategory)}" >분류</td>
                                                 <td name="gcPrice" th:text="${item.gcPrice}">가격</td>
                                                 <td name="gcStock" th:text="${item.gcStock}">재고량</td>
                                                 <td name="gcRegDateTime" th:text="${item.gcRegDateTime}">등록일</td>

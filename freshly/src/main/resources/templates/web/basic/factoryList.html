@@ -64,7 +64,7 @@
                                                 <td name="fcName"><a href="javascript:void(0);" th:text="${item.fcName}" th:attr="onclick=|goForm('${item.seq}')|">공장명</a></td>
                                                 <td name="fcManagerName" th:text="${item.fcManagerName}">대표자</td>
                                                 <td name="fcTel" th:text="${item.fcTel}">전화번호</td>
-                                                <td name="fcAddress" th:text="${item.fcAddress}">주소</td>
+                                                <td name="fcAddress"  th:text="${@codeService.selectOneCachedCode(item.fcAddress)}">주소</td>
                                                 <td name="fcAddressDetail" th:text="${item.fcAddressDetail}">상세주소</td>
                                                 <td name="fcRegDateTime" th:text="${item.fcRegDateTime}">등록일</td>
                                                 <td name="fcModDateTime" th:text="${item.fcModDateTime}">수정일</td>
