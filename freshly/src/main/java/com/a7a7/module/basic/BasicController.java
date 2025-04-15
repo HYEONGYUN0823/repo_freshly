@@ -1,6 +1,5 @@
 package com.a7a7.module.basic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.a7a7.module.code.CodeDto;
+import com.a7a7.module.code.CodeService;
+
 
 @Controller
 public class BasicController {
 	
 	@Autowired
 	BasicService service;
+	@Autowired
+	CodeService codeservice;
 	
 //	**********************************************
 //		Web
@@ -25,10 +29,8 @@ public class BasicController {
 	// 식료품 list 화면
 	@RequestMapping(value = "/web/basic/groceryList")
 	public String selectWebGroceryList(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
-//		model.addAttribute("li", service.viewCategory(vo.getGcCategory().toString()));
 		model.addAttribute("list", service.selectGroceryList());
-		System.out.println(dto.getGcCategory());
-		
+
 		return "web/basic/groceryList";
 	}
 	

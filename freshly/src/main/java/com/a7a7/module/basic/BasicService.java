@@ -18,16 +18,31 @@ public class BasicService {
 	@Autowired
 	CodeDao cddao;
 	
+	
+	
 //	**********************************************
 //	공통
 //**********************************************	
+	//form 에서 카테고리 보여주게 하기 위한 용도
 	public List<CodeDto> selectCategory(String codeGroup_seq){
 		return cddao.selectCategory(codeGroup_seq);
 	}
+	
+	
 //	**********************************************
 //		식료품
 //**********************************************
 	public List<BasicDto> selectGroceryList() {
+		List<CodeDto> list =cddao.selectCodeList();
+		CodeDto cd = new CodeDto();
+		
+		for (CodeDto item : list) {
+		    if (item.getSeq().equals("GC001")) {
+		      
+		        break;
+		    }
+		}
+
 		return dao.selectGroceryList();
 	}
 	public BasicDto selectGroceryView(BasicDto dto) {

@@ -116,20 +116,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq == '0'}"></div>
-                                                <div class="col-lg-6 mb-4" th:if = "${vo.seq != '0'}">
-                                                    <div class="form-group">
-                                                        <label class="text-label" for="fcDelNy">식료품 삭제여부</label><span style="color: crimson;">*</span>
-                                                        <div>
-                                                            <select
-																id="fcDelNy" name="fcDelNy" class="form-control">
-																	<option value="">선택하세요</option>
-																	<option value="1" th:selected="${item?.fcDelNy == 1}">삭제</option>
-                   													<option value="0" th:selected="${item?.fcDelNy == 0}">미삭제</option>
-															</select>
-                                                        </div>
-                                                    </div>
-                                                </div> 
+                                             
                                                 
                                         </section>
                                        

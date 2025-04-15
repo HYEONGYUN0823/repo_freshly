@@ -38,8 +38,11 @@
                                     <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                            	<th style="text-align: center;"><input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox"></th>
-                                                <th>#</th>
+                                            	<th style="text-align: center;">
+                                            		<div class="d-flex justify-content-center align-items-center">
+                                            			<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
+                                            		</div>
+                                            	</th>  
                                                 <th>seq</th>
                                                 <th>이름</th>
                                                 <th>분류</th>
@@ -51,11 +54,14 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="item:${list}">
-                      							<td style="text-align: center;"><input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}"></td>
-                                             	<td>#</td>
+                      							<td style="text-align: center;">
+                      								<div class="d-flex justify-content-center align-items-center">
+                                            			<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
+                                            		</div>
+                                            	</td>
                                                 <td name="seq" th:text="${item.seq}"></td>
                                                 <td name="gcName"><a href="javascript:void(0);" th:text="${item.gcName}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
-                                                <td name="gcCategory" th:text="${item.gcCategory}">분류</td>
+                                                <td name="gcCategory" th:value="${item.gcCategory}" th:text="${item.cdName}">분류</td>
                                                 <td name="gcPrice" th:text="${item.gcPrice}">가격</td>
                                                 <td name="gcStock" th:text="${item.gcStock}">재고량</td>
                                                 <td name="gcRegDateTime" th:text="${item.gcRegDateTime}">등록일</td>

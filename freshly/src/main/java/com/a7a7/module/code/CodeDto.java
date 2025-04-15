@@ -12,6 +12,9 @@ public class CodeDto {
 	
 	private String cgName;
 	
+	
+	
+	
 	public String getSeq() {
 		return seq;
 	}

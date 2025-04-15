@@ -62,8 +62,7 @@
 	
 	<insert id="GroceryInsert">
 		insert into grocery(
-			seq
-			,gcName
+			gcName
 			,gcCategory
 			,gcPrice
 			,gcStock
@@ -71,8 +70,7 @@
 			,gcDelNy
 			,gcRegDateTime
 		)values(
-			#{seq}
-			,#{gcName}
+			#{gcName}
 			,#{gcCategory}
 			,#{gcPrice}
 			,#{gcStock}
@@ -164,8 +162,7 @@
 	
 	<insert id="AccountInsert">
 		insert into account(
-			seq
-			,acName
+			acName
 			,acCategory
 			,acManagerName
 			,acManagerTel
@@ -175,8 +172,7 @@
 			,acEndDate
 			,acDelNy
 		)values(
-			#{seq}
-			,#{acName}
+			#{acName}
 			,#{acCategory}
 			,#{acManagerName}
 			,#{acManagerTel}
@@ -202,7 +198,6 @@
 			,acAddressDetail = #{acAddressDetail}
 			,acStartDate = #{acStartDate}
 			,acEndDate = #{acEndDate}
-			,acDelNy = #{acDelNy}
 		where
 		 	seq = #{seq}
 	</update>
@@ -251,8 +246,7 @@
 	
 	<insert  id="FactoryInsert">
 		insert into factory(
-			seq
-			,fcName
+			fcName
 			,fcManagerName
 			,fcTel
 		    ,fcAddress
@@ -261,8 +255,7 @@
 		    ,fcUseNy
 		    ,fcDelNy
 		)values(
-			#{seq}
-		    ,#{fcName}
+		    #{fcName}
 		    ,#{fcManagerName}
 		    ,#{fcTel}
 		    ,#{fcAddress}
@@ -286,7 +279,6 @@
 		    ,fcAddressDetail = #{fcAddressDetail}
 		    ,fcModDateTime = now()
 		    ,fcUseNy = #{fcUseNy}
-		    ,fcDelNy = #{fcDelNy}
 		where
 			seq = #{seq}
 	</update>

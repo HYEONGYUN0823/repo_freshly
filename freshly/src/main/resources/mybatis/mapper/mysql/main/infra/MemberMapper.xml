@@ -100,7 +100,6 @@
 		,mbPassword  = #{mbPassword}
 		,mbEmail  = #{mbEmail}
 		,mbModDateTime = now()
-		,mbDelNy = #{mbDelNy}
 		where 1=1
 		AND seq = #{seq}
 	</update>
