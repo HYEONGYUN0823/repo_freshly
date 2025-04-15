@@ -146,7 +146,7 @@
 		UPDATE ordering SET
 			odStatus = #{odStatus},
 			odQuantity = #{odQuantity},
-			odDelNy = #{odDelNy},
+			odDelNy = 0,
 			factory_seq = #{factory_seq},
 			member_seq = #{member_seq},
 			grocery_seq = #{grocery_seq}

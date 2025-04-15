@@ -8,7 +8,7 @@ public class OrderingDto {
 	private Integer odStatus;
 	private String odStartDateTime;
 	private String odEndDateTime;
-	private String odQuantity;	
+	private Integer odQuantity;	
 	private Integer odDelNy;
 	private String factory_seq;
 	private String member_seq;
@@ -45,10 +45,10 @@ public class OrderingDto {
 	public void setOdEndDateTime(String odEndDateTime) {
 		this.odEndDateTime = odEndDateTime;
 	}
-	public String getOdQuantity() {
+	public Integer getOdQuantity() {
 		return odQuantity;
 	}
-	public void setOdQuantity(String odQuantity) {
+	public void setOdQuantity(Integer odQuantity) {
 		this.odQuantity = odQuantity;
 	}
 	public Integer getOdDelNy() {
