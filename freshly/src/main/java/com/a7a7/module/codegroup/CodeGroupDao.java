@@ -11,5 +11,6 @@ public interface CodeGroupDao {
 	public CodeGroupDto selectOneCodeGroup(String seq);
 	public int insert(CodeGroupDto dto);
 	public int update(CodeGroupDto dto);
+	public int uelete(String seq);
 	
 }

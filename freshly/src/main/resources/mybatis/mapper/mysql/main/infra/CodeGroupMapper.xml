@@ -47,23 +47,33 @@
 	<insert id="insert">
 		INSERT INTO codegroup(
 			cgName,
-			cgUseNy,
-			cgDelNy,
-			cgRegDateTime
+			,cgUseNy
+			,cgDelNy
+			,cgRegDateTime
 		) VALUES(
-			#{cgName},
-			0,
-			0,
-			now()
+			#{cgName}
+			,0
+			,0
+			,now()
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE codegroup 
+		UPDATE 
+			codegroup 
 		SET
-			cgName = #{cgName},
-			cgUseNy = #{cgUseNy},
-			cgModDateTime = now()
+			cgName = #{cgName}
+			,cgUseNy = #{cgUseNy}
+			,cgModDateTime = now()
+		WHERE
+			seq = #{seq}
+	</update>
+	
+	<update id="uelete">
+		UPDATE 
+			codegroup 
+		SET
+			cgDelNy = 1
 		WHERE
 			seq = #{seq}
 	</update>

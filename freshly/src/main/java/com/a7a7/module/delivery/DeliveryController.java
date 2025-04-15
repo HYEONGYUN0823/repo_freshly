@@ -64,6 +64,11 @@ public class DeliveryController {
 		return "redirect:/web/delivery/deliverylist";
 	}
 	
+	@RequestMapping(value = "/web/delivery/deliveryUelete")
+	public String deliveryUelete(@RequestParam("seq") List<Integer> seqList) {
+		service.deliveryUelete(seqList);
+		return "redirect:/web/delivery/deliverylist";
+	}
 	
 	@RequestMapping(value = "/web/delivery/deliveryCompleted")
 	public String deliveryCompleted(@RequestParam("seq") List<String> seqList) {

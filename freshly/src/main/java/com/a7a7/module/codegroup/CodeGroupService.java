@@ -27,4 +27,8 @@ public class CodeGroupService {
 		return dao.update(dto);
 	}
 	
+	public int uelete(String seq) {
+		return dao.uelete(seq);
+	}
+	
 }
