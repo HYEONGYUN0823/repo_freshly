@@ -57,9 +57,9 @@
                                                     <div class="form-group">
                                                         <label for="acName" class="text-label">식료품 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="gcName" name="gcName"  th:value="${item?.gcName}"   class="form-control"> 
+	                                                        <input type="text" id="gcName" name="gcName"  th:value="${item?.gcName}" class="form-control"> 
+															<div class="invalid-feedback" id ="gcNameError">Please select a valid state</div>
 														</div>
-														<!-- <div class="invalid-feedback" id ="gcNameError">Please select a valid state.</div> -->
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -70,11 +70,8 @@
 																id="gcCategory" name="gcCategory" class="form-control">
 																	<option value="" >선택하세요</option>
 																	<option th:each="list: ${lists}" th:value="${list.seq}" th:text="${list.cdName}" th:selected = "${list.seq ==item?.gcCategory}">1</option>
-																	<!-- <option th:each="list : ${listCodeGroup}"
-																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
-																		th:selected="${list.factory_seq == item?.factory_seq}">
-																	</option> -->
 															</select>
+															<div class="invalid-feedback" id ="gcCategoryError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -84,6 +81,7 @@
                                                         <div>
 	                                                       <div>
 	                                                        	<input type="text" id="gcPrice" name="gcPrice"  th:value="${item?.gcPrice}" class="form-control"> 
+	                                                        	<div class="invalid-feedback" id ="gcPriceError">Please select a valid state</div>
 															</div>
 														</div>
                                                     </div>
@@ -94,6 +92,7 @@
                                                         <div>
 	                                                       <div>
 	                                                        	<input type="text" id="gcStock" name="gcStock"  th:value="${item?.gcStock}" class="form-control"> 
+	                                                        		<div class="invalid-feedback" id ="gcStockError">Please select a valid state</div>
 															</div>
 														</div>
                                                     </div>
@@ -103,11 +102,12 @@
                                                         <label class="text-label" for="gcUseNy">식료품 사용여부</label><span style="color: crimson;">*</span>
                                                         <div>
                                                             <select
-																id="acUseNy" name="gcUseNy" class="form-control">
+																id="gcUseNy" name="gcUseNy" class="form-control">
 																	<option value="">선택하세요</option>
 																	<option value="1" th:selected="${item?.gcUseNy == 1 || gcUseNy == null}">사용</option>
                    													<option value="0" th:selected="${item?.gcUseNy == 0}">미사용</option>
 															</select>
+																<div class="invalid-feedback" id ="gcUseNyError">Please select a valid state</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,13 +180,99 @@
     
     <script type="text/javascript">
     document.getElementById("BtnInst").onclick = function(){
-    	if(seq.value == "0" || seq.value == "") {
-			form.action = "/web/basic/groceryInsert";
-			form.submit();
-		}else {
-			form.action = "/web/basic/groceryUpdate";
-			form.submit();
+    	
+    	
+    	document.getElementById("gcName").classList.remove("is-invalid");
+		document.getElementById("gcName").classList.remove("is-valid");
+		
+	    document.getElementById("gcCategory").classList.remove("is-invalid");
+	    document.getElementById("gcCategory").classList.remove("is-valid");
+	   
+	    document.getElementById("gcPrice").classList.remove("is-invalid");
+	    document.getElementById("gcPrice").classList.remove("is-valid");
+	   
+	    document.getElementById("gcStock").classList.remove("is-invalid");
+	    document.getElementById("gcStock").classList.remove("is-valid");
+	    
+	   	document.getElementById("gcUseNy").classList.remove("is-invalid");
+	    document.getElementById("gcUseNy").classList.remove("is-valid"); 
+	    
+	    document.getElementById("gcNameError").textContent = '';  		
+  		document.getElementById("gcCategoryError").textContent = '';
+  		document.getElementById("gcPriceError").textContent = '';
+ 		document.getElementById("gcStockError").textContent = '';
+ 		document.getElementById("gcUseNyError").textContent = '';
+    	
+		let isValid = true; 
+		
+		const name = document.getElementById("gcName").value;
+		let n = /^[가-힣]{1,15}$/;
+		if(name == null || name == ""){
+			document.getElementById("gcNameError").textContent = "이름을 넣어주세요.";
+			document.getElementById("gcName").classList.add("is-invalid");
+			isValid = false;
+		}else if(!n.test(name)){
+			document.getElementById("gcNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("gcName").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("gcName").classList.add("is-valid");
 		}
+		
+		const pr = document.getElementById("gcPrice").value;
+		var regex = /^[0-9]*$/; // 숫자만 체크
+		if(pr  == null || pr == ""){
+			document.getElementById("gcPriceError").textContent = "가격을 넣어주세요";
+			document.getElementById("gcPrice").classList.add("is-invalid");
+			isValid = false;
+		}else if(!regex.test(pr)){
+			document.getElementById("gcPriceError").textContent = "숫자만 넣어주세요.";
+			document.getElementById("gcPrice").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("gcPrice").classList.add("is-valid");
+		}
+		
+		const gs = document.getElementById("gcStock").value;
+		if(gs  == null || gs == ""){
+			document.getElementById("gcStockError").textContent = "가격을 넣어주세요";
+			document.getElementById("gcStock").classList.add("is-invalid");
+			isValid = false;
+		}else if(!regex.test(gs)){
+			document.getElementById("gcStockError").textContent = "숫자만 넣어주세요.";
+			document.getElementById("gcStock").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("gcStock").classList.add("is-valid");
+		}
+			
+		const ad = document.getElementById("gcCategory").value;
+		if(ad  == null || ad == ""){
+			document.getElementById("gcCategoryError").textContent = "카테고리를 선택해주세요";
+			document.getElementById("gcCategory").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("gcCategory").classList.add("is-valid");
+		}
+		
+		const use = document.getElementById("gcUseNy").value;
+		if(use  == null || use == ""){
+			document.getElementById("gcUseNyError").textContent = "카테고리를 선택해주세요";
+			document.getElementById("gcUseNy").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("gcUseNy").classList.add("is-valid");
+		}
+    	
+    	if(isValid){
+    		if(seq.value == "0" || seq.value == "") {
+				form.action = "/web/basic/groceryInsert";
+				form.submit();
+			}else {
+				form.action = "/web/basic/groceryUpdate";
+				form.submit();
+			}
+    	}
     }
     </script>
 

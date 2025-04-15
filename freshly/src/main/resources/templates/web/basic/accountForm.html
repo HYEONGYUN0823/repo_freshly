@@ -30,7 +30,7 @@
                     <div class="col-xl-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                               <form method="post" id="form">
+                               <form method="post" id="form" novalidate>
                                     <div>
                                         <section>
                                             <div class="row">
@@ -57,7 +57,8 @@
                                                     <div class="form-group">
                                                         <label for="acName" class="text-label">거래처 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="acName" name="acName" th:value="${item?.acName}" class="form-control">
+	                                                        <input type="text" id="acName" name="acName" th:value="${item?.acName}" class="form-control" required>
+															 <div class="invalid-feedback" id ="acNameError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -66,14 +67,11 @@
                                                         <label for="acCategory" class="text-label">거래처 카테고리</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <select
-																id="acCategory" name="acCategory" class="form-control">
+																id="acCategory" name="acCategory" class="form-control" required>
 																	<option value="">선택하세요</option>
-																	<option th:each="list: ${list1}" th:value="${list.seq}" th:text="${list.cdName}" th:selected = "${list.seq ==item?.acCategory}">1</option>
-																	<!-- <option th:each="list : ${listCodeGroup}"
-																		th:value="${list.factory_seq}" th:text="${list.factory_seq}"
-																		th:selected="${list.factory_seq == item?.factory_seq}">
-																	</option> -->
+																	<option th:each="list: ${list1}"  th:value="${list.seq}" th:text="${list.cdName}" th:selected = "${list.seq ==item?.acCategory}">1</option>
 															</select>
+															<div class="invalid-feedback" id ="acCategoryError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -82,7 +80,8 @@
                                                         <label for="acManagerName" class="text-label">거래처 담당자</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="acManagerName" name="acManagerName" th:value="${item?.acManagerName}" class="form-control">
+	                                                        	<input type="text" id="acManagerName" name="acManagerName" th:value="${item?.acManagerName}" class="form-control" required>
+																<div class="invalid-feedback" id ="acManagerNameError">Please select a valid state</div>
 															</div>
 														</div>
                                                     </div>
@@ -91,7 +90,8 @@
                                                     <div class="form-group">
                                                         <label for="acManagerTel" class="text-label">거래처 전화번호</label><span style="color: crimson;">*</span>
                                                         <div>
-														   <input type="text" id="acManagerTel" name="acManagerTel" th:value="${item?.acManagerTel}" class="form-control">
+														   <input type="text" id="acManagerTel" name="acManagerTel" th:value="${item?.acManagerTel}" class="form-control" required>
+														<div class="invalid-feedback" id ="acManagerTelError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -100,16 +100,17 @@
                                                         <label class="text-label" for="acAddress">거래처 주소</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <select
-																id="acAdress" name="acAddress" class="form-control">
+																id="acAddress" name="acAddress" class="form-control" required>
 																	<option value="">선택하세요</option>		
 																	<option th:each="list: ${list2}" th:value="${list.seq}" th:text="${list.cdName}" th:selected = "${list.seq ==item?.acAddress}">1</option>																
 															</select>
+															<div class="invalid-feedback" id ="acAddressError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="acAddressDetail">거래처 상세주소</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="acAddressDetail">거래처 상세주소</label>
                                                         <div>
 	                                                         <input type="text" id="acAddressDetail" name="acAddressDetail"  th:value="${item?.acAddressDetail}" class="form-control">
 														</div>
@@ -119,7 +120,8 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="acStartDate">거래 일자</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                       <input type="text"  class="form-control" id="acStartDate" name="acStartDate" th:value="${item?.acStartDate}"  required>
+	                                                       <input type="text"  class="form-control" id="acStartDate" name="acStartDate" th:value="${item?.acStartDate}" required>
+																<div class="invalid-feedback" id ="acStartDateError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -128,6 +130,7 @@
                                                         <label class="text-label" for="acEndDate">거래 종료일자</label><span style="color: crimson;">*</span>
                                                         <div>
 															<input type="text"  class="form-control" id="acEndDate" name="acEndDate" th:value="${item?.acEndDate}" required>
+															<div class="invalid-feedback" id ="acEndDateError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -136,16 +139,17 @@
                                                         <label class="text-label" for="acUseNy">거래처 사용여부</label><span style="color: crimson;">*</span>
                                                         <div>
                                                             <select
-																id="acUseNy" name="acUseNy" class="form-control">
+																id="acUseNy" name="acUseNy" class="form-control" required>
 																	<option value="">선택하세요</option>
 																	<option value="1" th:selected="${item?.acUseNy == 1  or acUseNy == null}" >사용</option>
                    													<option value="0" th:selected="${item?.acUseNy == 0}">미사용</option>
 															</select>
+                                                        	<div class="invalid-feedback" id ="acUseNyError">Please select a valid state</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
- 
+ 											</div>
                                         </section>
                                        
                                     </div>
@@ -191,7 +195,6 @@
     <script src="/web/template/vendor/jquery-steps/build/jquery.steps.min.js"></script>
     <script src="/web/template/vendor/jquery-validation/jquery.validate.min.js"></script>
     <!-- Form validate init -->
-    <script src="/web/template/js/plugins-init/jquery.validate-init.js"></script>
     
     
     
@@ -214,17 +217,158 @@
 	  	lang:'ko'
 	});
 
-	/* insert 또는 update */
+	/* insert 또는 update 벨리데이션 */
 	
 	document.getElementById("BtnInst").onclick = function(){
-    	if(seq.value == "0" || seq.value == "") {
-			form.action = "/web/basic/accountInsert";
-			form.submit();
-		}else {
-			form.action = "/web/basic/accountUpdate";
-			form.submit();
+		
+		
+		document.getElementById("acName").classList.remove("is-invalid");
+		document.getElementById("acName").classList.remove("is-valid");
+		
+	    document.getElementById("acCategory").classList.remove("is-invalid");
+	    document.getElementById("acCategory").classList.remove("is-valid");
+	   
+	    document.getElementById("acManagerName").classList.remove("is-invalid");
+	    document.getElementById("acManagerName").classList.remove("is-valid");
+	   
+	    document.getElementById("acManagerTel").classList.remove("is-invalid");
+	    document.getElementById("acManagerTel").classList.remove("is-valid");
+	    
+	   	document.getElementById("acAddress").classList.remove("is-invalid");
+	    document.getElementById("acAddress").classList.remove("is-valid"); 
+	    
+	    document.getElementById("acStartDate").classList.remove("is-invalid");
+	    document.getElementById("acStartDate").classList.remove("is-valid");
+	    
+	    document.getElementById("acEndDate").classList.remove("is-invalid");
+	    document.getElementById("acEndDate").classList.remove("is-valid");
+	    
+	    document.getElementById("acUseNy").classList.remove("is-invalid");
+	    document.getElementById("acUseNy").classList.remove("is-valid");
+	   
+		
+	    document.getElementById("acNameError").textContent = '';  		
+  		document.getElementById("acCategoryError").textContent = '';
+  		document.getElementById("acManagerNameError").textContent = '';
+ 		document.getElementById("acManagerTelError").textContent = '';
+ 		document.getElementById("acAddressError").textContent = '';
+ 		document.getElementById("acStartDateError").textContent = '';
+ 		document.getElementById("acEndDateError").textContent = '';
+ 		document.getElementById("acUseNyError").textContent = '';
+      	      
+		let isValid = true; 
+		
+		const name = document.getElementById("acName").value;
+		let n = /^[가-힣]{1,15}$/;
+		if(name == null || name == ""){
+			document.getElementById("acNameError").textContent = "이름을 넣어주세요.";
+			document.getElementById("acName").classList.add("is-invalid");
+			isValid = false;
+		}else if(!n.test(name)){
+			document.getElementById("acNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("acName").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acName").classList.add("is-valid");
+		}
+		
+		
+		const ca = document.getElementById("acCategory").value;
+		if(ca  == null || ca  == ""){
+			document.getElementById("acCategoryError").textContent = "카테고리를 선택해주세요";
+			document.getElementById("acCategory").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acCategory").classList.add("is-valid");
+		}
+			
+
+		const mname = document.getElementById("acManagerName").value;
+		if(mname == null || mname == ""){
+			document.getElementById("acManagerNameError").textContent = "이름을 넣어주세요.";
+			document.getElementById("acManagerName").classList.add("is-invalid");
+			isValid = false;
+		}else if(mname.trim() != mname){
+			document.getElementById("acManagerNameError").textContent = "앞 띄어쓰기를 제거해주세요.";
+			document.getElementById("acManagerName").classList.add("is-invalid");
+			isValid = false;
+		}else if(!n.test(mname)){
+			document.getElementById("acManagerNameError").textContent = "이름이 5글자를 초과했습니다.";
+			document.getElementById("acManagerName").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acManagerName").classList.add("is-valid");
+		}
+		
+		
+		const ad = document.getElementById("acAddress").value;
+		if(ad  == null || ad == ""){
+			document.getElementById("acAddressError").textContent = "카테고리를 선택해주세요";
+			document.getElementById("acAddress").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acAddress").classList.add("is-valid");
+		}
+		
+		
+		const start = document.getElementById("acStartDate").value;  
+		if(start == null || start == ""){
+			document.getElementById("acStartDateError").textContent = "날짜를 입력해주세요";
+			document.getElementById("acStartDate").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acStartDate").classList.add("is-valid");
+		}
+		
+		
+		const end= document.getElementById("acEndDate").value;  /* 뒷날짜보다 늦게 */
+		if(start == null || start == ""){
+			document.getElementById("acEndDateError").textContent = "날짜를 입력해주세요";
+			document.getElementById("acEndDate").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acEndDate").classList.add("is-valid");
+		}
+		
+		const phone = document.getElementById("acManagerTel").value;
+		let result = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+		if(phone == null || phone == ""){
+			document.getElementById("acManagerTelError").textContent = "전화번호를 넣어주세요.";
+			document.getElementById("acManagerTel").classList.add("is-invalid");
+			isValid = false;
+		}else if(!result.test(phone)){
+			document.getElementById("acManagerTelError").textContent = "전화번호 형식에 맞게 넣어주세요.";
+			document.getElementById("acManagerTel").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acManagerTel").classList.add("is-valid");
+		}
+		
+		
+		
+		const use = document.getElementById("acUseNy").value;
+		if(use  == null || use == ""){
+			document.getElementById("acUseNyError").textContent = "카테고리를 선택해주세요";
+			document.getElementById("acUseNy").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("acUseNy").classList.add("is-valid");
+		}
+		
+		
+		if(isValid){
+    		if(seq.value == "0" || seq.value == "") {
+				form.action = "/web/basic/accountInsert";
+				form.submit();
+			}else {
+				form.action = "/web/basic/accountUpdate";
+				form.submit();
+			}
 		}
     }
+	
+	
+	
 </script>
 
 </body>

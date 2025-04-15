@@ -5,7 +5,6 @@
 
 
 <body>
-
         <!--**********************************
             Content body start
         ***********************************-->
@@ -30,7 +29,7 @@
                     <div class="col-xl-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" id="form">
+                                <form method="post" id="form" novalidate>
                                     <div>
                                         <section>
                                             <div class="row">
@@ -57,7 +56,8 @@
                                                     <div class="form-group">
                                                         <label for="fcName" class="text-label">공장 이름</label><span style="color: crimson;">*</span>
                                                         <div>
-	                                                        <input type="text" id="fcName" name="fcName" th:value="${item?.fcName}" class="form-control">
+	                                                        <input type="text" id="fcName" name="fcName" th:value="${item?.fcName}" class="form-control" required>
+                                                    		<div class="invalid-feedback" id ="fcNameError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -70,7 +70,8 @@
                                                         <label for="fcManagerName" class="text-label">공장 담당자</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                       <div>
-	                                                        	<input type="text" id="fcManagerName" name="fcManagerName" th:value="${item?.fcManagerName}" class="form-control">
+	                                                        	<input type="text" id="fcManagerName" name="fcManagerName" th:value="${item?.fcManagerName}" class="form-control" required>
+																 <div class="invalid-feedback" id ="fcManagerNameError">Please select a valid state</div>
 															</div>
 														</div>
                                                     </div>
@@ -79,7 +80,8 @@
                                                     <div class="form-group">
                                                         <label for="fcTel" class="text-label">공장 전화번호</label><span style="color: crimson;">*</span>
                                                         <div>
-														   <input type="text" id="fcTel" name="fcTel" th:value="${item?.fcTel}" class="form-control">
+														   <input type="text" id="fcTel" name="fcTel" th:value="${item?.fcTel}" class="form-control" required>
+															<div class="invalid-feedback" id ="fcTelError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -88,18 +90,20 @@
                                                         <label class="text-label" for="fcAddress">공장 주소</label><span style="color: crimson;">*</span>
                                                         <div>
 	                                                        <select
-																id="fcAddress" name="fcAddress" class="form-control">
+																id="fcAddress" name="fcAddress" class="form-control" required>
 																	<option value="">선택하세요</option>		
 																	<option th:each="list: ${lists}" th:value="${list.seq}" th:text="${list.cdName}" th:selected = "${list.seq ==item?.fcAddress}">1</option>																	
 															</select>
+															<div class="invalid-feedback" id ="fcAddressError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
-                                                        <label class="text-label" for="fcAddressDetail">공장 상세주소</label><span style="color: crimson;">*</span>
+                                                        <label class="text-label" for="fcAddressDetail">공장 상세주소</label>
                                                         <div>
-	                                                         <input type="text" id="fcAddressDetail" name="fcAddressDetail" th:value="${item?.fcAddressDetail}" class="form-control">
+	                                                         <input type="text" id="fcAddressDetail" name="fcAddressDetail" th:value="${item?.fcAddressDetail}" class="form-control" required>
+															<div class="invalid-feedback" id ="fcAddressDetailError">Please select a valid state</div>
 														</div>
                                                     </div>
                                                 </div>
@@ -108,16 +112,17 @@
                                                         <label class="text-label" for="fcUseNy">공장 사용여부</label><span style="color: crimson;">*</span>
                                                         <div>
                                                             <select
-																id="acUseNy" name="fcUseNy" class="form-control">
+																id="fcUseNy" name="fcUseNy" class="form-control" required>
 																	<option value="">선택하세요</option>
 																	<option value="1" th:selected="${item?.fcUseNy == 1 || fcUseNy == null}">사용</option>
                    													<option value="0" th:selected="${item?.fcUseNy == 0}">미사용</option>
 															</select>
+															<div class="invalid-feedback" id ="fcUseNyError">Please select a valid state</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                              
-                                                
+                                            </div>
                                         </section>
                                        
                                     </div>
@@ -179,12 +184,106 @@
     
     <script type="text/javascript">
     document.getElementById("BtnInst").onclick = function(){
-    	if(seq.value == "0" || seq.value == "") {
-			form.action = "/web/basic/factoryInsert";
-			form.submit();
-		}else {
-			form.action = "/web/basic/factoryUpdate";
-			form.submit();
+    	
+    	document.getElementById("fcName").classList.remove("is-invalid");
+		document.getElementById("fcName").classList.remove("is-valid");
+		
+	    document.getElementById("fcManagerName").classList.remove("is-invalid");
+	    document.getElementById("fcManagerName").classList.remove("is-valid");
+	   
+	    document.getElementById("fcTel").classList.remove("is-invalid");
+	    document.getElementById("fcTel").classList.remove("is-valid");
+	   
+	    document.getElementById("fcAddress").classList.remove("is-invalid");
+	    document.getElementById("fcAddress").classList.remove("is-valid");
+	    
+	   	document.getElementById("fcUseNy").classList.remove("is-invalid");
+	    document.getElementById("fcUseNy").classList.remove("is-valid"); 
+	    
+	    document.getElementById("fcNameError").textContent = '';  		
+  		document.getElementById("fcManagerNameError").textContent = '';
+  		document.getElementById("fcTelError").textContent = '';
+ 		document.getElementById("fcAddressError").textContent = '';
+ 		document.getElementById("fcUseNyError").textContent = '';
+    	
+		let isValid = true; 
+		
+		const name = document.getElementById("fcName").value;
+		let n = /^[가-힣]{1,15}$/;
+		if(name == null || name == ""){
+			document.getElementById("fcNameError").textContent = "이름을 넣어주세요.";
+			document.getElementById("fcName").classList.add("is-invalid");
+			isValid = false;
+		}else if(!n.test(name)){
+			document.getElementById("fcNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("fcName").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("fcName").classList.add("is-valid");
+		}
+			
+
+		const mname = document.getElementById("fcManagerName").value;
+		if(mname == null || mname == ""){
+			document.getElementById("fcManagerNameError").textContent = "이름을 넣어주세요.";
+			document.getElementById("fcManagerName").classList.add("is-invalid");
+			isValid = false;
+		}else if(mname.trim() != mname){
+			document.getElementById("fcManagerNameError").textContent = "앞 띄어쓰기를 제거해주세요.";
+			document.getElementById("fcManagerName").classList.add("is-invalid");
+			isValid = false;
+		}else if(!n.test(mname)){
+			document.getElementById("fcManagerNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("fcManagerName").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("fcManagerName").classList.add("is-valid");
+		}
+		
+
+		const phone = document.getElementById("fcTel").value;
+		let result = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+		if(phone == null || phone == ""){
+			document.getElementById("fcTelError").textContent = "전화번호를 넣어주세요.";
+			document.getElementById("fcTel").classList.add("is-invalid");
+			isValid = false;
+		}else if(!result.test(phone)){
+			document.getElementById("fcTelError").textContent = "전화번호 형식에 맞게 넣어주세요.";
+			document.getElementById("fcTel").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("fcTel").classList.add("is-valid");
+		}
+		
+			
+		const ad = document.getElementById("fcAddress").value;
+		if(ad  == null || ad == ""){
+			document.getElementById("fcAddressError").textContent = "카테고리를 선택해주세요";
+			document.getElementById("fcAddress").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("fcAddress").classList.add("is-valid");
+		}
+		
+		const use = document.getElementById("fcUseNy").value;
+		if(use  == null || use == ""){
+			document.getElementById("fcUseNyError").textContent = "카테고리를 선택해주세요";
+			document.getElementById("fcUseNy").classList.add("is-invalid");
+			isValid = false;
+		}else{
+			document.getElementById("fcUseNy").classList.add("is-valid");
+		}
+		
+
+		
+		if(isValid){
+    		if(seq.value == "0" || seq.value == "") {
+				form.action = "/web/basic/factoryInsert";
+				form.submit();
+			}else {
+				form.action = "/web/basic/factoryUpdate";
+				form.submit();
+			}
 		}
     }
     </script>
