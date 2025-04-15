@@ -20,14 +20,14 @@ public class DeliveryController {
 	@Autowired
 	OrderService orderservice;
 	
-	// 모바일 배달 리스트 화면 입니다.
-	@RequestMapping(value ="/mob/account/deliverylist")
+	// 앱 배달 리스트 화면 입니다.
+	@RequestMapping(value ="/web/delivery/deliverylist")
 	public String mobdeliverylist(Model model) {
 		model.addAttribute("list", service.selectDeliveryList());
-		return "mobile/account/deliverylist";
+		return "web/delivery/deliverylist";
 	}
 	
-	@RequestMapping(value ="/mob/account/deliveryForm")
+	@RequestMapping(value ="/web/delivery/deliveryForm")
 	public String mobdeliveryForm(@ModelAttribute("vo") BasicVo vo, DeliveryDto dto,Model model) {
 		model.addAttribute("acOrder", orderservice.selectOrderList());
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
@@ -35,19 +35,19 @@ public class DeliveryController {
 		else {
 			model.addAttribute("item", service.selectDeliveryView(dto));
 		}
-		return "mobile/account/deliveryForm";
+		return "web/delivery/deliveryForm";
 	}
 	
-	@RequestMapping(value ="/mob/account/deliveryInsert")
+	@RequestMapping(value ="/web/delivery/deliveryInsert")
 	public String mobdeliveryInsert(DeliveryDto dto) {
 		service.deliveryInsert(dto);
-		return "redirect:/mob/account/deliverylist";
+		return "redirect:/web/delivery/deliverylist";
 	}
 	
-	@RequestMapping(value ="/mob/account/deliveryUpdate")
+	@RequestMapping(value ="/web/delivery/deliveryUpdate")
 	public String mobdeliveryUpdate(DeliveryDto dto) {
 		service.deliveryUpdate(dto);
-		return "redirect:/mob/account/deliverylist";
+		return "redirect:/web/delivery/deliverylist";
 	}
 	
 	
@@ -75,11 +75,11 @@ public class DeliveryController {
 	
 	
 	
-	// 앱 배달 리스트 화면 입니다.
-	@RequestMapping(value ="/web/account/deliveryList")
+	// 모바일 배달 리스트 화면 입니다.
+	@RequestMapping(value ="/mob/account/deliveryList")
 	public String webdeliverylist(Model model) {
 		model.addAttribute("list", service.selectDeliveryList());
-		return "web/account/deliveryList";
+		return "mob/account/deliveryList";
 	}
 	
 }

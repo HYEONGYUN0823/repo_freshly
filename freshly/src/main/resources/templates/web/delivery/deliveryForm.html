@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{web/include/head :: head}"></div>
+
+
+<body>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>배송 관리</h4>
+<!--                             <p class="mb-0">공장관리 등록폼</p> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">기본</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">배송 관리</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                               <form method="post" id="form">
+                                    <div>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-4">
+                                                	<input type="hidden" name="seq" th:value="${vo.seq}">
+                                 					<label class="form-label">seq</label>
+                                 					<input 
+	                                 					type="text" 
+	                                					id="seq" 
+	                                 					name="seq" 
+	                                 					th:value="${item?.seq}" 
+	                                 					maxlength="20" 
+	                                 					placeholder="자동생성" 
+	                                 					disabled class="form-control"/>
+                                                    
+                                                </div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <label class="form-label" for="acOrder_seq">주문번호</label>
+                                                    <input type="hidden" name="acOrder_seq" th:value="${item?.acOrder_seq}">
+                                 					<select id="acOrder_seq" name="acOrder_seq" class="form-control" th:disabled="${item?.acOrder_seq != null}">
+														<option value="" selected hidden disabled>선택하세요</option>
+														<option th:each="ac : ${acOrder}"
+																th:value="${ac.seq}" 
+																th:text="${ac.seq}" 
+																th:selected="${ac.seq == item?.acOrder_seq}">
+														</option>
+													</select>
+                                               	</div>
+                                                <div class="col-lg-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">배송상태</label>
+														<select id="deliveryStatus" name="deliveryStatus" class="form-control">
+															<option value="" selected hidden disabled>선택하세요</option>
+															<option value="1" th:selected ="${item?.deliveryStatus == 1}">접수</option>
+															<option value="2" th:selected ="${item?.deliveryStatus == 2}">진행중</option>
+															<option value="3" th:selected ="${item?.deliveryStatus == 3}">완료</option>
+															<option value="4" th:selected ="${item?.deliveryStatus == 4}">취소</option>
+														</select>
+                                                    </div>
+                                                </div>
+                                                
+												<input type="hidden"  
+														id="deliveryDelNy" name="deliveryDelNy" 
+														th:value="0" 
+														class="form-control" />
+                              							<div></div>
+                              				</div>
+                                        </section>
+                                       
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/basic/accountList'"><i class="fa-solid fa-list"></i></button>
+                                    <button type="button" id="BtnInst" class="btn btn-primary" style="float: right;"><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="/web/template/vendor/global/global.min.js"></script>
+    <script src="/web/template/js/quixnav-init.js"></script>
+    <script src="/web/template/js/custom.min.js"></script>
+    
+
+
+    <script src="/web/template/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/web/template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/web/template/js/plugins-init/jquery.validate-init.js"></script>
+    
+    
+    
+
+
+    <!-- Form step init -->
+    <script src="/web/template/js/plugins-init/jquery-steps-init.js"></script>
+    
+    <div th:replace="~{web/include/footer :: footer}"></div>
+    
+    <script type="text/javascript">
+    
+    /* 데이트 타임 피커 */
+	jQuery('#acStartDate').datetimepicker({
+		format:'Y.m.d',
+		lang:'ko'
+		});
+	jQuery('#acEndDate').datetimepicker({
+		format:'Y.m.d',
+	  	lang:'ko'
+	});
+
+	/* insert 또는 update */
+	
+	document.getElementById("BtnInst").onclick = function(){
+    	if(seq.value == "0" || seq.value == "") {
+			form.action = "/web/delivery/deliveryInsert";
+			form.submit();
+		}else {
+			form.action = "/web/delivery/deliveryUpdate";
+			form.submit();
+		}
+    }
+</script>
+
+</body>
+
+</html>
