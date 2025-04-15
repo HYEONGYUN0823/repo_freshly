@@ -49,10 +49,7 @@ public class DeliveryController {
 	
 	@RequestMapping(value ="/web/delivery/deliveryUpdate")
 	public String mobdeliveryUpdate(@RequestParam("aoseq") String ao,DeliveryDto dto) {
-		System.out.println(ao);
 		dto.setAcOrder_seq(ao);
-		System.out.println(dto.getAcOrder_seq());
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		service.deliveryUpdate(dto);
 		return "redirect:/web/delivery/deliverylist";
 	}
