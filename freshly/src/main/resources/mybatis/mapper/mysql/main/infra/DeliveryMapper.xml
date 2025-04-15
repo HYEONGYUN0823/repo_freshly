@@ -44,7 +44,7 @@
 		)values(
 			#{seq}
 			,#{acOrder_seq}
-			,#{deliveryStatus}
+			,1
 			,now()
 			,0
 		)
