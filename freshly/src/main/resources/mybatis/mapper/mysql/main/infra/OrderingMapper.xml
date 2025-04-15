@@ -78,6 +78,7 @@
 		where
 		    1=1
 		    AND a.odDelNy = 0
+		    AND a.odStatus = 5
 		ORDER BY a.seq desc
 	</select>
 	
@@ -103,6 +104,7 @@
 		where
 		    1=1
 		    AND a.odDelNy = 0
+		    AND a.odStatus = 6
 		ORDER BY a.seq desc
 	</select>
 	
