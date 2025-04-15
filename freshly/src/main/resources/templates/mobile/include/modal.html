@@ -27,23 +27,23 @@
 
 <!-- 삭제 모달 -->
 
-<div class="modal" id="uelModal" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog">
+<div class="modal fade" id="modalConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">삭제 확인</h5>
-					<button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
-    <i class="fas fa-times fa-lg"></i>
-  </button>
+				<h5 class="modal-title" id="modalConfirmTitle">title</h5>
+				<button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
+    <i class="fas fa-times fa-lg"></i></button>
 			</div>
-			<div class="modal-body">
-				<p>삭제하시겠습니까?</p>
+			<div class="modal-body" id="modalConfirmBody">
+				body
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btnUelSubmit" class="btn btn-danger">삭제</button>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-danger btn_custom" name="" id="btnModalDelete"><i class="bi bi-x-lg"></i></button>
+				<button type="button" class="btn btn-danger btn_custom" name="" id="btnModalUelete">삭제</button>
 			</div>
 		</div>
 	</div>
-</div>
+  </div>
 </th:block>

@@ -24,5 +24,7 @@ public interface OrderingDao {
 	
 	public int update(OrderingDto dto);
 	
+	public int completeUpdate(@Param("seqs")List<Integer> seqs);
+	
 	public int uelete(@Param("seqs")List<Integer> seqs);
 }

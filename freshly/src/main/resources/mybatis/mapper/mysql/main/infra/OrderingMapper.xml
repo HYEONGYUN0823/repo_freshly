@@ -27,6 +27,7 @@
 		where
 		    1=1
 		    AND a.odDelNy = 0
+		    AND a.odStatus = 1
 		ORDER BY a.seq desc
 	</select>
 	
@@ -51,8 +52,8 @@
 		 	JOIN grocery gc ON gc.seq = a.grocery_seq
 		where
 		    1=1
-		    AND a.odStatus = 2
 		    AND a.odDelNy = 0
+		    AND a.odStatus = 2
 		ORDER BY a.seq desc
 	</select>
 	
@@ -78,7 +79,7 @@
 		where
 		    1=1
 		    AND a.odDelNy = 0
-<!-- 		    AND a.odStatus = 5 -->
+		    AND a.odStatus = 1
 		ORDER BY a.seq desc
 	</select>
 	
@@ -104,7 +105,7 @@
 		where
 		    1=1
 		    AND a.odDelNy = 0
-<!-- 		    AND a.odStatus = 6 -->
+		    AND a.odStatus = 2
 		ORDER BY a.seq desc
 	</select>
 	
@@ -148,11 +149,20 @@
 		UPDATE ordering SET
 			odStatus = #{odStatus},
 			odQuantity = #{odQuantity},
-			odDelNy = 0,
 			factory_seq = #{factory_seq},
 			member_seq = #{member_seq},
 			grocery_seq = #{grocery_seq}
 		WHERE seq = #{seq}
+	</update>
+	
+	<update id="completeUpdate">
+		UPDATE ordering SET
+			odStatus = 2
+			,odEndDateTime = now()
+		where seq in
+    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
+        #{seq}
+    </foreach>
 	</update>
 			
 	<update id="uelete">

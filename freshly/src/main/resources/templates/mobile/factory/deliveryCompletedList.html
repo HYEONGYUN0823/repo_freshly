@@ -64,6 +64,7 @@
                                			<th style="text-align: center;">출고완료번호</th>
                                			<th style="text-align: center;">공장</th>
                                			<th style="text-align: center;">출고 상태</th>
+                               			<th style="text-align: center;">관리자 이름</th>
                                			<th style="text-align: center;">식료품 이름</th>
                                			<th style="text-align: center;">수량</th>
                               			<th style="text-align: center;">출고일</th>
@@ -79,10 +80,7 @@
                                           </div>
                                        </td>
                                        <td style="text-align: center;">#</td>
-										<td style="text-align: center;" class="seq align-middle fw-semi-bold"><a
-											href="javascript:void(0);" th:text="${item.seq}"
-											th:attr="onclick=|goForm('${item.seq}')|"> </a>
-										</td>
+										<td style="text-align: center;" th:text ="${item.seq}"></td>
 										<td style="text-align: center;" th:text ="${item.fcName}"></td>
 										<td style="text-align: center;" th:text ="${item.odStatus}"></td>
 										<td style="text-align: center;" th:text ="${item.mbName}"></td>
@@ -161,7 +159,7 @@
          
 <script type="text/javascript">
 
-	let goUrlXdmForm = "/mob/factory/receivingForm";
+	let goUrlXdmForm = "";
 	let goUrlXdmUele = "";
 
 	let seq = document.querySelector("input[name=seq]");

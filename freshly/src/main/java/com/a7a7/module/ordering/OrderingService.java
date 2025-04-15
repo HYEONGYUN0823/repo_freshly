@@ -22,11 +22,11 @@ public class OrderingService {
 	}
 	
 	public List<OrderDto> selectForwardingWaitingList(){
-		return dao.selectOrderingList();
+		return dao.selectForwardingWaitingList();
 	}
 	
 	public List<OrderDto> selectDeliveryCompletedList(){
-		return dao.selectReceivingList();
+		return dao.selectDeliveryCompletedList();
 	}
 	
 	public OrderingDto selectOne(OrderingDto dto) {
@@ -39,6 +39,10 @@ public class OrderingService {
 	
 	public int update(OrderingDto dto) {
 		return dao.update(dto);
+	}
+	
+	public int completeUpdate(List<Integer> seqs) {
+		return dao.completeUpdate(seqs);
 	}
 	
 	public int uelete(List<Integer> seqs) {

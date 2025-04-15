@@ -7,6 +7,7 @@
          <main class="main-content-wrapper">
          <form name="formList" id="formList" method="post" autocomplete="off">
          <input type="hidden" name="seq">
+         <input type="hidden" name="odDelNy">
             <div class="container">
                <!-- row -->
                <div class="row mb-8">
@@ -67,9 +68,10 @@
                                			<th style="text-align: center;">출고대기번호</th>
                                			<th style="text-align: center;">공장</th>
                                			<th style="text-align: center;">출고 상태</th>
+                               			<th style="text-align: center;">관리자 이름</th>
                                			<th style="text-align: center;">식료품 이름</th>
                                			<th style="text-align: center;">수량</th>
-                              			<th style="text-align: center;">출고일</th>
+                              			<th style="text-align: center;">발주일</th>
                               			<th></th>
                                     </tr>
                                  </thead>
@@ -82,10 +84,7 @@
                                           </div>
                                        </td>
                                        <td style="text-align: center;">#</td>
-										<td style="text-align: center;" class="seq align-middle fw-semi-bold"><a
-											href="javascript:void(0);" th:text="${item.seq}"
-											th:attr="onclick=|goForm('${item.seq}')|"> </a>
-										</td>
+										<td style="text-align: center;" th:text ="${item.seq}"></td>
 										<td style="text-align: center;" th:text ="${item.fcName}"></td>
 										<td style="text-align: center;" th:text ="${item.odStatus}"></td>
 										<td style="text-align: center;" th:text ="${item.mbName}"></td>
@@ -148,14 +147,74 @@
 						        <button type="button" class="btn btn-success me-2">
 						            <i class="fa-regular fa-file-excel"></i>
 						        </button>
-						        <button type="button" id="btnForm" class="btn btn-primary">
-						            <i class="fa-solid fa-plus"></i>
+						        <button type="button" id="btnForwarding" class="btn btn-primary">
+						            <i class="fa-solid fa-rocket"></i>
 						        </button>
 						    </div>
 						</div>
 						
-						<div th:replace="~{mobile/include/modal :: modal}"></div>
-						
+            <!-- ✅ 삭제 모달 -->
+            <div class="modal fade" id="modalConfirmUelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalConfirmUeleteLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalConfirmTitleUelete">확 인</h5>
+                            <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
+                                <i class="fas fa-times fa-lg"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="modalConfirmBodyUelete">
+                            해당 데이터를 삭제하시겠습니까 ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-danger btn_custom" id="btnModalUelete">삭제</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ 출고 모달 -->
+            <div class="modal fade" id="modalConfirmForwarding" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalConfirmForwardingLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">출고 확인</h5>
+                            <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
+                                <i class="fas fa-times fa-lg"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            선택한 항목을 출고 처리하시겠습니까?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-danger btn_custom" id="btnModalForwarding">출고</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<!-- ✅ 알림 모달 -->
+			<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="alertModalLabel">알림</h5>
+			        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
+			          <i class="fas fa-times fa-lg"></i>
+			        </button>
+			      </div>
+			      <div class="modal-body" id="alertModalBody">
+			        <!-- 메시지가 여기 들어갑니다 -->
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-outline-secondary btn-sm btn_custom" data-bs-dismiss="modal">확인</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+					  
                      </div>
                   </div>
                </div>
@@ -164,55 +223,65 @@
          </main>
          
 <script type="text/javascript">
+    let goUrlXdmUele = "/mob/factory/forwardingWaitingUele";
+    let goUrlXdmUpdt = "/mob/factory/forwardingWaitingUpdt";
 
-// 	let goUrlXdmForm = "/mob/factory/receivingForm";
-	let goUrlXdmUele = "/mob/factory/deliveryCompletedList";
+    let seq = document.querySelector("input[name=seq]");
+    let form = document.getElementById("formList");
 
-	let seq = document.querySelector("input[name=seq]");
-	let form = document.getElementById("formList");
-	
-	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
-	}
+    function showAlertModal(message) {
+        const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+        document.getElementById('alertModalBody').innerText = message;
+        alertModal.show();
+    }
 
-	goForm = function (keyValue) {
-		
-	    seq.value = keyValue;
-	    form.action = goUrlXdmForm;
-	    form.submit();
-	}
-	
-	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
-	if(document.getElementById("btnUel")){
-		document.getElementById("btnUel").onclick = function () {
-			document.querySelector("#modalConfirmTitle").textContent = "확 인";
-			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-			document.querySelector("#btnModalUelete").style.display = '';
-			document.querySelector("#btnModalDelete").style.display = 'none';
-			$("#modalConfirm").modal("show");      	
-			}
-		}
+    // 삭제 버튼 클릭 시
+    document.getElementById("btnUel").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        if (selectedElements.length === 0) {
+            showAlertModal("삭제할 항목을 선택해주세요.");
+            return false;
+        } else {
+            new bootstrap.Modal(document.getElementById('modalConfirmUelete')).show();
+        }
+    };
 
-		document.getElementById("btnModalUelete").onclick = function () {
-		
-			const query = 'input[name="itemCheckbox"]:checked';
-			const selectedElements = document.querySelectorAll(query);
-			//체크박스 체크된 항목의 개수
-			const selectedElementsCnt = selectedElements.length;
-			if(selectedElementsCnt == 0){
-		      alert("삭제할 항목을 선택해주세요.");
-		      return false;
-			}else{
-				const selectedValues = [];
-				selectedElements.forEach(element => {
-	           	 selectedValues.push(element.value);
-	        });
-			
-				seq.value = selectedValues.join(',');
-				form.action = goUrlXdmUele;
-				form.submit();
-			}
-		}
+    // 삭제 모달 내부 삭제 버튼 클릭 시
+    document.getElementById("btnModalUelete").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        const selectedValues = Array.from(selectedElements).map(el => el.value);
+        if (selectedValues.length === 0) {
+            showAlertModal("삭제할 항목을 선택해주세요.");
+            return false;
+        }
+        seq.value = selectedValues.join(',');
+        form.action = goUrlXdmUele;
+        form.submit();
+    };
+
+    // 출고 버튼 클릭 시
+    document.getElementById("btnForwarding").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        if (selectedElements.length === 0) {
+            showAlertModal("출고할 항목을 선택해주세요.");
+            return false;
+        } else {
+            new bootstrap.Modal(document.getElementById('modalConfirmForwarding')).show();
+        }
+    };
+
+    // 출고 모달 내부 출고 버튼 클릭 시
+    document.getElementById("btnModalForwarding").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        const selectedValues = Array.from(selectedElements).map(el => el.value);
+        if (selectedValues.length === 0) {
+            showAlertModal("출고할 항목을 선택해주세요.");
+            return false;
+        }
+        seq.value = selectedValues.join(',');
+        form.action = goUrlXdmUpdt;
+        form.submit();
+    };
 </script>
 
     <div th:replace = "~{mobile/include/footer :: footer}"></div>

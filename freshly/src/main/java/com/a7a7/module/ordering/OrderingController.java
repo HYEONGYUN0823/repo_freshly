@@ -1,8 +1,9 @@
 package com.a7a7.module.ordering;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,25 +27,49 @@ public class OrderingController {
     @RequestMapping(value ="/mob/factory/forwardingWaitingList")
     public String mobReceivingList(Model model) {
         model.addAttribute("list", service.selectForwardingWaitingList());
+        
         return "mobile/factory/forwardingWaitingList";
     }
-    
-	@RequestMapping(value = "/mob/factory/forwardingWaitingUele")
-	public String forwardingWaitingUele(@RequestParam("seq") List<Integer> seqList) {
-		service.uelete(seqList);
-		
-		return "redirect:/mobile/factory/forwardingWaitingList";
-	}
+
+    @RequestMapping(value = "/mob/factory/forwardingWaitingUpdt")
+    public String forwardingWaitingUpdt(@RequestParam("seq") String seq) {
+    	List<Integer> seqList = Arrays.stream(seq.split(","))
+    			.map(String::trim)
+    			.map(Integer::parseInt)
+    			.collect(Collectors.toList());
+    	
+    	service.completeUpdate(seqList);
+    	
+    	return "redirect:/mob/factory/forwardingWaitingList";
+    }
+
+    @RequestMapping(value = "/mob/factory/forwardingWaitingUele")
+    public String forwardingWaitingUele(@RequestParam("seq") String seq) {
+        List<Integer> seqList = Arrays.stream(seq.split(","))
+                                      .map(String::trim)
+                                      .map(Integer::parseInt)
+                                      .collect(Collectors.toList());
+
+        service.uelete(seqList);
+
+        return "redirect:/mob/factory/forwardingWaitingList";
+    }
     
     // 출고완료 목록
     @RequestMapping(value ="/mob/factory/deliveryCompletedList")
     public String deliveryCompletedList(Model model) {
     	model.addAttribute("list", service.selectDeliveryCompletedList());
+    	
     	return "mobile/factory/deliveryCompletedList";
     }
     
 	@RequestMapping(value = "/mob/factory/deliveryCompletedUele")
-	public String deliveryCompletedUele(@RequestParam("seq") List<Integer> seqList) {
+	public String deliveryCompletedUele(@RequestParam("seq") String seq) {
+		List<Integer> seqList = Arrays.stream(seq.split(","))
+									  .map(String::trim)
+									  .map(Integer::parseInt)
+									  .collect(Collectors.toList());
+		
 		service.uelete(seqList);
 		
 		return "redirect:/mobile/factory/deliveryCompletedList";
@@ -54,6 +79,7 @@ public class OrderingController {
 	@RequestMapping(value ="/mob/factory/OrderingList")
 	public String mobOrderingList(Model model) {
 		model.addAttribute("list", service.selectOrderingList());
+		
 		return "mobile/factory/OrderingList";
 	}
 	
@@ -61,6 +87,7 @@ public class OrderingController {
 	@RequestMapping(value ="/web/factory/OrderingList")
 	public String webOrderingList(Model model) {
 		model.addAttribute("list", service.selectOrderingList());
+		
 		return "web/factory/OrderingList";
 	}
 	
