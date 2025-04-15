@@ -1,5 +1,8 @@
 package com.a7a7.module.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CodeDto {
 
 	private String seq;
@@ -12,7 +15,8 @@ public class CodeDto {
 	
 	private String cgName;
 	
-	
+//	for cache
+	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
 	
 	
 	public String getSeq() {
