@@ -46,7 +46,7 @@
 	
 	<insert id="insert">
 		INSERT INTO codegroup(
-			cgName,
+			cgName
 			,cgUseNy
 			,cgDelNy
 			,cgRegDateTime
