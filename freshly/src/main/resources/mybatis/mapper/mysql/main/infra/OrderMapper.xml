@@ -31,6 +31,7 @@
 			,a.grocery_seq
 			,gc.gcName
 			,gc.gcPrice
+			,gc.gcStock
 			,(a.aoQuantity * gc.gcPrice) AS aoTotal
 			,a.member_seq
 			,mb.mbName

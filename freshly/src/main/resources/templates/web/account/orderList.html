@@ -46,9 +46,10 @@
                                        			<th style="text-align: center;">식료품 가격</th>
                                        			<th style="text-align: center;">주문 개수</th>
                                        			<th style="text-align: center;">총 가격</th>
-                                       			<th style="text-align: center;">주문 상태</th>
                                       			<th style="text-align: center;">주문 시간</th>
                                       			<th style="text-align: center;">담당자</th>
+                                      			<th style="text-align: center;">주문 상태</th>
+                                      			<th style="text-align: center;">처리</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -60,14 +61,27 @@
                                       			<td style="text-align: center;" th:text ="${item.gcPrice}"></td>
                                       			<td style="text-align: center;" th:text ="${item.aoQuantity}"></td>
                                       			<td style="text-align: center;" th:text ="${item.aoTotal}"></td>
-                                      			
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 1}">주문 접수</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}">진행중</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">주문 완료</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 4}">주문 취소</td>
-                                      			
                                        			<td style="text-align: center;" th:text ="${item.aoDateTime}"></td>
                                        			<td style="text-align: center;" th:text ="${item.mbName}"></td>
+                                       			
+                                       			<!-- 주문 상태 -->
+                                       			<td style="text-align: center;" th:if="${item.aoStatus == 1}">주문 접수</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}">발주중</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">배송 대기</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 4}">배송중</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 5}">배송 완료</td>
+                                      			
+                                      			<!-- 주문 처리 -->
+                                       			<td style="text-align: center;" th:if="${item.aoStatus == 1}">
+                                       				<button type="button" class="btn btn-google-plus" id="btnOrdering" th:if="${item.gcStock - item.aoQuantity < 0}">발주</button>
+                                       				<button type="button" class="btn btn-google" id="btnDelivery" th:if="${item.gcStock - item.aoQuantity >= 0}">배송</button>
+                                       			</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}"></td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">
+                                      				<button type="button" class="btn btn-google" id="btnDelivery">배송</button>
+                                      			</td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 4}"></td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 5}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -119,22 +133,32 @@
 
 <script type="text/javascript">
 
-// 상세주문 이동
-let seq = document.querySelector("input[name=formSeq]");
-let form = document.getElementById("formList");
-
-let goUrlXdmForm = "/web/account/orderForm";
-let goUrlXdmUele = "";
-
-document.getElementById("btnForm").onclick = function () {
-    goForm(0);
-}
-
-goForm = function(keyValue) {
-    seq.value = keyValue;
-    form.action = goUrlXdmForm;
-    form.submit();
-}
+	// 상세주문 이동
+	let seq = document.querySelector("input[name=formSeq]");
+	let form = document.getElementById("formList");
+	
+	let goUrlXdmForm = "/web/account/orderForm";
+	let goUrlXdmUele = "";
+	
+	document.getElementById("btnForm").onclick = function () {
+	    goForm(0);
+	}
+	
+	goForm = function(keyValue) {
+	    seq.value = keyValue;
+	    form.action = goUrlXdmForm;
+	    form.submit();
+	}
+	
+	// 발주 Ajax
+	$('#btnOrdering').onclick(function(seq){
+		
+		$.ajax({
+			type:"POST"
+			,url:""
+		});
+	
+	});
 	
 
 </script>

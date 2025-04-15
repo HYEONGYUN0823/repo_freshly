@@ -72,7 +72,6 @@
 	
 	<insert id="insert">
 		INSERT INTO ordering (
-			seq,
 			odStatus,
 			odStartDateTime,
 			odQuantity,
@@ -81,11 +80,10 @@
 			member_seq,
 			grocery_seq
 		) values (
-			#{seq},
-			#{odStatus},
+			1,
 			now(),
 			#{odQuantity},
-			#{odDelNy},
+			0,
 			#{factory_seq},
 			#{member_seq},
 			#{grocery_seq}

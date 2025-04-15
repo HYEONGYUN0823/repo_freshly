@@ -21,6 +21,7 @@ public class OrderDto {
 	// grocery
 	private String gcName;
 	private Integer gcPrice;
+	private Integer gcStock;
 	
 	// member
 	private String mbName;
@@ -103,6 +104,12 @@ public class OrderDto {
 	}
 	public void setMbName(String mbName) {
 		this.mbName = mbName;
+	}
+	public Integer getGcStock() {
+		return gcStock;
+	}
+	public void setGcStock(Integer gcStock) {
+		this.gcStock = gcStock;
 	}
 	
 	
