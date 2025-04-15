@@ -86,7 +86,9 @@
                                        <td style="text-align: center;">#</td>
 										<td style="text-align: center;" th:text ="${item.seq}"></td>
 										<td style="text-align: center;" th:text ="${item.fcName}"></td>
-										<td style="text-align: center;" th:text ="${item.odStatus}"></td>
+										<td style="text-align: center;">
+										    <span th:if="${item.odStatus == 1}">출고 대기</span>
+										</td>
 										<td style="text-align: center;" th:text ="${item.mbName}"></td>
 										<td style="text-align: center;" th:text ="${item.gcName}"></td>
 										<td style="text-align: center;" th:text ="${item.odQuantity}"></td>

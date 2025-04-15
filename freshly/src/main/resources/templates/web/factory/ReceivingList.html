@@ -65,7 +65,9 @@
 													<a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"> </a>
 												</td>
 										        <td style="text-align: center;" th:text ="${item.fcName}"></td>
-										        <td style="text-align: center;" th:text ="${item.odStatus}"></td>
+										        <td style="text-align: center;">
+												    <span th:if="${item.odStatus == 2}">입고 완료</span>
+												</td>
 										        <td style="text-align: center;" th:text ="${item.mbName}"></td>
 												<td style="text-align: center;" th:text ="${item.gcName}"></td>
 												<td style="text-align: center;" th:text ="${item.odQuantity}"></td>
