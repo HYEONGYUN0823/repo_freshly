@@ -36,14 +36,12 @@
 	
 	<insert id ="deliveryInsert">
 		insert into delivery(
-			seq
-			,acOrder_seq
+			acOrder_seq
 			,deliveryStatus
 			,deliveryStartDateTime
 			,deliveryDelNy
 		)values(
-			#{seq}
-			,#{acOrder_seq}
+			#{acOrder_seq}
 			,1
 			,now()
 			,0

@@ -77,19 +77,22 @@ public class OrderController {
 		
 		return "redirect:/web/account/orderList";
 	}
-		
 	
 	// 배송 Insert 
 	@RequestMapping(value = "/web/account/orderModalInst")
-	public String orderModalInst(@RequestParam("seq") String seq) {
-		
-		OrderDto dto = service.selectOneOrder(seq);
-		dto.setAoStatus(2);
-		service.update(dto);
+	public String orderModalInst(@RequestParam("formSeq") List<String> seqList) {
 		
 		DeliveryDto deliveryDto = new DeliveryDto();
-		deliveryDto.setSeq(seq);
-		deliveryService.deliveryInsert(deliveryDto);
+		
+		for(String seq : seqList) {
+			
+			OrderDto dto = service.selectOneOrder(seq);
+			dto.setAoStatus(2);
+			service.update(dto);
+			
+			deliveryDto.setAcOrder_seq(seq);
+			deliveryService.deliveryInsert(deliveryDto);
+		}
 		
 		return "redirect:/web/account/orderList";
 	}

@@ -36,7 +36,7 @@
                                 	<h4 class="card-title">주문 목록</h4>
                                 </div>
                                 <div class="col text-right">
-                                	<button type="button" class="btn btn-google" id="btnDelivery">배송</button>
+                                	<button type="button" class="btn btn-google" id="btnDeli">배송</button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -46,7 +46,9 @@
                                         <thead>
                                             <tr>
                                             	<th style="text-align: center;">
-                                            		<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
+                                            		<div class="d-flex justify-content-center align-items-center">
+                                            			<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
+                                            		</div>
                                             	</th>
                                                 <th style="text-align: center;">#</th>
                                        			<th style="text-align: center;">주문번호</th>
@@ -63,7 +65,9 @@
                                         <tbody>
                                             <tr th:each="item : ${list}">
 	                                            <td style="text-align: center;">
-	                                            	<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
+	                                            	<div class="d-flex justify-content-center align-items-center">
+	                                            		<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
+	                                            	</div>
 	                                            </td>
                                                 <td style="text-align: center;">#</td>
                                        			<td style="text-align: center;"><a href="javascript:void(0);" th:text ="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
@@ -156,7 +160,7 @@
     }
 	
 	// 배송 button
-	document.querySelectorAll("#btnDelivery").forEach(btn => {
+	document.querySelectorAll("#btnDeli").forEach(btn => {
 	    btn.onclick = function(){
 		
 			let delValue = this.value;
@@ -186,39 +190,71 @@
 		form.submit();
 	}
 	
-	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
-	if(document.getElementById("btnUel")){
-		document.getElementById("btnUel").onclick = function () {
-			document.querySelector("#modalConfirmTitle").textContent = "확 인";
-			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-			document.querySelector("#btnModalDeli").style.display = 'none';
-			document.querySelector("#btnModalUelete").style.display = '';
-			document.querySelector("#btnModalDelete").style.display = 'none';
-			$("#modalConfirm").modal("show");      	
-			}
-		}
-
-		document.getElementById("btnModalUelete").onclick = function () {
+	// 배송 button click
+	document.getElementById("btnDeli").onclick = function () {
+		document.querySelector("#modalConfirmTitle").textContent = "배송";
+		document.querySelector("#modalConfirmBody").textContent = "배송하시겠습니까?";
+		document.querySelector("#btnModalDeli").style.display = '';
+		document.querySelector("#btnModalUelete").style.display = 'none';
+		document.querySelector("#btnModalDelete").style.display = 'none';
+		$("#modalConfirm").modal("show");      	
+	}
+	// Modal 배송 button click
+	document.getElementById("btnModalDeli").onclick = function () {
 		
-			const query = 'input[name="itemCheckbox"]:checked';
-			const selectedElements = document.querySelectorAll(query);
-			//체크박스 체크된 항목의 개수
-			const selectedElementsCnt = selectedElements.length;
-			if(selectedElementsCnt == 0){
-		      alert("삭제할 항목을 선택해주세요.");
-		      return false;
-			}else{
-				const selectedValues = [];
-				
-				selectedElements.forEach(element => {
-		           	 selectedValues.push(element.value);
-		        });
+		const query = 'input[name="itemCheckbox"]:checked';
+		const selectedElements = document.querySelectorAll(query);
+		//체크박스 체크된 항목의 개수
+		const selectedElementsCnt = selectedElements.length;
+		if(selectedElementsCnt == 0){
+	      alert("배송할 항목을 선택해주세요.");
+	      return false;
+		}else{
+			const selectedValues = [];
 			
-				seq.value = selectedValues.join(',');
-				form.action = "/web/account/orderUele";
-				form.submit();
-			}
+			selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+		
+			seq.value = selectedValues.join(',');
+			form.action = "/web/account/orderModalInst";
+			form.submit();
 		}
+	}
+	
+	
+	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
+	document.getElementById("btnUel").onclick = function () {
+		document.querySelector("#modalConfirmTitle").textContent = "확 인";
+		document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+		document.querySelector("#btnModalDeli").style.display = 'none';
+		document.querySelector("#btnModalUelete").style.display = '';
+		document.querySelector("#btnModalDelete").style.display = 'none';
+		$("#modalConfirm").modal("show");      	
+	}
+	
+
+	document.getElementById("btnModalUelete").onclick = function () {
+	
+		const query = 'input[name="itemCheckbox"]:checked';
+		const selectedElements = document.querySelectorAll(query);
+		//체크박스 체크된 항목의 개수
+		const selectedElementsCnt = selectedElements.length;
+		if(selectedElementsCnt == 0){
+	      alert("삭제할 항목을 선택해주세요.");
+	      return false;
+		}else{
+			const selectedValues = [];
+			
+			selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+		
+			seq.value = selectedValues.join(',');
+			form.action = "/web/account/orderUele";
+			form.submit();
+		}
+	}
 
 </script>
 
