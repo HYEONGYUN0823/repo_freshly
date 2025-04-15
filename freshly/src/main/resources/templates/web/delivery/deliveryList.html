@@ -64,14 +64,14 @@
                                             		</div>		
                                             	</td>
                                        			<td style="text-align: center;" th:text ="${item.seq}"></td>
-                                       			<td style="text-align: center;" name="acOrder_seq" th:text ="${item.acOrder_seq}">주문 번호</td>
+                                       			<td style="text-align: center;" th:text ="${item.acOrder_seq}">주문 번호</td>
                                        
                                 
-                                      			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 1}"><span class="badge badge-pill badge-success">배송중</span></td>
-                                       			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 2}"><span class="badge badge-pill badge-light">배송 완료</span></td>
+                                      			<td style="text-align: center;" th:if ="${item.deliveryStatus == 1}"><span class="badge badge-pill badge-success">배송중</span></td>
+                                       			<td style="text-align: center;" th:if ="${item.deliveryStatus == 2}"><span class="badge badge-pill badge-light">배송 완료</span></td>
                                        
-                                       			<td style="text-align: center;" name="deliveryStartDateTime" th:text ="${item.deliveryStartDateTime}">배송 시작 시간</td>
-                                       			<td style="text-align: center;" name="deliveryEndDateTime" th:text ="${item.deliveryEndDateTime}">배송 종료 시간</td>
+                                       			<td style="text-align: center;" th:text ="${item.deliveryStartDateTime}">배송 시작 시간</td>
+                                       			<td style="text-align: center;" th:text ="${item.deliveryEndDateTime}">배송 종료 시간</td>
                                             </tr>
                                         </tbody>
                                     </table>
