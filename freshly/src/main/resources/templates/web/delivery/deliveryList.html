@@ -61,12 +61,14 @@
                                             	<td style="text-align: center;">
                                             		<div class="d-flex justify-content-center align-items-center">
                                             			<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
+                                            			<input type="hidden" id="deliveryStatus" th:value="${item.deliveryStatus}">
                                             		</div>		
                                             	</td>
                                                 <td style="text-align: center;">#</td>
                                        			<td style="text-align: center;"><a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                        			<td style="text-align: center;" name="acOrder_seq" th:text ="${item.acOrder_seq}">주문 번호</td>
                                        
+                                
                                       			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 1}">배송중</td>
                                        			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 2}">배송 완료</td>
                                        
@@ -168,13 +170,26 @@
 		}else{
 			const selectedValues = [];
 			
-			selectedElements.forEach(element => {
+			for(const element of selectedElements){
 	           	 selectedValues.push(element.value);
-	        });
-		
+	           	 
+	           	const tr = element.closest('tr');
+	            if(tr.querySelector('#deliveryStatus').value == 2){
+	        		document.querySelector("#modalConfirmTitle").textContent = "확 인";
+	        		document.querySelector("#modalConfirmBody").textContent = "이미 배송 완료된 건이 포함되어 있습니다.";
+	        		document.querySelector("#btnModalDeli").style.display = 'none';
+	        		document.querySelector("#btnModalUelete").style.display = 'none';
+	        		document.querySelector("#btnModalDelete").style.display = 'none';
+	        		$("#modalConfirm").modal("show"); 
+	        		return;
+	            }
+	            
+	        };
+			
 			seq.value = selectedValues.join(',');
 			form.action = "/web/delivery/deliveryCompleted";
 			form.submit();
+			
 		}
 	}
 	
