@@ -7,18 +7,18 @@
 	
 	<select id="selectOrderingList" resultMap="resultMapObj">
 		select
-			a.seq,
-			a.odStatus,
-			a.odStartDateTime,
-			a.odEndDateTime,
-			a.odQuantity,
-			a.odDelNy,
-			a.factory_seq,
-			a.member_seq,
-			a.grocery_seq,
-			fc.fcName,
-			mb.mbName,
-			gc.gcName
+			a.seq
+			,a.odStatus
+			,a.odStartDateTime
+			,a.odEndDateTime
+			,a.odQuantity
+			,a.odDelNy
+			,a.factory_seq
+			,a.member_seq
+			,a.grocery_seq
+			,fc.fcName
+			,mb.mbName
+			,gc.gcName
 		from
 		 	ordering a
 		 	JOIN factory fc ON fc.seq = a.factory_seq
@@ -33,18 +33,18 @@
 	
 	<select id="selectReceivingList" resultMap="resultMapObj">
 		select
-			a.seq,
-			a.odStatus,
-			a.odStartDateTime,
-			a.odEndDateTime,
-			a.odQuantity,
-			a.odDelNy,
-			a.factory_seq,
-			a.member_seq,
-			a.grocery_seq,
-			fc.fcName,
-			mb.mbName,
-			gc.gcName
+			a.seq
+			,a.odStatus
+			,a.odStartDateTime
+			,a.odEndDateTime
+			,a.odQuantity
+			,a.odDelNy
+			,a.factory_seq
+			,a.member_seq
+			,a.grocery_seq
+			,fc.fcName
+			,mb.mbName
+			,gc.gcName
 		from
 		 	ordering a
 		 	JOIN factory fc ON fc.seq = a.factory_seq
@@ -59,18 +59,18 @@
 	
 	<select id="selectForwardingWaitingList" resultMap="resultMapObj">
 		select
-			a.seq,
-			a.odStatus,
-			a.odStartDateTime,
-			a.odEndDateTime,
-			a.odQuantity,
-			a.odDelNy,
-			a.factory_seq,
-			a.member_seq,
-			a.grocery_seq,
-			fc.fcName,
-			mb.mbName,
-			gc.gcName
+			a.seq
+			,a.odStatus
+			,a.odStartDateTime
+			,a.odEndDateTime
+			,a.odQuantity
+			,a.odDelNy
+			,a.factory_seq
+			,a.member_seq
+			,a.grocery_seq
+			,fc.fcName
+			,mb.mbName
+			,gc.gcName
 		from
 		 	ordering a
 		 	JOIN factory fc ON fc.seq = a.factory_seq
@@ -85,18 +85,18 @@
 	
 	<select id="selectDeliveryCompletedList" resultMap="resultMapObj">
 		select
-			a.seq,
-			a.odStatus,
-			a.odStartDateTime,
-			a.odEndDateTime,
-			a.odQuantity,
-			a.odDelNy,
-			a.factory_seq,
-			a.member_seq,
-			a.grocery_seq,
-			fc.fcName,
-			mb.mbName,
-			gc.gcName
+			a.seq
+			,a.odStatus
+			,a.odStartDateTime
+			,a.odEndDateTime
+			,a.odQuantity
+			,a.odDelNy
+			,a.factory_seq
+			,a.member_seq
+			,a.grocery_seq
+			,fc.fcName
+			,mb.mbName
+			,gc.gcName
 		from
 		 	ordering a
 		 	JOIN factory fc ON fc.seq = a.factory_seq
@@ -111,13 +111,13 @@
 	
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
-			seq,
-			odStatus,
-			odQuantity,
-			odDelNy,
-			factory_seq,
-			member_seq,
-			grocery_seq
+			seq
+			,odStatus
+			,odQuantity
+			,odDelNy
+			,factory_seq
+			,member_seq
+			,grocery_seq
 		FROM
 			ordering
 		WHERE 1=1
@@ -127,31 +127,31 @@
 	
 	<insert id="insert">
 		INSERT INTO ordering (
-			odStatus,
-			odStartDateTime,
-			odQuantity,
-			odDelNy,
-			factory_seq,
-			member_seq,
-			grocery_seq
+			odStatus
+			,odStartDateTime
+			,odQuantity
+			,odDelNy
+			,factory_seq
+			,member_seq
+			,grocery_seq
 		) values (
-			1,
-			now(),
-			#{odQuantity},
-			0,
-			#{factory_seq},
-			#{member_seq},
-			#{grocery_seq}
+			1
+			,now()
+			,#{odQuantity}
+			,0
+			,#{factory_seq}
+			,#{member_seq}
+			,#{grocery_seq}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE ordering SET
-			odStatus = #{odStatus},
-			odQuantity = #{odQuantity},
-			factory_seq = #{factory_seq},
-			member_seq = #{member_seq},
-			grocery_seq = #{grocery_seq}
+			odStatus = #{odStatus}
+			,odQuantity = #{odQuantity}
+			,factory_seq = #{factory_seq}
+			,member_seq = #{member_seq}
+			,grocery_seq = #{grocery_seq}
 		WHERE seq = #{seq}
 	</update>
 	
