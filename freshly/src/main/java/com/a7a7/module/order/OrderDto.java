@@ -1,7 +1,7 @@
 package com.a7a7.module.order;
 
 public class OrderDto {
-
+//
 	// acOrder 
 	private String seq;
 	private Integer aoStatus;
