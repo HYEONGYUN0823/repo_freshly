@@ -79,9 +79,9 @@
                                        			<td style="text-align: center;" th:text ="${item.mbName}"></td>
                                        			
                                        			<!-- 주문 상태 -->
-                                       			<td style="text-align: center;" th:if="${item.aoStatus == 1}">주문 접수</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}">배송중</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}">배송 완료</td>
+                                       			<td style="text-align: center;" th:if="${item.aoStatus == 1}"><span class="badge badge-pill badge-info">주문 접수</span></td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}"><span class="badge badge-pill badge-success">배송중</span></td>
+                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}"><span class="badge badge-pill badge-light">배송 완료</span></td>
                                       			
                                             </tr>
                                         </tbody>
