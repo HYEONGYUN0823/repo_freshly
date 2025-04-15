@@ -50,7 +50,7 @@
 		 	JOIN grocery gc ON gc.seq = a.grocery_seq
 		where
 		    1=1
-		    AND a.odStatus = 2
+<!-- 		    AND a.odStatus = 2 -->
 		ORDER BY a.seq desc
 	</select>
 	
@@ -100,12 +100,14 @@
 			grocery_seq = #{grocery_seq}
 		WHERE seq = #{seq}
 	</update>
-	
+			
 	<update id="uelete">
 		UPDATE ordering SET
-			odDelNy = 1,
-			modDateTime = now()
-		WHERE seq = #{seq}
+			odDelNy = 1
+		where seq in
+    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
+        #{seq}
+    </foreach>
 	</update>
 	
 </mapper>

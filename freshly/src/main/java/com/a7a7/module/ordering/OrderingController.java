@@ -1,10 +1,14 @@
 package com.a7a7.module.ordering;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.a7a7.module.basic.BasicService;
 import com.a7a7.module.member.MemberService;
@@ -30,12 +34,6 @@ public class OrderingController {
 	public String webOrderingList(Model model) {
 		model.addAttribute("list", service.selectOrderingList());
 		return "web/factory/OrderingList";
-	}
-	
-	@RequestMapping(value ="/web/factory/ReceivingList")
-	public String webReceivingList(Model model) {
-		model.addAttribute("list", service.selectReceivingList());
-		return "web/factory/receivingList";
 	}
 	
 	@RequestMapping(value = "/web/factory/OrderingForm")
@@ -70,12 +68,25 @@ public class OrderingController {
 	}
 	
 	@RequestMapping(value = "/web/factory/OrderingUele")
-	public String orderingUele(OrderingDto dto) {
-		service.uelete(dto);
+	public String orderingUele(@RequestParam("seq") List<Integer> seqList) {
+		service.uelete(seqList);
 		
 		return "redirect:/web/factory/OrderingList";
 	}
 
 	
+//	 ----입고관리----
+	@RequestMapping(value ="/web/factory/ReceivingList")
+	public String webReceivingList(Model model) {
+		model.addAttribute("list", service.selectReceivingList());
+		return "web/factory/receivingList";
+	}
+	
+	@RequestMapping(value = "/web/factory/ReceivingUele")
+	public String webReceivingUele(@RequestParam("seq") List<Integer> seqList) {
+		service.uelete(seqList);
+		
+		return "redirect:/web/factory/ReceivingList";
+	}
 	
 }

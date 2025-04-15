@@ -1,5 +1,7 @@
 package com.a7a7.module.ordering;
 
+import java.util.List;
+
 public class OrderingDto {
 	
 	private String seq;
@@ -16,6 +18,7 @@ public class OrderingDto {
 	private String mbName;
 	private String gcName;
 	
+	private List<Integer> seqs;
 //	-----
 	
 	public String getSeq() {
@@ -89,6 +92,12 @@ public class OrderingDto {
 	}
 	public void setGcName(String gcName) {
 		this.gcName = gcName;
+	}
+	public List<Integer> getSeqs() {
+		return seqs;
+	}
+	public void setSeqs(List<Integer> seqs) {
+		this.seqs = seqs;
 	}
 	
 	

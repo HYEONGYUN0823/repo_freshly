@@ -3,7 +3,9 @@
 
 <div th:replace="~{web/include/head :: head}"></div>
 
-
+<form name="formList" id="formList" method="post" autocomplete="off">
+<input type="hidden" name="seq">
+		<input type="hidden" name="odDelNy">
         <!--**********************************
             Content body start
         ***********************************-->
@@ -51,7 +53,12 @@
                                         <tbody>
 										    <tr th:each="item : ${list}">
 										    	<td style="text-align: center;">
-													<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
+													<input 
+														class="form-check-input itemCheckbox" 
+														type="checkbox" 
+														name="itemCheckbox" 
+														id="itemCheckbox" 
+														th:value="${item.seq}">
 												</td>
 										        <td style="text-align: center;">#</td>
 										   		<td style="text-align: center;" class="seq align-middle fw-semi-bold">
@@ -66,8 +73,16 @@
 										    </tr>
 										</tbody>
                                     </table>
-                                    
                                 </div>
+                                
+                                <div class="mt-3">
+                                	<button type="button" class="btn btn-danger"><i class="fa-solid fa-x"></i></button>
+                                    <button type="button" id="btnUel" class="btn btn-danger"><i
+                                            class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                                
+                                <div th:replace="~{web/include/modal :: modal}"></div>
+                                    
                             </div>
                         </div>
                     </div>
@@ -75,6 +90,7 @@
                 </div>
             </div>
         </div>
+        </form>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -95,6 +111,46 @@
 <!--**********************************
        Scripts end
    ***********************************-->
+   <script type="text/javascript">
+
+	let goUrlXdmForm = "";
+	let goUrlXdmUele = "/web/factory/ReceivingUele";
+
+	let seq = document.querySelector("input[name=seq]");
+	let form = document.getElementById("formList");
+	
+	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
+	if(document.getElementById("btnUel")){
+		document.getElementById("btnUel").onclick = function () {
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");      	
+			}
+		}
+
+		document.getElementById("btnModalUelete").onclick = function () {
+		
+			const query = 'input[name="itemCheckbox"]:checked';
+			const selectedElements = document.querySelectorAll(query);
+			//체크박스 체크된 항목의 개수
+			const selectedElementsCnt = selectedElements.length;
+			if(selectedElementsCnt == 0){
+		      alert("삭제할 항목을 선택해주세요.");
+		      return false;
+			}else{
+				const selectedValues = [];
+				selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+			
+				seq.value = selectedValues.join(',');
+				form.action = goUrlXdmUele;
+				form.submit();
+			}
+		}
+   </script>
    
 <div th:replace="~{web/include/footer :: footer}"></div>
 

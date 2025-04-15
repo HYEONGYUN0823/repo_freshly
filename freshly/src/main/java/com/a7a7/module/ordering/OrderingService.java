@@ -2,6 +2,7 @@ package com.a7a7.module.ordering;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,8 @@ public class OrderingService {
 		return dao.update(dto);
 	}
 	
-	public int uelete(OrderingDto dto) {
-		return dao.uelete(dto);
+	public int uelete(List<Integer> seqs) {
+		return dao.uelete(seqs);
 	}
 	
 }

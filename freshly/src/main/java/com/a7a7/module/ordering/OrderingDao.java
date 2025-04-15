@@ -2,6 +2,7 @@ package com.a7a7.module.ordering;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.a7a7.module.order.OrderDto;
@@ -19,5 +20,5 @@ public interface OrderingDao {
 	
 	public int update(OrderingDto dto);
 	
-	public int uelete(OrderingDto dto);
+	public int uelete(@Param("seqs")List<Integer> seqs);
 }
