@@ -96,22 +96,5 @@ public class OrderController {
 		
 		return "redirect:/web/account/orderList";
 	}
-	
-//	// 배송 Insert Ajax
-//	@RequestMapping(value = "/web/account/deliveryInstProc")
-//	@ResponseBody
-//	public String deliveryInstProc(@RequestParam("seq") String seq) {
-//		
-//		DeliveryDto deliveryDto = new DeliveryDto();
-//		deliveryDto.setAcOrder_seq(seq);
-//		
-//		OrderDto dto = service.selectOneOrder(seq);
-//		dto.setAoStatus(4);
-//		service.update(dto);
-//		
-//		deliveryService.deliveryInsert(deliveryDto);
-//		
-//		return "redirect:/web/account/orderList";
-//	}
 		
 }
