@@ -2,6 +2,7 @@ package com.a7a7.module.member;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,4 +22,6 @@ public interface MemberDao {
 	public int MemberInsert(MemberDto dto);
 	
 	public int MemberUpdate(MemberDto dto);
+	
+	public int MemberUelete(@Param("seqs")List<Integer> seqs);
 }

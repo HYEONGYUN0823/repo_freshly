@@ -36,5 +36,7 @@ public class MemberService {
 	public int MemberUpdate(MemberDto dto) {
 		return dao.MemberUpdate(dto);
 	}
-
+	public int MemberUelete(List<Integer> seqs) {
+		return dao.MemberUelete(seqs);
+	}
 }

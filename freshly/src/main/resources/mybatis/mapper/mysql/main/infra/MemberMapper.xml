@@ -105,4 +105,15 @@
 		AND seq = #{seq}
 	</update>
 	
+	
+	<update id="MemberUelete">
+		update member
+		set
+		mbDelNy = 1
+		where seq in
+    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
+        #{seq}
+    </foreach>
+	</update>
+	
 </mapper>

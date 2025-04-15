@@ -108,6 +108,7 @@
    ***********************************-->
    
 <div th:replace="~{web/include/footer :: footer}"></div>
+<div th:replace="~{web/include/modal :: modal}"></div>		<!-- uelete에 필요함. -->
 <script type="text/javascript">
 
 	let goUrlXdmForm = "/web/basic/memberForm";
@@ -127,6 +128,38 @@
 	    form.action = goUrlXdmForm;
 	    form.submit();
 	}
+	
+	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
+	if(document.getElementById("btnUel")){
+		document.getElementById("btnUel").onclick = function () {
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");      	
+			}
+		}
+
+		document.getElementById("btnModalUelete").onclick = function () {
+		
+			const query = 'input[name="itemCheckbox"]:checked';
+			const selectedElements = document.querySelectorAll(query);
+			//체크박스 체크된 항목의 개수
+			const selectedElementsCnt = selectedElements.length;
+			if(selectedElementsCnt == 0){
+		      alert("삭제할 항목을 선택해주세요.");
+		      return false;
+			}else{
+				const selectedValues = [];
+				selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+			
+				seq.value = selectedValues.join(',');
+				form.action = "/web/basic/memberUelete";
+				form.submit();
+			}
+		}
 </script>
 
 </html>
