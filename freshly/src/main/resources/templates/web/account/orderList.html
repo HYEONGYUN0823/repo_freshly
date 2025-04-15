@@ -9,8 +9,8 @@
             Content body start
         ***********************************-->
         <form class="content-body" id="formList" method="post">
-        	<input type="hidden" name="formSeq"> 
-        	<input type="hidden" name="seq"> 
+        	<input type="hidden" name="formSeq">
+        	<input type="hidden" id="seq" name="seq">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
@@ -32,7 +32,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">주문 목록</h4>
+                            	<div class="col">
+                                	<h4 class="card-title">주문 목록</h4>
+                                </div>
+                                <div class="col text-right">
+                                	<button type="button" class="btn btn-google" id="btnDelivery">배송</button>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -53,7 +58,6 @@
                                       			<th style="text-align: center;">주문 시간</th>
                                       			<th style="text-align: center;">담당자</th>
                                       			<th style="text-align: center;">주문 상태</th>
-                                      			<th style="text-align: center;">처리</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -76,12 +80,6 @@
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 2}">배송중</td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 3}">배송 완료</td>
                                       			
-                                      			<!-- 주문 처리 -->
-                                       			<td style="text-align: center;" th:if="${item.aoStatus == 1}">
-                                       				<button type="button" class="btn btn-google" id="btnDelivery" th:value="${item.gcStock - item.aoQuantity}">배송</button>
-                                       			</td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 2}"></td>
-                                      			<td style="text-align: center;" th:if="${item.aoStatus == 3}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -151,6 +149,12 @@
 	    form.submit();
 	}
 	
+	
+	function setSeq(val) {
+		alert(val);
+		document.querySelector("input[name=seq]").value = val;
+    }
+	
 	// 배송 button
 	document.querySelectorAll("#btnDelivery").forEach(btn => {
 	    btn.onclick = function(){
@@ -175,8 +179,46 @@
 	    }
 	});
 
+	// Modal에서 배송 버튼 누르면
+	document.getElementById("btnModalDeli").onclick = function () {
+		alert(document.querySelector("input[name=seq]").value);
+		form.action = "/web/account/orderModalInst";
+		form.submit();
+	}
 	
-	
+	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
+	if(document.getElementById("btnUel")){
+		document.getElementById("btnUel").onclick = function () {
+			document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+			document.querySelector("#btnModalDeli").style.display = 'none';
+			document.querySelector("#btnModalUelete").style.display = '';
+			document.querySelector("#btnModalDelete").style.display = 'none';
+			$("#modalConfirm").modal("show");      	
+			}
+		}
+
+		document.getElementById("btnModalUelete").onclick = function () {
+		
+			const query = 'input[name="itemCheckbox"]:checked';
+			const selectedElements = document.querySelectorAll(query);
+			//체크박스 체크된 항목의 개수
+			const selectedElementsCnt = selectedElements.length;
+			if(selectedElementsCnt == 0){
+		      alert("삭제할 항목을 선택해주세요.");
+		      return false;
+			}else{
+				const selectedValues = [];
+				
+				selectedElements.forEach(element => {
+		           	 selectedValues.push(element.value);
+		        });
+			
+				seq.value = selectedValues.join(',');
+				form.action = "/web/account/orderUele";
+				form.submit();
+			}
+		}
 
 </script>
 

@@ -11,5 +11,6 @@ public interface OrderDao {
 	public List<OrderDto> selectOrderList();
 	public int insert(OrderDto dto);
 	public int update(OrderDto dto);
+	public int uelete(String seq);
 
 }

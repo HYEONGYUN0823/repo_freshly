@@ -78,4 +78,12 @@
 			seq = #{seq}
 	</update>
 	
+	<update id="uelete">
+		UPDATE acorder
+		SET
+			aoDelNy = 1
+		WHERE
+			seq = #{seq}
+	</update>
+	
 </mapper>

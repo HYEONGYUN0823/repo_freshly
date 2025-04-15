@@ -152,9 +152,10 @@
 		      return false;
 			}else{
 				const selectedValues = [];
+				
 				selectedElements.forEach(element => {
-	           	 selectedValues.push(element.value);
-	        });
+		           	 selectedValues.push(element.value);
+		        });
 			
 				seq.value = selectedValues.join(',');
 				form.action = "/web/basic/accountUelete";

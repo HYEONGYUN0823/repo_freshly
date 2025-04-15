@@ -1,5 +1,7 @@
 package com.a7a7.module.order;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,6 +64,33 @@ public class OrderController {
 	@RequestMapping(value = "/web/account/orderUpdt")
 	public String orderUpdt(OrderDto dto) {
 		service.update(dto);
+		return "redirect:/web/account/orderList";
+	}
+	
+	// 주문 Uelete
+	@RequestMapping(value = "/web/account/orderUele")
+	public String orderUelete(@RequestParam("formSeq") List<String> seqList) {
+		
+		for(String seq : seqList) {
+			service.uelete(seq);
+		}
+		
+		return "redirect:/web/account/orderList";
+	}
+		
+	
+	// 배송 Insert 
+	@RequestMapping(value = "/web/account/orderModalInst")
+	public String orderModalInst(@RequestParam("seq") String seq) {
+		
+		OrderDto dto = service.selectOneOrder(seq);
+		dto.setAoStatus(2);
+		service.update(dto);
+		
+		DeliveryDto deliveryDto = new DeliveryDto();
+		deliveryDto.setSeq(seq);
+		deliveryService.deliveryInsert(deliveryDto);
+		
 		return "redirect:/web/account/orderList";
 	}
 	
