@@ -39,6 +39,9 @@
                                     <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
+                                            	<th style="text-align: center;">
+                                            		<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
+                                            	</th>
                                                 <th style="text-align: center;">#</th>
                                        			<th style="text-align: center;">주문번호</th>
                                        			<th style="text-align: center;">거래처</th>
@@ -54,6 +57,9 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="item : ${list}">
+	                                            <td style="text-align: center;">
+	                                            	<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
+	                                            </td>
                                                 <td style="text-align: center;">#</td>
                                        			<td style="text-align: center;"><a href="javascript:void(0);" th:text ="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                       			<td style="text-align: center;" th:text ="${item.acName}"></td>
@@ -73,12 +79,12 @@
                                       			
                                       			<!-- 주문 처리 -->
                                        			<td style="text-align: center;" th:if="${item.aoStatus == 1}">
-                                       				<button type="button" class="btn btn-google-plus" id="btnOrdering" th:if="${item.gcStock - item.aoQuantity < 0}">발주</button>
-                                       				<button type="button" class="btn btn-google" id="btnDelivery" th:if="${item.gcStock - item.aoQuantity >= 0}">배송</button>
+                                       				<button type="button" class="btn btn-google-plus" id="btnOrdering" th:if="${item.gcStock - item.aoQuantity < 0}" th:value="${item.seq}">발주</button>
+                                       				<button type="button" class="btn btn-google" id="btnDelivery" th:if="${item.gcStock - item.aoQuantity >= 0}" th:value="${item.seq}">배송</button>
                                        			</td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 2}"></td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 3}">
-                                      				<button type="button" class="btn btn-google" id="btnDelivery">배송</button>
+                                      				<button type="button" class="btn btn-google" id="btnDelivery" th:value="${item.seq}">배송</button>
                                       			</td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 4}"></td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 5}"></td>
@@ -150,15 +156,7 @@
 	    form.submit();
 	}
 	
-	// 발주 Ajax
-	$('#btnOrdering').onclick(function(seq){
-		
-		$.ajax({
-			type:"POST"
-			,url:""
-		});
 	
-	});
 	
 
 </script>
