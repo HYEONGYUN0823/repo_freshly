@@ -17,12 +17,12 @@ public class ReceivingController {
 	@Autowired
 	BasicService basicService;
 
-    // 모바일 공장 발주관리
-    @RequestMapping(value ="/mob/factory/ReceivingList")
-    public String mobReceivingList(Model model) {
-        model.addAttribute("list", service.selectList());
-        return "mobile/factory/ReceivingList";
-    }
+//    // 모바일 공장 발주관리
+//    @RequestMapping(value ="/mob/factory/ReceivingList")
+//    public String mobReceivingList(Model model) {
+//        model.addAttribute("list", service.selectList());
+//        return "mobile/factory/ReceivingList";
+//    }
     
     @RequestMapping(value ="/mob/factory/receivingForm")
     public String mobReceivingForm(@ModelAttribute("vo") ReceivingVo vo, ReceivingDto dto, Model model) {

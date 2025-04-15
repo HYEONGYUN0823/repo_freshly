@@ -22,6 +22,13 @@ public class OrderingController {
 	@Autowired
 	MemberService memberService;
 	
+    // 모바일 공장 발주관리
+    @RequestMapping(value ="/mob/factory/ReceivingList")
+    public String mobReceivingList(Model model) {
+        model.addAttribute("list", service.selectReceivingList());
+        return "mobile/factory/ReceivingList";
+    }
+	
 	// 모바일 공장 발주관리
 	@RequestMapping(value ="/mob/factory/OrderingList")
 	public String mobOrderingList(Model model) {
