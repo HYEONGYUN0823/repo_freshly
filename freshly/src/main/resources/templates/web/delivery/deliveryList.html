@@ -30,7 +30,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">배송 목록</h4>
+                            	<div class="col">
+                                	<h4 class="card-title">배송 목록</h4>
+                                </div>
+                                <div class="col text-right">
+                                	<button type="button" class="btn btn-google" id="btnDeli">배송 완료</button>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -58,14 +63,12 @@
                                             			<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
                                             		</div>		
                                             	</td>
-                                                <td>#</td>
-                                       			<td style="text-align: center;" name="seq"><a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
+                                                <td style="text-align: center;">#</td>
+                                       			<td style="text-align: center;"><a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                        			<td style="text-align: center;" name="acOrder_seq" th:text ="${item.acOrder_seq}">주문 번호</td>
                                        
-                                      			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 1}">접수</td>
-                                      			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 2}">진행중</td>
-                                       			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 3}">완료</td>
-                                       			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 4}">취소</td>
+                                      			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 1}">배송중</td>
+                                       			<td style="text-align: center;" name="deliveryStatus" th:if ="${item.deliveryStatus == 2}">배송 완료</td>
                                        
                                        			<td style="text-align: center;" name="deliveryStartDateTime" th:text ="${item.deliveryStartDateTime}">배송 시작 시간</td>
                                        			<td style="text-align: center;" name="deliveryEndDateTime" th:text ="${item.deliveryEndDateTime}">배송 종료 시간</td>
@@ -74,18 +77,25 @@
                                     </table>
                                     
                                 </div>
+                                
                                 <div class="mt-3">
-                                	<button type="button" class="btn btn-danger"><i class="fa-solid fa-x"></i></button>
-                                    <button type="button" id="btnUel" class="btn btn-danger"><i
-                                            class="fa-regular fa-trash-can"></i></button>
-                                    <button type="button" id="btnForm" class="btn btn-primary" style="float: right;"><i
-                                            class="fa-solid fa-plus"></i></button>
-                                    <button type="button" class="btn btn-success"
-                                        style="float: right; margin-right: 4px;"><i
-                                            class="fa-regular fa-file-excel"></i></button>
-                                    <button type="button" class="btn btn-primary"
-                                        style="float: right; margin-right: 4px;"><i class="fa-solid fa-u"></i></button>
+                                	<button type="button" class="btn btn-danger">
+                                		<i class="fa-solid fa-x"></i>
+                                	</button>
+                                    <button type="button" id="btnUel" class="btn btn-danger">
+                                    	<i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                    <button type="button" id="btnForm" class="btn btn-primary" style="float: right;">
+                                    	<i class="fa-solid fa-plus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-success" style="float: right; margin-right: 4px;">
+                                    	<i class="fa-regular fa-file-excel"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" style="float: right; margin-right: 4px;">
+                                        <i class="fa-solid fa-u"></i>
+                                    </button>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -119,6 +129,7 @@
 
 <script type="text/javascript">
 
+	// 배송 Form
 	let goUrlXdmForm = "/web/delivery/deliveryForm";
 	let goUrlXdmUele = "";
 
@@ -130,43 +141,75 @@
 	}
 
 	goForm = function (keyValue) {
-		
 	    seq.value = keyValue;
 	    form.action = goUrlXdmForm;
 	    form.submit();
 	}
 	
-	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
-	if(document.getElementById("btnUel")){
-		document.getElementById("btnUel").onclick = function () {
-			document.querySelector("#modalConfirmTitle").textContent = "확 인";
-			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-			document.querySelector("#btnModalUelete").style.display = '';
-			document.querySelector("#btnModalDelete").style.display = 'none';
-			$("#modalConfirm").modal("show");      	
-			}
-		}
-
-		document.getElementById("btnModalUelete").onclick = function () {
+	// 배송완료 button click
+	document.getElementById("btnDeli").onclick = function () {
+		document.querySelector("#modalConfirmTitle").textContent = "배송 완료";
+		document.querySelector("#modalConfirmBody").textContent = "배송 완료 처리하시겠습니까?";
+		document.querySelector("#btnModalDeli").style.display = '';
+		document.querySelector("#btnModalUelete").style.display = 'none';
+		document.querySelector("#btnModalDelete").style.display = 'none';
+		$("#modalConfirm").modal("show");      	
+	}
+	// Modal 배송완료 button click
+	document.getElementById("btnModalDeli").onclick = function () {
 		
-			const query = 'input[name="itemCheckbox"]:checked';
-			const selectedElements = document.querySelectorAll(query);
-			//체크박스 체크된 항목의 개수
-			const selectedElementsCnt = selectedElements.length;
-			if(selectedElementsCnt == 0){
-		      alert("삭제할 항목을 선택해주세요.");
-		      return false;
-			}else{
-				const selectedValues = [];
-				selectedElements.forEach(element => {
+		const query = 'input[name="itemCheckbox"]:checked';
+		const selectedElements = document.querySelectorAll(query);
+		//체크박스 체크된 항목의 개수
+		const selectedElementsCnt = selectedElements.length;
+		if(selectedElementsCnt == 0){
+	      alert("배송 완료 처리할 항목을 선택해주세요.");
+	      return false;
+		}else{
+			const selectedValues = [];
+			
+			selectedElements.forEach(element => {
 	           	 selectedValues.push(element.value);
 	        });
-			
-				seq.value = selectedValues.join(',');
-				form.action = "/web/delivery/deliveryUelete";
-				form.submit();
-			}
+		
+			seq.value = selectedValues.join(',');
+			form.action = "/web/delivery/deliveryCompleted";
+			form.submit();
 		}
+	}
+	
+	
+	// Uelete Button Click
+	document.getElementById("btnUel").onclick = function () {
+		document.querySelector("#modalConfirmTitle").textContent = "확 인";
+		document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+		document.querySelector("#btnModalDeli").style.display = 'none';
+		document.querySelector("#btnModalUelete").style.display = '';
+		document.querySelector("#btnModalDelete").style.display = 'none';
+		$("#modalConfirm").modal("show");      	
+	}
+	// Modal Uelete Button Click
+	document.getElementById("btnModalUelete").onclick = function () {
+	
+		const query = 'input[name="itemCheckbox"]:checked';
+		const selectedElements = document.querySelectorAll(query);
+		//체크박스 체크된 항목의 개수
+		const selectedElementsCnt = selectedElements.length;
+		if(selectedElementsCnt == 0){
+	      alert("삭제할 항목을 선택해주세요.");
+	      return false;
+		}else{
+			const selectedValues = [];
+			selectedElements.forEach(element => {
+           	 selectedValues.push(element.value);
+        });
+		
+			seq.value = selectedValues.join(',');
+			form.action = "/web/delivery/deliveryUelete";
+			form.submit();
+		}
+	}
+	
 </script>
 
 </html>

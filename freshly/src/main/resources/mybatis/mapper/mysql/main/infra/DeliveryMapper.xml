@@ -28,9 +28,9 @@
 			,acOrder_seq
 		from
 			delivery 
-			where 1=1
+		where 
+			1=1
 			and seq =#{seq}
-			ORDER BY seq desc
 	</select>
 	
 	
@@ -53,24 +53,25 @@
 	</insert>
 	
 	<update id ="deliveryUpdate">
-		update delivery 
-		set
-		acOrder_seq = #{acOrder_seq}
-		,deliveryStatus = #{deliveryStatus}
-		,deliveryEndDateTime = now()
-		,deliveryDelNy = #{deliveryDelNy}
-		where
-		seq = #{seq}
+		UPDATE 
+			delivery 
+		SET
+			deliveryStatus = #{deliveryStatus}
+			,deliveryEndDateTime = now()
+		WHERE
+			seq = #{seq}
 	</update>
 	
 	<update id="deliveryUelete">
-		update delivery
-		set
-		deliveryDelNy = 1
-		where seq in
-    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
-        #{seq}
-    </foreach>
+		UPDATE 
+			delivery
+		SET
+			deliveryDelNy = 1
+		WHERE
+			 seq in
+	    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
+	        #{seq}
+	    </foreach>
 	</update>
 	
 </mapper>

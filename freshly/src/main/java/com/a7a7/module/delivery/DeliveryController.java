@@ -1,27 +1,37 @@
 package com.a7a7.module.delivery;
 
 import java.util.List;
-
+import com.a7a7.module.ordering.OrderingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.a7a7.module.basic.BasicController;
 import com.a7a7.module.basic.BasicDto;
 import com.a7a7.module.basic.BasicVo;
+import com.a7a7.module.order.OrderDto;
 import com.a7a7.module.order.OrderService;
 
 
 @Controller
 public class DeliveryController {
 
+    private final OrderingService orderingService;
+
+    private final BasicController basicController;
+
 	@Autowired
 	DeliveryService service;
 	
 	@Autowired
 	OrderService orderservice;
+
+    DeliveryController(BasicController basicController, OrderingService orderingService) {
+        this.basicController = basicController;
+        this.orderingService = orderingService;
+    }
 	
 	// 앱 배달 리스트 화면 입니다.
 	@RequestMapping(value ="/web/delivery/deliverylist")
@@ -55,9 +65,22 @@ public class DeliveryController {
 	}
 	
 	
-	@RequestMapping(value = "/web/delivery/deliveryUelete")
-	public String deliveryUelete(@RequestParam("seq") List<Integer> seqList) {
-		service.deliveryUelete(seqList);
+	@RequestMapping(value = "/web/delivery/deliveryCompleted")
+	public String deliveryCompleted(@RequestParam("seq") List<String> seqList) {
+		
+		DeliveryDto dto = new DeliveryDto();
+		OrderDto orderDto = new OrderDto();
+		
+		for(String seq : seqList) {
+			dto.setSeq(seq);
+			dto = service.selectDeliveryView(dto);
+			dto.setDeliveryStatus(2);
+			service.deliveryUpdate(dto);
+			
+			orderDto = orderservice.selectOneOrder(dto.getAcOrder_seq());
+			orderDto.setAoStatus(3);
+			orderservice.update(orderDto);
+		}
 		return "redirect:/web/delivery/deliverylist";
 	}
 	
