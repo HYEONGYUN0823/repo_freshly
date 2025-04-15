@@ -56,6 +56,56 @@
 		ORDER BY a.seq desc
 	</select>
 	
+	<select id="selectForwardingWaitingList" resultMap="resultMapObj">
+		select
+			a.seq,
+			a.odStatus,
+			a.odStartDateTime,
+			a.odEndDateTime,
+			a.odQuantity,
+			a.odDelNy,
+			a.factory_seq,
+			a.member_seq,
+			a.grocery_seq,
+			fc.fcName,
+			mb.mbName,
+			gc.gcName
+		from
+		 	ordering a
+		 	JOIN factory fc ON fc.seq = a.factory_seq
+		 	JOIN member mb ON mb.seq = a.member_seq
+		 	JOIN grocery gc ON gc.seq = a.grocery_seq
+		where
+		    1=1
+		    AND a.odDelNy = 0
+		ORDER BY a.seq desc
+	</select>
+	
+	<select id="selectDeliveryCompletedList" resultMap="resultMapObj">
+		select
+			a.seq,
+			a.odStatus,
+			a.odStartDateTime,
+			a.odEndDateTime,
+			a.odQuantity,
+			a.odDelNy,
+			a.factory_seq,
+			a.member_seq,
+			a.grocery_seq,
+			fc.fcName,
+			mb.mbName,
+			gc.gcName
+		from
+		 	ordering a
+		 	JOIN factory fc ON fc.seq = a.factory_seq
+		 	JOIN member mb ON mb.seq = a.member_seq
+		 	JOIN grocery gc ON gc.seq = a.grocery_seq
+		where
+		    1=1
+		    AND a.odDelNy = 0
+		ORDER BY a.seq desc
+	</select>
+	
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
 			seq,

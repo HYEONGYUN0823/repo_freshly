@@ -10,12 +10,12 @@
                   <div class="col-md-12">
                      <!-- page header -->
                      <div>
-                        <h2>출고대기 목록</h2>
+                        <h2>출고완료 목록</h2>
                         <!-- breacrumb -->
                         <nav aria-label="breadcrumb">
                            <ol class="breadcrumb mb-0">
                               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                              <li class="breadcrumb-item active" aria-current="page">Order List</li>
+                              <li class="breadcrumb-item active" aria-current="page">출고완료 목록</li>
                            </ol>
                         </nav>
                      </div>
@@ -61,7 +61,7 @@
                                           </div>
                                        </th>
                                        	<th style="text-align: center;">#</th>
-                               			<th style="text-align: center;">출고대기번호</th>
+                               			<th style="text-align: center;">출고완료번호</th>
                                			<th style="text-align: center;">공장</th>
                                			<th style="text-align: center;">출고 상태</th>
                                			<th style="text-align: center;">식료품 이름</th>
@@ -88,7 +88,7 @@
 										<td style="text-align: center;" th:text ="${item.mbName}"></td>
 										<td style="text-align: center;" th:text ="${item.gcName}"></td>
 										<td style="text-align: center;" th:text ="${item.odQuantity}"></td>
-										<td style="text-align: center;" th:text ="${item.odStartDateTime}"></td>
+										<td style="text-align: center;" th:text ="${item.odEndDateTime}"></td>
                                        <td>
                                           <div class="dropdown">
                                              <a href="#" class="text-reset" data-bs-toggle="dropdown" aria-expanded="false">

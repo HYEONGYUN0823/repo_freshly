@@ -22,11 +22,18 @@ public class OrderingController {
 	@Autowired
 	MemberService memberService;
 	
-    // 모바일 공장 발주관리
-    @RequestMapping(value ="/mob/factory/ReceivingList")
+    // 출고대기 목록
+    @RequestMapping(value ="/mob/factory/forwardingWaitingList")
     public String mobReceivingList(Model model) {
-        model.addAttribute("list", service.selectReceivingList());
-        return "mobile/factory/ReceivingList";
+        model.addAttribute("list", service.selectForwardingWaitingList());
+        return "mobile/factory/forwardingWaitingList";
+    }
+    
+    // 출고완료 목록
+    @RequestMapping(value ="/mob/factory/deliveryCompletedList")
+    public String deliveryCompletedList(Model model) {
+    	model.addAttribute("list", service.selectDeliveryCompletedList());
+    	return "mobile/factory/deliveryCompletedList";
     }
 	
 	// 모바일 공장 발주관리

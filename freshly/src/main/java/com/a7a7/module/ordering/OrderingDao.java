@@ -14,6 +14,10 @@ public interface OrderingDao {
 	
 	public List<OrderDto> selectReceivingList();
 	
+	public List<OrderDto> selectForwardingWaitingList();
+	
+	public List<OrderDto> selectDeliveryCompletedList();
+	
 	public OrderingDto selectOne(OrderingDto dto);
 	
 	public int insert(OrderingDto dto);

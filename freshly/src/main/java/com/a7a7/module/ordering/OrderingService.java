@@ -21,6 +21,14 @@ public class OrderingService {
 		return dao.selectReceivingList();
 	}
 	
+	public List<OrderDto> selectForwardingWaitingList(){
+		return dao.selectOrderingList();
+	}
+	
+	public List<OrderDto> selectDeliveryCompletedList(){
+		return dao.selectReceivingList();
+	}
+	
 	public OrderingDto selectOne(OrderingDto dto) {
 		return dao.selectOne(dto);
 	}
