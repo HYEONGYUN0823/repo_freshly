@@ -48,7 +48,6 @@
                                             			<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
                                             		</div>
                                             	</th>
-                                                <th style="text-align: center;">#</th>
                                        			<th style="text-align: center;">Seq</th>
                                        			<th style="text-align: center;">주문 번호</th>
                                       			<th style="text-align: center;">배송 상태</th>
@@ -64,7 +63,6 @@
                                             			<input type="hidden" id="deliveryStatus" th:value="${item.deliveryStatus}">
                                             		</div>		
                                             	</td>
-                                                <td style="text-align: center;">#</td>
                                        			<td style="text-align: center;"><a href="javascript:void(0);" th:text="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                        			<td style="text-align: center;" name="acOrder_seq" th:text ="${item.acOrder_seq}">주문 번호</td>
                                        

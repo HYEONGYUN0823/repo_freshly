@@ -105,17 +105,17 @@
 	</select>
 	
 	<update id="GroceryUpdate">
-		update grocery 
+		update 
+			grocery 
 		set
-		gcName = #{gcName}
-		,gcCategory = #{gcCategory}
-		,gcPrice = #{gcPrice}
-		,gcStock = #{gcStock}
-		,gcUseNy = #{gcUseNy}
-		,gcModDateTime = now()
-		,gcDelNy = #{gcDelNy}
+			gcName = #{gcName}
+			,gcCategory = #{gcCategory}
+			,gcPrice = #{gcPrice}
+			,gcStock = #{gcStock}
+			,gcUseNy = #{gcUseNy}
+			,gcModDateTime = now()
 		where
-		seq = #{seq}
+			seq = #{seq}
 	</update>
 	
 	

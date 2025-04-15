@@ -50,7 +50,6 @@
                                             			<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
                                             		</div>
                                             	</th>
-                                                <th style="text-align: center;">#</th>
                                        			<th style="text-align: center;">주문번호</th>
                                        			<th style="text-align: center;">거래처</th>
                                        			<th style="text-align: center;">식료품</th>
@@ -70,7 +69,6 @@
 	                                            		<input type="hidden" id="stockChk" th:value="${item.gcStock - item.aoQuantity}">
 	                                            	</div>
 	                                            </td>
-                                                <td style="text-align: center;">#</td>
                                        			<td style="text-align: center;"><a href="javascript:void(0);" th:text ="${item.seq}" th:attr="onclick=|goForm('${item.seq}')|"></a></td>
                                       			<td style="text-align: center;" th:text ="${item.acName}"></td>
                                       			<td style="text-align: center;" id="gcName" th:text ="${item.gcName}"></td>

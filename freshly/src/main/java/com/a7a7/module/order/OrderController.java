@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.a7a7.module.basic.BasicDto;
 import com.a7a7.module.basic.BasicService;
 import com.a7a7.module.delivery.DeliveryDto;
 import com.a7a7.module.delivery.DeliveryService;
@@ -83,12 +84,18 @@ public class OrderController {
 	public String orderModalInst(@RequestParam("formSeq") List<String> seqList) {
 		
 		DeliveryDto deliveryDto = new DeliveryDto();
+		BasicDto basicDto = new BasicDto();
 		
 		for(String seq : seqList) {
 			
 			OrderDto dto = service.selectOneOrder(seq);
 			dto.setAoStatus(2);
 			service.update(dto);
+			
+			basicDto.setSeq(dto.getGrocery_seq());
+			basicDto = basicService.selectGroceryView(basicDto);
+			basicDto.setGcStock(basicDto.getGcStock() - dto.getAoQuantity());
+			basicService.GroceryUpdate(basicDto);
 			
 			deliveryDto.setAcOrder_seq(seq);
 			deliveryService.deliveryInsert(deliveryDto);
