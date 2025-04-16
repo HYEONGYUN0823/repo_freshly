@@ -119,6 +119,10 @@
     	
     	let seq = document.querySelector("input[name=seq]");
     	
+    	document.getElementById("cgName").addEventListener("input", function(){
+    		validation();
+    	});
+    	
     	function validation() {
     	    const cgNameInput = document.getElementById("cgName");
     	    const cgNameValue = cgNameInput.value.trim();

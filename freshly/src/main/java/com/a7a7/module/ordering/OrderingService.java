@@ -41,8 +41,8 @@ public class OrderingService {
 		return dao.update(dto);
 	}
 	
-	public int completeUpdate(List<Integer> seqs) {
-		return dao.completeUpdate(seqs);
+	public int completeUpdate(String seq) {
+		return dao.completeUpdate(seq);
 	}
 	
 	public int uelete(List<Integer> seqs) {

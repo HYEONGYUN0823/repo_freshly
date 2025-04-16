@@ -33,12 +33,8 @@
                         <div class="p-6">
                            <div class="row justify-content-between">
                               <div class="col-md-4 col-12 mb-2 mb-md-0">
-                                 <!-- form -->
-<!--                                  <form class="d-flex" role="search" name="formList" id="formList" method="post" autocomplete="off"> -->
-									<input type="hidden" name="seq">
 									<input type="hidden" name="rcDelNy">
                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-<!--                                  </form> -->
                               </div>
                               <div class="col-lg-2 col-md-4 col-12">
                                  <!-- select -->
@@ -64,6 +60,7 @@
                                              <label class="form-check-label" for="checkAll"></label>
                                           </div>
                                        </th>
+                                       	<th style="text-align: center;">#</th>
                                			<th style="text-align: center;">출고대기번호</th>
                                			<th style="text-align: center;">공장</th>
                                			<th style="text-align: center;">출고 상태</th>
@@ -82,6 +79,7 @@
                                              <label class="form-check-label" for="orderOne"></label>
                                           </div>
                                        </td>
+                                       <td style="text-align: center;">#</td>
 										<td style="text-align: center;" th:text ="${item.seq}"></td>
 										<td style="text-align: center;" th:text ="${item.fcName}"></td>
 										<td style="text-align: center;">
@@ -214,19 +212,27 @@
 
     // 출고 모달 내부 출고 버튼 클릭 시
     document.getElementById("btnModalForwarding").onclick = function () {
-        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
-        const selectedValues = Array.from(selectedElements).map(el => el.value);
-        if (selectedValues.length === 0) {
-            showAlertModal("출고할 항목을 선택해주세요.");
-            return false;
-        }
-
-        // 출고 완료 후 모달 띄우도록 설정
-        localStorage.setItem("forwardingCompleted", "true");
-
-        seq.value = selectedValues.join(',');
-        form.action = goUrlXdmUpdt;
-        form.submit();
+    	const query = 'input[name="itemCheckbox"]:checked';
+		const selectedElements = document.querySelectorAll(query);
+		//체크박스 체크된 항목의 개수
+		const selectedElementsCnt = selectedElements.length;
+		if(selectedElementsCnt == 0){
+	      alert("삭제할 항목을 선택해주세요.");
+	      return false;
+		}else{
+			const selectedValues = [];
+			
+			selectedElements.forEach(element => {
+	           	 selectedValues.push(element.value);
+	        });
+		
+			// 출고 완료 후 모달 띄우도록 설정
+	        localStorage.setItem("forwardingCompleted", "true");
+			
+			seq.value = selectedValues.join(',');
+			form.action = goUrlXdmUpdt;
+			form.submit();
+		}
     };
 
     // 페이지 로드 후 출고 완료 모달 띄우기
@@ -236,37 +242,12 @@
             const confirmModal = new bootstrap.Modal(document.getElementById("modalAfterForwarding"));
             confirmModal.show();
         }
-
-        // 체크박스 전체 선택/해제 연동 기능 추가
-        const checkAllBox = document.getElementById("checkAll");
-
-        function updateCheckAllStatus() {
-            const itemCheckboxes = document.querySelectorAll('input[name="itemCheckbox"]');
-            const allChecked = Array.from(itemCheckboxes).every(cb => cb.checked);
-            checkAllBox.checked = allChecked;
-        }
-
-        // 전체선택 체크박스 클릭 시
-        if (checkAllBox) {
-            checkAllBox.addEventListener("change", function () {
-                const itemCheckboxes = document.querySelectorAll('input[name="itemCheckbox"]');
-                itemCheckboxes.forEach(cb => cb.checked = checkAllBox.checked);
-            });
-        }
-
-        // 개별 체크박스 클릭 시 전체선택 상태 갱신
-        document.addEventListener("change", function (e) {
-            if (e.target && e.target.name === "itemCheckbox") {
-                updateCheckAllStatus();
-            }
-        });
     });
 
     // 출고완료 목록으로 이동
     document.getElementById("btnGoToComplete").onclick = function () {
         window.location.href = goUrlXdmList;
     };
-
 </script>
 
     <div th:replace = "~{mobile/include/footer :: footer}"></div>

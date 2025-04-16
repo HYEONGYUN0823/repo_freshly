@@ -132,14 +132,24 @@
     	
     	let seq = document.querySelector("input[name=seq]");
     	
-    	function validation() {
+    	document.getElementById("cdName").addEventListener("input", function(){
+    		cdNameValidation();
+    	});
+    	
+    	document.getElementById("codeGroup_seq").addEventListener("change", function(){
+    		codeGroup_seqValidation();
+    	});
+    	
+    	// 코드 이름 Validation
+    	function cdNameValidation(){
+    		
     	    const cdNameInput = document.getElementById("cdName");
     	    const cdNameValue = cdNameInput.value.trim();
     	    const cdNamePattern = /^[A-Za-z0-9가-힣]{2,20}$/;
     	    const cdNameFeedback = document.getElementById("cdNameFeedback");
-
+    	    
     	    let isValid = true;
-
+    	    
     	    if (cdNameValue === "") {
     	        cdNameInput.classList.add("is-invalid");
     	        cdNameInput.classList.remove("is-valid");
@@ -154,8 +164,40 @@
     	        cdNameInput.classList.remove("is-invalid");
     	        cdNameInput.classList.add("is-valid");
     	    }
-
+    	    
     	    return isValid;
+    	}
+    	
+    	// 코드그룹 select Validation
+    	function codeGroup_seqValidation(){
+    		
+    	    const codeGroup_seqInput = document.getElementById("codeGroup_seq");
+    	    const codeGroup_seqValue = codeGroup_seqInput.value.trim();
+    	    
+    	    let isValid = true;
+    	    
+    	    if (codeGroup_seqValue === "") {
+    	    	codeGroup_seqInput.classList.add("is-invalid");
+    	    	codeGroup_seqInput.classList.remove("is-valid");
+    	        isValid = false;
+    	    } else {
+    	    	codeGroup_seqInput.classList.remove("is-invalid");
+    	    	codeGroup_seqInput.classList.add("is-valid");
+    	    }
+    	    
+    	    return isValid;
+    	}
+    	
+    	// 통합 Validation
+    	function validation() {
+
+    		let isValid = true;
+    		
+    		if(!(cdNameValidation() && codeGroup_seqValidation())){
+    			isValid = false;
+    		}
+    		
+    		return isValid;
     	}
     	
     	document.getElementById("BtnSubmit").onclick = function(){

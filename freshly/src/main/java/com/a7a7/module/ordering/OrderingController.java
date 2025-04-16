@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.a7a7.module.basic.BasicDto;
 import com.a7a7.module.basic.BasicService;
 import com.a7a7.module.member.MemberService;
 
@@ -32,13 +33,28 @@ public class OrderingController {
     }
 
     @RequestMapping(value = "/mob/factory/forwardingWaitingUpdt")
-    public String forwardingWaitingUpdt(@RequestParam("seq") String seq) {
-    	List<Integer> seqList = Arrays.stream(seq.split(","))
-    			.map(String::trim)
-    			.map(Integer::parseInt)
-    			.collect(Collectors.toList());
+    public String forwardingWaitingUpdt(@RequestParam("seq") List<String> seqList) {
     	
-    	service.completeUpdate(seqList);
+    	for(String seq : seqList) {
+    		
+    		service.completeUpdate(seq);
+    		
+    		OrderingDto dto = new OrderingDto();
+    		dto.setSeq(seq);
+    		dto = service.selectOne(dto);
+    		
+    		System.out.println("#############");
+    		System.out.println(dto.getGrocery_seq());
+    		
+    		BasicDto basicDto = new BasicDto();
+    		basicDto.setSeq(dto.getGrocery_seq());
+    		
+    		basicDto = basicService.selectGroceryView(basicDto);
+    		basicDto.setGcStock(basicDto.getGcStock() + dto.getOdQuantity());
+    		
+    		basicService.GroceryUpdate(basicDto);
+    		
+    	}
     	
     	return "redirect:/mob/factory/forwardingWaitingList";
     }

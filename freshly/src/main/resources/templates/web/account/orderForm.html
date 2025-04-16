@@ -173,13 +173,25 @@
     	let seq = document.querySelector("input[name=seq]");
     	
     	function validation() {
+			
+    		// 주문 개수 
     	    const aoQuantityInput = document.getElementById("aoQuantity");
     	    const aoQuantityValue = aoQuantityInput.value.trim();
     	    const aoQuantityPattern = /^[0-9]{1,10}$/;
     	    const aoQuantityFeedback = document.getElementById("aoQuantityFeedback");
-
+    	 	// 거래처 select
+    	    const account_seqInput = document.getElementById("account_seq");
+    	    const account_seqValue = account_seqInput.value.trim();
+    	 	// 상품 select
+    	    const grocery_seqInput = document.getElementById("grocery_seq");
+    	    const grocery_seqValue = grocery_seqInput.value.trim();
+    	 	// 담당자 select
+    	    const member_seqInput = document.getElementById("member_seq");
+    	    const member_seqValue = member_seqInput.value.trim();
+    	    
     	    let isValid = true;
 
+    	 	// 주문 개수 
     	    if (aoQuantityValue === "") {
     	    	aoQuantityInput.classList.add("is-invalid");
     	    	aoQuantityInput.classList.remove("is-valid");
@@ -193,6 +205,33 @@
     	    } else {
     	    	aoQuantityInput.classList.remove("is-invalid");
     	    	aoQuantityInput.classList.add("is-valid");
+    	    }
+    	    // 거래처 select
+    	    if (account_seqValue === "") {
+    	    	account_seqInput.classList.add("is-invalid");
+    	    	account_seqInput.classList.remove("is-valid");
+    	        isValid = false;
+    	    } else {
+    	    	account_seqInput.classList.remove("is-invalid");
+    	    	account_seqInput.classList.add("is-valid");
+    	    }
+    		// 상품 select
+    	    if (grocery_seqValue === "") {
+    	    	grocery_seqInput.classList.add("is-invalid");
+    	    	grocery_seqInput.classList.remove("is-valid");
+    	        isValid = false;
+    	    } else {
+    	    	grocery_seqInput.classList.remove("is-invalid");
+    	    	grocery_seqInput.classList.add("is-valid");
+    	    }
+    		// 담당자 select
+    	    if (member_seqValue === "") {
+    	    	member_seqInput.classList.add("is-invalid");
+    	    	member_seqInput.classList.remove("is-valid");
+    	        isValid = false;
+    	    } else {
+    	    	member_seqInput.classList.remove("is-invalid");
+    	    	member_seqInput.classList.add("is-valid");
     	    }
 
     	    return isValid;

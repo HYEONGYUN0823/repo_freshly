@@ -122,7 +122,6 @@
 			ordering
 		WHERE 1=1
 			AND seq = #{seq}
-		ORDER BY seq DESC
 	</select>
 	
 	<insert id="insert">
@@ -156,13 +155,14 @@
 	</update>
 	
 	<update id="completeUpdate">
-		UPDATE ordering SET
+		UPDATE 
+			ordering 
+		SET
 			odStatus = 2
 			,odEndDateTime = now()
-		where seq in
-    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
-        #{seq}
-    </foreach>
+		WHERE 
+			1=1
+			AND seq = #{seq} 
 	</update>
 			
 	<update id="uelete">
