@@ -108,11 +108,9 @@
 	<update id="MemberUelete">
 		update member
 		set
-		mbDelNy = 1
-		where seq in
-    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
-        #{seq}
-    </foreach>
+			mbDelNy = 1
+		where 
+			seq = #{seq}
 	</update>
 	
 </mapper>

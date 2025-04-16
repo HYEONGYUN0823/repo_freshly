@@ -23,5 +23,5 @@ public interface MemberDao {
 	
 	public int MemberUpdate(MemberDto dto);
 	
-	public int MemberUelete(@Param("seqs")List<Integer> seqs);
+	public int MemberUelete(String seq);
 }

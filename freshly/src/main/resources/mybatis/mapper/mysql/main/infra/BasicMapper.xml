@@ -6,38 +6,15 @@
 	<resultMap id="resultMapObj" type="com.a7a7.module.basic.BasicDto"/>
 	
 	<!-- ************ 공통 **************** -->
-	<update id="GroceryUelete">
-		update grocery
-		set
-		gcDelNy = 1
-		,gcModDateTime = now()
-		where seq in
-    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
-        #{seq}
-    </foreach>
-	</update>
+	<select id="cdList"  resultMap="resultMapObj">
+		select 
+			seq as cd_seq,
+			cdName
+		from
+			code
+		where 1=1
+	</select>
 	
-	<update id="AccountUelete">
-		update account
-		set
-		acDelNy = 1
-		where seq in
-    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
-        #{seq}
-    </foreach>
-	</update>
-	
-	
-	<update id="FactoryUelete">
-		update factory
-		set
-		fcDelNy = 1
-		,fcModDateTime = now()
-		where seq in
-    <foreach collection="seqs" item="seq" open="(" separator="," close=")">
-        #{seq}
-    </foreach>
-	</update>
 	
 	<!--*********** 식료품 ********************-->
 	
@@ -113,6 +90,17 @@
 			,gcUseNy = #{gcUseNy}
 			,gcModDateTime = now()
 		where
+			seq = #{seq}
+	</update>
+	
+	
+	<update id="GroceryUelete">
+    	UPDATE 
+			grocery 
+		SET
+			gcDelNy = 1
+			,gcModDateTime = now()
+		WHERE
 			seq = #{seq}
 	</update>
 	
@@ -203,6 +191,16 @@
 	</update>
 	
 	
+	<update id="AccountUelete">
+    UPDATE 
+			account 
+		SET
+			acDelNy = 1
+		WHERE
+			seq = #{seq} 
+	</update>
+	
+	
 	<!--*********** 공장 ********************-->
 	
 	<select id="selectFactoryList" resultMap="resultMapObj">
@@ -283,4 +281,19 @@
 			seq = #{seq}
 	</update>
 	
+	
+	
+	
+	
+	
+	
+	<update id="FactoryUelete">
+	UPDATE 
+			factory 
+		SET
+			fcDelNy = 1
+			,fcModDateTime = now()
+		WHERE
+			seq = #{seq} 
+	</update>
 </mapper>

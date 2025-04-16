@@ -59,8 +59,12 @@ public class BasicController {
 	
 	
 	@RequestMapping(value = "/web/basic/groceryUelete")
-	public String groceryUelete(@RequestParam("seq") List<Integer> seqList) {
-		service.GroceryUelete(seqList);
+	public String groceryUelete(@RequestParam("seq") List<String> seqList) {
+		
+		for(String seq : seqList) {
+			service.GroceryUelete(seq);
+		}
+		
 		return "redirect:/web/basic/groceryList";
 	}
 	
@@ -103,8 +107,11 @@ public class BasicController {
 		return "redirect:/web/basic/accountList";
 	}
 	@RequestMapping(value = "/web/basic/accountUelete")
-	public String accountUelete(@RequestParam("seq") List<Integer> seqList) {
-		service.AccountUelete(seqList);
+	public String accountUelete(@RequestParam("seq") List<String> seqList) {
+		for(String seq : seqList) {
+			service.AccountUelete(seq);
+		}
+		
 		return "redirect:/web/basic/accountList";
 	}
 	
@@ -145,8 +152,10 @@ public class BasicController {
 	
 	
 	@RequestMapping(value = "/web/basic/factoryUelete")
-	public String factoryUelete(@RequestParam("seq") List<Integer> seqList) {
-		service.FactoryUelete(seqList);
+	public String factoryUelete(@RequestParam("seq") List<String> seqList) {
+		for(String seq : seqList){
+			service.FactoryUelete(seq);
+		}
 		return "redirect:/web/basic/factoryList";
 	}
 	

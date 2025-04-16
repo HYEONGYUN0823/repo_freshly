@@ -13,7 +13,6 @@ public class MemberDto {
 	private String mbModDateTime;
 	private Integer mbDelNy;
 	
-	private List<Integer> seqs;  // uelete 메서드를 위한 공통 seqs.
 	
 	public String getSeq() {
 		return seq;
@@ -63,11 +62,6 @@ public class MemberDto {
 	public void setMbDelNy(Integer mbDelNy) {
 		this.mbDelNy = mbDelNy;
 	}
-	public List<Integer> getSeqs() {
-		return seqs;
-	}
-	public void setSeqs(List<Integer> seqs) {
-		this.seqs = seqs;
-	}
+	
 	
 }

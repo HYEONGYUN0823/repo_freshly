@@ -27,6 +27,9 @@ public class BasicService {
 	public List<CodeDto> selectCategory(String codeGroup_seq){
 		return cddao.selectCategory(codeGroup_seq);
 	}
+	public List<BasicDto> cdList(){
+		return dao.cdList();
+	}
 	
 	
 //	**********************************************
@@ -56,8 +59,8 @@ public class BasicService {
 		return dao.GroceryUpdate(dto);
 	}
 	
-	public int GroceryUelete(List<Integer> seqs) {
-		return dao.GroceryUelete(seqs);
+	public int GroceryUelete(String seq) {
+		return dao.GroceryUelete(seq);
 	}
 	
 	
@@ -76,8 +79,8 @@ public class BasicService {
 	public int AccountUpdate(BasicDto dto) {
 		return dao.AccountUpdate(dto);
 	}
-	public int AccountUelete(List<Integer> seqs) {
-		return dao.AccountUelete(seqs);
+	public int AccountUelete(String seq) {
+		return dao.AccountUelete(seq);
 	}
 //	**********************************************
 //	공장
@@ -96,8 +99,8 @@ public class BasicService {
 	public int FactoryUpdate(BasicDto dto) {
 		return dao.FactoryUpdate(dto);
 	}
-	public int FactoryUelete(List<Integer> seqs) {
-		return dao.FactoryUelete(seqs);
+	public int FactoryUelete(String seq) {
+		return dao.FactoryUelete(seq);
 	}
 	
 	

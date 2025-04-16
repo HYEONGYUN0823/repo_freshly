@@ -155,8 +155,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/web/basic/memberUelete")
-	public String memberUelete(@RequestParam("seq") List<Integer> seqList) {
-		service.MemberUelete(seqList);
+	public String memberUelete(@RequestParam("seq") List<String> seqList) {
+		for(String seq: seqList) {
+			service.MemberUelete(seq);
+		}
 		return "redirect:/web/basic/memberList";
 	}
 	

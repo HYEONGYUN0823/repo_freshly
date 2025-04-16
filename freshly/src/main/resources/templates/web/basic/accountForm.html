@@ -265,7 +265,7 @@
 			document.getElementById("acName").classList.add("is-invalid");
 			isValid = false;
 		}else if(!n.test(name)){
-			document.getElementById("acNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("acNameError").textContent = "형식에 맞지 않습니다.";
 			document.getElementById("acName").classList.add("is-invalid");
 			isValid = false;
 		}else{
@@ -329,6 +329,19 @@
 		}else{
 			document.getElementById("acEndDate").classList.add("is-valid");
 		}
+		
+		if (start && end) {
+		    const startDate = new Date(start);
+		    const endDate = new Date(end);
+
+		    if (endDate < startDate) {
+		        document.getElementById("acEndDateError").textContent = "종료일은 시작일보다 같거나 늦어야 합니다";
+		        document.getElementById("acEndDate").classList.remove("is-valid");
+		        document.getElementById("acEndDate").classList.add("is-invalid");
+		        isValid = false;
+		    }
+		}
+		
 		
 		const phone = document.getElementById("acManagerTel").value;
 		let result = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;

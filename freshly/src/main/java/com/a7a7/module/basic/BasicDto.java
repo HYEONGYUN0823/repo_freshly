@@ -6,7 +6,6 @@ public class BasicDto {
 	
 	// 공통
 	private String seq;
-	private List<Integer> seqs;  // uelete 메서드를 위한 공통 seqs.
 	
 	
 	// 식료품
@@ -225,12 +224,7 @@ public class BasicDto {
 	public void setGcStock(Integer gcStock) {
 		this.gcStock = gcStock;
 	}
-	public List<Integer> getSeqs() {
-		return seqs;
-	}
-	public void setSeqs(List<Integer> seqs) {
-		this.seqs = seqs;
-	}
+	
 	
 	//
 	public String getCd_seq() {
