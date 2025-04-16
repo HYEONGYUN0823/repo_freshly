@@ -19,22 +19,13 @@ import com.a7a7.module.ordering.OrderingService;
 @Controller
 public class DeliveryController {
 
-    private final OrderingService orderingService;
-
-    private final BasicController basicController;
-
 	@Autowired
 	DeliveryService service;
 	
 	@Autowired
 	OrderService orderservice;
-
-    DeliveryController(BasicController basicController, OrderingService orderingService) {
-        this.basicController = basicController;
-        this.orderingService = orderingService;
-    }
 	
-	// 앱 배달 리스트 화면 입니다.
+	// 배송 List 화면
 	@RequestMapping(value ="/web/delivery/deliverylist")
 	public String mobdeliverylist(Model model) {
 		model.addAttribute("list", service.selectDeliveryList());
@@ -52,6 +43,7 @@ public class DeliveryController {
 		return "web/delivery/deliveryForm";
 	}
 	
+	// Insert
 	@RequestMapping(value ="/web/delivery/deliveryInsert")
 	public String mobdeliveryInsert(DeliveryDto dto) {
 		service.deliveryInsert(dto);
@@ -65,6 +57,7 @@ public class DeliveryController {
 		return "redirect:/web/delivery/deliverylist";
 	}
 	
+	// Uelete
 	@RequestMapping(value = "/web/delivery/deliveryUelete")
 	public String deliveryUelete(@RequestParam("seq") List<Integer> seqList) {
 		service.deliveryUelete(seqList);
@@ -88,35 +81,6 @@ public class DeliveryController {
 			orderservice.update(orderDto);
 		}
 		return "redirect:/web/delivery/deliverylist";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 모바일 배달 리스트 화면 입니다.
-	@RequestMapping(value ="/mob/account/deliveryList")
-	public String webdeliverylist(Model model) {
-		model.addAttribute("list", service.selectDeliveryList());
-		return "mob/account/deliveryList";
 	}
 	
 }
