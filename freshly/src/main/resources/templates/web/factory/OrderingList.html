@@ -125,55 +125,64 @@
    ***********************************-->
 <script type="text/javascript">
 
-	let goUrlXdmForm = "/web/factory/OrderingForm";
-	let goUrlXdmUele = "/web/factory/OrderingUele";
+    let goUrlXdmForm = "/web/factory/OrderingForm";
+    let goUrlXdmUele = "/web/factory/OrderingUele";
 
-	let seq = document.querySelector("input[name=seq]");
-	let form = document.getElementById("formList");
-	
-	document.getElementById("btnForm").onclick = function () {
-	    goForm(0);
-	}
+    let seq = document.querySelector("input[name=seq]");
+    let form = document.getElementById("formList");
 
-	goForm = function (keyValue) {
-		
-	    seq.value = keyValue;
-	    form.action = goUrlXdmForm;
-	    form.submit();
-	}
-	
-	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
-	if(document.getElementById("btnUel")){
-		document.getElementById("btnUel").onclick = function () {
-			document.querySelector("#modalConfirmTitle").textContent = "확 인";
-			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-			document.querySelector("#btnModalUelete").style.display = '';
-			document.querySelector("#btnModalDelete").style.display = 'none';
-			 document.querySelector("#btnModalDeli").style.display = 'none';
-			$("#modalConfirm").modal("show");      	
-			}
-		}
+    document.getElementById("btnForm").onclick = function () {
+        goForm(0);
+    }
 
-		document.getElementById("btnModalUelete").onclick = function () {
-		
-			const query = 'input[name="itemCheckbox"]:checked';
-			const selectedElements = document.querySelectorAll(query);
-			//체크박스 체크된 항목의 개수
-			const selectedElementsCnt = selectedElements.length;
-			if(selectedElementsCnt == 0){
-		      alert("삭제할 항목을 선택해주세요.");
-		      return false;
-			}else{
-				const selectedValues = [];
-				selectedElements.forEach(element => {
-	           	 selectedValues.push(element.value);
-	        });
-			
-				seq.value = selectedValues.join(',');
-				form.action = goUrlXdmUele;
-				form.submit();
-			}
-		}
+    function goForm(keyValue) {
+        seq.value = keyValue;
+        form.action = goUrlXdmForm;
+        form.submit();
+    }
+
+    // 알림 모달 표시
+    function showAlertModal(message) {
+        document.querySelector("#modalConfirmTitle").textContent = "알림";
+        document.querySelector("#alertMessageModalBody").textContent = message;
+        document.querySelector("#btnModalUelete").style.display = 'none';
+        document.querySelector("#btnModalDelete").style.display = 'none';
+        document.querySelector("#btnModalDeli").style.display = 'none';
+        $("#alertMessageModal").modal("show");
+    }
+
+    // 삭제 버튼 클릭 시 - 모달 띄우기
+    document.getElementById("btnUel").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        if (selectedElements.length == 0) {
+            showAlertModal("삭제할 항목을 선택해주세요.");
+            return false;
+        }
+
+        // 모달 텍스트 설정 및 삭제 버튼만 보이게
+        document.querySelector("#modalConfirmTitle").textContent = "확 인";
+        document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까?";
+        document.querySelector("#btnModalUelete").style.display = '';
+        document.querySelector("#btnModalDelete").style.display = 'none';
+        document.querySelector("#btnModalDeli").style.display = 'none';
+
+        $("#modalConfirm").modal("show");
+    };
+
+    // 모달 내 실제 삭제 버튼 클릭 시
+    document.getElementById("btnModalUelete").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        if (selectedElements.length == 0) {
+            showAlertModal("삭제할 항목을 선택해주세요.");
+            return false;
+        }
+
+        const selectedValues = Array.from(selectedElements).map(el => el.value);
+        seq.value = selectedValues.join(',');
+        form.action = goUrlXdmUele;
+        form.submit();
+    };
+
 </script>
 <div th:replace="~{web/include/checkBox :: checkBox}"></div>
 <div th:replace="~{web/include/footer :: footer}"></div>

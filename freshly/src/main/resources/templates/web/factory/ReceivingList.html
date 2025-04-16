@@ -110,47 +110,80 @@
 <!--**********************************
        Scripts end
    ***********************************-->
-   <script type="text/javascript">
+<script type="text/javascript">
 
-	let goUrlXdmForm = "";
-	let goUrlXdmUele = "/web/factory/ReceivingUele";
+    let goUrlXdmForm = "";
+    let goUrlXdmUele = "/web/factory/ReceivingUele";
 
-	let seq = document.querySelector("input[name=seq]");
-	let form = document.getElementById("formList");
-	
-	/* uelet를 위한 메서드 + dto에 추가해야할 값이 있음. */
-	if(document.getElementById("btnUel")){
-		document.getElementById("btnUel").onclick = function () {
-			document.querySelector("#modalConfirmTitle").textContent = "확 인";
-			document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-			document.querySelector("#btnModalUelete").style.display = '';
-			document.querySelector("#btnModalDelete").style.display = 'none';
-			 document.querySelector("#btnModalDeli").style.display = 'none';
-			$("#modalConfirm").modal("show");      	
-			}
-		}
+    let seq = document.querySelector("input[name=seq]");
+    let form = document.getElementById("formList");
 
-		document.getElementById("btnModalUelete").onclick = function () {
-		
-			const query = 'input[name="itemCheckbox"]:checked';
-			const selectedElements = document.querySelectorAll(query);
-			//체크박스 체크된 항목의 개수
-			const selectedElementsCnt = selectedElements.length;
-			if(selectedElementsCnt == 0){
-		      alert("삭제할 항목을 선택해주세요.");
-		      return false;
-			}else{
-				const selectedValues = [];
-				selectedElements.forEach(element => {
-	           	 selectedValues.push(element.value);
-	        });
-			
-				seq.value = selectedValues.join(',');
-				form.action = goUrlXdmUele;
-				form.submit();
-			}
-		}
-   </script>
+ 	// 전체선택 체크박스 클릭 시
+    document.getElementById("selectAllCheckbox").onclick = function () {
+        const isChecked = this.checked;
+        const checkboxes = document.querySelectorAll('input[name="itemCheckbox"]');
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = isChecked;
+        });
+    };
+
+    // 하위 체크박스 상태에 따라 전체선택 체크박스 상태 조절
+    const itemCheckboxes = document.querySelectorAll('input[name="itemCheckbox"]');
+
+    itemCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            const allCheckboxes = document.querySelectorAll('input[name="itemCheckbox"]');
+            const checkedCheckboxes = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+
+            const selectAllCheckbox = document.getElementById("selectAllCheckbox");
+
+            selectAllCheckbox.checked = allCheckboxes.length === checkedCheckboxes.length;
+        });
+    });
+
+    // 알림 모달
+    function showAlertModal(message) {
+        document.querySelector("#modalConfirmTitle").textContent = "알림";
+        document.querySelector("#alertMessageModalBody").textContent = message;
+        document.querySelector("#btnModalUelete").style.display = 'none';
+        document.querySelector("#btnModalDelete").style.display = 'none';
+        document.querySelector("#btnModalDeli").style.display = 'none';
+        $("#alertMessageModal").modal("show");
+    }
+
+    // 삭제 버튼 클릭 시
+    document.getElementById("btnUel").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        if (selectedElements.length == 0) {
+            showAlertModal("삭제할 항목을 선택해주세요.");
+            return false;
+        }
+
+        document.querySelector("#modalConfirmTitle").textContent = "확 인";
+        document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까?";
+        document.querySelector("#btnModalUelete").style.display = '';
+        document.querySelector("#btnModalDelete").style.display = 'none';
+        document.querySelector("#btnModalDeli").style.display = 'none';
+
+        $("#modalConfirm").modal("show");
+    };
+
+    // 모달 내 삭제 확인 시
+    document.getElementById("btnModalUelete").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        if (selectedElements.length == 0) {
+            showAlertModal("삭제할 항목을 선택해주세요.");
+            return false;
+        }
+
+        const selectedValues = Array.from(selectedElements).map(el => el.value);
+        seq.value = selectedValues.join(',');
+        form.action = goUrlXdmUele;
+        form.submit();
+    };
+
+</script>
+
 <div th:replace="~{web/include/footer :: footer}"></div>
 
 </html>

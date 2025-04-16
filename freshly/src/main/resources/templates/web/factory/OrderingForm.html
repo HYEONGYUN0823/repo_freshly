@@ -65,10 +65,11 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="odStatus">발주 상태 *</label>
                                                         <div>
-	                                                        <select
-																id="odStatus" name="odStatus" class="form-control">
-																	<option value="1" th:selected="${item?.odStatus} == 1">접수</option>
-															</select>
+															<input class="form-control"
+															       id="odStatusText" type="text"
+															       th:value="'접수'" placeholder="접수" disabled>
+															
+															<input type="hidden" id="odStatus" name="odStatus" th:value="1">
 														</div>
                                                     </div>
                                                 </div>

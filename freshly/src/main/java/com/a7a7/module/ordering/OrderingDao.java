@@ -2,21 +2,18 @@ package com.a7a7.module.ordering;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import com.a7a7.module.order.OrderDto;
 
 @Repository
 public interface OrderingDao {
 	
-	public List<OrderDto> selectOrderingList();
+	public List<OrderingDto> selectOrderingList();
 	
-	public List<OrderDto> selectReceivingList();
+	public List<OrderingDto> selectReceivingList();
 	
-	public List<OrderDto> selectForwardingWaitingList();
+	public List<OrderingDto> selectForwardingWaitingList();
 	
-	public List<OrderDto> selectDeliveryCompletedList();
+	public List<OrderingDto> selectDeliveryCompletedList();
 	
 	public OrderingDto selectOne(OrderingDto dto);
 	
@@ -26,5 +23,5 @@ public interface OrderingDao {
 	
 	public int completeUpdate(String seq);
 	
-	public int uelete(@Param("seqs")List<Integer> seqs);
+	public int uelete(String seq);
 }

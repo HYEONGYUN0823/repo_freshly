@@ -1,8 +1,6 @@
 package com.a7a7.module.ordering;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,14 +58,12 @@ public class OrderingController {
     }
 
     @RequestMapping(value = "/mob/factory/forwardingWaitingUele")
-    public String forwardingWaitingUele(@RequestParam("seq") String seq) {
-        List<Integer> seqList = Arrays.stream(seq.split(","))
-                                      .map(String::trim)
-                                      .map(Integer::parseInt)
-                                      .collect(Collectors.toList());
-
-        service.uelete(seqList);
-
+    public String forwardingWaitingUele(@RequestParam("seq") List<String> seqList) {
+    	
+    	for(String seq : seqList) {
+    		service.uelete(seq);
+    	}
+    	
         return "redirect:/mob/factory/forwardingWaitingList";
     }
     
@@ -80,13 +76,11 @@ public class OrderingController {
     }
     
 	@RequestMapping(value = "/mob/factory/deliveryCompletedUele")
-	public String deliveryCompletedUele(@RequestParam("seq") String seq) {
-		List<Integer> seqList = Arrays.stream(seq.split(","))
-									  .map(String::trim)
-									  .map(Integer::parseInt)
-									  .collect(Collectors.toList());
-		
-		service.uelete(seqList);
+	public String deliveryCompletedUele(@RequestParam("seq") List<String> seqList) {
+
+    	for(String seq : seqList) {
+    		service.uelete(seq);
+    	}
 		
 		return "redirect:/mob/factory/deliveryCompletedList";
 	}
@@ -139,8 +133,11 @@ public class OrderingController {
 	}
 	
 	@RequestMapping(value = "/web/factory/OrderingUele")
-	public String orderingUele(@RequestParam("seq") List<Integer> seqList) {
-		service.uelete(seqList);
+	public String orderingUele(@RequestParam("seq") List<String> seqList) {
+
+    	for(String seq : seqList) {
+    		service.uelete(seq);
+    	}
 		
 		return "redirect:/web/factory/OrderingList";
 	}
@@ -154,8 +151,11 @@ public class OrderingController {
 	}
 	
 	@RequestMapping(value = "/web/factory/ReceivingUele")
-	public String webReceivingUele(@RequestParam("seq") List<Integer> seqList) {
-		service.uelete(seqList);
+	public String webReceivingUele(@RequestParam("seq") List<String> seqList) {
+
+    	for(String seq : seqList) {
+    		service.uelete(seq);
+    	}
 		
 		return "redirect:/web/factory/ReceivingList";
 	}
