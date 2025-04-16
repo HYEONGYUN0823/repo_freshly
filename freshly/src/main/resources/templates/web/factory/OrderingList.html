@@ -46,7 +46,6 @@
                                             			<input class="form-check-input" type="checkbox" name ="selectAllCheckbox" id="selectAllCheckbox">
                                             		</div>
                                             	</th>
-                                                <th style="text-align: center;">#</th>
                                        			<th style="text-align: center;">발주번호</th>
                                        			<th style="text-align: center;">공장</th>
                                        			<th style="text-align: center;">발주 상태</th>
@@ -63,7 +62,6 @@
 	                                            		<input class="form-check-input itemCheckbox" type="checkbox" name="itemCheckbox" id="itemCheckbox" th:value="${item.seq}">
 	                                            	</div>
 	                                            </td>
-                                                <td style="text-align: center;">#</td>
                                        			<td style="text-align: center;" class="seq align-middle fw-semi-bold"><a
 													href="javascript:void(0);" th:text="${item.seq}"
 													th:attr="onclick=|goForm('${item.seq}')|"> </a>

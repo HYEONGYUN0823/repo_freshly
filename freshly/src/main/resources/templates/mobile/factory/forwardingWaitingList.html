@@ -64,7 +64,6 @@
                                              <label class="form-check-label" for="checkAll"></label>
                                           </div>
                                        </th>
-                                       	<th style="text-align: center;">#</th>
                                			<th style="text-align: center;">출고대기번호</th>
                                			<th style="text-align: center;">공장</th>
                                			<th style="text-align: center;">출고 상태</th>
@@ -83,7 +82,6 @@
                                              <label class="form-check-label" for="orderOne"></label>
                                           </div>
                                        </td>
-                                       <td style="text-align: center;">#</td>
 										<td style="text-align: center;" th:text ="${item.seq}"></td>
 										<td style="text-align: center;" th:text ="${item.fcName}"></td>
 										<td style="text-align: center;">
@@ -238,12 +236,37 @@
             const confirmModal = new bootstrap.Modal(document.getElementById("modalAfterForwarding"));
             confirmModal.show();
         }
+
+        // 체크박스 전체 선택/해제 연동 기능 추가
+        const checkAllBox = document.getElementById("checkAll");
+
+        function updateCheckAllStatus() {
+            const itemCheckboxes = document.querySelectorAll('input[name="itemCheckbox"]');
+            const allChecked = Array.from(itemCheckboxes).every(cb => cb.checked);
+            checkAllBox.checked = allChecked;
+        }
+
+        // 전체선택 체크박스 클릭 시
+        if (checkAllBox) {
+            checkAllBox.addEventListener("change", function () {
+                const itemCheckboxes = document.querySelectorAll('input[name="itemCheckbox"]');
+                itemCheckboxes.forEach(cb => cb.checked = checkAllBox.checked);
+            });
+        }
+
+        // 개별 체크박스 클릭 시 전체선택 상태 갱신
+        document.addEventListener("change", function (e) {
+            if (e.target && e.target.name === "itemCheckbox") {
+                updateCheckAllStatus();
+            }
+        });
     });
 
     // 출고완료 목록으로 이동
     document.getElementById("btnGoToComplete").onclick = function () {
         window.location.href = goUrlXdmList;
     };
+
 </script>
 
     <div th:replace = "~{mobile/include/footer :: footer}"></div>
