@@ -95,8 +95,6 @@
 		FROM
 			code
 		WHERE 1=1
-			AND cdDelNy = 0
-		    AND cdUseNy = 0
    </select>
 	
 </mapper>
