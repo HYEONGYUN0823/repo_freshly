@@ -178,7 +178,7 @@
     // 삭제 버튼 클릭 시
     document.getElementById("btnUel").onclick = function () {
         const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
-        if (selectedElements.length === 0) {
+        if (selectedElements.length == 0) {
             showAlertModal("삭제할 항목을 선택해주세요.");
             return false;
         } else {
@@ -190,7 +190,7 @@
     document.getElementById("btnModalUelete").onclick = function () {
         const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
         const selectedValues = Array.from(selectedElements).map(el => el.value);
-        if (selectedValues.length === 0) {
+        if (selectedValues.length == 0) {
             showAlertModal("삭제할 항목을 선택해주세요.");
             return false;
         }
@@ -202,7 +202,7 @@
     // 출고 버튼 클릭 시
     document.getElementById("btnForwarding").onclick = function () {
         const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
-        if (selectedElements.length === 0) {
+        if (selectedElements.length == 0) {
             showAlertModal("출고할 항목을 선택해주세요.");
             return false;
         } else {
@@ -214,19 +214,16 @@
     document.getElementById("btnModalForwarding").onclick = function () {
     	const query = 'input[name="itemCheckbox"]:checked';
 		const selectedElements = document.querySelectorAll(query);
-		//체크박스 체크된 항목의 개수
 		const selectedElementsCnt = selectedElements.length;
 		if(selectedElementsCnt == 0){
 	      alert("삭제할 항목을 선택해주세요.");
 	      return false;
 		}else{
 			const selectedValues = [];
-			
 			selectedElements.forEach(element => {
 	           	 selectedValues.push(element.value);
 	        });
-		
-			// 출고 완료 후 모달 띄우도록 설정
+
 	        localStorage.setItem("forwardingCompleted", "true");
 			
 			seq.value = selectedValues.join(',');
@@ -237,10 +234,28 @@
 
     // 페이지 로드 후 출고 완료 모달 띄우기
     document.addEventListener("DOMContentLoaded", function () {
-        if (localStorage.getItem("forwardingCompleted") === "true") {
+        if (localStorage.getItem("forwardingCompleted") == "true") {
             localStorage.removeItem("forwardingCompleted");
             const confirmModal = new bootstrap.Modal(document.getElementById("modalAfterForwarding"));
             confirmModal.show();
+        }
+
+        // 전체선택 체크박스 기능 추가
+        const checkAll = document.getElementById("checkAll");
+        const checkboxes = document.querySelectorAll('input[name="itemCheckbox"]');
+
+        if (checkAll) {
+            checkAll.addEventListener("change", function () {
+                checkboxes.forEach(cb => cb.checked = checkAll.checked);
+            });
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener("change", function () {
+                    const total = checkboxes.length;
+                    const checked = document.querySelectorAll('input[name="itemCheckbox"]:checked').length;
+                    checkAll.checked = total === checked;
+                });
+            });
         }
     });
 
@@ -248,6 +263,7 @@
     document.getElementById("btnGoToComplete").onclick = function () {
         window.location.href = goUrlXdmList;
     };
+
 </script>
 
     <div th:replace = "~{mobile/include/footer :: footer}"></div>
