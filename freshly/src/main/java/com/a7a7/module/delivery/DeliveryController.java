@@ -32,28 +32,10 @@ public class DeliveryController {
 		return "web/delivery/deliverylist";
 	}
 	
-	@RequestMapping(value ="/web/delivery/deliveryForm")
-	public String mobdeliveryForm(@ModelAttribute("vo") BasicVo vo, DeliveryDto dto,Model model) {
-		model.addAttribute("acOrder", orderservice.selectOrderList());
-		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
-		}// update
-		else {
-			model.addAttribute("item", service.selectDeliveryView(dto));
-		}
-		return "web/delivery/deliveryForm";
-	}
-	
 	// Insert
 	@RequestMapping(value ="/web/delivery/deliveryInsert")
 	public String mobdeliveryInsert(DeliveryDto dto) {
 		service.deliveryInsert(dto);
-		return "redirect:/web/delivery/deliverylist";
-	}
-	
-	@RequestMapping(value ="/web/delivery/deliveryUpdate")
-	public String mobdeliveryUpdate(@RequestParam("aoseq") String ao,DeliveryDto dto) {
-		dto.setAcOrder_seq(ao);
-		service.deliveryUpdate(dto);
 		return "redirect:/web/delivery/deliverylist";
 	}
 	
@@ -64,6 +46,7 @@ public class DeliveryController {
 		return "redirect:/web/delivery/deliverylist";
 	}
 	
+	// 배송 완료
 	@RequestMapping(value = "/web/delivery/deliveryCompleted")
 	public String deliveryCompleted(@RequestParam("seq") List<String> seqList) {
 		

@@ -44,9 +44,9 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label for="cgName" class="text-label">코드그룹 이름 *</label>
-                                                        <input type="text" id="cgName" name="cgName" style="white-space: normal;"
+                                                        <input type="text" id="cgName" name="cgName"
                                                         	   class="form-control" placeholder="한글,영대소문자,숫자" th:value="${item?.cgName}" required>  
-                                                        <div class="invalid-feedback">코드그룹 이름을 입력해주세요.</div>  
+                                                        <div class="invalid-feedback" id="cgNameFeedback">코드그룹 이름을 입력해주세요.</div>  
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -122,12 +122,38 @@
     	
     	let seq = document.querySelector("input[name=seq]");
     	
+    	function validation() {
+    	    const cgNameInput = document.getElementById("cgName");
+    	    const cgNameValue = cgNameInput.value.trim();
+    	    const cgNamePattern = /^[A-Za-z0-9가-힣]{2,20}$/;
+    	    const cgNameFeedback = document.getElementById("cgNameFeedback");
+
+    	    let isValid = true;
+
+    	    if (cgNameValue === "") {
+    	        cgNameInput.classList.add("is-invalid");
+    	        cgNameInput.classList.remove("is-valid");
+    	        cgNameFeedback.textContent = "코드그룹 이름을 입력해주세요.";
+    	        isValid = false;
+    	    } else if (!cgNamePattern.test(cgNameValue)) {
+    	        cgNameInput.classList.add("is-invalid");
+    	        cgNameInput.classList.remove("is-valid");
+    	        cgNameFeedback.textContent = "코드그룹 이름은 한글, 영어 또는 숫자만 입력해주세요. (2~20자)";
+    	        isValid = false;
+    	    } else {
+    	        cgNameInput.classList.remove("is-invalid");
+    	        cgNameInput.classList.add("is-valid");
+    	    }
+
+    	    return isValid;
+    	}
+    	
     	document.getElementById("BtnSubmit").onclick = function(){
 
     		let form = document.getElementById("form");
 
     	    // 벨리데이션
-    	    if (!form.checkValidity()) {
+    	    if (!validation()) {
     	        form.classList.add('was-validated');
     	        return false;
     	    }

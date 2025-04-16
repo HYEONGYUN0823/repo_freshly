@@ -13672,19 +13672,19 @@ input[type="checkbox"]:checked:after {
 
 .form-control.is-valid {
   border-color: #7ED321 !important;
-  border-right: 0px !important; }
+  }
   .form-control.is-valid:focus {
     box-shadow: none; }
 
 .form-control.is-warning {
   border-color: #FFAA16 !important;
-  border-right: 0px !important; }
+  }
   .form-control.is-warning:focus {
     box-shadow: none; }
 
 .form-control.is-invalid {
   border-color: #FF1616 !important;
-  border-right: 0px !important; }
+  }
   .form-control.is-invalid:focus {
     box-shadow: none; }
 
