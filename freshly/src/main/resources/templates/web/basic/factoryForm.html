@@ -209,13 +209,13 @@
 		let isValid = true; 
 		
 		const name = document.getElementById("fcName").value;
-		let n = /^[가-힣]{1,15}$/;
+		let n =  /^[가-힣a-zA-Z0-9]{1,15}$/;
 		if(name == null || name == ""){
-			document.getElementById("fcNameError").textContent = "이름을 넣어주세요.";
+			document.getElementById("fcNameError").textContent = "공장명을 넣어주세요.";
 			document.getElementById("fcName").classList.add("is-invalid");
 			isValid = false;
 		}else if(!n.test(name)){
-			document.getElementById("fcNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("fcNameError").textContent = "허용 글자 수(15)를 초과했습니다.";
 			document.getElementById("fcName").classList.add("is-invalid");
 			isValid = false;
 		}else{
@@ -224,6 +224,7 @@
 			
 
 		const mname = document.getElementById("fcManagerName").value;
+		let fn = /^[가-힣0-9]{1,15}$/;
 		if(mname == null || mname == ""){
 			document.getElementById("fcManagerNameError").textContent = "이름을 넣어주세요.";
 			document.getElementById("fcManagerName").classList.add("is-invalid");
@@ -232,7 +233,7 @@
 			document.getElementById("fcManagerNameError").textContent = "앞 띄어쓰기를 제거해주세요.";
 			document.getElementById("fcManagerName").classList.add("is-invalid");
 			isValid = false;
-		}else if(!n.test(mname)){
+		}else if(!fn.test(mname)){
 			document.getElementById("fcManagerNameError").textContent = "이름이 15글자를 초과했습니다.";
 			document.getElementById("fcManagerName").classList.add("is-invalid");
 			isValid = false;
@@ -274,8 +275,7 @@
 			document.getElementById("fcUseNy").classList.add("is-valid");
 		}
 		
-
-		
+	
 		if(isValid){
     		if(seq.value == "0" || seq.value == "") {
 				form.action = "/web/basic/factoryInsert";
