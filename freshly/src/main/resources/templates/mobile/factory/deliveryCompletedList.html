@@ -4,6 +4,9 @@
   <div th:replace= "~{mobile/include/head :: head}"></div>
          <!-- main wrapper -->
          <main class="main-content-wrapper">
+         <form name="formList" id="formList" method="post" autocomplete="off">
+         <input type="hidden" name="seq">
+         <input type="hidden" name="odDelNy">
             <div class="container">
                <!-- row -->
                <div class="row mb-8">
@@ -26,27 +29,27 @@
                   <div class="col-xl-12 col-12 mb-5">
                      <!-- card -->
                      <div class="card h-100 card-lg">
-                        <div class="p-6">
-                           <div class="row justify-content-between">
-                              <div class="col-md-4 col-12 mb-2 mb-md-0">
-                                 <!-- form -->
-                                 <form class="d-flex" role="search" name="formList" id="formList" method="post" autocomplete="off">
-									<input type="hidden" name="seq">
-									<input type="hidden" name="rcDelNy">
-                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-                                 </form>
-                              </div>
-                              <div class="col-lg-2 col-md-4 col-12">
-                                 <!-- select -->
-                                 <select class="form-select">
-                                    <option selected>Status</option>
-                                    <option value="Success">Success</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Cancel">Cancel</option>
-                                 </select>
-                              </div>
-                           </div>
-                        </div>
+<!--                         <div class="p-6"> -->
+<!--                            <div class="row justify-content-between"> -->
+<!--                               <div class="col-md-4 col-12 mb-2 mb-md-0"> -->
+<!--                                  form -->
+<!--                                  <form class="d-flex" role="search" name="formList" id="formList" method="post" autocomplete="off"> -->
+<!-- 									<input type="hidden" name="seq"> -->
+<!-- 									<input type="hidden" name="rcDelNy"> -->
+<!--                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" /> -->
+<!--                                  </form> -->
+<!--                               </div> -->
+<!--                               <div class="col-lg-2 col-md-4 col-12"> -->
+<!--                                  select -->
+<!--                                  <select class="form-select"> -->
+<!--                                     <option selected>Status</option> -->
+<!--                                     <option value="Success">Success</option> -->
+<!--                                     <option value="Pending">Pending</option> -->
+<!--                                     <option value="Cancel">Cancel</option> -->
+<!--                                  </select> -->
+<!--                               </div> -->
+<!--                            </div> -->
+<!--                         </div> -->
                         <!-- card body -->
                         <div class="card-body p-0">
                            <!-- table responsive -->
@@ -71,7 +74,16 @@
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr th:each="item: ${list}">
+                                    <tr th:if="${#lists.isEmpty(list)}" class="hover-actions-trigger btn-reveal-trigger position-static">
+                                   		<td></td>
+                                   		<td></td>
+                                   		<td></td>
+                                   		<td></td>
+                                   		<td colspan="10">
+                                   			<p class="fs-0" style="padding-top: 12px;">There are no data!</p>
+                                   		</td>
+                                   	</tr>
+                                       <tr th:if="${!#lists.isEmpty(list)}" th:each="item : ${list}">
                                        <td>
                                           <div class="form-check">
                                              <input class="form-check-input" type="checkbox" th:value="${item.seq}" name="itemCheckbox" id="itemCheckbox" />
@@ -155,6 +167,7 @@
                   </div>
                </div>
             </div>
+            </form>
          </main>
          
 <script type="text/javascript">
@@ -169,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btnUel) {
         btnUel.onclick = function () {
             const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
-            if (selectedElements.length === 0) {
+            if (selectedElements.length == 0) {
                 showAlertModal("삭제할 항목을 선택해주세요.");
                 return false;
             } else {
@@ -179,23 +192,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         };
-    }
+    }btnModalUelete
 
     // 삭제 모달 내부 삭제 버튼 클릭 시
-    const btnModalUelete = document.getElementById("btnModalUelete");
-    if (btnModalUelete) {
-        btnModalUelete.onclick = function () {
-            const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
-            const selectedValues = Array.from(selectedElements).map(el => el.value);
-            if (selectedValues.length === 0) {
-                showAlertModal("삭제할 항목을 선택해주세요.");
-                return false;
-            }
-            seq.value = selectedValues.join(',');
-            form.action = goUrlXdmUele;
-            form.submit();
-        };
-    }
+    document.getElementById("btnModalUelete").onclick = function () {
+        const selectedElements = document.querySelectorAll('input[name="itemCheckbox"]:checked');
+        const selectedValues = Array.from(selectedElements).map(el => el.value);
+        if (selectedValues.length == 0) {
+            showAlertModal("삭제할 항목을 선택해주세요.");
+            return false;
+        }
+        seq.value = selectedValues.join(',');
+        form.action = goUrlXdmUele;
+        form.submit();
+    };
 
     // 모달 알림 함수
     function showAlertModal(message) {
@@ -223,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 각 항목 체크박스 클릭 시 전체선택 체크박스 상태 업데이트
     document.addEventListener("change", function (e) {
-        if (e.target && e.target.name === "itemCheckbox") {
+        if (e.target && e.target.name == "itemCheckbox") {
             updateCheckAllStatus();
         }
     });
