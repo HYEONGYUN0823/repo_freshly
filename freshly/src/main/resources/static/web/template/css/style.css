@@ -260,7 +260,7 @@ body {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #BDBDC7;
+  color: #000000;
   text-align: left;
   background-color: rgba(88, 115, 254, 0.04); }
 
@@ -7850,7 +7850,7 @@ li {
   list-style: none; }
 
 a {
-  color: #BDBDC7; }
+  color: rgb(79, 60, 255); }
   a:hover, a:focus, a.active {
     color: #593bdb;
     text-decoration: none; }
