@@ -225,14 +225,14 @@
     	}
     	// 주문 개수 Validation
     	function aoQuantityValidation() {
-    		// 주문 개수 
+
     	    const aoQuantityInput = document.getElementById("aoQuantity");
     	    const aoQuantityValue = aoQuantityInput.value.trim();
     	    const aoQuantityPattern = /^[0-9]{1,10}$/;
     	    const aoQuantityFeedback = document.getElementById("aoQuantityFeedback");
     	    
     	    let isValid = true;
-    	 	// 주문 개수 
+
     	    if (aoQuantityValue === "") {
     	    	aoQuantityInput.classList.add("is-invalid");
     	    	aoQuantityInput.classList.remove("is-valid");
@@ -286,7 +286,7 @@
 
     		let form = document.getElementById("form");
 
-    	    // 벨리데이션
+    	    // Validation
     	    if (!validation()) {
     	        return false;
     	    }
