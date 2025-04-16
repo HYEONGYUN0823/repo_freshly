@@ -64,9 +64,6 @@
                                        
                                     </div>
                                     <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/system/codeGroupList'"><i class="fa-solid fa-list"></i></button>
-                                    <button type="button" id="btnUel" class="btn btn-danger">
-										<i class="fa-regular fa-trash-can"></i>
-									</button>
                                     <button type="button" class="btn btn-primary" id="BtnSubmit" style="float: right;"><i class="fa-solid fa-plus"></i></button>
                                 </form>
                             </div>
@@ -133,12 +130,12 @@
     	    if (cgNameValue === "") {
     	        cgNameInput.classList.add("is-invalid");
     	        cgNameInput.classList.remove("is-valid");
-    	        cgNameFeedback.textContent = "코드그룹 이름을 입력해주세요.";
+    	        cgNameFeedback.textContent = "코드그룹 이름을 입력해 주세요.";
     	        isValid = false;
     	    } else if (!cgNamePattern.test(cgNameValue)) {
     	        cgNameInput.classList.add("is-invalid");
     	        cgNameInput.classList.remove("is-valid");
-    	        cgNameFeedback.textContent = "코드그룹 이름은 한글, 영어 또는 숫자만 입력해주세요. (2~20자)";
+    	        cgNameFeedback.textContent = "코드그룹 이름은 공백 없이 한글, 영어 또는 숫자만 입력해 주세요. (2~20자)";
     	        isValid = false;
     	    } else {
     	        cgNameInput.classList.remove("is-invalid");

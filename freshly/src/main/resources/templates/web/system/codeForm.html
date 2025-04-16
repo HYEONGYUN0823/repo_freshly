@@ -45,7 +45,7 @@
                                                     <div class="form-group">
                                                         <label for="cdName" class="text-label">코드 이름 *</label>
                                                         <input type="text" id="cdName" name="cdName" class="form-control" placeholder="한글,영대소문자,숫자" th:value="${item?.cdName}" required>  
-                                                        <div class="invalid-feedback">코드 이름을 입력해주세요.</div>    
+                                                        <div class="invalid-feedback" id="cdNameFeedback">코드 이름을 입력해주세요.</div>    
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -77,9 +77,6 @@
                                        
                                     </div>
                                     <button type="button" class="btn btn-outline-primary" onclick="location.href='/web/system/codeList'"><i class="fa-solid fa-list"></i></button>
-                                    <button type="button" id="btnUel" class="btn btn-danger">
-										<i class="fa-regular fa-trash-can"></i>
-									</button>
                                     <button type="button" class="btn btn-primary" id="BtnSubmit" style="float: right;"><i class="fa-solid fa-plus"></i></button>
                                 </form>
                             </div>
@@ -135,12 +132,38 @@
     	
     	let seq = document.querySelector("input[name=seq]");
     	
+    	function validation() {
+    	    const cdNameInput = document.getElementById("cdName");
+    	    const cdNameValue = cdNameInput.value.trim();
+    	    const cdNamePattern = /^[A-Za-z0-9가-힣]{2,20}$/;
+    	    const cdNameFeedback = document.getElementById("cdNameFeedback");
+
+    	    let isValid = true;
+
+    	    if (cdNameValue === "") {
+    	        cdNameInput.classList.add("is-invalid");
+    	        cdNameInput.classList.remove("is-valid");
+    	        cdNameFeedback.textContent = "코드 이름을 입력해 주세요.";
+    	        isValid = false;
+    	    } else if (!cdNamePattern.test(cdNameValue)) {
+    	        cdNameInput.classList.add("is-invalid");
+    	        cdNameInput.classList.remove("is-valid");
+    	        cdNameFeedback.textContent = "코드 이름은 공백 없이 한글, 영어 또는 숫자만 입력해 주세요. (2~20자)";
+    	        isValid = false;
+    	    } else {
+    	        cdNameInput.classList.remove("is-invalid");
+    	        cdNameInput.classList.add("is-valid");
+    	    }
+
+    	    return isValid;
+    	}
+    	
     	document.getElementById("BtnSubmit").onclick = function(){
 
     		let form = document.getElementById("form");
 
     	    // 벨리데이션
-    	    if (!form.checkValidity()) {
+    	    if (!validation()) {
     	        form.classList.add('was-validated');
     	        return false;
     	    }
