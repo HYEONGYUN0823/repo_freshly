@@ -224,7 +224,7 @@
 			
 
 		const mname = document.getElementById("fcManagerName").value;
-		let fn = /^[가-힣0-9]{1,15}$/;
+		let fn = /^[가-힣0-9]{1,6}$/;
 		if(mname == null || mname == ""){
 			document.getElementById("fcManagerNameError").textContent = "이름을 넣어주세요.";
 			document.getElementById("fcManagerName").classList.add("is-invalid");
@@ -234,7 +234,7 @@
 			document.getElementById("fcManagerName").classList.add("is-invalid");
 			isValid = false;
 		}else if(!fn.test(mname)){
-			document.getElementById("fcManagerNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("fcManagerNameError").textContent = "이름 폼 양식에 맞지않습니다.(한글,6글자 미만)";
 			document.getElementById("fcManagerName").classList.add("is-invalid");
 			isValid = false;
 		}else{

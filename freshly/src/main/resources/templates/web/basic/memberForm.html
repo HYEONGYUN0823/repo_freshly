@@ -173,13 +173,13 @@
 		let isValid = true; 
 		
 		const name = document.getElementById("mbName").value;
-		let n = /^[가-힣]{1,15}$/;
+		let n = /^[가-힣]{1,6}$/;
 		if(name == null || name == ""){
 			document.getElementById("mbNameError").textContent = "이름을 넣어주세요.";
 			document.getElementById("mbName").classList.add("is-invalid");
 			isValid = false;
 		}else if(!n.test(name)){
-			document.getElementById("mbNameError").textContent = "이름이 15글자를 초과했습니다.";
+			document.getElementById("mbNameError").textContent = "이름 폼 양식에 맞지않습니다.(한글,6글자 미만)";
 			document.getElementById("mbName").classList.add("is-invalid");
 			isValid = false;
 		}else{
