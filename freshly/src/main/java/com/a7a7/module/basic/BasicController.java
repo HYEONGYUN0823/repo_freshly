@@ -36,7 +36,6 @@ public class BasicController {
 	
 	@RequestMapping(value = "/web/basic/groceryForm")
 	public String selectWebGroceryForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
-		model.addAttribute("lists", service.selectCategory("3"));
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {	
 		}// update
 		else {
@@ -84,8 +83,7 @@ public class BasicController {
 	
 	@RequestMapping(value = "/web/basic/accountForm")
 	public String selectWebAccountForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
-		model.addAttribute("list1", service.selectCategory("2"));
-		model.addAttribute("list2", service.selectCategory("1"));
+		
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {						
 		}// update
 		else {
@@ -128,7 +126,6 @@ public class BasicController {
 	
 	@RequestMapping(value = "/web/basic/factoryForm")
 	public String selectWebFactoryForm(@ModelAttribute("vo") BasicVo vo, BasicDto dto,Model model) {
-		model.addAttribute("lists", service.selectCategory("1"));
 		if(vo.getSeq().equals("0") || vo.getSeq().equals(" ")) {
 					
 		}// update
