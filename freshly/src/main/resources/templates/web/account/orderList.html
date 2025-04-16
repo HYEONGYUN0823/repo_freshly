@@ -82,7 +82,7 @@
                                        			<td style="text-align: center;" th:if="${item.aoStatus == 1}"><span class="badge badge-pill badge-primary">주문 접수</span></td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 2}"><span class="badge badge-pill badge-success">배송중</span></td>
                                       			<td style="text-align: center;" th:if="${item.aoStatus == 3}"><span class="badge badge-pill badge-light">배송 완료</span></td>
-                                      			
+                                      			<td><input type="hidden" id="aoStatus" th:value="${item.aoStatus}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -190,6 +190,14 @@
 	            if(tr.querySelector('#stockChk').value < 0){
 	        		document.querySelector("#modalConfirmTitle").textContent = "확 인";
 	        		document.querySelector("#modalConfirmBody").textContent = tr.querySelector('#gcName').innerText + "의 재고가 부족해 발주가 필요합니다.";
+	        		document.querySelector("#btnModalDeli").style.display = 'none';
+	        		document.querySelector("#btnModalUelete").style.display = 'none';
+	        		document.querySelector("#btnModalDelete").style.display = 'none';
+	        		$("#modalConfirm").modal("show"); 
+	        		return;
+	            } else if(tr.querySelector('#aoStatus').value != 1){
+	            	document.querySelector("#modalConfirmTitle").textContent = "확 인";
+	        		document.querySelector("#modalConfirmBody").textContent = "주문 접수 상태인 건만 배송할 수 있습니다.";
 	        		document.querySelector("#btnModalDeli").style.display = 'none';
 	        		document.querySelector("#btnModalUelete").style.display = 'none';
 	        		document.querySelector("#btnModalDelete").style.display = 'none';

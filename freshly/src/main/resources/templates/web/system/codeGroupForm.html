@@ -45,7 +45,7 @@
                                                     <div class="form-group">
                                                         <label for="cgName" class="text-label">코드그룹 이름 *</label>
                                                         <input type="text" id="cgName" name="cgName"
-                                                        	   class="form-control" placeholder="한글,영대소문자,숫자" th:value="${item?.cgName}" required>  
+                                                        	   class="form-control" placeholder="한글,영대소문자,숫자" th:value="${item?.cgName}">  
                                                         <div class="invalid-feedback" id="cgNameFeedback">코드그룹 이름을 입력해주세요.</div>  
                                                     </div>
                                                 </div>
@@ -155,7 +155,6 @@
 
     	    // 벨리데이션
     	    if (!validation()) {
-    	        form.classList.add('was-validated');
     	        return false;
     	    }
     	    

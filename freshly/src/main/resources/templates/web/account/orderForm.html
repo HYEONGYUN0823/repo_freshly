@@ -46,7 +46,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="account_seq">거래처 *</label>
-                                                        <select id="account_seq" name="account_seq" class="form-control" required>
+                                                        <select id="account_seq" name="account_seq" class="form-control">
 															<option disabled hidden th:selected="${item?.account_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${accountGroup}"
 																	th:value="${group.seq}" 
@@ -61,7 +61,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="grocery_seq">상품</label>
-                                                        <select id="grocery_seq" name="grocery_seq" class="form-control" required>
+                                                        <select id="grocery_seq" name="grocery_seq" class="form-control">
 															<option disabled hidden th:selected="${item?.grocery_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${groceryGroup}"
 																	th:value="${group.seq}" 
@@ -76,7 +76,7 @@
                                                     <div class="form-group">
                                                         <label class="text-label" for="ioQuantity">주문 개수</label>
                                                         <input type="text" id="aoQuantity" name="aoQuantity" maxlength="20" placeholder="숫자" th:value="${item?.aoQuantity}"
-	                                                     class="form-control" required/>
+	                                                     class="form-control"/>
 	                                                     <div class="invalid-feedback" id="aoQuantityFeedback">주문 개수를 입력해주세요.</div> 
                                                     </div>
                                                 </div>
@@ -84,7 +84,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="member_seq">담당자</label>
-                                                        <select id="member_seq" name="member_seq" class="form-control" required>
+                                                        <select id="member_seq" name="member_seq" class="form-control">
 															<option disabled hidden th:selected="${item?.member_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${memberGroup}"
 																	th:value="${group.seq}" 
@@ -102,9 +102,8 @@
                                                         <select id="aoStatus" name="aoStatus" class="form-control" th:disabled="${item?.seq == null}">
 															<option disabled hidden th:selected="${item?.aoStatus == null}" value="">선택하세요</option>
 															<option value="1" th:selected="${item?.aoStatus == 1 or item?.seq == null}">주문 접수</option>
-															<option value="2" th:selected="${item?.aoStatus == 2}">진행중</option>
-															<option value="3" th:selected="${item?.aoStatus == 3}">주문 완료</option>
-															<option value="4" th:selected="${item?.aoStatus == 4}">주문 취소</option>
+															<option value="2" th:selected="${item?.aoStatus == 2}">배송중</option>
+															<option value="3" th:selected="${item?.aoStatus == 3}">배송 완료</option>
 														</select>
                                                     </div>
                                                 </div>
@@ -172,25 +171,70 @@
     	
     	let seq = document.querySelector("input[name=seq]");
     	
-    	function validation() {
-			
+    	document.getElementById("account_seq").addEventListener("change", function(){
+    		account_seqValidation();
+    	});
+    	
+    	document.getElementById("grocery_seq").addEventListener("change", function(){
+    		grocery_seqValidation();
+    	});
+    	
+    	document.getElementById("aoQuantity").addEventListener("input", function(){
+    		aoQuantityValidation();
+    	});
+    	
+    	document.getElementById("member_seq").addEventListener("change", function(){
+    		member_seqValidation();
+    	});
+    	
+    	
+    	// 거래처 select Validation
+    	function account_seqValidation() {
+    
+    	    const account_seqInput = document.getElementById("account_seq");
+    	    const account_seqValue = account_seqInput.value.trim();
+    	    
+    	    let isValid = true;
+   
+    	    if (account_seqValue === "") {
+    	    	account_seqInput.classList.add("is-invalid");
+    	    	account_seqInput.classList.remove("is-valid");
+    	        isValid = false;
+    	    } else {
+    	    	account_seqInput.classList.remove("is-invalid");
+    	    	account_seqInput.classList.add("is-valid");
+    	    }
+    		 
+    	    return isValid;
+    	}
+    	// 상품 select Validation
+    	function grocery_seqValidation(){
+
+    	    const grocery_seqInput = document.getElementById("grocery_seq");
+    	    const grocery_seqValue = grocery_seqInput.value.trim();
+    	    
+    	    let isValid = true;
+
+    	    if (grocery_seqValue === "") {
+    	    	grocery_seqInput.classList.add("is-invalid");
+    	    	grocery_seqInput.classList.remove("is-valid");
+    	        isValid = false;
+    	    } else {
+    	    	grocery_seqInput.classList.remove("is-invalid");
+    	    	grocery_seqInput.classList.add("is-valid");
+    	    }
+    	    
+    	    return isValid;
+    	}
+    	// 주문 개수 Validation
+    	function aoQuantityValidation() {
     		// 주문 개수 
     	    const aoQuantityInput = document.getElementById("aoQuantity");
     	    const aoQuantityValue = aoQuantityInput.value.trim();
     	    const aoQuantityPattern = /^[0-9]{1,10}$/;
     	    const aoQuantityFeedback = document.getElementById("aoQuantityFeedback");
-    	 	// 거래처 select
-    	    const account_seqInput = document.getElementById("account_seq");
-    	    const account_seqValue = account_seqInput.value.trim();
-    	 	// 상품 select
-    	    const grocery_seqInput = document.getElementById("grocery_seq");
-    	    const grocery_seqValue = grocery_seqInput.value.trim();
-    	 	// 담당자 select
-    	    const member_seqInput = document.getElementById("member_seq");
-    	    const member_seqValue = member_seqInput.value.trim();
     	    
     	    let isValid = true;
-
     	 	// 주문 개수 
     	    if (aoQuantityValue === "") {
     	    	aoQuantityInput.classList.add("is-invalid");
@@ -206,25 +250,17 @@
     	    	aoQuantityInput.classList.remove("is-invalid");
     	    	aoQuantityInput.classList.add("is-valid");
     	    }
-    	    // 거래처 select
-    	    if (account_seqValue === "") {
-    	    	account_seqInput.classList.add("is-invalid");
-    	    	account_seqInput.classList.remove("is-valid");
-    	        isValid = false;
-    	    } else {
-    	    	account_seqInput.classList.remove("is-invalid");
-    	    	account_seqInput.classList.add("is-valid");
-    	    }
-    		// 상품 select
-    	    if (grocery_seqValue === "") {
-    	    	grocery_seqInput.classList.add("is-invalid");
-    	    	grocery_seqInput.classList.remove("is-valid");
-    	        isValid = false;
-    	    } else {
-    	    	grocery_seqInput.classList.remove("is-invalid");
-    	    	grocery_seqInput.classList.add("is-valid");
-    	    }
-    		// 담당자 select
+    	 	
+    	    return isValid;
+    	}
+    	// 담당자 select Validation
+    	function member_seqValidation() {
+
+    	    const member_seqInput = document.getElementById("member_seq");
+    	    const member_seqValue = member_seqInput.value.trim();
+    	    
+    	    let isValid = true;
+
     	    if (member_seqValue === "") {
     	    	member_seqInput.classList.add("is-invalid");
     	    	member_seqInput.classList.remove("is-valid");
@@ -237,13 +273,24 @@
     	    return isValid;
     	}
     	
+    	// 통합 Validation
+    	function validation() {
+
+    		let isValid = true;
+    		
+    		if(!(account_seqValidation() && grocery_seqValidation() && aoQuantityValidation()&& member_seqValidation())){
+    			isValid = false;
+    		}
+    		
+    		return isValid;
+    	}
+    	
     	document.getElementById("BtnSubmit").onclick = function(){
 
     		let form = document.getElementById("form");
 
     	    // 벨리데이션
     	    if (!validation()) {
-    	        form.classList.add('was-validated');
     	        return false;
     	    }
     	    

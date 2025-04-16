@@ -44,7 +44,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label for="cdName" class="text-label">코드 이름 *</label>
-                                                        <input type="text" id="cdName" name="cdName" class="form-control" placeholder="한글,영대소문자,숫자" th:value="${item?.cdName}" required>  
+                                                        <input type="text" id="cdName" name="cdName" class="form-control" placeholder="한글,영대소문자,숫자" th:value="${item?.cdName}">  
                                                         <div class="invalid-feedback" id="cdNameFeedback">코드 이름을 입력해주세요.</div>    
                                                     </div>
                                                 </div>
@@ -60,7 +60,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <div class="form-group">
                                                         <label class="text-label" for="codeGroup_seq">코드그룹 *</label>
-                                                        <select id="codeGroup_seq" name="codeGroup_seq" class="form-control" required>
+                                                        <select id="codeGroup_seq" name="codeGroup_seq" class="form-control">
 															<option disabled hidden th:selected="${item?.codeGroup_seq == null}" value="">선택하세요</option>
 															<option th:each="group : ${codeGroup}"
 																	th:value="${group.seq}" 
@@ -206,7 +206,6 @@
 
     	    // 벨리데이션
     	    if (!validation()) {
-    	        form.classList.add('was-validated');
     	        return false;
     	    }
     	    
