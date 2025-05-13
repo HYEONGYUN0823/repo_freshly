@@ -180,30 +180,49 @@
 	      return false;
 		}else{
 			const selectedValues = [];
-			
-			for(const element of selectedElements){
-	           	 selectedValues.push(element.value);
-	           	 
-	           	const tr = element.closest('tr');
-	            if(tr.querySelector('#stockChk').value < 0){
-	        		document.querySelector("#modalConfirmTitle").textContent = "확 인";
-	        		document.querySelector("#modalConfirmBody").textContent = tr.querySelector('#gcName').innerText + "의 재고가 부족해 발주가 필요합니다.";
-	        		document.querySelector("#btnModalDeli").style.display = 'none';
-	        		document.querySelector("#btnModalUelete").style.display = 'none';
-	        		document.querySelector("#btnModalDelete").style.display = 'none';
-	        		$("#modalConfirm").modal("show"); 
-	        		return;
-	            } else if(tr.querySelector('#aoStatus').value != 1){
-	            	document.querySelector("#modalConfirmTitle").textContent = "확 인";
-	        		document.querySelector("#modalConfirmBody").textContent = "주문 접수 상태인 건만 배송할 수 있습니다.";
-	        		document.querySelector("#btnModalDeli").style.display = 'none';
-	        		document.querySelector("#btnModalUelete").style.display = 'none';
-	        		document.querySelector("#btnModalDelete").style.display = 'none';
-	        		$("#modalConfirm").modal("show"); 
-	        		return;
-	            }
-	            
-	        };
+			const stockIssues = new Set();  // 중복 제거를 위한 Set
+			const statusIssues = new Set();
+
+			for (const element of selectedElements) {
+			    selectedValues.push(element.value);
+			    
+			    const tr = element.closest('tr');
+			    const stockChk = parseInt(tr.querySelector('#stockChk').value, 10);
+			    const aoStatus = tr.querySelector('#aoStatus').value;
+			    const gcName = tr.querySelector('#gcName').innerText;
+
+			    if (stockChk < 0) {
+			        stockIssues.add(gcName);  // Set이라 중복 자동 제거
+			    }
+
+			    if (aoStatus != "1") {
+			        statusIssues.add(gcName);
+			    }
+			}
+
+			// 재고 부족 처리
+			if (stockIssues.size > 0) {
+			    document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			    document.querySelector("#modalConfirmBody").textContent =
+			        Array.from(stockIssues).join(", ") + " 의 재고가 부족해 발주가 필요합니다.";
+			    document.querySelector("#btnModalDeli").style.display = 'none';
+			    document.querySelector("#btnModalUelete").style.display = 'none';
+			    document.querySelector("#btnModalDelete").style.display = 'none';
+			    $("#modalConfirm").modal("show"); 
+			    return;
+			}
+
+			// 상태 오류 처리
+			if (statusIssues.size > 0) {
+			    document.querySelector("#modalConfirmTitle").textContent = "확 인";
+			    document.querySelector("#modalConfirmBody").textContent =
+			        "주문 접수 상태인 건만 배송할 수 있습니다: " + Array.from(statusIssues).join(", ");
+			    document.querySelector("#btnModalDeli").style.display = 'none';
+			    document.querySelector("#btnModalUelete").style.display = 'none';
+			    document.querySelector("#btnModalDelete").style.display = 'none';
+			    $("#modalConfirm").modal("show"); 
+			    return;
+			}
 		
 			seq.value = selectedValues.join(',');
 			form.action = "/web/account/orderModalInst";
