@@ -13,7 +13,7 @@ public class OrderDto {
 	private String member_seq;
 	
 	// temp
-	private Integer aoTotal;
+	private Long aoTotal;
 	
 	// account
 	private String acName;
@@ -63,10 +63,10 @@ public class OrderDto {
 	public void setGrocery_seq(String grocery_seq) {
 		this.grocery_seq = grocery_seq;
 	}
-	public Integer getAoTotal() {
+	public Long getAoTotal() {
 		return aoTotal;
 	}
-	public void setAoTotal(Integer aoTotal) {
+	public void setAoTotal(Long aoTotal) {
 		this.aoTotal = aoTotal;
 	}
 	public String getAcName() {

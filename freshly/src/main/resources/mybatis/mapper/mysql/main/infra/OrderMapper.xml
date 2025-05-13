@@ -86,4 +86,20 @@
 			seq = #{seq}
 	</update>
 	
+	<select id="findOrdersByAoStatus1" resultMap="resultMapObj">
+		SELECT
+			seq
+			,aoStatus
+			,aoQuantity
+			,account_seq
+			,grocery_seq
+			,member_seq
+		FROM
+			acOrder
+		WHERE
+			1=1
+			AND aoStatus = 1
+			AND aoDelNy = 0
+	</select>
+	
 </mapper>

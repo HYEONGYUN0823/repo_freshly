@@ -1,12 +1,15 @@
 package com.a7a7.module.order;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.a7a7.module.basic.BasicDto;
 import com.a7a7.module.basic.BasicService;
@@ -27,14 +30,14 @@ public class OrderController {
 	DeliveryService deliveryService;
 	
 	// 주문 List 화면
-	@RequestMapping(value ="/web/account/orderList")
+	@RequestMapping("/web/account/orderList")
 	public String weborderlist(Model model) {
 		model.addAttribute("list", service.selectOrderList());
 		return "/web/account/orderList";
 	}
 	
 	// 주문 Form 화면
-	@RequestMapping(value = "/web/account/orderForm")
+	@RequestMapping("/web/account/orderForm")
 	public String orderForm(@RequestParam("formSeq") String formSeq, Model model) {
 		
 		// SelectBox
@@ -59,14 +62,14 @@ public class OrderController {
 	}
 	
 	// 주문 Update
-	@RequestMapping(value = "/web/account/orderUpdt")
+	@RequestMapping("/web/account/orderUpdt")
 	public String orderUpdt(OrderDto dto) {
 		service.update(dto);
 		return "redirect:/web/account/orderList";
 	}
 	
 	// 주문 Uelete
-	@RequestMapping(value = "/web/account/orderUele")
+	@RequestMapping("/web/account/orderUele")
 	public String orderUelete(@RequestParam("formSeq") List<String> seqList) {
 		
 		for(String seq : seqList) {
@@ -77,7 +80,7 @@ public class OrderController {
 	}
 	
 	// 배송 Insert 
-	@RequestMapping(value = "/web/account/orderModalInst")
+	@RequestMapping("/web/account/orderModalInst")
 	public String orderModalInst(@RequestParam("formSeq") List<String> seqList) {
 		
 		DeliveryDto deliveryDto = new DeliveryDto();
@@ -85,20 +88,29 @@ public class OrderController {
 		
 		for(String seq : seqList) {
 			
+			// 주문 상태 '배송중'으로 변경
 			OrderDto dto = service.selectOneOrder(seq);
 			dto.setAoStatus(2);
 			service.update(dto);
 			
+			// 식료품 재고 Update
 			basicDto.setSeq(dto.getGrocery_seq());
 			basicDto = basicService.selectGroceryView(basicDto);
 			basicDto.setGcStock(basicDto.getGcStock() - dto.getAoQuantity());
 			basicService.GroceryUpdate(basicDto);
 			
+			// 배송 Insert
 			deliveryDto.setAcOrder_seq(seq);
 			deliveryService.deliveryInsert(deliveryDto);
 		}
 		
 		return "redirect:/web/account/orderList";
+	}
+	
+	@RequestMapping("/web/account/processAllOrdersToDelivery")
+	@ResponseBody
+	public Set<String> processAllOrdersToDelivery() {
+		return service.processAllOrdersToDelivery();
 	}
 		
 }

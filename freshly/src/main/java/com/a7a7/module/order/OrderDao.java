@@ -12,5 +12,7 @@ public interface OrderDao {
 	public int insert(OrderDto dto);
 	public int update(OrderDto dto);
 	public int uelete(String seq);
+	
+	public List<OrderDto> findOrdersByAoStatus1();
 
 }
