@@ -36,6 +36,7 @@
                                 	<h4 class="card-title">주문 목록</h4>
                                 </div>
                                 <div class="col text-right">
+                                	<button type="button" class="btn btn-google" id="btnAllDeli">일괄 배송</button>
                                 	<button type="button" class="btn btn-google" id="btnDeli">배송</button>
                                 </div>
                             </div>
@@ -158,11 +159,43 @@
 		document.querySelector("input[name=seq]").value = val;
     }
 	
+	// 일괄 배송 button click
+	document.getElementById("btnAllDeli").onclick = function () {
+		document.querySelector("#modalConfirmTitle").textContent = "일괄 배송";
+		document.querySelector("#modalConfirmBody").textContent = "일괄 배송하시겠습니까?";
+		document.querySelector("#btnModalAllDeli").style.display = '';
+		document.querySelector("#btnModalDeli").style.display = 'none';
+		document.querySelector("#btnModalUelete").style.display = 'none';
+		document.querySelector("#btnModalDelete").style.display = 'none';
+		$("#modalConfirm").modal("show");      	
+	}
+	// Modal 일괄 배송 button click
+	document.getElementById("btnModalAllDeli").onclick = function () {
+		
+		fetch('/web/account/processAllOrdersToDelivery', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        }
+		})
+		.then(res => res.json())
+		.then(data => {
+	        if (data.length === 0) {
+	            alert("일괄 배송이 완료되었습니다.");
+	        } else {
+	            alert("다음 품목은 발주가 필요합니다: " + data.join(", "));
+	        }
+			location.reload();  // 페이지 새로고침
+		})
+		.catch(error => console.error(error));
+	}
+	
 	
 	// 배송 button click
 	document.getElementById("btnDeli").onclick = function () {
 		document.querySelector("#modalConfirmTitle").textContent = "배송";
 		document.querySelector("#modalConfirmBody").textContent = "배송하시겠습니까?";
+		document.querySelector("#btnModalAllDeli").style.display = 'none';
 		document.querySelector("#btnModalDeli").style.display = '';
 		document.querySelector("#btnModalUelete").style.display = 'none';
 		document.querySelector("#btnModalDelete").style.display = 'none';
@@ -180,49 +213,32 @@
 	      return false;
 		}else{
 			const selectedValues = [];
-			const stockIssues = new Set();  // 중복 제거를 위한 Set
-			const statusIssues = new Set();
-
-			for (const element of selectedElements) {
-			    selectedValues.push(element.value);
-			    
-			    const tr = element.closest('tr');
-			    const stockChk = parseInt(tr.querySelector('#stockChk').value, 10);
-			    const aoStatus = tr.querySelector('#aoStatus').value;
-			    const gcName = tr.querySelector('#gcName').innerText;
-
-			    if (stockChk < 0) {
-			        stockIssues.add(gcName);  // Set이라 중복 자동 제거
-			    }
-
-			    if (aoStatus != "1") {
-			        statusIssues.add(gcName);
-			    }
-			}
-
-			// 재고 부족 처리
-			if (stockIssues.size > 0) {
-			    document.querySelector("#modalConfirmTitle").textContent = "확 인";
-			    document.querySelector("#modalConfirmBody").textContent =
-			        Array.from(stockIssues).join(", ") + " 의 재고가 부족해 발주가 필요합니다.";
-			    document.querySelector("#btnModalDeli").style.display = 'none';
-			    document.querySelector("#btnModalUelete").style.display = 'none';
-			    document.querySelector("#btnModalDelete").style.display = 'none';
-			    $("#modalConfirm").modal("show"); 
-			    return;
-			}
-
-			// 상태 오류 처리
-			if (statusIssues.size > 0) {
-			    document.querySelector("#modalConfirmTitle").textContent = "확 인";
-			    document.querySelector("#modalConfirmBody").textContent =
-			        "주문 접수 상태인 건만 배송할 수 있습니다: " + Array.from(statusIssues).join(", ");
-			    document.querySelector("#btnModalDeli").style.display = 'none';
-			    document.querySelector("#btnModalUelete").style.display = 'none';
-			    document.querySelector("#btnModalDelete").style.display = 'none';
-			    $("#modalConfirm").modal("show"); 
-			    return;
-			}
+			
+			for(const element of selectedElements){
+	           	 selectedValues.push(element.value);
+	           	 
+	           	const tr = element.closest('tr');
+	            if(tr.querySelector('#stockChk').value < 0){
+	        		document.querySelector("#modalConfirmTitle").textContent = "확 인";
+	        		document.querySelector("#modalConfirmBody").textContent = tr.querySelector('#gcName').innerText + "의 재고가 부족해 발주가 필요합니다.";
+	        		document.querySelector("#btnModalAllDeli").style.display = 'none';
+	        		document.querySelector("#btnModalDeli").style.display = 'none';
+	        		document.querySelector("#btnModalUelete").style.display = 'none';
+	        		document.querySelector("#btnModalDelete").style.display = 'none';
+	        		$("#modalConfirm").modal("show"); 
+	        		return;
+	            } else if(tr.querySelector('#aoStatus').value != 1){
+	            	document.querySelector("#modalConfirmTitle").textContent = "확 인";
+	        		document.querySelector("#modalConfirmBody").textContent = "주문 접수 상태인 건만 배송할 수 있습니다.";
+	        		document.querySelector("#btnModalAllDeli").style.display = 'none';
+	        		document.querySelector("#btnModalDeli").style.display = 'none';
+	        		document.querySelector("#btnModalUelete").style.display = 'none';
+	        		document.querySelector("#btnModalDelete").style.display = 'none';
+	        		$("#modalConfirm").modal("show"); 
+	        		return;
+	            }
+	            
+	        };
 		
 			seq.value = selectedValues.join(',');
 			form.action = "/web/account/orderModalInst";
@@ -235,6 +251,7 @@
 	document.getElementById("btnUel").onclick = function () {
 		document.querySelector("#modalConfirmTitle").textContent = "확 인";
 		document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
+		document.querySelector("#btnModalAllDeli").style.display = 'none';
 		document.querySelector("#btnModalDeli").style.display = 'none';
 		document.querySelector("#btnModalUelete").style.display = '';
 		document.querySelector("#btnModalDelete").style.display = 'none';

@@ -14,12 +14,12 @@
                   <div class="col-md-12">
                      <!-- page header -->
                      <div>
-                        <h2>출고대기 목록</h2>
+                        <h2>발주접수 목록</h2>
                         <!-- breacrumb -->
                         <nav aria-label="breadcrumb">
                            <ol class="breadcrumb mb-0">
                               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                              <li class="breadcrumb-item active" aria-current="page">출고대기 목록</li>
+                              <li class="breadcrumb-item active" aria-current="page">발수접수 목록</li>
                            </ol>
                         </nav>
                      </div>
@@ -60,9 +60,9 @@
                                              <label class="form-check-label" for="checkAll"></label>
                                           </div>
                                        </th>
-                               			<th style="text-align: center;">출고대기번호</th>
+                               			<th style="text-align: center;">발주접수번호</th>
                                			<th style="text-align: center;">공장</th>
-                               			<th style="text-align: center;">출고 상태</th>
+                               			<th style="text-align: center;">상태</th>
                                			<th style="text-align: center;">관리자 이름</th>
                                			<th style="text-align: center;">식료품 이름</th>
                                			<th style="text-align: center;">수량</th>
@@ -90,7 +90,7 @@
 										<td style="text-align: center;" th:text ="${item.seq}"></td>
 										<td style="text-align: center;" th:text ="${item.fcName}"></td>
 										<td style="text-align: center;">
-										    <span th:if="${item.odStatus == 1}">출고 대기</span>
+										    <span th:if="${item.odStatus == 1}">접수</span>
 										</td>
 										<td style="text-align: center;" th:text ="${item.mbName}"></td>
 										<td style="text-align: center;" th:text ="${item.gcName}"></td>
@@ -153,7 +153,7 @@
 <!-- 						            <i class="fa-regular fa-file-excel"></i> -->
 <!-- 						        </button> -->
 						        <button type="button" id="btnForwarding" class="btn btn-primary">
-						            <i class="fa-solid fa-rocket"></i>
+						            <b>발주</b>
 						        </button>
 						    </div>
 						</div>
