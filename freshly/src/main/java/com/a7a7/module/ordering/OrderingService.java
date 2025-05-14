@@ -1,14 +1,20 @@
 package com.a7a7.module.ordering;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.a7a7.module.basic.BasicDao;
 
 @Service
 public class OrderingService {
 	@Autowired
 	OrderingDao dao;
+	
+	@Autowired
+	BasicDao basicDao;
 	
 	public List<OrderingDto> selectOrderingList(){
 		return dao.selectOrderingList();
@@ -44,6 +50,17 @@ public class OrderingService {
 	
 	public int uelete(String seq) {
 		return dao.uelete(seq);
+	}
+	
+	public void processAllOrdersToDelivery(Map<String, Integer> needsOrderItems) {
+		for(String key : needsOrderItems.keySet()) {
+			OrderingDto dto = new OrderingDto();
+			dto.setGrocery_seq(basicDao.findSeqByGcName(key).getSeq());
+			dto.setOdQuantity(needsOrderItems.get(key));
+			dto.setMember_seq("1");
+			dto.setFactory_seq("1");
+			dao.insert(dto);
+		}
 	}
 	
 }

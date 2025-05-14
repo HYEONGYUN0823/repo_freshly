@@ -1,7 +1,5 @@
 package com.a7a7.module.ordering;
 
-import java.util.List;
-
 public class OrderingDto {
 	
 	private String seq;

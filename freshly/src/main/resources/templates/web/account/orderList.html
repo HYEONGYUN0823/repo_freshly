@@ -168,6 +168,9 @@
 	    $("#modalOrder").modal("show");
 	}
 
+	// 발주 필요한 품목
+    let needsOrderItems;
+	
 	// Modal 전체 배송 button click
 	document.getElementById("btnModalAllDeli").onclick = function () {
 	    fetch('/web/account/processAllOrdersToDelivery', {
@@ -179,7 +182,7 @@
 	    .then(res => res.json())
 	    .then(data => {
 	        const completedItems = data[0];
-	        const needsOrderItems = data[1];
+	        needsOrderItems = data[1];
 
 	        // 배송 완료 품목
 	        let completedMessage = "";
@@ -236,16 +239,17 @@
 	
 	// Modal 일괄 발주 button click
 	document.getElementById("btnModalOrderingConfirm").onclick = function () {
-	
-		fetch('/web/account/processAllOrdersToDelivery', {
+	    fetch('/web/factory/processAllOrderToOrdering', {
 	        method: 'POST',
 	        headers: {
 	            'Content-Type': 'application/json'
-	        }
+	        },
+	        body: JSON.stringify(needsOrderItems)  // needsOrderItems를 JSON으로 변환하여 전송
 	    })
 	    .then(res => res.json())
 	    .then(data => {
-
+	    	console.log(data);
+	        location.href='/web/factory/OrderingList';
 	    })
 	    .catch(error => console.error(error));
 	}

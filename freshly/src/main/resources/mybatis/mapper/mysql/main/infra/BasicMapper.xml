@@ -104,6 +104,14 @@
 			seq = #{seq}
 	</update>
 	
+	<select id="findSeqByGcName" resultMap="resultMapObj">
+		SELECT
+			seq
+		FROM
+			grocery
+		WHERE
+			gcName = #{gcName}
+	</select>
 	
 	
 	<!--*********** 거래처 ********************-->

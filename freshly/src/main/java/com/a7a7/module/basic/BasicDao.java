@@ -22,6 +22,7 @@ public interface BasicDao {
 	public int GroceryInsert(BasicDto dto);						//insert
 	public int GroceryUpdate(BasicDto dto);
 	public int GroceryUelete(String seq);
+	public BasicDto findSeqByGcName(String gcName);
 	
 //	**********************************************
 //		거래처
