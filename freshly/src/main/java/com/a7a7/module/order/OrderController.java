@@ -1,6 +1,7 @@
 package com.a7a7.module.order;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,7 @@ public class OrderController {
 	
 	@RequestMapping("/web/account/processAllOrdersToDelivery")
 	@ResponseBody
-	public Set<String> processAllOrdersToDelivery() {
+	public List<Map<String, Integer>> processAllOrdersToDelivery() {
 		return service.processAllOrdersToDelivery();
 	}
 		

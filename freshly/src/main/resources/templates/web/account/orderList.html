@@ -183,9 +183,45 @@
 	        if (data.length === 0) {
 	            alert("일괄 배송이 완료되었습니다.");
 	        } else {
-	            alert("다음 품목은 발주가 필요합니다: " + data.join(", "));
+	            // 배송 완료 품목
+	            let completedMessage = "";
+	            for (const [key, value] of Object.entries(data[0])) {
+	                completedMessage += `${key} : ${value}개\n`;
+	            }
+
+	            // 발주 필요 품목
+	            let needsOrderMessage = "";
+	            for (const [key, value] of Object.entries(data[1])) {
+	                needsOrderMessage += `${key} : ${value}개\n`;
+	            }
+
+	            if(completedMessage != ""){
+// 	            	alert(completedMessage + "배송이 완료되었습니다.");
+	        		document.querySelector("#modalConfirmTitle").textContent = "일괄 배송";
+	        		document.querySelector("#modalConfirmBody").textContent = completedMessage + "배송이 완료되었습니다.";
+	        		document.querySelector("#btnModalAllDeli").style.display = 'none';
+	        		document.querySelector("#btnModalDeli").style.display = 'none';
+	        		document.querySelector("#btnModalUelete").style.display = 'none';
+	        		document.querySelector("#btnModalDelete").style.display = 'none';
+	        		document.querySelector("#btnModalCancel").style.display = 'none';
+	        		$("#modalConfirm").modal("show");
+	        	}
+// 	            alert(needsOrderMessage + "발주가 필요합니다.");
+	            document.querySelector("#modalConfirmTitle").textContent = "발주 필요";
+	            document.querySelector("#modalConfirmBody").textContent = needsOrderMessage + "발주가 필요합니다.";
+	            document.querySelector("#modalConfirmFooter").textContent = "일괄 발주하시겠습니까?";
+        		document.querySelector("#btnModalAllDeli").style.display = 'none';
+        		document.querySelector("#btnModalDeli").style.display = 'none';
+        		document.querySelector("#btnModalUelete").style.display = 'none';
+        		document.querySelector("#btnModalDelete").style.display = 'none';
+        		document.querySelector("#btnModalCancel").style.display = 'none';
+        		$("#modalConfirm").modal("show");
 	        }
-			location.reload();  // 페이지 새로고침
+	        
+	    	// 모달이 닫힐 때 새로고침
+	        modal.on("hidden.bs.modal", function () {
+	            location.reload();
+	        });
 		})
 		.catch(error => console.error(error));
 	}

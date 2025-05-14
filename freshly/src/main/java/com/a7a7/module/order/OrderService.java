@@ -1,7 +1,10 @@
 package com.a7a7.module.order;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +48,12 @@ public class OrderService {
 	}
 	
 	// 일괄 배송처리
-	public Set<String> processAllOrdersToDelivery() {
-		// 발주가 필요한 품목들
-		Set<String> notDelivery = new HashSet<>();
+	public List<Map<String, Integer>> processAllOrdersToDelivery() {
+		// itemList.get(0) : 배송완료 품목과 수량
+		// itemList.get(1) : 발주필요 품목과 수량
+		List<Map<String, Integer>> itemList = new ArrayList<>();
+		itemList.add(new HashMap<String, Integer>());
+		itemList.add(new HashMap<String, Integer>());
 		
 		BasicDto basicDto = new BasicDto();
 		// 접수 상태인 주문 전체 출력
@@ -58,12 +64,14 @@ public class OrderService {
 			
 			int sub = basicDto.getGcStock() - dto.getAoQuantity();
 			
+			String name = basicDto.getGcName();
 			// 재고가 부족하면 배송X
 			if(sub < 0) {
-				notDelivery.add(basicDto.getGcName());
+				itemList.get(1).put(name, itemList.get(1).getOrDefault(name, 0) + dto.getAoQuantity());
 				continue;
 			}
 			
+			itemList.get(0).put(name, itemList.get(0).getOrDefault(name, 0) + dto.getAoQuantity());
 			// 주문 상태 '배송중'으로 변경
 			dto.setAoStatus(2);
 			dao.update(dto);
@@ -80,6 +88,6 @@ public class OrderService {
 		}
 		
 		
-		return notDelivery;
+		return itemList;
 	}
 }
