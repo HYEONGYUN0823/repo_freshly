@@ -46,7 +46,7 @@ public class DeliveryController {
 		return "redirect:/web/delivery/deliverylist";
 	}
 	
-	// 배송 완료
+	// 선택 배송 완료
 	@RequestMapping(value = "/web/delivery/deliveryCompleted")
 	public String deliveryCompleted(@RequestParam("seq") List<String> seqList) {
 		
@@ -63,6 +63,14 @@ public class DeliveryController {
 			orderDto.setAoStatus(3);
 			orderservice.update(orderDto);
 		}
+		return "redirect:/web/delivery/deliverylist";
+	}
+	
+	// 전체 배송 완료
+	@RequestMapping(value = "/web/delivery/allDeliveryCompleted")
+	public String allDeliveryCompleted() {
+		service.allDeliveryCompleted();
+		orderservice.allOrderDeliveryCompleted();
 		return "redirect:/web/delivery/deliverylist";
 	}
 	

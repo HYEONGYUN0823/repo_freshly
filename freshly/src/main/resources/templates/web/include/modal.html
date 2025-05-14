@@ -3,8 +3,7 @@
 
 <th:block th:fragment="modal">
 
-<!-- 모달 -->
-									
+<!-- 모달 -->			
 <div class="modal" id="alertModal" tabindex="-1" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -26,7 +25,6 @@
 </div>
 
 <!-- 삭제 모달 -->
-
 <div class="modal fade" id="modalConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -39,32 +37,52 @@
 				body
 			</div>
 			<div class="modal-footer" id="modalConfirmFooter">
-				<button type="button" class="btn btn-google" id="btnModalAllDeli" name="">일괄 배송</button>
-				<button type="button" class="btn btn-google" id="btnModalDeli" name="">배송</button>
 				<button type="button" class="btn btn-danger btn_custom" name="" id="btnModalDelete"><i class="bi bi-x-lg"></i></button>
 				<button type="button" class="btn btn-danger btn_custom" name="" id="btnModalUelete">삭제</button>
 				<button type="button" class="btn btn-outline-secondary btn_custom" id="btnModalCancel" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
-  </div>
+</div>
   
-	<!-- 알림 모달 -->
-	<div class="modal fade" id="alertMessageModal" tabindex="-1" aria-labelledby="alertMessageModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="alertMessageModalLabel">알림</h5>
-					<button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
-						<i class="fas fa-times fa-lg"></i>
-					</button>
-				</div>
-				<div class="modal-body" id="alertMessageModalBody"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary btn btn_custom" data-bs-dismiss="modal">확인</button>
-				</div>
+<!-- 알림 모달 -->
+<div class="modal fade" id="alertMessageModal" tabindex="-1" aria-labelledby="alertMessageModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertMessageModalLabel">알림</h5>
+				<button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none;">
+					<i class="fas fa-times fa-lg"></i>
+				</button>
+			</div>
+			<div class="modal-body" id="alertMessageModalBody"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-secondary btn btn_custom" data-bs-dismiss="modal">확인</button>
 			</div>
 		</div>
 	</div>
+</div>
+	
+<!-- 주문 모달 -->
+<div class="modal fade" id="modalOrder" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalOrderTitle">title</h5>
+				<button type="button" class="close-btn" data-bs-dismiss="modal" style="background:none;border:none;">
+    				<i class="fas fa-times fa-lg"></i>
+    			</button>
+			</div>
+			<div class="modal-body" id="modalOrderBody">
+				body
+			</div>
+			<div class="modal-footer" id="modalOrderFooter">
+				<button type="button" class="btn btn-google" id="btnModalAllDeli" name="">전체 배송</button>
+				<button type="button" class="btn btn-facebook" id="btnModalDeli" name="">배송</button>
+				<button type="button" class="btn btn-outline-secondary btn_custom" id="btnModalCancel" data-bs-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
 	
 </th:block>

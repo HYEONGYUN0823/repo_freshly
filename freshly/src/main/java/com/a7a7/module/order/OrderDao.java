@@ -14,5 +14,6 @@ public interface OrderDao {
 	public int uelete(String seq);
 	
 	public List<OrderDto> findOrdersByAoStatus1();
+	public int allOrderDeliveryCompleted();
 
 }

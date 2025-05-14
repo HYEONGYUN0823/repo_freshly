@@ -28,6 +28,10 @@ public class DeliveryService {
 		return dao.deliveryUpdate(dto);
 	}
 	
+	public int allDeliveryCompleted() {
+		return dao.allDeliveryCompleted();
+	}
+	
 	public int deliveryUelete(List<Integer> seqs) {
 		return dao.deliveryUelete(seqs);
 	}

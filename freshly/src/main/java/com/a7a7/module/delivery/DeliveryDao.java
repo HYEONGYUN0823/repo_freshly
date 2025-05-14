@@ -13,6 +13,7 @@ public interface DeliveryDao {
 	
 	public int deliveryInsert(DeliveryDto dto);
 	public int deliveryUpdate(DeliveryDto dto);
+	public int allDeliveryCompleted();
 	public int deliveryUelete(@Param("seqs")List<Integer> seqs);
 
 }

@@ -34,7 +34,8 @@
                                 	<h4 class="card-title">배송 목록</h4>
                                 </div>
                                 <div class="col text-right">
-                                	<button type="button" class="btn btn-google" id="btnDeli">배송 완료</button>
+                                	<button type="button" class="btn btn-google" id="btnAllDeli">전체 완료</button>
+                                	<button type="button" class="btn btn-facebook" id="btnDeli">선택 완료</button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -127,16 +128,15 @@
 	
 
 	
-	// 배송완료 button click
+	// 선택 완료 button click
 	document.getElementById("btnDeli").onclick = function () {
-		document.querySelector("#modalConfirmTitle").textContent = "배송 완료";
-		document.querySelector("#modalConfirmBody").textContent = "배송 완료 처리하시겠습니까?";
+		document.querySelector("#modalOrderTitle").textContent = "배송 완료";
+		document.querySelector("#modalOrderBody").textContent = "배송 완료 처리하시겠습니까?";
+		document.querySelector("#btnModalAllDeli").style.display = 'none';
 		document.querySelector("#btnModalDeli").style.display = '';
-		document.querySelector("#btnModalUelete").style.display = 'none';
-		document.querySelector("#btnModalDelete").style.display = 'none';
-		$("#modalConfirm").modal("show");      	
+		$("#modalOrder").modal("show");      	
 	}
-	// Modal 배송완료 button click
+	// Modal 선택 완료 button click
 	document.getElementById("btnModalDeli").onclick = function () {
 		
 		const query = 'input[name="itemCheckbox"]:checked';
@@ -156,7 +156,6 @@
 	            if(tr.querySelector('#deliveryStatus').value == 2){
 	        		document.querySelector("#modalConfirmTitle").textContent = "확 인";
 	        		document.querySelector("#modalConfirmBody").textContent = "이미 배송 완료된 건이 포함되어 있습니다.";
-	        		document.querySelector("#btnModalDeli").style.display = 'none';
 	        		document.querySelector("#btnModalUelete").style.display = 'none';
 	        		document.querySelector("#btnModalDelete").style.display = 'none';
 	        		$("#modalConfirm").modal("show"); 
@@ -172,12 +171,25 @@
 		}
 	}
 	
+	// 전체 완료 button click
+	document.getElementById("btnAllDeli").onclick = function () {
+		document.querySelector("#modalOrderTitle").textContent = "배송 완료";
+		document.querySelector("#modalOrderBody").textContent = "배송 완료 처리하시겠습니까?";
+		document.querySelector("#btnModalAllDeli").style.display = '';
+		document.querySelector("#btnModalDeli").style.display = 'none';
+		$("#modalOrder").modal("show");      	
+	}
+	// Modal 전체 완료 button click
+	document.getElementById("btnModalAllDeli").onclick = function () {
+		form.action = "/web/delivery/allDeliveryCompleted";
+		form.submit();
+	}
+	
 	
 	// Uelete Button Click
 	document.getElementById("btnUel").onclick = function () {
 		document.querySelector("#modalConfirmTitle").textContent = "확 인";
 		document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-		document.querySelector("#btnModalDeli").style.display = 'none';
 		document.querySelector("#btnModalUelete").style.display = '';
 		document.querySelector("#btnModalDelete").style.display = 'none';
 		$("#modalConfirm").modal("show");      	

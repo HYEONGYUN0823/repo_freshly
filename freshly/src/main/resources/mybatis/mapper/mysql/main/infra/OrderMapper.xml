@@ -102,4 +102,14 @@
 			AND aoDelNy = 0
 	</select>
 	
+	<update id="allOrderDeliveryCompleted">
+		UPDATE acorder
+		SET
+			aoStatus = 3
+		WHERE
+			1=1
+			AND aoDelNy = 0
+			AND aoStatus = 2
+	</update>
+	
 </mapper>

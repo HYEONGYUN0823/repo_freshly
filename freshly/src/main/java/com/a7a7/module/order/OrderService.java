@@ -90,4 +90,9 @@ public class OrderService {
 		
 		return itemList;
 	}
+	
+	// 전체 배송 완료
+	public int allOrderDeliveryCompleted() {
+		return dao.allOrderDeliveryCompleted();
+	}
 }

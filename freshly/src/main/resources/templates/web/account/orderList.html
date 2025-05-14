@@ -36,8 +36,8 @@
                                 	<h4 class="card-title">주문 목록</h4>
                                 </div>
                                 <div class="col text-right">
-                                	<button type="button" class="btn btn-google" id="btnAllDeli">일괄 배송</button>
-                                	<button type="button" class="btn btn-google" id="btnDeli">배송</button>
+                                	<button type="button" class="btn btn-google" id="btnAllDeli">전체 배송</button>
+                                	<button type="button" class="btn btn-facebook" id="btnDeli">선택 배송</button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -159,15 +159,13 @@
 		document.querySelector("input[name=seq]").value = val;
     }
 	
-	// 일괄 배송 button click
+	// 전체 배송 button click
 	document.getElementById("btnAllDeli").onclick = function () {
-		document.querySelector("#modalConfirmTitle").textContent = "일괄 배송";
-		document.querySelector("#modalConfirmBody").textContent = "일괄 배송하시겠습니까?";
+		document.querySelector("#modalOrderTitle").textContent = "전체 배송";
+		document.querySelector("#modalOrderBody").textContent = "전체 배송하시겠습니까?";
 		document.querySelector("#btnModalAllDeli").style.display = '';
 		document.querySelector("#btnModalDeli").style.display = 'none';
-		document.querySelector("#btnModalUelete").style.display = 'none';
-		document.querySelector("#btnModalDelete").style.display = 'none';
-		$("#modalConfirm").modal("show");      	
+		$("#modalOrder").modal("show");      	
 	}
 	// Modal 일괄 배송 button click
 	document.getElementById("btnModalAllDeli").onclick = function () {
@@ -181,7 +179,7 @@
 		.then(res => res.json())
 		.then(data => {
 	        if (data.length === 0) {
-	            alert("일괄 배송이 완료되었습니다.");
+	            alert("전체 배송이 완료되었습니다.");
 	        } else {
 	            // 배송 완료 품목
 	            let completedMessage = "";
@@ -197,25 +195,21 @@
 
 	            if(completedMessage != ""){
 // 	            	alert(completedMessage + "배송이 완료되었습니다.");
-	        		document.querySelector("#modalConfirmTitle").textContent = "일괄 배송";
-	        		document.querySelector("#modalConfirmBody").textContent = completedMessage + "배송이 완료되었습니다.";
+	        		document.querySelector("#modalOrderTitle").textContent = "전체 배송";
+	        		document.querySelector("#modalOrderBody").textContent = completedMessage + "배송이 완료되었습니다.";
 	        		document.querySelector("#btnModalAllDeli").style.display = 'none';
 	        		document.querySelector("#btnModalDeli").style.display = 'none';
-	        		document.querySelector("#btnModalUelete").style.display = 'none';
-	        		document.querySelector("#btnModalDelete").style.display = 'none';
 	        		document.querySelector("#btnModalCancel").style.display = 'none';
-	        		$("#modalConfirm").modal("show");
+	        		$("#modalOrder").modal("show");
 	        	}
 // 	            alert(needsOrderMessage + "발주가 필요합니다.");
-	            document.querySelector("#modalConfirmTitle").textContent = "발주 필요";
-	            document.querySelector("#modalConfirmBody").textContent = needsOrderMessage + "발주가 필요합니다.";
-	            document.querySelector("#modalConfirmFooter").textContent = "일괄 발주하시겠습니까?";
+	            document.querySelector("#modalOrderTitle").textContent = "발주 필요";
+	            document.querySelector("#modalOrderBody").textContent = needsOrderMessage + "발주가 필요합니다.";
+	            document.querySelector("#modalOrderFooter").textContent = "일괄 발주하시겠습니까?";
         		document.querySelector("#btnModalAllDeli").style.display = 'none';
         		document.querySelector("#btnModalDeli").style.display = 'none';
-        		document.querySelector("#btnModalUelete").style.display = 'none';
-        		document.querySelector("#btnModalDelete").style.display = 'none';
         		document.querySelector("#btnModalCancel").style.display = 'none';
-        		$("#modalConfirm").modal("show");
+        		$("#modalOrder").modal("show");
 	        }
 	        
 	    	// 모달이 닫힐 때 새로고침
@@ -229,13 +223,11 @@
 	
 	// 배송 button click
 	document.getElementById("btnDeli").onclick = function () {
-		document.querySelector("#modalConfirmTitle").textContent = "배송";
-		document.querySelector("#modalConfirmBody").textContent = "배송하시겠습니까?";
+		document.querySelector("#modalOrderTitle").textContent = "배송";
+		document.querySelector("#modalOrderBody").textContent = "배송하시겠습니까?";
 		document.querySelector("#btnModalAllDeli").style.display = 'none';
 		document.querySelector("#btnModalDeli").style.display = '';
-		document.querySelector("#btnModalUelete").style.display = 'none';
-		document.querySelector("#btnModalDelete").style.display = 'none';
-		$("#modalConfirm").modal("show");      	
+		$("#modalOrder").modal("show");      	
 	}
 	// Modal 배송 button click
 	document.getElementById("btnModalDeli").onclick = function () {
@@ -255,22 +247,18 @@
 	           	 
 	           	const tr = element.closest('tr');
 	            if(tr.querySelector('#stockChk').value < 0){
-	        		document.querySelector("#modalConfirmTitle").textContent = "확 인";
-	        		document.querySelector("#modalConfirmBody").textContent = tr.querySelector('#gcName').innerText + "의 재고가 부족해 발주가 필요합니다.";
+	        		document.querySelector("#modalOrderTitle").textContent = "확 인";
+	        		document.querySelector("#modalOrderBody").textContent = tr.querySelector('#gcName').innerText + "의 재고가 부족해 발주가 필요합니다.";
 	        		document.querySelector("#btnModalAllDeli").style.display = 'none';
 	        		document.querySelector("#btnModalDeli").style.display = 'none';
-	        		document.querySelector("#btnModalUelete").style.display = 'none';
-	        		document.querySelector("#btnModalDelete").style.display = 'none';
-	        		$("#modalConfirm").modal("show"); 
+	        		$("#modalOrder").modal("show"); 
 	        		return;
 	            } else if(tr.querySelector('#aoStatus').value != 1){
-	            	document.querySelector("#modalConfirmTitle").textContent = "확 인";
-	        		document.querySelector("#modalConfirmBody").textContent = "주문 접수 상태인 건만 배송할 수 있습니다.";
+	            	document.querySelector("#modalOrderTitle").textContent = "확 인";
+	        		document.querySelector("#modalOrderBody").textContent = "주문 접수 상태인 건만 배송할 수 있습니다.";
 	        		document.querySelector("#btnModalAllDeli").style.display = 'none';
 	        		document.querySelector("#btnModalDeli").style.display = 'none';
-	        		document.querySelector("#btnModalUelete").style.display = 'none';
-	        		document.querySelector("#btnModalDelete").style.display = 'none';
-	        		$("#modalConfirm").modal("show"); 
+	        		$("#modalOrder").modal("show"); 
 	        		return;
 	            }
 	            
@@ -287,8 +275,6 @@
 	document.getElementById("btnUel").onclick = function () {
 		document.querySelector("#modalConfirmTitle").textContent = "확 인";
 		document.querySelector("#modalConfirmBody").textContent = "해당 데이터를 삭제하시겠습니까 ?";
-		document.querySelector("#btnModalAllDeli").style.display = 'none';
-		document.querySelector("#btnModalDeli").style.display = 'none';
 		document.querySelector("#btnModalUelete").style.display = '';
 		document.querySelector("#btnModalDelete").style.display = 'none';
 		$("#modalConfirm").modal("show");      	

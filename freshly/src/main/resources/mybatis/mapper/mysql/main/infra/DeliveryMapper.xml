@@ -62,6 +62,18 @@
 			seq = #{seq}
 	</update>
 	
+	<update id ="allDeliveryCompleted">
+		UPDATE 
+			delivery 
+		SET
+			deliveryStatus = 2
+			,deliveryEndDateTime = now()
+		WHERE
+			1=1
+			AND deliveryDelNy = 0
+			AND deliveryStatus = 1
+	</update>
+	
 	<update id="deliveryUelete">
 		UPDATE 
 			delivery
