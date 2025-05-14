@@ -43,7 +43,7 @@
 		where 
 		 	1=1
 		 	AND a.aoDelNy = 0
-		ORDER BY seq desc
+		ORDER BY a.aoStatus ASC, a.seq DESC
 	</select>
 	
 	<insert id="insert">
