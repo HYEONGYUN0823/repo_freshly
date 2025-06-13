@@ -36,16 +36,6 @@ public class BasicService {
 //		식료품
 //**********************************************
 	public List<BasicDto> selectGroceryList() {
-		List<CodeDto> list =cddao.selectCodeList();
-		CodeDto cd = new CodeDto();
-		
-		for (CodeDto item : list) {
-		    if (item.getSeq().equals("GC001")) {
-		      
-		        break;
-		    }
-		}
-
 		return dao.selectGroceryList();
 	}
 	public BasicDto selectGroceryView(BasicDto dto) {
