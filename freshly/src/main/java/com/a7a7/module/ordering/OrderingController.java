@@ -151,7 +151,7 @@ public class OrderingController {
 	@RequestMapping(value ="/web/factory/ReceivingList")
 	public String webReceivingList(Model model) {
 		model.addAttribute("list", service.selectReceivingList());
-		return "web/factory/receivingList";
+		return "web/factory/ReceivingList";
 	}
 	
 	@RequestMapping(value = "/web/factory/ReceivingUele")
