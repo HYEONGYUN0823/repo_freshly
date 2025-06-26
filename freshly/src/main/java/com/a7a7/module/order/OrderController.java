@@ -34,7 +34,7 @@ public class OrderController {
 	@RequestMapping("/web/account/orderList")
 	public String weborderlist(Model model) {
 		model.addAttribute("list", service.selectOrderList());
-		return "/web/account/orderList";
+		return "web/account/orderList";
 	}
 	
 	// 주문 Form 화면
