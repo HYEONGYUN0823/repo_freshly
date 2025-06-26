@@ -95,7 +95,7 @@
 			,grocery_seq
 			,member_seq
 		FROM
-			acOrder
+			acorder
 		WHERE
 			1=1
 			AND aoStatus = 1
